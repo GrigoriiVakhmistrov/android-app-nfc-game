@@ -25,9 +25,8 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="landscape">
-        </activity>
-
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".ScanNfcActivity"></activity>
     </application>
 
 </manifest>
