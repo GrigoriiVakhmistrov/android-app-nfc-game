@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">nfc-reader-writer</string>
+    <string name="btn_register">Read</string>
 </resources>
