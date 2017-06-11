@@ -3,7 +3,7 @@
     package="com.example.tzadmin.nfc_reader_writer">
 
     <uses-sdk android:minSdkVersion="10" />
-
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -19,14 +19,15 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".ScanNfcActivity"></activity>
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".ScanNfcActivity">
+        </activity>
     </application>
 
 </manifest>

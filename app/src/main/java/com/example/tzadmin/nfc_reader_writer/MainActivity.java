@@ -14,12 +14,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     String[] values = {
             "Test1",
-            "Test2"
+            "Test2",
+            "Test3",
+            "Test4",
+            "Test5",
+            "Test6",
+            "Test7",
+            "Test8",
+            "Test9",
+            "Test10",
     };
     
     int[] imageId = {
             R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
     };
 
     GridView gridView;

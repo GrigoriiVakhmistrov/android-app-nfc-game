@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText id;
+    Button btn_register;
     ImageView avatar;
     AutoCompleteTextView autoCompleted;
     final int _requestCode = 200;
@@ -23,6 +25,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         avatar = (ImageView) findViewById(R.id.image_register);
+        btn_register = (Button) findViewById(R.id.btn_readRegister);
+        btn_register.setOnClickListener(this);
         //TODO FixMe
         avatar.setImageResource(R.mipmap.ic_launcher_round);
         //
