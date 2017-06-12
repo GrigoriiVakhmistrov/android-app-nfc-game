@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">nfc-reader-writer</string>
-    <string name="btn_register">Read</string>
+    <string name="app_name">Jumanji</string>
+    <string name="btn_register">OK</string>
+    <string name="textView">Поднесите браслет к устройству</string>
+
+    /*RegisterActivity*/
+    <string name="search">Поиск</string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
+    <string name="patronymic">Отчество</string>
+
 </resources>

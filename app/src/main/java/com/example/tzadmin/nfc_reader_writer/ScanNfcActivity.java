@@ -6,23 +6,33 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import com.skyfishjy.library.RippleBackground;
 
 public class ScanNfcActivity extends AppCompatActivity {
 
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-
+    String nameBlinds;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_nfc);
-
+        textView = (TextView)findViewById(R.id.test);
+        Intent intent = getIntent();
+        nameBlinds = intent.getStringExtra("nameBlinds");
+        textView.setText(nameBlinds);
         adapter = NfcAdapter.getDefaultAdapter(this);
         if(adapter == null || !adapter.isEnabled()) {
             setResult(RESULT_CANCELED, new Intent());
             finish();
             return;
         }
+
+        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
+        rippleBackground.startRippleAnimation();
 
         pendingIntent = PendingIntent.getActivity(
             this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
@@ -46,6 +56,7 @@ public class ScanNfcActivity extends AppCompatActivity {
         String NfcId = toHex(tagFromIntent.getId());
         Intent resultInt = new Intent();
         resultInt.putExtra("NfcId", NfcId);
+        resultInt.putExtra("nameBlinds", nameBlinds);
         setResult(RESULT_OK, resultInt);
         finish();
     }

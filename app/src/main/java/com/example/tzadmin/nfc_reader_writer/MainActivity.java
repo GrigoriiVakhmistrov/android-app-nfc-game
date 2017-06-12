@@ -9,27 +9,20 @@ import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
+import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String[] values = {
-            "Test1",
+            "Регистрация",
             "Test2",
             "Test3",
             "Test4",
             "Test5",
             "Test6",
-            "Test7",
-            "Test8",
-            "Test9",
-            "Test10",
     };
     
     int[] imageId = {
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
@@ -48,18 +41,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
-
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-        Database.SetUp(dbHelper.getWritableDatabase());
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view,
                             int position, long id) {
-        /* TODO
-        1 - Определить какой пункт меню был нажат (switch)
-        2 - Запустить соответствующее активити
-        */
-        startActivity(new Intent(this, RegisterActivity.class));
+        switch (position) {
+            case MainMenu.REGISTER:
+                startActivity(new Intent(this, RegisterActivity.class));
+                break;
+        }
     }
 }
