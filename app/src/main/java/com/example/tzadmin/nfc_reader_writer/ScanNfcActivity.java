@@ -57,10 +57,10 @@ public class ScanNfcActivity extends AppCompatActivity {
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String RfcId = toHex(tagFromIntent.getId());
 
-        if(Database.isNfcIdAlreadyExist(RfcId)) {
+        /*if(Database.isNfcIdAlreadyExist(RfcId)) {
             Toast.makeText(this, "Браслет уже зарегистрирован", Toast.LENGTH_LONG).show();
             return;
-        }
+        }*/
 
         Intent resultInt = new Intent();
         resultInt.putExtra("NfcId", RfcId);

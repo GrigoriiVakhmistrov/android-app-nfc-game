@@ -8,10 +8,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
+
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
+import com.example.tzadmin.nfc_reader_writer.Models.User;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         switch (position) {
             case MainMenu.REGISTER:
                 startActivity(new Intent(this, RegisterActivity.class));
+                break;
+            case MainMenu.VALIDATOR:
+                startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
                 break;
         }
     }

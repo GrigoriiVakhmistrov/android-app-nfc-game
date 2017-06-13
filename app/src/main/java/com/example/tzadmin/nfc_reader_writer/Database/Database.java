@@ -77,6 +77,7 @@ public class Database {
         else
             return false;
     }
+
     @Nullable
     public static ArrayList<User> selectUsers () {
         Cursor cursor = db.query("tbUsers", null, null,
@@ -98,6 +99,21 @@ public class Database {
                 result.add(user);
             } while (cursor.moveToNext());
             return result;
+        } else {
+            return  null;
+        }
+    }
+
+    @Nullable
+    public static User selectUsersByNfcId (String id) {
+        Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",
+                new String[] { id }, null, null, null, null);
+        User user = new User(false);
+        if(cursor.moveToFirst()) {
+            user.cFirstName = cursor.getString(cursor.getColumnIndex("cFirstName"));
+            user.cLastName = cursor.getString(cursor.getColumnIndex("cLastName"));
+            user.cSurname = cursor.getString(cursor.getColumnIndex("cSurname"));
+            return user;
         } else {
             return  null;
         }

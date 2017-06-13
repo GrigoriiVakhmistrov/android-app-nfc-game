@@ -103,9 +103,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
-        intent.putExtra("name",
-                et_search.getText().toString()
-        );
+        users = Database.selectUsers();
+        intent.putExtra("name", users.get(position).cFirstName + " " +
+                users.get(position).cLastName + " " +
+                        users.get(position).cSurname);
+
+        //Database.isNfcIdAlreadyExist()
+
+        try {
+            Database.update("tbUsers", users.get(position));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
         startActivityForResult(intent, _requestCode);
     }
 }
