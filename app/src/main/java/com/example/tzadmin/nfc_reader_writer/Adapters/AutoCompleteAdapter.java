@@ -58,9 +58,9 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
         if (convertView == null) {
             view = inflater.inflate(android.R.layout.simple_dropdown_item_1line, null);
-            AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
-            textView.setText(users.get(position).cFirstName +
-                    users.get(position).cLastName +
+//            AutoCompleteTextView textView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
+            ((TextView)view).setText(users.get(position).cFirstName + " " +
+                    users.get(position).cLastName + " " +
                         users.get(position).cSurname);
         } else {
             view = convertView;

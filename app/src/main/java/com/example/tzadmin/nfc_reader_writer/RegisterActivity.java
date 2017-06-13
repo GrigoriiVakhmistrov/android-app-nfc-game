@@ -20,6 +20,7 @@ import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
 
@@ -49,9 +50,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         users = Database.selectUsers();
 
-        //autoCompleted = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
-        //autoCompleted.setAdapter(new AutoCompleteAdapter(this, users));
-        //autoCompleted.setOnItemClickListener(this);
+        autoCompleted = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        autoCompleted.setAdapter(new AutoCompleteAdapter(this, users));
+        autoCompleted.setOnItemClickListener(this);
     }
 
     @Override
