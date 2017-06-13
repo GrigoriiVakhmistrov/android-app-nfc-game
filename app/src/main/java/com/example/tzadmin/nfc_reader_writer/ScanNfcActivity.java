@@ -7,7 +7,9 @@ import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.skyfishjy.library.RippleBackground;
 
 public class ScanNfcActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class ScanNfcActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_nfc);
         textView = (TextView)findViewById(R.id.test);
         Intent intent = getIntent();
-        nameBlinds = intent.getStringExtra("nameBlinds");
+        nameBlinds = intent.getStringExtra("name");
         textView.setText(nameBlinds);
         adapter = NfcAdapter.getDefaultAdapter(this);
         if(adapter == null || !adapter.isEnabled()) {
@@ -53,10 +55,16 @@ public class ScanNfcActivity extends AppCompatActivity {
     @Override
     public void onNewIntent(Intent intent) {
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        String NfcId = toHex(tagFromIntent.getId());
+        String RfcId = toHex(tagFromIntent.getId());
+
+        if(Database.isNfcIdAlreadyExist(RfcId)) {
+            Toast.makeText(this, "Браслет уже зарегистрирован", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Intent resultInt = new Intent();
-        resultInt.putExtra("NfcId", NfcId);
-        resultInt.putExtra("nameBlinds", nameBlinds);
+        resultInt.putExtra("NfcId", RfcId);
+        resultInt.putExtra("name", nameBlinds);
         setResult(RESULT_OK, resultInt);
         finish();
     }

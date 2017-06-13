@@ -21,18 +21,38 @@ public class Database {
         db = dbHelper;
     }
 
-    public static void insert (String tableName, ArrayList<Object> objects) throws IllegalAccessException {
+    public static void insert (String tableName, ArrayList<Object> objects) {
         ContentValues cv = new ContentValues();
         for (Object object : objects) {
             Class _class = object.getClass();
             Field[] fields = _class.getFields();
             for (Field field : fields) {
                 if(field.getType() == String.class) {
-                    cv.put(field.getName(), field.get(object).toString());
+                    try {
+                        cv.put(field.getName(), field.get(object).toString());
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             db.insert(tableName, null, cv);
         }
+    }
+
+    public static void insert (String tableName, Object object) {
+        ContentValues cv = new ContentValues();
+        Class _class = object.getClass();
+        Field[] fields = _class.getFields();
+        for (Field field : fields) {
+            if(field.getType() == String.class) {
+                try {
+                    cv.put(field.getName(), field.get(object).toString());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        db.insert(tableName, null, cv);
     }
 
     public static void update (String tableName, Object object) throws IllegalAccessException {
@@ -42,62 +62,40 @@ public class Database {
         for (Field field : fields) {
             cv.put(field.getName(), field.get(object).toString());
         }
-        db.insert(tableName,
-                "id =" + cv.get("id"), cv);
+        db.update(tableName, cv,
+                "id = ?", new String[] { String.valueOf(cv.get("id")) });
     }
 
-   /* @Nullable
-    public static ArrayList<User> selectUsers() {
-        Cursor cursor = db.query("user", null, null,
-                null, null, null, null, null);
-        ArrayList<User> deliveries = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            do {
-                User user = new User();
-                user.id = cursor.getInt(0);
-                user.idUser = cursor.getInt(1);
-                user.DeliveryDate = cursor.getString(2);
-                user.day = cursor.getInt(3);
-                user.month = cursor.getInt(4);
-                user.year = cursor.getInt(5);
-                user.DocID = cursor.getString(6);
-                user.SerialNumber = cursor.getString(7);
-                user.Client = cursor.getString(8);
-                user.Address = cursor.getString(9);
-                deliveries.add(delivery);
-            } while (cursor.moveToNext());
-            return deliveries;
-        }
+    public static boolean isNfcIdAlreadyExist (String RfcId) {
+        Cursor cursor = db.query("tbUsers",
+                null, "cRfcId = ?",
+                new String[] { RfcId },
+                null, null, null);
+
+        if(cursor.getCount() > 0)
+            return true;
         else
-            return null;
-    }*/
-
-
+            return false;
+    }
     @Nullable
-    public static ArrayList<Object> select (String tableName) {
-        Cursor cursor = db.query(tableName, null,
-                null,
+    public static ArrayList<User> selectUsers () {
+        Cursor cursor = db.query("tbUsers", null, null,
                 null, null, null, null, null);
-        ArrayList<Object> result = new ArrayList<>();
+        ArrayList<User> result = new ArrayList<>();
         if(cursor.moveToFirst()) {
             do {
-                String[] names = cursor.getColumnNames();
-                Object object = new Object();
-                for (int i = 0; i < names.length; i++) {
-                    int type = cursor.getType(i);
-                    switch (type) {
-                        case Cursor.FIELD_TYPE_INTEGER:
-                            object = cursor.getInt(cursor.getColumnIndex(names[i]));
-                            break;
-                        case Cursor.FIELD_TYPE_STRING:
-                            object = cursor.getString(cursor.getColumnIndex(names[i]));
-                            break;
-                        case Cursor.FIELD_TYPE_NULL:
-                            object = null;
-                            break;
-                    }
-                }
-                result.add(object);
+                User user = new User(false);
+                user.id = cursor.getInt(0);
+                user.cFirstName = cursor.getString(1);
+                user.cLastName = cursor.getString(2);
+                user.cSurname = cursor.getString(3);
+                user.cGroupId = cursor.getString(4);
+                user.cBatchId = cursor.getString(5);
+                user.cRfcId = cursor.getString(6);
+                user.cRouteId = cursor.getString(7);
+                user.cIsCap = cursor.getString(8);
+                user.cIsDeleted = cursor.getString(9);
+                result.add(user);
             } while (cursor.moveToNext());
             return result;
         } else {
@@ -109,32 +107,5 @@ public class Database {
         db.delete(tableName,
                 "id =?",
                 new String[] { String.valueOf(id) });
-    }
-
-
-    /*Todo : delete Blinds*/
-    public static void Blinds_insert_user(User user) {
-        /*User user = new User();
-        user.firstname = "Антон";
-        user.lastname = "Иванов";
-        user.patronymic = "Эдуардович";
-        user.batchild = "1";
-        user.groupid = "2";
-        user.iscap = "3";
-        user.routeid = "4";
-        user.rfcid = "12-12-32-32";
-        user.isdeleted = "0";*/
-
-        ContentValues cv = new ContentValues();
-        cv.put("firstname", user.firstname);
-        cv.put("lastname", user.lastname);
-        cv.put("patronymic", user.patronymic);
-        cv.put("rfcid", user.rfcid);
-        cv.put("groupid", user.groupid);
-        cv.put("batchild", user.batchild);
-        cv.put("routeid", user.routeid);
-        cv.put("iscap", user.iscap);
-        cv.put("isdeleted", user.isdeleted);
-        db.insert("user", null, cv);
     }
 }

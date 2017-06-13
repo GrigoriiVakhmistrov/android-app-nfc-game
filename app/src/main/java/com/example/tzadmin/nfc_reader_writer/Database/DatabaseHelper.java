@@ -11,22 +11,34 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
-        super(context, "dbAnim", null, 1);
+        super(context, "dbJumanji", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table tbUsers ("
                 + "id integer primary key autoincrement,"
-                + "firstname text,"
-                + "lastname text,"
-                + "patronymic text"
-                + "rfcid text,"
-                + "groupid text,"
-                + "batchid text,"
-                + "routeid text,"
-                + "iscap text,"
-                + "isdeleted text" + ");");
+                + "cFirstName text,"
+                + "cLastName text,"
+                + "cSurname text,"
+                + "cRfcId text,"
+                + "cGroupId text,"
+                + "cBatchId text,"
+                + "cRouteId text,"
+                + "cIsCap text,"
+                + "cIsDeleted text" + ");");
+
+        db.execSQL("create table tbUsers_cache ("
+                + "id integer primary key autoincrement,"
+                + "cFirstName text,"
+                + "cLastName text,"
+                + "cSurname text,"
+                + "cRfcId text,"
+                + "cGroupId text,"
+                + "cBatchId text,"
+                + "cRouteId text,"
+                + "cIsCap text,"
+                + "cIsDeleted text" + ");");
 
         db.execSQL("create table tbRoutes ("
                 + "id integer primary key autoincrement,"
