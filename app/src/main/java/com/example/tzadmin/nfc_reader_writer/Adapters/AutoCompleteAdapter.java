@@ -24,10 +24,15 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
     private Context mContext;
     LayoutInflater inflater;
     private ArrayList<User> users;
+    private ArrayList<User> usersAll;
+    private ArrayList<User> suggestions;
 
     public AutoCompleteAdapter(Context context, ArrayList<User> usersList) {
         mContext = context;
         users = usersList;
+        usersAll = (ArrayList<User>) users.clone();
+        suggestions = new ArrayList<>();
+
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -64,8 +69,47 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         return view;
     }
 
+
+    Filter nameFilter = new Filter() {
+        @Override
+        public String convertResultToString(Object resultValue) {
+            User u = (User) resultValue;
+            String str = u.cFirstName + " " + u.cLastName + " " + u.cSurname;
+            return str;
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            if(constraint != null) {
+                suggestions.clear();
+                for (User u : usersAll) {
+                    if((u.cFirstName + " " + u.cLastName + " " + u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                        suggestions.add(u);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = suggestions;
+                filterResults.count = suggestions.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            ArrayList<User> filteredList = (ArrayList<User>) results.values;
+            if(results != null && results.count > 0) {
+                users.clear();
+                for (User c : filteredList) {
+                    users.add(c);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
+
+
     @Override
     public Filter getFilter() {
-        return null;
+        return nameFilter;
     }
 }
