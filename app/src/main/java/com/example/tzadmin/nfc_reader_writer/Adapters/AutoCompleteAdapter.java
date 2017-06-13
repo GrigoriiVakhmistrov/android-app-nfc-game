@@ -31,6 +31,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
     public AutoCompleteAdapter(Context context, ArrayList<User> usersList) {
         mContext = context;
         users = usersList;
+        if (users == null) users = new ArrayList<>();
         usersAll = (ArrayList<User>) users.clone();
         suggestions = new ArrayList<>();
 

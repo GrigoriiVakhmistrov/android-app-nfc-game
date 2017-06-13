@@ -60,7 +60,9 @@ public class Database {
         Class _class = object.getClass();
         Field[] fields = _class.getDeclaredFields();
         for (Field field : fields) {
-            cv.put(field.getName(), field.get(object).toString());
+            if(field.getType() == String.class) {
+                cv.put(field.getName(), field.get(object).toString());
+            }
         }
         db.update(tableName, cv,
                 "id = ?", new String[] { String.valueOf(cv.get("id")) });
@@ -107,8 +109,8 @@ public class Database {
     @Nullable
     public static User selectUsersByNfcId (String id) {
         Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",
-                new String[] { id }, null, null, null, null);
-        User user = new User(false);
+                new String[] { id }, null, null, null, "1");
+        User user = new User(true);
         if(cursor.moveToFirst()) {
             user.cFirstName = cursor.getString(cursor.getColumnIndex("cFirstName"));
             user.cLastName = cursor.getString(cursor.getColumnIndex("cLastName"));

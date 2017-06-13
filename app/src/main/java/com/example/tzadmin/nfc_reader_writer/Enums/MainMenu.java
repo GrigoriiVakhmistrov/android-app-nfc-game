@@ -7,5 +7,5 @@ package com.example.tzadmin.nfc_reader_writer.Enums;
 public class MainMenu {
     /*enum menus*/
     public final static int REGISTER = 0;
-    public final static int VALIDATOR = 6;
+    public final static int VALIDATOR = 1;
 }
