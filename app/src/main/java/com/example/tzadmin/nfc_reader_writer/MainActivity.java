@@ -20,20 +20,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     String[] values = {
             "Регистрация",
+            "Валидатор",
+            /*
+            "Регистрация",
             "Test2",
             "Test3",
             "Test4",
             "Test5",
             "Test6",
+            */
     };
     
     int[] imageId = {
+            /*
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
+            */
+            R.drawable.mainIconReg,
+            R.drawable.mainIconReg,
+
+
     };
 
     GridView gridView;

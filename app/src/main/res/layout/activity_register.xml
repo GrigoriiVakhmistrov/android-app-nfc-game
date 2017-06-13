@@ -6,49 +6,52 @@
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.RegisterActivity"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:background="@drawable/regfon"
+
+    >
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView"
-        android:layout_width="286dp"
-        android:layout_height="68dp"
+        android:layout_width="315dp"
+        android:layout_height="65dp"
         android:hint="@string/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintVertical_bias="0.556" />
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintVertical_bias="0.662" />
+    <!--
+        <TextView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/register_braslet"
+            android:text="Новый Участник"
+            android:layout_width="286dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="152dp"
+            android:textSize="30sp"
+            app:layout_constraintVertical_bias="0.074"
+            app:layout_constraintHorizontal_bias="0.691">
+        </TextView>
 
-    <TextView
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/register_braslet"
-        android:text="Новый Участник"
-        android:layout_width="286dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="152dp"
-        android:textSize="30sp"
-        app:layout_constraintVertical_bias="0.074"
-        app:layout_constraintHorizontal_bias="0.691">
-    </TextView>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="286dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="152dp"
-        android:text="Привязка Браслета"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.074"></TextView>
-
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="286dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="152dp"
+            android:text="Привязка Браслета"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.218"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.074"></TextView>
+    -->
     <Button
         android:id="@+id/btn_readRegister"
         android:text="@string/btn_register"
@@ -58,8 +61,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.901"
-        app:layout_constraintHorizontal_bias="0.878" />
+        app:layout_constraintVertical_bias="0.902"
+        app:layout_constraintHorizontal_bias="0.914" />
 
     <EditText
         android:id="@+id/et_patronymic_register"
@@ -72,8 +75,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.901"
-        app:layout_constraintHorizontal_bias="0.691" />
+        app:layout_constraintVertical_bias="0.902"
+        app:layout_constraintHorizontal_bias="0.727" />
 
     <EditText
         android:id="@+id/et_lastname_register"
@@ -83,11 +86,11 @@
         android:hint="@string/lastname"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.781" />
 
     <EditText
         android:id="@+id/et_name_register"
@@ -100,7 +103,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556"
-        app:layout_constraintHorizontal_bias="0.691" />
+        app:layout_constraintVertical_bias="0.66"
+        app:layout_constraintHorizontal_bias="0.727" />
 
 </android.support.constraint.ConstraintLayout>
