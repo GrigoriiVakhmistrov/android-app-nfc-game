@@ -9,27 +9,38 @@
     >
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_fname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="270dp"
-        android:layout_height="54dp"
+        android:layout_height="25dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="493dp" />
+        app:layout_constraintHorizontal_bias="0.108" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_lname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="265dp"
-        android:layout_height="62dp"
+        android:layout_height="25dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="317dp" />
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintVertical_bias="0.685" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_sname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="268dp"
-        android:layout_height="55dp"
+        android:layout_height="25dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="410dp" />
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintVertical_bias="0.871" />
 
 </android.support.constraint.ConstraintLayout>
