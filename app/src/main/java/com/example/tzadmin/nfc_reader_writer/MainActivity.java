@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     
     int[] imageId = {
             R.drawable.mainiconreg,
-            R.drawable.mainiconreg,
+            R.drawable.validate_menu,
     };
 
     GridView gridView;

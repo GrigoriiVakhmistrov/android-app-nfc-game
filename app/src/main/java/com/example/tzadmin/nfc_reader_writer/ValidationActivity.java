@@ -16,9 +16,9 @@ public class ValidationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation);
-        firstName = (TextView) findViewById(R.id.tv_fname);
-        lastName = (TextView) findViewById(R.id.tv_lname);
-        SurName = (TextView) findViewById(R.id.tv_sname);
+        firstName = (TextView) findViewById(R.id.tv_valid_firstName);
+        lastName = (TextView) findViewById(R.id.tv_valid_lastName);
+        SurName = (TextView) findViewById(R.id.tv_valid_surName);
 
         startActivityForResult(new Intent(this, ScanNfcActivity.class), RESULT_OK);
     }

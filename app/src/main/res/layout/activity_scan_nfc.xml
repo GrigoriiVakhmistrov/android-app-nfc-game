@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/scan_activity"
     tools:context="com.example.tzadmin.nfc_reader_writer.ScanNfcActivity">
 
     <TextView
@@ -13,10 +14,11 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/grid_text"
         android:text="@string/textView"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:layout_constraintVertical_bias="0.964">
     </TextView>
 
@@ -27,6 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/infoScan"
         android:text=""
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
