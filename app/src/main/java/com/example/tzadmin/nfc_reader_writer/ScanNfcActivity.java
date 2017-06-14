@@ -8,24 +8,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
+import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.skyfishjy.library.RippleBackground;
 
 public class ScanNfcActivity extends AppCompatActivity {
 
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-    String nameBlinds;
-    TextView textView;
+    String name;
+    TextView infoScan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_nfc);
-        textView = (TextView)findViewById(R.id.test);
+        infoScan = (TextView)findViewById(R.id.infoScan);
+
         Intent intent = getIntent();
-        nameBlinds = intent.getStringExtra("name");
-        textView.setText(nameBlinds);
+        name = intent.getStringExtra("name");
+        infoScan.setText(name);
+
         adapter = NfcAdapter.getDefaultAdapter(this);
         if(adapter == null || !adapter.isEnabled()) {
             setResult(RESULT_CANCELED, new Intent());
@@ -57,14 +60,14 @@ public class ScanNfcActivity extends AppCompatActivity {
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String RfcId = toHex(tagFromIntent.getId());
 
-        /*if(Database.isNfcIdAlreadyExist(RfcId)) {
-            Toast.makeText(this, "Браслет уже зарегистрирован", Toast.LENGTH_LONG).show();
+        if(Database.isNfcIdAlreadyExist(RfcId)) {
+            Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
             return;
-        }*/
+        }
 
         Intent resultInt = new Intent();
-        resultInt.putExtra("NfcId", RfcId);
-        resultInt.putExtra("name", nameBlinds);
+        resultInt.putExtra("RfcId", RfcId);
+        resultInt.putExtra("name", name);
         setResult(RESULT_OK, resultInt);
         finish();
     }

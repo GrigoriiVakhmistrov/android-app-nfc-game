@@ -2,35 +2,31 @@ package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
 import android.os.Build;
-import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Adapters.AutoCompleteAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
-import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
+import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
 
-    EditText et_patronymic, et_search, et_name, et_lastName;
+    EditText surName, et_search, firstName, lastName;
     Button btn_register;
     AutoCompleteTextView autoCompleted;
-    final int _requestCode = 200;
-
+    static final int _registerCode = 1;
+    static final int _bindCode = 2;
     ArrayList<User> users;
-    DatabaseHelper dbHelper;
+    User selectedUser = null;
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +35,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btn_register = (Button) findViewById(R.id.btn_readRegister);
         et_search = (EditText) findViewById(R.id.autoCompleteTextView);
-        et_name = (EditText)findViewById(R.id.et_name_register);
-        et_lastName = (EditText)findViewById(R.id.et_lastname_register);
-        et_patronymic = (EditText)findViewById(R.id.et_patronymic_register);
+        firstName = (EditText)findViewById(R.id.et_name_register);
+        lastName = (EditText)findViewById(R.id.et_lastname_register);
+        surName = (EditText)findViewById(R.id.et_patronymic_register);
 
         btn_register.setOnClickListener(this);
-
-        dbHelper = new DatabaseHelper(this);
-        Database.SetUp(dbHelper.getReadableDatabase());
 
         users = Database.selectUsers();
 
@@ -59,18 +52,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_readRegister:
-                if(!et_name.getText().toString().equals("") &&
-                        !et_lastName.getText().toString().equals("") &&
-                        !et_patronymic.getText().toString().equals("")) {
+                if(!firstName.getText().toString().equals("") &&
+                        !lastName.getText().toString().equals("") &&
+                        !surName.getText().toString().equals("")) {
                     Intent intent = new Intent(this, ScanNfcActivity.class);
                     intent.putExtra("name",
-                            et_name.getText().toString() + " " +
-                                    et_lastName.getText().toString() + " " +
-                                    et_patronymic.getText().toString()
-                    );
-                    startActivityForResult(intent, _requestCode);
+                            firstName.getText().toString() + " " +
+                                    lastName.getText().toString() + " " +
+                                    surName.getText().toString());
+                    startActivityForResult(intent, _registerCode);
                 } else {
-                    Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, Message.FIELDS_NOT_FILLED, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -79,22 +71,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
        switch (requestCode) {
-           case _requestCode:
+           case _registerCode:
                if(resultCode == RESULT_OK) {
-                   String RfcId = data.getStringExtra("NfcId");
+                   String RfcId = data.getStringExtra("RfcId");
                    //TODO FIXME
-                   User user = new User(true);
-                   user.cFirstName = et_name.getText().toString();
-                   user.cLastName = et_lastName.getText().toString();
-                   user.cSurname = et_patronymic.getText().toString();
+                   User user = new User();
+                   user.cFirstName = firstName.getText().toString();
+                   user.cLastName = lastName.getText().toString();
+                   user.cSurname = surName.getText().toString();
                    user.cRfcId = RfcId;
 
                    Database.insert("tbUsers", user);
                    Database.insert("tbUsers_cache", user);
 
-                   Toast.makeText(this, "Пользователь " + et_name.getText().toString() +
-                           et_lastName.getText().toString() +
-                           et_patronymic.getText().toString() + " успешно зарегистрирован", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(this,
+                           Message.USER_SUCCESSFULLY_REGISTERED(user),
+                           Toast.LENGTH_SHORT).show();
+               }
+               break;
+           case _bindCode:
+               if(resultCode == RESULT_OK) {
+                   String RfcId = data.getStringExtra("RfcId");
+                   selectedUser.cRfcId = RfcId;
+                   Database.update("tbUsers", selectedUser);
                }
                break;
        }
@@ -103,19 +102,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
-        users = Database.selectUsers();
-        intent.putExtra("name", users.get(position).cFirstName + " " +
-                users.get(position).cLastName + " " +
-                        users.get(position).cSurname);
+        users = Database.selectUsers(); // TODO WARNING synchronize (this.users -> adapter.users)
+        selectedUser = users.get(position);
 
-        //Database.isNfcIdAlreadyExist()
-
-        try {
-            Database.update("tbUsers", users.get(position));
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        if(Database.isNfcIdAlreadyExist(selectedUser.cRfcId)) {
+            Toast.makeText(this,
+                    Message.USER_IS_HAVE_BRACER(selectedUser),
+                    Toast.LENGTH_LONG).show();
+            return;
         }
 
-        startActivityForResult(intent, _requestCode);
+        intent.putExtra("name", Message.concatFio(selectedUser));
+        startActivityForResult(intent, _bindCode);
     }
 }

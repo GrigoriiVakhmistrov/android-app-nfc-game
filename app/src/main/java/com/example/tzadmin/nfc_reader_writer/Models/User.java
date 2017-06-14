@@ -6,15 +6,16 @@ package com.example.tzadmin.nfc_reader_writer.Models;
 
 public class User {
 
-    public User (boolean isRegister) {
-        if(isRegister) {
-            cRfcId = "0";
-            cGroupId = "0";
-            cBatchId = "0";
-            cRouteId = "0";
-            cIsCap = "0";
-            cIsDeleted = "0";
-        }
+    public User () {
+        cFirstName = "-1";
+        cLastName = "-1";
+        cSurname = "-1";
+        cRfcId = "-1";
+        cGroupId = "-1";
+        cBatchId = "-1";
+        cRouteId = "-1";
+        cIsCap = "-1";
+        cIsDeleted = "-1";
     }
 
     public int id;
@@ -27,5 +28,4 @@ public class User {
     public String cRouteId;
     public String cIsCap;
     public String cIsDeleted;
-
 }
