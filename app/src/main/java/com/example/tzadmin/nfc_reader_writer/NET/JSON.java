@@ -17,7 +17,6 @@ public class JSON {
     public static Object fromString (String json, Class _class) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
-        Object object = gson.fromJson(json, _class);
-        return object;
+        return gson.fromJson(json, _class);
     }
 }
