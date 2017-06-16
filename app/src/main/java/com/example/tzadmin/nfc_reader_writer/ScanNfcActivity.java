@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.skyfishjy.library.RippleBackground;
 
@@ -32,15 +31,19 @@ public class ScanNfcActivity extends AppCompatActivity {
         adapter = NfcAdapter.getDefaultAdapter(this);
         if(adapter == null || !adapter.isEnabled()) {
             setResult(RESULT_CANCELED, new Intent());
+            Toast.makeText(this,
+                    Message.DEVICE_NOT_FOUND_NFC_ADAPTHER, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
+        final RippleBackground rippleBackground =
+                (RippleBackground)findViewById(R.id.content);
         rippleBackground.startRippleAnimation();
 
         pendingIntent = PendingIntent.getActivity(
-            this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+            this, 0, new Intent(this,
+                        getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
     }
 
     @Override
@@ -57,13 +60,9 @@ public class ScanNfcActivity extends AppCompatActivity {
 
     @Override
     public void onNewIntent(Intent intent) {
-        Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        Tag tagFromIntent =
+                intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String RfcId = toHex(tagFromIntent.getId());
-
-        if(Database.isNfcIdAlreadyExist(RfcId)) {
-            Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
-            return;
-        }
 
         Intent resultInt = new Intent();
         resultInt.putExtra("RfcId", RfcId);

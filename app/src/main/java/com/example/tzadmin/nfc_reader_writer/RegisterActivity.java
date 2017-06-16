@@ -74,6 +74,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
            case _registerCode:
                if(resultCode == RESULT_OK) {
                    String RfcId = data.getStringExtra("RfcId");
+
+                   if(Database.isNfcIdAlreadyExist(RfcId)) {
+                       Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
+                       return;
+                   }
+
                    //TODO FIXME
                    User user = new User();
                    user.cFirstName = firstName.getText().toString();

@@ -3,15 +3,17 @@ package com.example.tzadmin.nfc_reader_writer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 
-public class ValidationActivity extends AppCompatActivity {
+public class ValidationActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView firstName, lastName, SurName;
+    User user = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,22 @@ public class ValidationActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                         //TODO что делать дальше ?
                     }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_validClear:
+                if(this.user != null) {
+                    this.user.cRfcId = "-1";
+                    Database.update("tbUsers", user);
+                    Database.update("tbUsers_cache", user);
+                    user = null;
+                    Toast.makeText(this, Message.CLEAR_RFCID_SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                    //TODO что делать дальше ?
                 }
                 break;
         }
