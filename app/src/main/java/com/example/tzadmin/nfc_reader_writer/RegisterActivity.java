@@ -70,39 +70,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       switch (requestCode) {
-           case _registerCode:
-               if(resultCode == RESULT_OK) {
-                   String RfcId = data.getStringExtra("RfcId");
+        if(resultCode == RESULT_OK) {
+            String RfcId = data.getStringExtra("RfcId");
+            switch (requestCode) {
+                case _registerCode:
+                    if (Database.isNfcIdAlreadyExist(RfcId)) {
+                            Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
+                            return;
+                        }
 
-                   if(Database.isNfcIdAlreadyExist(RfcId)) {
-                       Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
-                       return;
-                   }
-
-                   //TODO FIXME
-                   User user = new User();
-                   user.cFirstName = firstName.getText().toString();
-                   user.cLastName = lastName.getText().toString();
-                   user.cSurname = surName.getText().toString();
-                   user.cRfcId = RfcId;
-
-                   Database.insert("tbUsers", user);
-                   Database.insert("tbUsers_cache", user);
-
-                   Toast.makeText(this,
-                           Message.USER_SUCCESSFULLY_REGISTERED(user),
-                           Toast.LENGTH_SHORT).show();
-               }
-               break;
-           case _bindCode:
-               if(resultCode == RESULT_OK) {
-                   String RfcId = data.getStringExtra("RfcId");
-                   selectedUser.cRfcId = RfcId;
-                   Database.update("tbUsers", selectedUser);
-               }
-               break;
-       }
+                    Toast.makeText(this,
+                            Message.USER_SUCCESSFULLY_REGISTERED(register(RfcId)),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case _bindCode:
+                    bind(RfcId);
+                    break;
+            }
+        }
     }
 
     @Override
@@ -120,5 +105,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         intent.putExtra("name", Message.concatFio(selectedUser));
         startActivityForResult(intent, _bindCode);
+    }
+
+    private User register (String RfcId) {
+        User user = new User();
+        user.cFirstName = firstName.getText().toString();
+        user.cLastName = lastName.getText().toString();
+        user.cSurname = surName.getText().toString();
+        user.cRfcId = RfcId;
+
+        Database.insert("tbUsers", user);
+        Database.insert("tbUsers_cache", user);
+        return user;
+    }
+
+    private void bind (String RfcId) {
+        selectedUser.cRfcId = RfcId;
+        Database.update("tbUsers", selectedUser);
+        Database.update("tbUsers_cache", selectedUser);
     }
 }
