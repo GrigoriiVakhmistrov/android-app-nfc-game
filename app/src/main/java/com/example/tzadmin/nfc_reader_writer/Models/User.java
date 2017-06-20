@@ -7,6 +7,7 @@ package com.example.tzadmin.nfc_reader_writer.Models;
 public class User {
 
     public User () {
+        id = -1;
         cFirstName = "-1";
         cLastName = "-1";
         cSurname = "-1";

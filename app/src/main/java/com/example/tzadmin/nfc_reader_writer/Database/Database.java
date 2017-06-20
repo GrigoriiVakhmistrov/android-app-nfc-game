@@ -83,11 +83,79 @@ public class Database {
     }
 
     @Nullable
+    //public static<T> void select (String tableName, T model, ArrayList listModel) {
+    public static<T> ArrayList<T> select (String tableName) {
+        ArrayList<T> listModel = new ArrayList<>();
+        T model = new T();
+        Cursor cursor = db.query(tableName,
+                null, null, null, null, null, null, null);
+        //ArrayList listModel = new ArrayList<>();
+        Field[] fieldModel = model.getClass().getFields();
+        if (cursor.moveToFirst()) {
+            do {
+                //Object object = new Object();
+                model = null;
+                String[] names = cursor.getColumnNames();
+                for (Field tempField : fieldModel) {
+                    for (int i = 0; i < names.length; i++) {
+                        if (names[i].equals(tempField.getName())) {
+                            int type = cursor.getType(i);
+                            try {
+                                switch (type) {
+                                    case Cursor.FIELD_TYPE_INTEGER:
+                                        tempField.setInt(model, cursor.getInt(cursor.getColumnIndex(names[i])));
+                                        break;
+                                    case Cursor.FIELD_TYPE_STRING:
+                                        String tempStr = cursor.getString(cursor.getColumnIndex(names[i]));
+                                        tempField.set(model, tempStr);
+                                        break;
+                                    case Cursor.FIELD_TYPE_NULL:
+                                        tempField.set(model, null);
+                                        break;
+                                }
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+                listModel.add(model);
+            } while (cursor.moveToNext());
+            return listModel;
+        } else {
+            return  null;
+        }
+    }
+
+        @Nullable
+        public static User selectUserByRfcId (String RfcId) {
+            Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",
+                    new String[]{RfcId}, null, null, null, "1");
+            User user = new User();
+            if (cursor.moveToFirst()) {
+                user.id = cursor.getInt(0);
+                user.cFirstName = cursor.getString(1);
+                user.cLastName = cursor.getString(2);
+                user.cSurname = cursor.getString(3);
+                user.cGroupId = cursor.getString(4);
+                user.cBatchId = cursor.getString(5);
+                user.cRfcId = cursor.getString(6);
+                user.cRouteId = cursor.getString(7);
+                user.cIsCap = cursor.getString(8);
+                user.cIsDeleted = cursor.getString(9);
+                return user;
+            } else {
+                return null;
+            }
+        }
+
+
+    @Nullable
     public static ArrayList<User> selectUsers () {
         Cursor cursor = db.query("tbUsers", null, null,
                 null, null, null, null, null);
-        ArrayList<User> result = new ArrayList<>();
-        if(cursor.moveToFirst()) {
+        ArrayList<User> users = new ArrayList<>();
+        if (cursor.moveToFirst()) {
             do {
                 User user = new User();
                 user.id = cursor.getInt(0);
@@ -100,35 +168,14 @@ public class Database {
                 user.cRouteId = cursor.getString(7);
                 user.cIsCap = cursor.getString(8);
                 user.cIsDeleted = cursor.getString(9);
-                result.add(user);
+                users.add(user);
             } while (cursor.moveToNext());
-            return result;
+            return users;
         } else {
-            return  null;
+            return null;
         }
     }
 
-    @Nullable
-    public static User selectUserByRfcId (String RfcId) {
-        Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",
-                new String[] { RfcId }, null, null, null, "1");
-        User user = new User();
-        if(cursor.moveToFirst()) {
-            user.id = cursor.getInt(0);
-            user.cFirstName = cursor.getString(1);
-            user.cLastName = cursor.getString(2);
-            user.cSurname = cursor.getString(3);
-            user.cGroupId = cursor.getString(4);
-            user.cBatchId = cursor.getString(5);
-            user.cRfcId = cursor.getString(6);
-            user.cRouteId = cursor.getString(7);
-            user.cIsCap = cursor.getString(8);
-            user.cIsDeleted = cursor.getString(9);
-            return user;
-        } else {
-            return  null;
-        }
-    }
 
     public static void delete (String tableName, int id) {
         db.delete(tableName,
