@@ -1,10 +1,12 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
+
 /**
  * Created by forz on 11.06.17.
  */
 
-public class User {
+public class User extends BaseModel {
 
     public User () {
         id = -1;
@@ -29,4 +31,11 @@ public class User {
     public String cRouteId;
     public String cIsCap;
     public String cIsDeleted;
+
+
+    //### MODEL INTERFACE ###//
+    public String GetTable() {
+        return "tbUsers";
+    }
+
 }

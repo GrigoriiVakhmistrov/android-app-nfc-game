@@ -1,25 +1,103 @@
 package com.example.tzadmin.nfc_reader_writer.Database;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+import com.example.tzadmin.nfc_reader_writer.SharedApplication;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by forz on 11.06.17.
  */
 
 public class Database {
-    private static SQLiteDatabase db;
+    static SQLiteDatabase db; //Private instance of SQLite database
+    private static Database instance; //private variable of singlton
 
-    public static void SetUp (SQLiteDatabase dbHelper) {
-        db = dbHelper;
+    private Context appContext;
+    private Semaphore threadMutex = new Semaphore(1);
+
+    //Entry point to singlton with ThreadSafe manner
+    //USE ONLY THIS METHOD TO ACCESS DATABASE
+    public static Database get() {
+        if(instance == null) instance = getSync();
+        return instance;
     }
 
-    public static void insert (String tableName, ArrayList<Object> objects) {
+    private static synchronized Database getSync() {
+        if(instance == null) instance = new Database();
+        return instance;
+    }
+
+    private Database(){
+        // here you can directly access the Application context calling
+        appContext = SharedApplication.get();
+        DatabaseHelper dbHelper = new DatabaseHelper(appContext);
+        db = dbHelper.getReadableDatabase();
+    }
+
+    public long insert (String table, String nullColumnHack, ContentValues values) {
+        try {
+            threadMutex.acquire();
+            return db.insert(table, nullColumnHack, values);
+        }catch (Exception ex) {
+        }finally {
+            threadMutex.release();
+            return -1;
+        }
+    }
+
+    public int update (String table, ContentValues values, String whereClause, String[] whereArgs) {
+        try {
+            threadMutex.acquire();
+            return db.update(table, values, whereClause, whereArgs);
+        }catch (Exception ex) {
+        }finally {
+            threadMutex.release();
+            return -1;
+        }
+    }
+
+    public Collection<Map<String, String>> select (String table, String[] columns, String selection,
+                                                   String[] selectionArgs, String groupBy, String having,
+                                                   String orderBy, String limit) {
+        Collection<Map<String, String>> retData = new ArrayList<>();
+
+        try {
+            threadMutex.acquire();
+
+            Cursor c = db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+
+            if (c.moveToFirst()) {
+                do {
+                    Map<String, String> data = new HashMap<>();
+                    for (int i = 0; i < c.getColumnCount(); i++) {
+                        data.put(c.getColumnName(i), c.getString(i));
+                    }
+
+                    retData.add(data);
+                } while (c.moveToNext());
+            }
+
+        }catch (Exception ex) {
+        }finally {
+            threadMutex.release();
+        }
+
+        return retData;
+    }
+
+    public void insert (String tableName, ArrayList<Object> objects) {
         ContentValues cv = new ContentValues();
         for (Object object : objects) {
             Class _class = object.getClass();
@@ -37,7 +115,7 @@ public class Database {
         }
     }
 
-    public static void insert (String tableName, Object object) {
+    public void insert (String tableName, Object object) {
         ContentValues cv = new ContentValues();
         Class _class = object.getClass();
         Field[] fields = _class.getFields();
@@ -53,7 +131,7 @@ public class Database {
         db.insert(tableName, null, cv);
     }
 
-    public static void update (String tableName, Object object) {
+    public void update (String tableName, Object object) {
         ContentValues cv = new ContentValues();
         Class _class = object.getClass();
         Field[] fields = _class.getDeclaredFields();
@@ -70,7 +148,7 @@ public class Database {
                 "id = ?", new String[] { String.valueOf(cv.get("id")) });
     }
 
-    public static boolean isNfcIdAlreadyExist (String RfcId) {
+    public boolean isNfcIdAlreadyExist (String RfcId) {
         Cursor cursor = db.query("tbUsers",
                 null, "cRfcId = ?",
                 new String[] { RfcId },
@@ -128,7 +206,7 @@ public class Database {
     }
 
         @Nullable
-        public static User selectUserByRfcId (String RfcId) {
+        public User selectUserByRfcId (String RfcId) {
             Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",
                     new String[]{RfcId}, null, null, null, "1");
             User user = new User();
@@ -151,7 +229,7 @@ public class Database {
 
 
     @Nullable
-    public static ArrayList<User> selectUsers () {
+    public ArrayList<User> selectUsers () {
         Cursor cursor = db.query("tbUsers", null, null,
                 null, null, null, null, null);
         ArrayList<User> users = new ArrayList<>();
@@ -177,7 +255,7 @@ public class Database {
     }
 
 
-    public static void delete (String tableName, int id) {
+    public void delete (String tableName, int id) {
         db.delete(tableName,
                 "id =?",
                 new String[] { String.valueOf(id) });
