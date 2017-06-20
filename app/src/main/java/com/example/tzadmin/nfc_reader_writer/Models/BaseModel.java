@@ -1,10 +1,13 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -34,7 +37,7 @@ public abstract class BaseModel implements ModelInterface {
         //Collection<Map<String, String>> data = Database.get().select(GetTable())
     }
 
-    public Collection<? extends BaseModel> select (Type model, Map<String, String> andWhare) {
+    public Collection<? extends BaseModel> select (Type model, Map<String, String> andWhare, Collection<String> groupBy, Collection<String> orderBy, String limit) {
 
         BaseModel currentModel;
         try {
@@ -45,6 +48,8 @@ public abstract class BaseModel implements ModelInterface {
 
         String whereCause = null;
         String[] whereParams = null;
+        String _groupBy = null;
+        String _orderBy = null;
 
         if (andWhare != null) {
 
@@ -65,13 +70,60 @@ public abstract class BaseModel implements ModelInterface {
                 whereParams[i] = value;
                 i++;
             }
+
+            whereCause = sbuilder.toString();
         }
 
-        Collection<Map<String, String>> data = Database.get().select(currentModel.GetTableName(), null, )
+        if (groupBy != null && groupBy.size() > 0) {
+            StringBuilder sBuilder = new StringBuilder();
 
-        currentModel.GetTableName();
+            int i = 0;
+            for (String item : groupBy) {
+                if (i == 0)
+                    sBuilder.append(item);
+                else
+                    sBuilder.append(", ").append(item);
+                i++;
+            }
+
+            _groupBy = sBuilder.toString();
+        }
+
+        //TODO Add order by if nessary
+        /*
+        if (orderBy != null && orderBy.size() > 0) {
+            StringBuilder sBuilder = new StringBuilder();
+
+            int i = 0;
+            for (String item : groupBy) {
+                if (i == 0)
+                    sBuilder.append(item);
+                else
+                    sBuilder.append(", ").append(item);
+                i++;
+            }
+
+            _groupBy = sBuilder.toString();
+        }*/
+
+
+        Collection<Map<String, String>> data = Database.get().select(currentModel.GetTableName(), null, whereCause, whereParams, _groupBy, null, _orderBy, limit);
+
+        Collection<? extends BaseModel> retData = new ArrayList<>();
+
+        for (Map<String, String> item : data) {
+            BaseModel m = null;
+            try {
+                m = (BaseModel) model.getClass().getConstructors()[0].newInstance();
+            } catch (Exception e) {
+            } finally {
+                continue;
+            }
+
+            retData.add(m);
+        }
 
         //TODO Replace with proper code
-        return null;
+        return retData;
     }
 }
