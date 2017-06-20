@@ -9,4 +9,7 @@
     <string name="lastname">Фамилия</string>
     <string name="patronymic">Отчество</string>
 
+    /*CubeActivity*/
+    <string name="write">Записать</string>
+
 </resources>
