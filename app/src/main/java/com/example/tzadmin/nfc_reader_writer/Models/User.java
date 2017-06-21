@@ -21,20 +21,30 @@ public class User extends BaseModel {
         cIsDeleted = "-1";
     }
 
-    public int id;
+    @MAnotation(PrimaryKey = true)
+    public Integer id;
+    @MAnotation
     public String cFirstName;
+    @MAnotation
     public String cLastName;
+    @MAnotation
     public String cSurname;
+    @MAnotation
     public String cRfcId;
+    @MAnotation
     public String cGroupId;
+    @MAnotation
     public String cBatchId;
+    @MAnotation
     public String cRouteId;
+    @MAnotation
     public String cIsCap;
+    @MAnotation
     public String cIsDeleted;
 
 
     //### MODEL INTERFACE ###//
-    public String GetTable() {
+    public String GetTableName() {
         return "tbUsers";
     }
 

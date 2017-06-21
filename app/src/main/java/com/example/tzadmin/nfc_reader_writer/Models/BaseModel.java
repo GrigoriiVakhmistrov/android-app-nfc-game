@@ -1,15 +1,19 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteException;
 import android.support.annotation.VisibleForTesting;
 
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,23 +22,91 @@ import java.util.Map;
 
 public abstract class BaseModel implements ModelInterface {
 
-    public String getInsertQuery() {
-        StringBuilder queryBuilder = new StringBuilder();
-
-        return queryBuilder.toString();
-    }
-
     public String GetLogTableName() {
         return "log" + GetTableName();
     }
 
-
-    public boolean InsertIt() {
-        return false;
+    public Collection<? extends BaseModel> selectAll() {
+        return select(getClass(), null, null, null, null);
     }
 
-    public Collection<? extends BaseModel> selectAll() {
-        //Collection<Map<String, String>> data = Database.get().select(GetTable())
+    public Collection<? extends BaseModel> selectByParams() {
+        Map<String, String> findParams = new HashMap<>();
+
+        Field[] fields = getClass().getFields();
+        for (Field item : fields) {
+            if (item.isAnnotationPresent(MAnotation.class)) {
+                MAnotation a = item.getAnnotation(MAnotation.class);
+
+                String key = item.getName();
+                if (!a.FieldName().equals(""))
+                    key = a.FieldName();
+                String val = null;
+
+                if (item.getType() == String.class) {
+                    try {
+                        val = (String) item.get(this);
+                    } catch (Exception e) { }
+                } else if (item.getType() == Integer.class) {
+                    try {
+                        val = ((Integer) item.get(this)).toString();
+                    } catch (Exception e) { }
+                }
+
+                if (val != null && !val.equals(a.DefaultValue()))
+                    findParams.put(key, val);
+            }
+        }
+
+        if (findParams.size() == 0)
+            findParams = null;
+        return select(getClass(), findParams, null, null, null);
+    }
+
+    public boolean insert() {
+        ContentValues values = new ContentValues();
+
+        Field[] fields = getClass().getFields();
+        for (Field item : fields) {
+            if (item.isAnnotationPresent(MAnotation.class)) {
+                MAnotation a = item.getAnnotation(MAnotation.class);
+
+                String key = item.getName();
+                if (!a.FieldName().equals(""))
+                    key = a.FieldName();
+                String val = null;
+
+                if (item.getType() == String.class) {
+                    try {
+                        val = (String) item.get(this);
+                    } catch (Exception e) { }
+                } else if (item.getType() == Integer.class) {
+                    try {
+                        val = ((Integer) item.get(this)).toString();
+                    } catch (Exception e) { }
+                }
+
+                if (!a.PrimaryKey())
+                    values.put(key, val);
+            }
+        }
+
+        long newId = Database.get().insert(GetTableName(), null, values);
+        if (newId == -1) return false;
+
+        for (Field item : fields) {
+            if (item.isAnnotationPresent(MAnotation.class)) {
+                MAnotation a = item.getAnnotation(MAnotation.class);
+
+                if (a.PrimaryKey()) {
+                    try {
+                        item.set(this, Integer.valueOf((int)newId));
+                    } catch (Exception e) { }
+                }
+            }
+        }
+
+        return true;
     }
 
     public Collection<? extends BaseModel> select (Type model, Map<String, String> andWhare, Collection<String> groupBy, Collection<String> orderBy, String limit) {
@@ -89,13 +161,12 @@ public abstract class BaseModel implements ModelInterface {
             _groupBy = sBuilder.toString();
         }
 
-        //TODO Add order by if nessary
-        /*
+
         if (orderBy != null && orderBy.size() > 0) {
             StringBuilder sBuilder = new StringBuilder();
 
             int i = 0;
-            for (String item : groupBy) {
+            for (String item : orderBy) {
                 if (i == 0)
                     sBuilder.append(item);
                 else
@@ -103,27 +174,25 @@ public abstract class BaseModel implements ModelInterface {
                 i++;
             }
 
-            _groupBy = sBuilder.toString();
-        }*/
+            _orderBy = sBuilder.toString();
+        }
 
 
         Collection<Map<String, String>> data = Database.get().select(currentModel.GetTableName(), null, whereCause, whereParams, _groupBy, null, _orderBy, limit);
 
-        Collection<? extends BaseModel> retData = new ArrayList<>();
+        Collection<BaseModel> retData = new ArrayList<>();
 
         for (Map<String, String> item : data) {
             BaseModel m = null;
             try {
-                m = (BaseModel) model.getClass().getConstructors()[0].newInstance();
+                m = (BaseModel)model.getClass().getConstructors()[0].newInstance();
             } catch (Exception e) {
-            } finally {
                 continue;
             }
 
             retData.add(m);
         }
 
-        //TODO Replace with proper code
         return retData;
     }
 }
