@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
 
-        ArrayList<User> users = new ArrayList<>();
+       /* ArrayList<User> users = new ArrayList<>();
         User user = new User();
         Database.select("tbUsers", user, users);
 
-        int a = 5;
+        int a = 5;*/
     }
 
     @Override

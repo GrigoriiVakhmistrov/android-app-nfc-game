@@ -82,7 +82,7 @@ public class Database {
             return false;
     }
 
-    @Nullable
+    /*@Nullable
     //public static<T> void select (String tableName, T model, ArrayList listModel) {
     public static<T> ArrayList<T> select (String tableName) {
         ArrayList<T> listModel = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Database {
         } else {
             return  null;
         }
-    }
+    }*/
 
         @Nullable
         public static User selectUserByRfcId (String RfcId) {
