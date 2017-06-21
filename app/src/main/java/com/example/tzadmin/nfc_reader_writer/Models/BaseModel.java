@@ -109,11 +109,53 @@ public abstract class BaseModel implements ModelInterface {
         return true;
     }
 
-    public Collection<? extends BaseModel> select (Type model, Map<String, String> andWhare, Collection<String> groupBy, Collection<String> orderBy, String limit) {
+    public boolean update() {
+        ContentValues values = new ContentValues();
+        String where = "";
+        String[] whereARGS = new String[1];
+
+
+        Field[] fields = getClass().getFields();
+        for (Field item : fields) {
+            if (item.isAnnotationPresent(MAnotation.class)) {
+                MAnotation a = item.getAnnotation(MAnotation.class);
+
+                String key = item.getName();
+                if (!a.FieldName().equals(""))
+                    key = a.FieldName();
+                String val = null;
+
+                if (item.getType() == String.class) {
+                    try {
+                        val = (String) item.get(this);
+                    } catch (Exception e) { }
+                } else if (item.getType() == Integer.class) {
+                    try {
+                        val = ((Integer) item.get(this)).toString();
+                    } catch (Exception e) { }
+                }
+
+                if (!a.PrimaryKey()) {
+                    values.put(key, val);
+                } else {
+                    where = key + " = ? ";
+                    whereARGS[0] = val;
+                }
+
+            }
+        }
+
+        long newId = Database.get().update(GetTableName(), values, where, whereARGS);
+
+        if (newId == 0) return false;
+        else return true;
+    }
+
+    public Collection<? extends BaseModel> select (Class<?> model, Map<String, String> andWhare, Collection<String> groupBy, Collection<String> orderBy, String limit) {
 
         BaseModel currentModel;
         try {
-            currentModel = (BaseModel) model.getClass().getConstructors()[0].newInstance();
+            currentModel = (BaseModel) model.getConstructors()[0].newInstance();
         } catch (Exception e) {
             return null;
         }
@@ -182,10 +224,37 @@ public abstract class BaseModel implements ModelInterface {
 
         Collection<BaseModel> retData = new ArrayList<>();
 
+        Field[] fields = model.getFields();
+
         for (Map<String, String> item : data) {
             BaseModel m = null;
             try {
-                m = (BaseModel)model.getClass().getConstructors()[0].newInstance();
+                m = (BaseModel)model.getConstructors()[0].newInstance();
+
+
+                for (Field f : fields) {
+                    if (f.isAnnotationPresent(MAnotation.class)) {
+                        MAnotation a = f.getAnnotation(MAnotation.class);
+
+                        String key = f.getName();
+                        if (!a.FieldName().equals(""))
+                            key = a.FieldName();
+
+                        if (item.containsKey(key)) {
+                            if (f.getType() == String.class) {
+                                try {
+                                    f.set(m, item.get(key));
+                                } catch (Exception e) { }
+                            } else if (f.getType() == Integer.class) {
+                                try {
+                                    f.set(m, Integer.valueOf(item.get(key)));
+                                } catch (Exception e) { }
+                            }
+                        }
+
+                    }
+                }
+
             } catch (Exception e) {
                 continue;
             }

@@ -97,6 +97,7 @@ public class Database {
         return retData;
     }
 
+    /*
     public void insert (String tableName, ArrayList<Object> objects) {
         ContentValues cv = new ContentValues();
         for (Object object : objects) {
@@ -147,6 +148,7 @@ public class Database {
         db.update(tableName, cv,
                 "id = ?", new String[] { String.valueOf(cv.get("id")) });
     }
+    */
 
     public boolean isNfcIdAlreadyExist (String RfcId) {
         Cursor cursor = db.query("tbUsers",
