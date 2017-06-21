@@ -10,9 +10,6 @@ import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -41,12 +38,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
+<<<<<<< HEAD
 
        /* ArrayList<User> users = new ArrayList<>();
         User user = new User();
         Database.select("tbUsers", user, users);
 
         int a = 5;*/
+=======
+>>>>>>> fd4c0f848870ab5b092a4a7c1cc88853694a9ccd
     }
 
     @Override

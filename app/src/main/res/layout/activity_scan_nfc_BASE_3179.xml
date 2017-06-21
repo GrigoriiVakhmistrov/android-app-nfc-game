@@ -19,11 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
         android:textSize="26sp"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.878">
-=======
-        app:layout_constraintVertical_bias="0.882">
->>>>>>> 4c7eeafc721d433606abb1a650d9079797b035c9
+        app:layout_constraintVertical_bias="0.964">
     </TextView>
 
     <TextView
@@ -38,31 +34,30 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
         android:textSize="20sp"
-        app:layout_constraintVertical_bias="0.789">
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.021">
     </TextView>
 
     <com.skyfishjy.library.RippleBackground
         android:id="@+id/content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:rb_color="@color/colorPrimary"
         app:rb_duration="3000"
         app:rb_radius="38dp"
         app:rb_rippleAmount="4"
-        app:rb_scale="6">
+        app:rb_scale="6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:layout_width="0dp">
 
         <ImageView
             android:id="@+id/centerImage"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
     </com.skyfishjy.library.RippleBackground>
 
 </android.support.constraint.ConstraintLayout>

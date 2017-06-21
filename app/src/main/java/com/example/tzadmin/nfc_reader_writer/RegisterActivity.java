@@ -75,9 +75,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             switch (requestCode) {
                 case _registerCode:
                     if (Database.isNfcIdAlreadyExist(RfcId)) {
-                            Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
-                            return;
-                        }
+                        Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
+                        return;
+                    }
 
                     Toast.makeText(this,
                             Message.USER_SUCCESSFULLY_REGISTERED(register(RfcId)),
@@ -94,9 +94,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
         users = Database.selectUsers(); // TODO WARNING synchronize (this.users -> adapter.users)
-        selectedUser = users.get(position);
+        selectedUser = (User)parent.getItemAtPosition(position);
 
-        if(Database.isNfcIdAlreadyExist(selectedUser.cRfcId)) {
+        if(!selectedUser.cRfcId.equals("-1")) {
             Toast.makeText(this,
                     Message.USER_IS_HAVE_BRACER(selectedUser),
                     Toast.LENGTH_LONG).show();
@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void bind (String RfcId) {
         selectedUser.cRfcId = RfcId;
-        Database.update("tbUsers", selectedUser);
-        Database.update("tbUsers_cache", selectedUser);
+        Database.updateBracer(selectedUser.id, selectedUser.cRfcId);
+        //Database.update("tbUsers_cache", selectedUser);
     }
 }
