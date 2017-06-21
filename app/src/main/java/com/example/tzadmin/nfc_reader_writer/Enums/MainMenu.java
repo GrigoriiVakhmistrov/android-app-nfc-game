@@ -8,4 +8,5 @@ public class MainMenu {
     /*enum menus*/
     public final static int REGISTER = 0;
     public final static int VALIDATOR = 1;
+    public final static int CUBES = 2;
 }
