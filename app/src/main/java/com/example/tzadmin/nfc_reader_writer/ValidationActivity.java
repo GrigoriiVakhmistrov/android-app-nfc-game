@@ -14,7 +14,6 @@ import com.example.tzadmin.nfc_reader_writer.Models.User;
 public class ValidationActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView firstName, lastName, surName;
-    Button btn_clear;
     User user = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,7 @@ public class ValidationActivity extends AppCompatActivity implements View.OnClic
         firstName = (TextView) findViewById(R.id.tv_valid_firstName);
         lastName = (TextView) findViewById(R.id.tv_valid_lastName);
         surName = (TextView) findViewById(R.id.tv_valid_surName);
-        btn_clear = (Button)findViewById(R.id.btn_validClear);
-        btn_clear.setOnClickListener(this);
+
         startActivityForResult(new Intent(this, ScanNfcActivity.class), 2);
     }
 
@@ -53,19 +51,7 @@ public class ValidationActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_validClear:
-                if(this.user != null) {
-                    this.user.cRfcId = "-1";
-                    Database.updateBracer(user.id, user.cRfcId);
-                    //Database.update("tbUsers_cache", user);
-                    firstName.setText("");
-                    lastName.setText("");
-                    surName.setText("");
-                    user = null;
-                    Toast.makeText(this, Message.CLEAR_RFCID_SUCCESSFULLY, Toast.LENGTH_SHORT).show();
-                    //TODO что делать дальше ?
-                }
-                break;
+
         }
     }
 }

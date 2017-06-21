@@ -37,8 +37,11 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".ValidationActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".CubeActivity"></activity>
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".CubeActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".WinnersActivity"></activity>
     </application>
 
 </manifest>
