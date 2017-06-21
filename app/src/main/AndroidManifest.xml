@@ -41,7 +41,8 @@
         <activity
             android:name=".CubeActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".WinnersActivity"></activity>
+        <activity android:name=".WinnersActivity" />
+        <activity android:name=".ThrowCubes"></activity>
     </application>
 
 </manifest>
