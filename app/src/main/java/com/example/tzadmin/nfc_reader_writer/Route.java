@@ -19,7 +19,7 @@ public class Route extends AppCompatActivity {
         setContentView(R.layout.activity_route);
 
         gridView = (GridView)findViewById(R.id.gridView_route);
-        MainGridViewAdapter mainGridViewAdapter = new MainGridViewAdapter()
+        //MainGridViewAdapter mainGridViewAdapter = new MainGridViewAdapter()
 
     }
 }

@@ -31,7 +31,7 @@ public class ValidationActivity extends AppCompatActivity implements View.OnClic
             case RESULT_OK:
                 if(resultCode == RESULT_OK) {
                     String RfcId = data.getStringExtra("RfcId");
-                    User user = Database.selectUserByRfcId(RfcId);
+                    User user = new User().selectUserByRfcId(RfcId);
                     if(user != null) {
                         firstName.setText(user.cFirstName);
                         lastName.setText(user.cLastName);
@@ -53,8 +53,11 @@ public class ValidationActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_validClear:
                 if(this.user != null) {
                     this.user.cRfcId = "-1";
+                    user.update();
+                    /*
                     Database.update("tbUsers", user);
                     Database.update("tbUsers_cache", user);
+                    */
                     user = null;
                     Toast.makeText(this, Message.CLEAR_RFCID_SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                     //TODO что делать дальше ?

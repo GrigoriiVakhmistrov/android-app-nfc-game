@@ -1,7 +1,5 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
-import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
-
 import java.util.Collection;
 
 /**
@@ -53,12 +51,20 @@ public class User extends BaseModel {
     public boolean isNfcIdAlreadyExist (String RfcId) {
         this.cRfcId = RfcId;
 
-        Collection<User> u = selectByParams();
+        Collection<User> u = (Collection<User>) selectByParams();
 
-        if(u.size() > 0)
-            return true;
-        else
-            return false;
+        return u.size() > 0;
+    }
+
+    public User selectUserByRfcId  (String RfcId) {
+        this.cRfcId = RfcId;
+
+        Collection<User> u = (Collection<User>) selectByParams();
+
+        if (u.size() > 0)
+            for (User usr : u) return usr;
+
+        return null;
     }
 
 }

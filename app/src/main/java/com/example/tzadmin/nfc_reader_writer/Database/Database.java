@@ -148,7 +148,7 @@ public class Database {
         db.update(tableName, cv,
                 "id = ?", new String[] { String.valueOf(cv.get("id")) });
     }
-    */
+
 
     public boolean isNfcIdAlreadyExist (String RfcId) {
         Cursor cursor = db.query("tbUsers",
@@ -207,6 +207,8 @@ public class Database {
         }
     }
 
+
+
         @Nullable
         public User selectUserByRfcId (String RfcId) {
             Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",
@@ -262,4 +264,6 @@ public class Database {
                 "id =?",
                 new String[] { String.valueOf(id) });
     }
+
+     */
 }
