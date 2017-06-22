@@ -42,7 +42,9 @@
             android:name=".CubeActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".WinnersActivity" />
-        <activity android:name=".ThrowCubes"></activity>
+        <activity android:name=".ThrowCubes" />
+        <activity android:name=".TeamsActivity" />
+        <activity android:name=".ShopActivity"></activity>
     </application>
 
 </manifest>
