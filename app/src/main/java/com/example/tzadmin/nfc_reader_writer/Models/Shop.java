@@ -9,8 +9,9 @@ import android.widget.ImageView;
  */
 
 public class Shop {
-    public int image;
+    public Integer id;
+    public Integer image;
     public String name;
     public String info;
-    //public Button btn;
+    public Button btn;
 }

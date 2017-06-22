@@ -42,9 +42,6 @@
             android:name=".CubeActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".WinnersActivity"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".ThrowCubes"
             android:screenOrientation="landscape" />
         <activity
@@ -54,13 +51,11 @@
             android:name=".ShopActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".WinnersTeamActivity"
+            android:name=".ScanNfcNonstopActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".WinnersIndividualsActivity"
+            android:name=".CheckinScaner"
             android:screenOrientation="landscape" />
-        <activity android:name=".WinnersTeam2Activity" />
-        <activity android:name=".WinnersIndividuals2Activity"></activity>
     </application>
 
 </manifest>

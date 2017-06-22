@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tzadmin.nfc_reader_writer.TeamsActivity">
+    tools:context="com.example.tzadmin.nfc_reader_writer.TeamsActivity"
+    android:background="@drawable/team_xxxhdpi">
 
     <ImageButton
         android:background="@drawable/bigimot_xxxhdpi"

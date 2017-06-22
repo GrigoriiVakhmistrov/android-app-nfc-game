@@ -89,55 +89,6 @@ public class Database {
             return false;
     }
 
-<<<<<<< HEAD
-    /*@Nullable
-    //public static<T> void select (String tableName, T model, ArrayList listModel) {
-    public static<T> ArrayList<T> select (String tableName) {
-        ArrayList<T> listModel = new ArrayList<>();
-        T model = new T();
-=======
-/*
-    @Nullable
-    public static<T> ArrayList select(String tableName, T model) {
->>>>>>> fd4c0f848870ab5b092a4a7c1cc88853694a9ccd
-        Cursor cursor = db.query(tableName,
-                null, null, null, null, null, null, null);
-        Field[] fieldModel = model.getClass().getFields();
-        ArrayList listModel = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            do {
-                model = null;
-                String[] names = cursor.getColumnNames();
-                for (Field tempField : fieldModel) {
-                    for (int i = 0; i < names.length; i++) {
-                        if (names[i].equals(tempField.getName()))
-                            try {
-                                int type = cursor.getType(i);
-                                switch (type) {
-                                    case Cursor.FIELD_TYPE_INTEGER:
-                                        tempField.setInt(model, cursor.getInt(cursor.getColumnIndex(names[i])));
-                                        break;
-                                    case Cursor.FIELD_TYPE_STRING:
-                                        tempField.set(model, cursor.getString(cursor.getColumnIndex(names[i])));
-                                        break;
-                                    case Cursor.FIELD_TYPE_NULL:
-                                        tempField.set(model, null);
-                                        break;
-                                }
-                        } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                        }
-                    }
-                }
-                listModel.add(model);
-            } while (cursor.moveToNext());
-            return listModel;
-        } else {
-            return null;
-        }
-    }*/
-
-
     @Nullable
     public static User selectUserByRfcId (String RfcId) {
         Cursor cursor = db.query("tbUsers", null, "cRfcId = ?",

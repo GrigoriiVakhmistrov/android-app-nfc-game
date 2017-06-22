@@ -1,6 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * Created by forz on 22.06.17.
  */
 
-public class ShopAdapter extends BaseAdapter {
+public class ShopAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     private ArrayList<Shop> items;
 
@@ -59,12 +60,20 @@ public class ShopAdapter extends BaseAdapter {
             imageView.setImageResource(items.get(position).image);
             name.setText(items.get(position).name);
             info.setText(items.get(position).info);
-            //btn
+            btn.setTag(items.get(position).id);
+            btn.setOnClickListener(this);
 
         } else {
             shop = convertView;
         }
 
         return shop;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Integer tag = (Integer) v.getTag(); //TODO check return value
+        //database ->
+        //
     }
 }
