@@ -44,7 +44,8 @@
         <activity android:name=".WinnersActivity" />
         <activity android:name=".ThrowCubes" />
         <activity android:name=".TeamsActivity" />
-        <activity android:name=".ShopActivity"></activity>
+        <activity android:name=".ShopActivity" />
+        <activity android:name=".WinnersTeamActivity"></activity>
     </application>
 
 </manifest>
