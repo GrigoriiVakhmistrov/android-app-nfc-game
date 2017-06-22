@@ -29,23 +29,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RegisterActivity"
+        <activity android:name=".RegisterActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".ScanNfcActivity"
+        <activity android:name=".ScanNfcActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".ValidationActivity"
+        <activity android:name=".ValidationActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".CubeActivity"
+        <activity android:name=".CubeActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".WinnersActivity" />
-        <activity android:name=".ThrowCubes" />
-        <activity android:name=".TeamsActivity" />
-        <activity android:name=".ShopActivity" />
-        <activity android:name=".WinnersTeamActivity"></activity>
+        <activity android:name=".WinnersActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ThrowCubes"
+            android:screenOrientation="landscape" />
+        <activity android:name=".TeamsActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ShopActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".WinnersTeamActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".WinnersIndividualsActivity"
+            android:screenOrientation="landscape" ></activity>
     </application>
 
 </manifest>
