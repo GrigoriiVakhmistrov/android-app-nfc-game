@@ -17,7 +17,7 @@ public class Group extends BaseModel {
     @MAnotation
     public String totemname;
     @MAnotation
-    public Integer totemimage;
+    public String totemimage;
     @MAnotation
     public String color;
     @MAnotation
