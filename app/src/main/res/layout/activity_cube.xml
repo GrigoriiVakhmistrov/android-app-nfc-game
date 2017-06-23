@@ -30,6 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/btn_gradient"
@@ -40,6 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:tag="pnl1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
@@ -61,6 +63,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/btn_gradient"
@@ -71,6 +74,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:tag="pnl1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
@@ -92,6 +96,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/btn_gradient"
@@ -102,6 +107,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:tag="pnl1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
@@ -139,6 +145,7 @@
             android:weightSum="1">
 
             <Button
+                android:tag="pnl2"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -149,6 +156,7 @@
                 android:text="1"/>
 
             <Button
+                android:tag="pnl2"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
@@ -170,6 +178,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl2"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -180,6 +189,7 @@
                 android:text="2"/>
 
             <Button
+                android:tag="pnl2"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
@@ -201,6 +211,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl2"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -211,6 +222,7 @@
                 android:text="3"/>
 
             <Button
+                android:tag="pnl2"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
@@ -246,6 +258,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl3"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -256,6 +269,7 @@
                 android:text="Нос"/>
 
             <Button
+                android:tag="pnl3"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
@@ -277,6 +291,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl3"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -287,6 +302,7 @@
                 android:text="Глаз"/>
 
             <Button
+                android:tag="pnl3"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
@@ -308,6 +324,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:tag="pnl3"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -318,6 +335,7 @@
                 android:text="Ухо"/>
 
             <Button
+                android:tag="pnl3"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_gradient"
                 android:layout_width="70dp"
