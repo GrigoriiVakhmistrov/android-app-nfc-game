@@ -23,19 +23,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "cSurname text,"
                 + "cRfcId text,"
                 + "cGroupId text,"
-                + "cBatchId text,"
+                //+ "cBatchId text,"
                 + "cRouteId text,"
                 + "cIsCap text,"
                 + "cIsDeleted text" + ");");
 
-        db.execSQL("create table tbUsers_cache ("
+        db.execSQL("create table log_tbUsers ("
                 + "id integer primary key autoincrement,"
                 + "cFirstName text,"
                 + "cLastName text,"
                 + "cSurname text,"
                 + "cRfcId text,"
                 + "cGroupId text,"
-                + "cBatchId text,"
+                //+ "cBatchId text,"
                 + "cRouteId text,"
                 + "cIsCap text,"
                 + "cIsDeleted text" + ");");

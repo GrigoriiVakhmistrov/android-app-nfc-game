@@ -23,7 +23,7 @@ import java.util.Map;
 public abstract class BaseModel implements ModelInterface {
 
     public String GetLogTableName() {
-        return "log" + GetTableName();
+        return "log_" + GetTableName();
     }
 
     public Collection<? extends BaseModel> selectAll() {
