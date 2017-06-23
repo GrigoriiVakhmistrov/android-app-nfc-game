@@ -73,7 +73,6 @@ public class ShopAdapter extends BaseAdapter implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Integer tag = (Integer) v.getTag(); //TODO check return value
-        //database ->
-        //
+
     }
 }
