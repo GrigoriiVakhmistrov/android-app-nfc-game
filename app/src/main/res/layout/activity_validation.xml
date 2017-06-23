@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.ValidationActivity"
-    android:background="@drawable/validatebacground"
+    android:background="@drawable/info_user_xxxhdpi"
     >
 
     <TextView
