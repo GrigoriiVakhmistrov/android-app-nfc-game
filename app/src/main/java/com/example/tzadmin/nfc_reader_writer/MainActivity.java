@@ -17,14 +17,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "Регистрация",
             "Валидатор",
             "Кубики",
-            "Тест"
+            "Тест",
+            "Регистрация команды"
     };
     
     int[] imageId = {
             R.drawable.mainiconreg,
             R.drawable.validate_menu,
             R.drawable.mainiconreg,
-            R.drawable.bear_xxxhdpi
+            R.drawable.bear_xxxhdpi,
+            R.drawable.bear_xxxhdpi,
     };
 
     GridView gridView;
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case MainMenu.TEST:
                 startActivity(new Intent(this, ThrowCubes.class));
+                break;
+            case MainMenu.RegisterTeam:
+                startActivity(new Intent(this, TeamsActivity.class));
                 break;
         }
     }
