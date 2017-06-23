@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by forz on 13.06.17.
@@ -74,7 +75,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             if(constraint != null) {
                 suggestions.clear();
-                usersAll = Database.selectUsers();
+                usersAll = (ArrayList<User>)new User().selectAll();
                 for (User u : usersAll) {
                     if((u.cFirstName + " " + u.cLastName + " " + u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);

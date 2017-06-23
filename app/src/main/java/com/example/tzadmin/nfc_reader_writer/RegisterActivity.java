@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btn_register.setOnClickListener(this);
 
-        users = Database.selectUsers();
+        users = (ArrayList<User>) new User().selectAll();
 
         autoCompleted = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         autoCompleted.setAdapter(new AutoCompleteAdapter(this, users));
@@ -74,10 +74,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             String RfcId = data.getStringExtra("RfcId");
             switch (requestCode) {
                 case _registerCode:
-                    if (Database.isNfcIdAlreadyExist(RfcId)) {
-                        Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
-                        return;
-                    }
+                    if (new User().isNfcIdAlreadyExist(RfcId)) {
+                            Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
+                            return;
+                        }
 
                     Toast.makeText(this,
                             Message.USER_SUCCESSFULLY_REGISTERED(register(RfcId)),
@@ -93,10 +93,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
-        users = Database.selectUsers(); // TODO WARNING synchronize (this.users -> adapter.users)
-        selectedUser = (User)parent.getItemAtPosition(position);
+        users = (ArrayList<User>) new User().selectAll(); // TODO WARNING synchronize (this.users -> adapter.users)
+        selectedUser = users.get(position);
 
-        if(!selectedUser.cRfcId.equals("-1")) {
+        if(new User().isNfcIdAlreadyExist(selectedUser.cRfcId)) {
             Toast.makeText(this,
                     Message.USER_IS_HAVE_BRACER(selectedUser),
                     Toast.LENGTH_LONG).show();
@@ -114,14 +114,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         user.cSurname = surName.getText().toString();
         user.cRfcId = RfcId;
 
-        Database.insert("tbUsers", user);
-        Database.insert("tbUsers_cache", user);
+        user.insert();
+
+        //Database.insert("tbUsers", user);
+        //Database.insert("tbUsers_cache", user);
         return user;
     }
 
     private void bind (String RfcId) {
         selectedUser.cRfcId = RfcId;
-        Database.updateBracer(selectedUser.id, selectedUser.cRfcId);
-        //Database.update("tbUsers_cache", selectedUser);
+
+        selectedUser.update();
+//        Database.update("tbUsers", selectedUser);
+//        Database.update("tbUsers_cache", selectedUser);
     }
 }
