@@ -110,4 +110,10 @@ public class User extends BaseModel {
         return  ml.insert();
     }
 
+    public boolean subscribeToRoute(Integer route) {
+        cRouteId = route;
+
+        return update();
+    }
+
 }
