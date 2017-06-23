@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.tzadmin.nfc_reader_writer.R;
+
 /**
  * Created by tzadmin on 10.06.17.
  */
@@ -72,6 +74,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "pic text,"
                 + "price text,"
                 + "isdeleted text" + ");");
+
+
+
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Фламинго', '" + R.drawable.albat_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Антилопы', '" + R.drawable.antilop_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Медведи', '" + R.drawable.bear_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Бегемоты', '" + R.drawable.bigimot_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Крокодилы', '" + R.drawable.crocodile_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Еноты', '" + R.drawable.enot_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Лягушки', '" + R.drawable.jaba_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Жирафы', '" + R.drawable.jiraf_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Пантеры', '" + R.drawable.leo_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Львы', '" + R.drawable.lion_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Обезьяны', '" + R.drawable.monkey_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Летучие мыши', '" + R.drawable.mouse_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Носороги', '" + R.drawable.nosorog_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Попугаи', '" + R.drawable.popygai_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Слоны', '" + R.drawable.slon_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Кобры', '" + R.drawable.snake_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Тигры', '" + R.drawable.tiger_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Волки', '" + R.drawable.wolf_xxxhdpi+"');");
+        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Зебры', '" + R.drawable.zebra_xxxhdpi+"');");
     }
 
     @Override
