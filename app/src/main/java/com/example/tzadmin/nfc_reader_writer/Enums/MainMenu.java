@@ -10,4 +10,5 @@ public class MainMenu {
     public final static int VALIDATOR = 1;
     public final static int CUBES = 2;
     public final static int TEST = 3;
+    public final static int RegisterTeam = 4;
 }
