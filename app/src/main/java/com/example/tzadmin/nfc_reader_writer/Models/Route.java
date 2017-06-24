@@ -54,18 +54,4 @@ public class Route extends BaseModel {
         return (Collection<User>)u.selectAllByParams();
 
     }
-
-
-    public Collection<Route_State> getDrawModels() {
-        Collection<Route_State> states = new ArrayList<>();
-
-        Collection<Route> tmp = (Collection<Route>) selectAll();
-
-        for (Route r : tmp) {
-            Route_State state = new Route_State(r.name, r.capacity);
-            states.add(state);
-        }
-
-        return states;
-    }
 }
