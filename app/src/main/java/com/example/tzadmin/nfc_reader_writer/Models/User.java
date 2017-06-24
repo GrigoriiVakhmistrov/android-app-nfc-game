@@ -61,10 +61,7 @@ public class User extends BaseModel {
 
         User u = (User) selectOneByParams();
 
-        if (u != null)
-            return u;
-
-        return null;
+        return u;
     }
 
     public Integer getBallance() {

@@ -350,6 +350,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_writeButton"
         android:layout_width="201dp"
         android:layout_height="55dp"
         android:background="@drawable/btn_gradient_black"

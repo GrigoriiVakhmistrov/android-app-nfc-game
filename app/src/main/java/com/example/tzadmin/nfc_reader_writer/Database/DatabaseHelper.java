@@ -76,6 +76,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "isdeleted text" + ");");
 
 
+        db.execSQL("create table tbGroupPriority ("
+                + "id integer primary key autoincrement,"
+                + "groupid text,"
+                + "p1 text,"
+                + "p2 text,"
+                + "p3 text,"
+                + "p4 text" + ");");
+
 
         db.execSQL("insert table tbGroups (totemname, totemimage) values ('Фламинго', 'albat_xxxhdpi');");
         db.execSQL("insert table tbGroups (totemname, totemimage) values ('Антилопы', 'antilop_xxxhdpi');");
