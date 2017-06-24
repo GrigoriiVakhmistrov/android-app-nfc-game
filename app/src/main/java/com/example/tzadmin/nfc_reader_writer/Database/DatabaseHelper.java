@@ -84,6 +84,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "p3 text,"
                 + "p4 text" + ");");
 
+        db.execSQL("create table tbMorda ("
+                + "id integer primary key autoincrement,"
+                + "fio text,"
+                + "description text,"
+                + "pic text" + ");");
+
+        db.execSQL("create table tbUserMorda ("
+                + "id integer primary key autoincrement,"
+                + "userid text,"
+                + "mordaid text" + ");");
+
+
 
         db.execSQL("insert table tbGroups (totemname, totemimage) values ('Фламинго', 'albat_xxxhdpi');");
         db.execSQL("insert table tbGroups (totemname, totemimage) values ('Антилопы', 'antilop_xxxhdpi');");

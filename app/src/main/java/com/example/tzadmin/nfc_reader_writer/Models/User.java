@@ -1,5 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -111,6 +112,47 @@ public class User extends BaseModel {
         cRouteId = route;
 
         return update();
+    }
+
+    public Collection<Morda> getSubscribed () {
+        Collection<Morda> retdata = new ArrayList<>();
+
+        UserMorda m = new UserMorda();
+        m.userid = id;
+
+        Collection<UserMorda> mordas = (Collection<UserMorda>) m.selectAllByParams();
+
+        for (UserMorda item : mordas) {
+            Morda tmp = item.getMorda();
+            if (tmp != null)
+                retdata.add(tmp);
+        }
+
+        return retdata;
+    }
+
+    public boolean subscribe(Integer mordaId) {
+        Morda m = new Morda();
+        m.id = mordaId;
+
+        m = (Morda) m.selectOneByParams();
+
+        if (m == null) return false;
+
+        UserMorda um = new UserMorda();
+        um.userid = id;
+        um.mordaid = mordaId;
+
+        um = (UserMorda) um.selectOneByParams();
+
+        if (um == null) {
+            um = new UserMorda();
+            um.mordaid = mordaId;
+            um.userid = id;
+            return um.insert();
+        }
+
+        return true;
     }
 
 }
