@@ -51,7 +51,7 @@ public class Route extends BaseModel {
         User u = new User();
         u.cRouteId = id;
 
-        return (Collection<User>)u.selectByParams();
+        return (Collection<User>)u.selectAllByParams();
 
     }
 

@@ -34,6 +34,6 @@ public class Group extends BaseModel {
         User u = new User();
         u.cGroupId = id;
 
-        return (Collection<User>)u.selectByParams();
+        return (Collection<User>)u.selectAllByParams();
     }
 }

@@ -17,7 +17,7 @@ import java.util.Collection;
 public class TeamsActivity extends AppCompatActivity implements View.OnClickListener {
 
     Collection<ImageButton> images;
-    Collection<Group> groups;
+    Group currentGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,8 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
         Group group = new Group();
         group.totemimage = (String) v.getTag();
 
-        groups = (Collection<Group>)group.selectByParams();
-        if(groups.size() > 0)
+        currentGroup = (Group)group.selectOneByParams();
+        if(currentGroup != null)
             startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
     }
 
@@ -65,9 +65,7 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user.cGroupId.equals("-1")) {
-                Integer gid = 0;
-                for(Group g : groups) { gid = g.id; break; }
-                user.cGroupId = gid;
+                user.cGroupId = currentGroup.id;
                 user.update();
                 Toast.makeText(this, "Пользователь успешно вступил в клан", Toast.LENGTH_SHORT).show();
             } else

@@ -51,18 +51,18 @@ public class User extends BaseModel {
     public boolean isNfcIdAlreadyExist (String RfcId) {
         this.cRfcId = RfcId;
 
-        Collection<User> u = (Collection<User>) selectByParams();
+        User u = (User) selectOneByParams();
 
-        return u.size() > 0;
+        return u != null;
     }
 
     public User selectUserByRfcId  (String RfcId) {
         this.cRfcId = RfcId;
 
-        Collection<User> u = (Collection<User>) selectByParams();
+        User u = (User) selectOneByParams();
 
-        if (u.size() > 0)
-            for (User usr : u) return usr;
+        if (u != null)
+            return u;
 
         return null;
     }
@@ -71,7 +71,7 @@ public class User extends BaseModel {
         MoneyLogs mLog = new MoneyLogs();
         mLog.userid = id;
 
-        Collection<MoneyLogs> moneys = (Collection<MoneyLogs>) mLog.selectByParams();
+        Collection<MoneyLogs> moneys = (Collection<MoneyLogs>) mLog.selectAllByParams();
 
         Integer retdata = 0;
 

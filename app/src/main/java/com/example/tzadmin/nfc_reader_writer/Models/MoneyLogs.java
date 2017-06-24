@@ -31,7 +31,7 @@ public class MoneyLogs extends BaseModel {
         User u = new User();
         u.id = userid;
 
-        Collection<User> users = (Collection<User>) new User().selectByParams();
+        Collection<User> users = (Collection<User>) new User().selectAllByParams();
 
         if (users.size() == 0) return null;
 

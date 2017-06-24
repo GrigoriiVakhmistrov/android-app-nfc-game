@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by velor on 6/20/17.
@@ -30,7 +31,7 @@ public abstract class BaseModel implements ModelInterface {
         return select(getClass(), null, null, null, null);
     }
 
-    public Collection<? extends BaseModel> selectByParams() {
+    public Collection<? extends BaseModel> selectAllByParams() {
         Map<String, String> findParams = new HashMap<>();
 
         Field[] fields = getClass().getFields();
@@ -62,6 +63,27 @@ public abstract class BaseModel implements ModelInterface {
             findParams = null;
         return select(getClass(), findParams, null, null, null);
     }
+
+    public BaseModel selectOne() {
+        Collection<? extends BaseModel> all = selectAll();
+
+        if (all.size() == 0) return  null;
+
+        for (BaseModel obj : all) return obj;
+
+        return null;
+    }
+
+    public BaseModel selectOneByParams() {
+        Collection<? extends BaseModel> all = selectAllByParams();
+
+        if (all.size() == 0) return  null;
+
+        for (BaseModel obj : all) return obj;
+
+        return null;
+    }
+
 
     public boolean insert() {
         ContentValues values = new ContentValues();
