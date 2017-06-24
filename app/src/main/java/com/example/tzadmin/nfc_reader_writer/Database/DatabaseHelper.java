@@ -102,6 +102,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert table tbRoute (name, capacity) values ('Route3', '5');");
         db.execSQL("insert table tbRoute (name, capacity) values ('Route4', '14');");
         db.execSQL("insert table tbRoute (name, capacity) values ('Route5', '11');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route6', '18');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route7', '43');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route8', '12');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route9', '43');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route10', '7');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route11', '8');");
+        db.execSQL("insert table tbRoute (name, capacity) values ('Route12', '11');");
+
     }
 
     @Override
