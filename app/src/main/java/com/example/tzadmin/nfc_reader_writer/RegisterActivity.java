@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
-        users = (ArrayList<User>) new User().selectAll(); // TODO WARNING synchronize (this.users -> adapter.users)
+        users = (ArrayList<User>) new User().selectAll();
         selectedUser = users.get(position);
 
         if(new User().isNfcIdAlreadyExist(selectedUser.cRfcId)) {
@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         selectedUser.cRfcId = RfcId;
 
         selectedUser.update();
-//        Database.update("tbUsers", selectedUser);
-//        Database.update("tbUsers_cache", selectedUser);
+        //Database.update("tbUsers", selectedUser);
+        //Database.update("tbUsers_cache", selectedUser);
     }
 }

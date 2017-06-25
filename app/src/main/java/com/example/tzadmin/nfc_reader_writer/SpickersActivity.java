@@ -4,14 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
-
-import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-
 import java.util.ArrayList;
-import java.util.Collection;
+
 
 public class SpickersActivity extends AppCompatActivity implements View.OnClickListener {
 

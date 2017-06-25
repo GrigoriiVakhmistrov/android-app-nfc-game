@@ -11,7 +11,9 @@ public class Message {
     public static final String FIELDS_NOT_FILLED = "Ошибка. Не все поля заполнены";
     public static final String USER_THIS_BRACER_NOT_FOUND = "Ошибка. Пользователь с таким браслетом не зарегистрирован";
     public static final String CLEAR_RFCID_SUCCESSFULLY = "Браслет успешно сброшен";
-    public static final String DEVICE_NOT_FOUND_NFC_ADAPTHER = "Данное устройство не поддерживает NFC сканер браслета";
+    public static final String DEVICE_NOT_FOUND_NFC_ADAPTHER = "Устройство не поддерживает NFC сканер браслета, либо NFC сканер вылючен";
+    public static final String SUCCESSFULLY = "Успешно";
+
 
     public static String isUserHaveBraced(User user) {
         return "У пользователя " + concatFio(user) + " уже привязан браслет";
