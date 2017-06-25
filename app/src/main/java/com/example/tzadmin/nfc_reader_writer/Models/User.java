@@ -60,9 +60,7 @@ public class User extends BaseModel {
     public User selectUserByRfcId  (String RfcId) {
         this.cRfcId = RfcId;
 
-        User u = (User) selectOneByParams();
-
-        return u;
+        return (User) selectOneByParams();
     }
 
     public Integer getBallance() {
@@ -72,10 +70,12 @@ public class User extends BaseModel {
         Collection<MoneyLogs> moneys = (Collection<MoneyLogs>) mLog.selectAllByParams();
 
         Integer retdata = 0;
+        if(moneys == null)
+            return retdata;
 
         for (MoneyLogs l : moneys) {
-            if (l.equals(MoneyLogs.AddMoney)) retdata += l.money;
-            if (l.equals(MoneyLogs.RemoveMoney)) retdata -= l.money;
+            if (l.type == MoneyLogs.Type.ADD_MONEY) retdata += l.money;
+            if (l.type == MoneyLogs.Type.REMOVE_MONEY) retdata -= l.money;
         }
 
         return retdata;
@@ -89,7 +89,7 @@ public class User extends BaseModel {
         ml.userid = id;
         ml.money = money;
         ml.description = description;
-        ml.type = MoneyLogs.AddMoney;
+        ml.type = MoneyLogs.Type.ADD_MONEY;
 
         return  ml.insert();
     }
@@ -103,7 +103,7 @@ public class User extends BaseModel {
         ml.userid = id;
         ml.money = money;
         ml.description = description;
-        ml.type = MoneyLogs.RemoveMoney;
+        ml.type = MoneyLogs.Type.REMOVE_MONEY;
 
         return  ml.insert();
     }
@@ -121,6 +121,8 @@ public class User extends BaseModel {
         m.userid = id;
 
         Collection<UserMorda> mordas = (Collection<UserMorda>) m.selectAllByParams();
+        if(mordas == null)
+            return retdata;
 
         for (UserMorda item : mordas) {
             Morda tmp = item.getMorda();

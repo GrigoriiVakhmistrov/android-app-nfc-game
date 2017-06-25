@@ -35,12 +35,14 @@ public class Route extends BaseModel {
 
     public Integer getLeft() {
         Collection<User> users = (Collection<User>) new User().selectAll();
+        if(users == null)
+            return capacity;
 
         int cap = capacity;
 
         for (User item : users) {
             if (item.cGroupId.equals(id))
-                cap --;
+                cap--;
         }
 
         return cap;

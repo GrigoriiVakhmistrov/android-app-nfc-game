@@ -10,10 +10,18 @@ import org.junit.runner.RunWith;
 import java.util.Collection;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class DatabaseTest {
+    @Test
+    public void getCorrectness() throws Exception {
+        Database database = Database.get();
+
+        assertEquals(database, Database.get()); //Check for singleton
+    }
+
     @Test
     public void insertDeadlockTest() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();

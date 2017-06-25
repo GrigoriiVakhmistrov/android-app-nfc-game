@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import com.example.tzadmin.nfc_reader_writer.SharedApplication;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Created by forz on 11.06.17.
@@ -18,7 +20,7 @@ import java.util.concurrent.Semaphore;
 
 public class Database {
     static SQLiteDatabase db; //Private instance of SQLite database
-    private static Database instance; //private variable of singleton
+    private static final AtomicReference<Database> instance = new AtomicReference<>(null); //private variable of singleton.
 
     Context appContext;
     private Semaphore threadMutex = new Semaphore(1);
@@ -32,14 +34,18 @@ public class Database {
 
     //Entry point to singleton with ThreadSafe manner
     //USE ONLY THIS METHOD TO ACCESS DATABASE
+    //TODO If you want instance be ThreadSafe, you must use atomic value or synchronized method. Read and write together in non-synchronized is unsafe!
+    @NonNull
     public static Database get() {
-        if(instance == null) instance = getSync();
-        return instance;
-    }
-
-    private static synchronized Database getSync() {
-        if(instance == null) instance = new Database();
-        return instance;
+        Database database = instance.get(); //Get current value
+        if(database == null) { //Null means that Database isn't currently created
+            database = new Database();
+            if(!instance.compareAndSet(null, database)) //If value still null, it return true and set new value
+                return instance.get(); //If value != null, then return current value
+            return database; //Return new value
+        } else {
+            return database;
+        }
     }
 
     public long insert(String table, String nullColumnHack, ContentValues values) {
