@@ -4,17 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+import android.support.annotation.NonNull;
 import com.example.tzadmin.nfc_reader_writer.SharedApplication;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Created by forz on 11.06.17.
@@ -22,55 +20,63 @@ import java.util.concurrent.Semaphore;
 
 public class Database {
     static SQLiteDatabase db; //Private instance of SQLite database
-    private static Database instance; //private variable of singlton
+    private static final AtomicReference<Database> instance = new AtomicReference<>(null); //private variable of singleton.
 
-    private Context appContext;
+    Context appContext;
     private Semaphore threadMutex = new Semaphore(1);
 
-    //Entry point to singlton with ThreadSafe manner
-    //USE ONLY THIS METHOD TO ACCESS DATABASE
-    public static Database get() {
-        if(instance == null) instance = getSync();
-        return instance;
-    }
-
-    private static synchronized Database getSync() {
-        if(instance == null) instance = new Database();
-        return instance;
-    }
-
-    private Database(){
+    private Database() {
         // here you can directly access the Application context calling
         appContext = SharedApplication.get();
         DatabaseHelper dbHelper = new DatabaseHelper(appContext);
         db = dbHelper.getReadableDatabase();
     }
 
-    public long insert (String table, String nullColumnHack, ContentValues values) {
+    //Entry point to singleton with ThreadSafe manner
+    //USE ONLY THIS METHOD TO ACCESS DATABASE
+    //TODO If you want instance be ThreadSafe, you must use atomic value or synchronized method. Read and write together in non-synchronized method is unsafe!
+
+    //This method is already fixed
+    @NonNull
+    public static Database get() {
+        Database database = instance.get(); //Get current value
+        if(database == null) { //Null means that Database isn't currently created
+            database = new Database();
+            if(!instance.compareAndSet(null, database)) //If value still null, it return true and set new value
+                return instance.get(); //If value != null, then return current value
+            return database; //Return new value
+        } else {
+            return database;
+        }
+    }
+
+    public long insert(String table, String nullColumnHack, ContentValues values) {
         try {
             threadMutex.acquire();
             return db.insert(table, nullColumnHack, values);
-        }catch (Exception ex) {
-        }finally {
-            threadMutex.release();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return -1;
+        } finally {
+            threadMutex.release();
         }
     }
 
-    public int update (String table, ContentValues values, String whereClause, String[] whereArgs) {
+    public int update(String table, ContentValues values, String whereClause, String[] whereArgs) {
         try {
             threadMutex.acquire();
             return db.update(table, values, whereClause, whereArgs);
-        }catch (Exception ex) {
-        }finally {
-            threadMutex.release();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return -1;
+        } finally {
+            threadMutex.release();
         }
     }
 
-    public Collection<Map<String, String>> select (String table, String[] columns, String selection,
-                                                   String[] selectionArgs, String groupBy, String having,
-                                                   String orderBy, String limit) {
+    public Collection<Map<String, String>> select(String table, String[] columns, String selection,
+                                                  String[] selectionArgs, String groupBy, String having,
+                                                  String orderBy, String limit) {
         Collection<Map<String, String>> retData = new ArrayList<>();
 
         try {
@@ -78,19 +84,20 @@ public class Database {
 
             Cursor c = db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
 
-            if (c.moveToFirst()) {
+            if(c.moveToFirst()) {
                 do {
                     Map<String, String> data = new HashMap<>();
-                    for (int i = 0; i < c.getColumnCount(); i++) {
+                    for(int i = 0; i < c.getColumnCount(); i++) {
                         data.put(c.getColumnName(i), c.getString(i));
                     }
 
                     retData.add(data);
-                } while (c.moveToNext());
+                } while(c.moveToNext());
             }
+            c.close();
 
-        }catch (Exception ex) {
-        }finally {
+        } catch (Exception ex) {
+        } finally {
             threadMutex.release();
         }
 

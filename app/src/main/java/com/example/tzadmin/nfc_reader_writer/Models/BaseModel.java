@@ -1,57 +1,48 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteException;
-import android.support.annotation.VisibleForTesting;
-
+import android.support.annotation.Nullable;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by velor on 6/20/17.
  */
 
 public abstract class BaseModel implements ModelInterface {
-
     public String GetLogTableName() {
         return "log_" + GetTableName();
     }
 
+    @Nullable
     public Collection<? extends BaseModel> selectAll() {
         return select(getClass(), null, null, null, null);
     }
 
+    @Nullable
     public Collection<? extends BaseModel> selectAllByParams() {
         Map<String, String> findParams = new HashMap<>();
 
         Field[] fields = getClass().getFields();
         for (Field item : fields) {
-            if (item.isAnnotationPresent(MAnotation.class)) {
-                MAnotation a = item.getAnnotation(MAnotation.class);
+            if (item.isAnnotationPresent(MAnnotation.class)) {
+                MAnnotation a = item.getAnnotation(MAnnotation.class);
 
                 String key = item.getName();
                 if (!a.FieldName().equals(""))
                     key = a.FieldName();
                 String val = null;
 
-                if (item.getType() == String.class) {
-                    try {
-                        val = (String) item.get(this);
-                    } catch (Exception e) { }
-                } else if (item.getType() == Integer.class) {
-                    try {
-                        val = ((Integer) item.get(this)).toString();
-                    } catch (Exception e) { }
+                try {
+                    val = item.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
 
                 if (val != null && !val.equals(a.DefaultValue()))
@@ -64,51 +55,42 @@ public abstract class BaseModel implements ModelInterface {
         return select(getClass(), findParams, null, null, null);
     }
 
+    @Nullable
     public BaseModel selectOne() {
         Collection<? extends BaseModel> all = selectAll();
 
-        if (all.size() == 0) return  null;
-
-        for (BaseModel obj : all) return obj;
-
-        return null;
+        return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];
     }
 
+    @Nullable
     public BaseModel selectOneByParams() {
         Collection<? extends BaseModel> all = selectAllByParams();
 
-        if (all.size() == 0) return  null;
-
-        for (BaseModel obj : all) return obj;
-
-        return null;
+        return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];
     }
-
 
     public boolean insert() {
         ContentValues values = new ContentValues();
 
         Field[] fields = getClass().getFields();
         for (Field item : fields) {
-            if (item.isAnnotationPresent(MAnotation.class)) {
-                MAnotation a = item.getAnnotation(MAnotation.class);
+            if (item.isAnnotationPresent(MAnnotation.class)) {
+                MAnnotation annotation = item.getAnnotation(MAnnotation.class);
+
+                item.setAccessible(true);
 
                 String key = item.getName();
-                if (!a.FieldName().equals(""))
-                    key = a.FieldName();
-                String val = null;
+                if (!"".equals(annotation.FieldName()))
+                    key = annotation.FieldName();
 
-                if (item.getType() == String.class) {
-                    try {
-                        val = (String) item.get(this);
-                    } catch (Exception e) { }
-                } else if (item.getType() == Integer.class) {
-                    try {
-                        val = ((Integer) item.get(this)).toString();
-                    } catch (Exception e) { }
+                String val = null;
+                try {
+                    val = item.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    //Ignore
                 }
 
-                if (!a.PrimaryKey())
+                if (!annotation.PrimaryKey())
                     values.put(key, val);
             }
         }
@@ -117,13 +99,15 @@ public abstract class BaseModel implements ModelInterface {
         if (newId == -1) return false;
 
         for (Field item : fields) {
-            if (item.isAnnotationPresent(MAnotation.class)) {
-                MAnotation a = item.getAnnotation(MAnotation.class);
+            if (item.isAnnotationPresent(MAnnotation.class)) {
+                MAnnotation a = item.getAnnotation(MAnnotation.class);
 
                 if (a.PrimaryKey()) {
                     try {
-                        item.set(this, Integer.valueOf((int)newId));
-                    } catch (Exception e) { }
+                        item.set(this, (int) newId);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -139,22 +123,20 @@ public abstract class BaseModel implements ModelInterface {
 
         Field[] fields = getClass().getFields();
         for (Field item : fields) {
-            if (item.isAnnotationPresent(MAnotation.class)) {
-                MAnotation a = item.getAnnotation(MAnotation.class);
+            if (item.isAnnotationPresent(MAnnotation.class)) {
+                MAnnotation a = item.getAnnotation(MAnnotation.class);
+
+                item.setAccessible(true);
 
                 String key = item.getName();
-                if (!a.FieldName().equals(""))
+                if (!"".equals(a.FieldName()))
                     key = a.FieldName();
                 String val = null;
 
-                if (item.getType() == String.class) {
-                    try {
-                        val = (String) item.get(this);
-                    } catch (Exception e) { }
-                } else if (item.getType() == Integer.class) {
-                    try {
-                        val = ((Integer) item.get(this)).toString();
-                    } catch (Exception e) { }
+                try {
+                    val = item.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    //Ignore
                 }
 
                 if (!a.PrimaryKey()) {
@@ -169,14 +151,14 @@ public abstract class BaseModel implements ModelInterface {
 
         long newId = Database.get().update(GetTableName(), values, where, whereARGS);
 
-        if (newId == 0) return false;
-        else return true;
+        return newId != 0;
     }
 
+    @Nullable
     public Collection<? extends BaseModel> select (Class<?> model, Map<String, String> andWhare, Collection<String> groupBy, Collection<String> orderBy, String limit) {
-
         BaseModel currentModel;
         try {
+
             currentModel = (BaseModel) model.getConstructors()[0].newInstance();
         } catch (Exception e) {
             return null;
@@ -210,36 +192,8 @@ public abstract class BaseModel implements ModelInterface {
             whereCause = sbuilder.toString();
         }
 
-        if (groupBy != null && groupBy.size() > 0) {
-            StringBuilder sBuilder = new StringBuilder();
-
-            int i = 0;
-            for (String item : groupBy) {
-                if (i == 0)
-                    sBuilder.append(item);
-                else
-                    sBuilder.append(", ").append(item);
-                i++;
-            }
-
-            _groupBy = sBuilder.toString();
-        }
-
-
-        if (orderBy != null && orderBy.size() > 0) {
-            StringBuilder sBuilder = new StringBuilder();
-
-            int i = 0;
-            for (String item : orderBy) {
-                if (i == 0)
-                    sBuilder.append(item);
-                else
-                    sBuilder.append(", ").append(item);
-                i++;
-            }
-
-            _orderBy = sBuilder.toString();
-        }
+        _groupBy = concatStrings(groupBy, _groupBy);
+        _orderBy = concatStrings(orderBy, _orderBy);
 
 
         Collection<Map<String, String>> data = Database.get().select(currentModel.GetTableName(), null, whereCause, whereParams, _groupBy, null, _orderBy, limit);
@@ -249,29 +203,20 @@ public abstract class BaseModel implements ModelInterface {
         Field[] fields = model.getFields();
 
         for (Map<String, String> item : data) {
-            BaseModel m = null;
+            BaseModel m;
             try {
                 m = (BaseModel)model.getConstructors()[0].newInstance();
 
-
                 for (Field f : fields) {
-                    if (f.isAnnotationPresent(MAnotation.class)) {
-                        MAnotation a = f.getAnnotation(MAnotation.class);
+                    if (f.isAnnotationPresent(MAnnotation.class)) {
+                        MAnnotation a = f.getAnnotation(MAnnotation.class);
 
                         String key = f.getName();
                         if (!a.FieldName().equals(""))
                             key = a.FieldName();
 
                         if (item.containsKey(key)) {
-                            if (f.getType() == String.class) {
-                                try {
-                                    f.set(m, item.get(key));
-                                } catch (Exception e) { }
-                            } else if (f.getType() == Integer.class) {
-                                try {
-                                    f.set(m, Integer.valueOf(item.get(key)));
-                                } catch (Exception e) { }
-                            }
+                            setItemValue(item, m, f, key);
                         }
 
                     }
@@ -285,5 +230,39 @@ public abstract class BaseModel implements ModelInterface {
         }
 
         return retData;
+    }
+
+    private void setItemValue(Map<String, String> item, BaseModel m, Field f, String key) {
+        try {
+            String value = item.get(key);
+            if (f.getType() == String.class) {
+                f.set(m, value);
+            } else if (f.getType() == Integer.class) {
+                f.set(m, Integer.valueOf(value));
+            }
+        } catch (IllegalAccessException e) {
+            //Ignore
+        }
+    }
+
+    /**
+     * Used for create orderBy and groupBy
+     */
+    private String concatStrings(@Nullable Collection<String> strings, String def) {
+        if (strings != null && strings.size() > 0) {
+            StringBuilder builder = new StringBuilder();
+
+            int i = 0;
+            for (String item : strings) {
+                if (i == 0)
+                    builder.append(item);
+                else
+                    builder.append(", ").append(item);
+                i++;
+            }
+
+            return builder.toString();
+        }
+        return def;
     }
 }

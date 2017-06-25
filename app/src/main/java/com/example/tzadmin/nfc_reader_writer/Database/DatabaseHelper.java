@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.tzadmin.nfc_reader_writer.R;
-
 /**
  * Created by tzadmin on 10.06.17.
  */
@@ -97,39 +95,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Фламинго', 'albat_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Антилопы', 'antilop_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Медведи', 'bear_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Бегемоты', 'bigimot_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Крокодилы', 'crocodile_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Еноты', 'enot_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Лягушки', 'jaba_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Жирафы', 'jiraf_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Пантеры', 'leo_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Львы', 'lion_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Обезьяны', 'monkey_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Летучие мыши', 'mouse_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Носороги', 'nosorog_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Попугаи', 'popygai_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Слоны', 'slon_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Кобры', 'snake_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Тигры', 'tiger_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Волки', 'wolf_xxxhdpi');");
-        db.execSQL("insert table tbGroups (totemname, totemimage) values ('Зебры', 'zebra_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Фламинго', 'albat_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Антилопы', 'antilop_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Медведи', 'bear_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Бегемоты', 'bigimot_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Крокодилы', 'crocodile_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Еноты', 'enot_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Лягушки', 'jaba_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Жирафы', 'jiraf_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Пантеры', 'leo_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Львы', 'lion_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Обезьяны', 'monkey_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Летучие мыши', 'mouse_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Носороги', 'nosorog_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Попугаи', 'popygai_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Слоны', 'slon_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Кобры', 'snake_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Тигры', 'tiger_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Волки', 'wolf_xxxhdpi');");
+        db.execSQL("insert into tbGroups (totemname, totemimage) values ('Зебры', 'zebra_xxxhdpi');");
 
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route1', '15');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route2', '45');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route3', '5');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route4', '14');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route5', '11');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route6', '18');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route7', '43');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route8', '12');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route9', '43');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route10', '7');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route11', '8');");
-        db.execSQL("insert table tbRoute (name, capacity) values ('Route12', '11');");
-
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route1', '15');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route2', '45');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route3', '5');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route4', '14');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route5', '11');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route6', '18');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route7', '43');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route8', '12');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route9', '43');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route10', '7');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route11', '8');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route12', '11');");
     }
 
     @Override

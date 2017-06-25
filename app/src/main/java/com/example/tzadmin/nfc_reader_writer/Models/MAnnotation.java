@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface MAnotation {
+public @interface MAnnotation {
     boolean PrimaryKey() default false;
     boolean Sortable() default false;
     String FieldName() default "";

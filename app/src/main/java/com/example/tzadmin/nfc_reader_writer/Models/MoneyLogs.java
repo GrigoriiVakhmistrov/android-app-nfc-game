@@ -1,5 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import android.support.annotation.Nullable;
+import com.example.tzadmin.nfc_reader_writer.Utils;
+
 import java.util.Collection;
 
 /**
@@ -7,19 +10,15 @@ import java.util.Collection;
  */
 
 public class MoneyLogs extends BaseModel {
-
-    public final static String AddMoney = "Add";
-    public final static String RemoveMoney = "Remove";
-
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public Integer userid;
-    @MAnotation
+    @MAnnotation
     public Integer money;
-    @MAnotation
-    public String type;
-    @MAnotation
+    @MAnnotation
+    public Type type;
+    @MAnnotation
     public String description;
 
     @Override
@@ -27,16 +26,28 @@ public class MoneyLogs extends BaseModel {
         return "tbMoneyLogs";
     }
 
-    public User getUser () {
-        User u = new User();
+    @Nullable
+    public User getUser() {
+        User u = new User(); //TODO this object is useless. Maybe it created for selectAllByParams() ?
         u.id = userid;
 
         Collection<User> users = (Collection<User>) new User().selectAllByParams();
 
-        if (users.size() == 0) return null;
+        return (users == null || users.size() == 0) ? null : Utils.getFirst(users);
+    }
 
-        for (User usr : users) return  usr;
+    public enum Type {
+        ADD_MONEY("Add"),
+        REMOVE_MONEY("Remove");
 
-        return null;
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

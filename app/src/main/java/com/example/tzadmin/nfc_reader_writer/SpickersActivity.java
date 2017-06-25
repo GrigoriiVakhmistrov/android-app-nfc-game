@@ -54,6 +54,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             this.RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null && spicker != null) {
+                //TODO
                 //Известны Юзер - Спикер
                 //Подписать юзера на спикера
             }
