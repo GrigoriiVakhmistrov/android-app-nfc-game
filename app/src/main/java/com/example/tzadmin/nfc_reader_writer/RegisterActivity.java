@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.AutoCompleteAdapter;
-import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import java.util.ArrayList;
@@ -80,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         }
 
                     Toast.makeText(this,
-                            Message.USER_SUCCESSFULLY_REGISTERED(register(RfcId)),
+                            Message.userSuccessfullyRegistered(register(RfcId)),
                             Toast.LENGTH_SHORT).show();
                     break;
                 case _bindCode:
@@ -98,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if(new User().isNfcIdAlreadyExist(selectedUser.cRfcId)) {
             Toast.makeText(this,
-                    Message.USER_IS_HAVE_BRACER(selectedUser),
+                    Message.isUserHaveBraced(selectedUser),
                     Toast.LENGTH_LONG).show();
             return;
         }
