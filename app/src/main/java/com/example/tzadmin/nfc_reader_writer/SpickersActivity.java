@@ -15,7 +15,7 @@ import java.util.Collection;
 
 public class SpickersActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Morda> morda;
+    ArrayList<Morda> spickers;
     Morda spicker = null;
     String RfcId;
     @Override
@@ -26,23 +26,23 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.image_chekin_spicker2).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker3).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
-        morda = (ArrayList<Morda>) new Morda().selectAll();
     }
 
     @Override
     public void onClick(View v) {
+        spickers = (ArrayList<Morda>) new Morda().selectAll();
         switch (v.getId()) {
             case R.id.image_chekin_spicker1:
-                spicker = morda.get(0);
+                spicker = spickers.get(0);
                 break;
             case R.id.image_chekin_spicker2:
-                spicker = morda.get(1);
+                spicker = spickers.get(1);
                 break;
             case R.id.image_chekin_spicker3:
-                spicker = morda.get(2);
+                spicker = spickers.get(2);
                 break;
             case R.id.image_chekin_spicker4:
-                spicker = morda.get(3);
+                spicker = spickers.get(3);
                 break;
         }
         startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
