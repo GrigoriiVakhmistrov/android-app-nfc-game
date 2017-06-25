@@ -34,7 +34,9 @@ public class Database {
 
     //Entry point to singleton with ThreadSafe manner
     //USE ONLY THIS METHOD TO ACCESS DATABASE
-    //TODO If you want instance be ThreadSafe, you must use atomic value or synchronized method. Read and write together in non-synchronized is unsafe!
+    //TODO If you want instance be ThreadSafe, you must use atomic value or synchronized method. Read and write together in non-synchronized method is unsafe!
+
+    //This method is already fixed
     @NonNull
     public static Database get() {
         Database database = instance.get(); //Get current value
