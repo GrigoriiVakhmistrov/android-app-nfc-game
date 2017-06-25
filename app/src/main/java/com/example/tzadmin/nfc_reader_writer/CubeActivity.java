@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CubeActivity extends AppCompatActivity  implements View.OnClickListener {
+public class  CubeActivity extends AppCompatActivity  implements View.OnClickListener {
 
     LinearLayout ll_cube_block1;
     LinearLayout ll_cube_block2;

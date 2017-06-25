@@ -68,8 +68,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".Route"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".ClanRegistration"></activity>
+            android:screenOrientation="landscape" />
+        <activity android:name=".ClanRegistration" />
+        <activity android:name=".MoneyOperationActivity"></activity>
     </application>
 
 </manifest>
