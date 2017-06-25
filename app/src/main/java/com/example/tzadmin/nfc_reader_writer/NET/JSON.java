@@ -7,16 +7,15 @@ import com.google.gson.GsonBuilder;
  * Created by forz on 16.06.17.
  */
 
-public class JSON {
-    public static String toString (Object object) {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        return gson.toJson(object);
+public final class JSON {
+    private static final Gson GSON = new GsonBuilder()
+            .create();
+
+    public static String toString(Object object) {
+        return GSON.toJson(object);
     }
 
-    public static Object fromString (String json, Class _class) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        return gson.fromJson(json, _class);
+    public static <T> T fromString(String json, Class<T> clazz) {
+        return GSON.fromJson(json, clazz);
     }
 }
