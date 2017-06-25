@@ -16,7 +16,6 @@ import java.util.Map;
  */
 
 public abstract class BaseModel implements ModelInterface {
-
     public String GetLogTableName() {
         return "log_" + GetTableName();
     }
@@ -60,14 +59,14 @@ public abstract class BaseModel implements ModelInterface {
     public BaseModel selectOne() {
         Collection<? extends BaseModel> all = selectAll();
 
-        return all.size() == 0 ? null : (BaseModel) all.toArray()[0];
+        return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];
     }
 
     @Nullable
     public BaseModel selectOneByParams() {
         Collection<? extends BaseModel> all = selectAllByParams();
 
-        return all.size() == 0 ? null : (BaseModel) all.toArray()[0];
+        return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];
     }
 
     public boolean insert() {
@@ -157,9 +156,9 @@ public abstract class BaseModel implements ModelInterface {
 
     @Nullable
     public Collection<? extends BaseModel> select (Class<?> model, Map<String, String> andWhare, Collection<String> groupBy, Collection<String> orderBy, String limit) {
-
         BaseModel currentModel;
         try {
+
             currentModel = (BaseModel) model.getConstructors()[0].newInstance();
         } catch (Exception e) {
             return null;
@@ -249,21 +248,21 @@ public abstract class BaseModel implements ModelInterface {
     /**
      * Used for create orderBy and groupBy
      */
-    private String concatStrings(Collection<String> orderBy, String _orderBy) {
-        if (orderBy != null && orderBy.size() > 0) {
-            StringBuilder sBuilder = new StringBuilder();
+    private String concatStrings(@Nullable Collection<String> strings, String def) {
+        if (strings != null && strings.size() > 0) {
+            StringBuilder builder = new StringBuilder();
 
             int i = 0;
-            for (String item : orderBy) {
+            for (String item : strings) {
                 if (i == 0)
-                    sBuilder.append(item);
+                    builder.append(item);
                 else
-                    sBuilder.append(", ").append(item);
+                    builder.append(", ").append(item);
                 i++;
             }
 
-            _orderBy = sBuilder.toString();
+            return builder.toString();
         }
-        return _orderBy;
+        return def;
     }
 }
