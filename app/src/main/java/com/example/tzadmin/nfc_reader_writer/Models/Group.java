@@ -8,21 +8,21 @@ import java.util.Collection;
 
 public class Group extends BaseModel {
 
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public String name;
-    @MAnotation
+    @MAnnotation
     public String description;
-    @MAnotation
+    @MAnnotation
     public String totemname;
-    @MAnotation
+    @MAnnotation
     public String totemimage;
-    @MAnotation
+    @MAnnotation
     public String color;
-    @MAnotation
+    @MAnnotation
     public String colorhex;
-    @MAnotation
+    @MAnnotation
     public String isdeleted;
 
     @Override

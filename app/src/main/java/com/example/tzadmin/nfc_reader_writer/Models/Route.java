@@ -1,6 +1,5 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -17,15 +16,15 @@ public class Route extends BaseModel {
         this.isdeleted = "-1";
     }
 
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public String name;
-    @MAnotation
+    @MAnnotation
     public String description;
-    @MAnotation
+    @MAnnotation
     public Integer capacity;
-    @MAnotation
+    @MAnnotation
     public String isdeleted;
 
 

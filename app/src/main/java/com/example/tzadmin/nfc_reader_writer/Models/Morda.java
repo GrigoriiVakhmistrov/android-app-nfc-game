@@ -13,13 +13,13 @@ public class Morda extends BaseModel {
         pic = "-1";
     }
 
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public String fio;
-    @MAnotation
+    @MAnnotation
     public String description;
-    @MAnotation
+    @MAnnotation
     public String pic;
 
     @Override

@@ -11,15 +11,15 @@ public class MoneyLogs extends BaseModel {
     public final static String AddMoney = "Add";
     public final static String RemoveMoney = "Remove";
 
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public Integer userid;
-    @MAnotation
+    @MAnnotation
     public Integer money;
-    @MAnotation
+    @MAnnotation
     public String type;
-    @MAnotation
+    @MAnnotation
     public String description;
 
     @Override

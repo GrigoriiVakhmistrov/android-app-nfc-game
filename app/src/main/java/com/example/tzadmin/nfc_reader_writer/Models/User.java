@@ -22,25 +22,25 @@ public class User extends BaseModel {
         cIsDeleted = "-1";
     }
 
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public String cFirstName;
-    @MAnotation
+    @MAnnotation
     public String cLastName;
-    @MAnotation
+    @MAnnotation
     public String cSurname;
-    @MAnotation
+    @MAnnotation
     public String cRfcId;
-    @MAnotation
+    @MAnnotation
     public Integer cGroupId;
 //    @MAnotation
 //    public String cBatchId;
-    @MAnotation
+    @MAnnotation
     public Integer cRouteId;
-    @MAnotation
+    @MAnnotation
     public Integer cIsCap;
-    @MAnotation
+    @MAnnotation
     public String cIsDeleted;
 
 

@@ -15,17 +15,17 @@ public class GroupActivity extends BaseModel {
         p4 = -1;
     }
 
-    @MAnotation(PrimaryKey = true)
+    @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnotation
+    @MAnnotation
     public Integer groupid;
-    @MAnotation
+    @MAnnotation
     public Integer p1;
-    @MAnotation
+    @MAnnotation
     public Integer p2;
-    @MAnotation
+    @MAnnotation
     public Integer p3;
-    @MAnotation
+    @MAnnotation
     public Integer p4;
 
     @Override
