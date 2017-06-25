@@ -1,6 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by forz on 13.06.17.
@@ -68,14 +68,20 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         @Override
         public String convertResultToString(Object resultValue) {
             User u = (User) resultValue;
-            String str = u.cFirstName + " " + u.cLastName + " " + u.cSurname;
-            return str;
+            return u.cFirstName + " " + u.cLastName + " " + u.cSurname;
         }
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             if(constraint != null) {
                 suggestions.clear();
                 usersAll = (ArrayList<User>)new User().selectAll();
+                if(usersAll == null) {
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = suggestions;
+                    filterResults.count = suggestions.size();
+                    return filterResults;
+                }
+
                 for (User u : usersAll) {
                     if((u.cFirstName + " " + u.cLastName + " " + u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
@@ -90,13 +96,11 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
             }
         }
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
+        protected void publishResults(CharSequence constraint, @NonNull FilterResults results) {
             ArrayList<User> filteredList = (ArrayList<User>) results.values;
-            if(results != null && results.count > 0) {
+            if(results.count > 0) {
                 users.clear();
-                for (User c : filteredList) {
-                    users.add(c);
-                }
+                users.addAll(filteredList);
                 notifyDataSetChanged();
             }
         }

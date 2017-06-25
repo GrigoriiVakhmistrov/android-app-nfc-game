@@ -23,7 +23,7 @@ public class RouteViewAdapter extends BaseAdapter {
     public RouteViewAdapter(Context context, ArrayList<Route> state){
         this.context = context;
         this.states = state;
-        inflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
