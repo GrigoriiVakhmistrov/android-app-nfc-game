@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.108" />
 
     <TextView
-        android:id="@+id/tv_routes"
+        android:id="@+id/tv_valid_routes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.566" />
 
     <TextView
-        android:id="@+id/tv_rating"
+        android:id="@+id/tv_valid_rating"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -47,10 +47,10 @@
         android:textColor="@color/colorBlack"
         android:textSize="18dp"
         app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.712" />
 
     <TextView
-        android:id="@+id/tv_points"
+        android:id="@+id/tv_valid_points"
         android:layout_width="270dp"
         android:layout_height="35dp"
         android:text=""
@@ -64,6 +64,7 @@
         app:layout_constraintVertical_bias="0.637" />
 
     <ImageView
+        android:id="@+id/image_valid"
         android:layout_width="189dp"
         android:layout_height="158dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,6 +74,7 @@
         app:layout_constraintVertical_bias="0.662" />
 
     <TextView
+        android:id="@+id/nameClan_valid"
         android:layout_width="189dp"
         android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,9 +87,26 @@
         android:textAlignment="center"
         android:text=""/>
 
+    <TextView
+        android:id="@+id/route_valid"
+        android:layout_width="273dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.837"
+        android:textSize="22dp"
+        android:textColor="@color/colorBlack"
+        android:textAlignment="center"
+        android:text=""
+        app:layout_constraintHorizontal_bias="0.109" />
+
     <ListView
+        android:id="@+id/lv_history_valid"
         android:layout_width="286dp"
         android:layout_height="250dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.901"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -95,14 +114,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.798"></ListView>
 
-    <ListView
-        android:layout_width="272dp"
-        android:layout_height="78dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.854"></ListView>
+
 
 </android.support.constraint.ConstraintLayout>
