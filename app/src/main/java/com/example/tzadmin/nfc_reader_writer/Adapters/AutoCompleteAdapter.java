@@ -83,9 +83,19 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
                 }
 
                 for (User u : usersAll) {
+                    /*
                     if((u.cFirstName + " " + u.cLastName + " " + u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
                     }
+                    */
+                    if((u.cFirstName).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                        suggestions.add(u);
+                    }else if((u.cLastName).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                        suggestions.add(u);
+                    }else if((u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                        suggestions.add(u);
+                    }
+
                 }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = suggestions;
