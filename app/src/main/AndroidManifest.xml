@@ -67,10 +67,14 @@
             android:name=".SpickersActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Route"
+            android:name=".RouteActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".ClanRegistration" />
-        <activity android:name=".MoneyOperationActivity"></activity>
+        <activity
+            android:name=".ClanRegistration"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MoneyOperationActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

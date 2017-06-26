@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 
@@ -64,12 +65,15 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
         if(resultCode == RESULT_OK) {
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
-            if(user.cGroupId.equals(-1)) {
-                user.cGroupId = currentGroup.id;
-                user.update();
-                Toast.makeText(this, "Пользователь успешно вступил в клан", Toast.LENGTH_SHORT).show();
+            if(user != null) {
+                if (user.cGroupId == -1) {
+                    user.cGroupId = currentGroup.id;
+                    user.update();
+                    Toast.makeText(this, "Пользователь успешно вступил в клан", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(this, "Пользователь уже состоит в клане", Toast.LENGTH_SHORT).show();
             } else
-                Toast.makeText(this, "Пользователь уже состоит в клане", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
         }
     }
 }
