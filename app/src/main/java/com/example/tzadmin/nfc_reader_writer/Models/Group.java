@@ -8,6 +8,17 @@ import java.util.Collection;
 
 public class Group extends BaseModel {
 
+    public Group () {
+        id = -1;
+        name = "-1";
+        description = "-1";
+        totemname = "-1";
+        totemimage = "-1";
+        color = "-1";
+        colorhex = "-1";
+        isdeleted = "-1";
+    }
+
     @MAnnotation(PrimaryKey = true)
     public Integer id;
     @MAnnotation
