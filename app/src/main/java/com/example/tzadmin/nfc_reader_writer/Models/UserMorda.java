@@ -12,8 +12,11 @@ public class UserMorda extends BaseModel {
         mordaid = -1;
     }
 
+    @MAnnotation(PrimaryKey=true)
     public Integer id;
+    @MAnnotation
     public Integer userid;
+    @MAnnotation
     public Integer mordaid;
 
     @Override

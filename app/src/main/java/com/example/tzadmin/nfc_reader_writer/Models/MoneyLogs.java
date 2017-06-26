@@ -17,9 +17,16 @@ public class MoneyLogs extends BaseModel {
     @MAnnotation
     public Integer money;
     @MAnnotation
-    public Type type;
+    public String type;
     @MAnnotation
     public String description;
+
+    public MoneyLogs(){
+        id = -1;
+        userid = -1;
+        type = "-1";
+        description = "-1";
+    }
 
     @Override
     public String GetTableName() {
