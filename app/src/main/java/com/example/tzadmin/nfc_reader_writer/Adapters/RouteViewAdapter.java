@@ -28,12 +28,12 @@ public class RouteViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return states.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return states.get(position);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class RouteViewAdapter extends BaseAdapter {
         Route route = states.get(position);
 
         myrectangle.setText(route.name);
-        square.setText(route.getLeft());
+        square.setText(route.getLeft().toString());
 
         return convertView;
     }

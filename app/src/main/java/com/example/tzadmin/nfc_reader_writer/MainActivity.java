@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(this, ThrowCubes.class));
                 break;
             case MainMenu.REGISTER_ROUTES:
-                startActivity(new Intent(this, Route.class));
+                startActivity(new Intent(this, RouteActivity.class));
                 break;
             case MainMenu.REGISTER_SPICKERS:
                 startActivity(new Intent(this, SpickersActivity.class));

@@ -74,8 +74,8 @@ public class User extends BaseModel {
             return retdata;
 
         for (MoneyLogs l : moneys) {
-            if (l.type == MoneyLogs.Type.ADD_MONEY) retdata += l.money;
-            if (l.type == MoneyLogs.Type.REMOVE_MONEY) retdata -= l.money;
+            if (l.type == MoneyLogs.Type.ADD_MONEY.toString()) retdata += l.money;
+            if (l.type == MoneyLogs.Type.REMOVE_MONEY.toString()) retdata -= l.money;
         }
 
         return retdata;
@@ -89,7 +89,7 @@ public class User extends BaseModel {
         ml.userid = id;
         ml.money = money;
         ml.description = description;
-        ml.type = MoneyLogs.Type.ADD_MONEY;
+        ml.type = MoneyLogs.Type.ADD_MONEY.toString();
 
         return  ml.insert();
     }
@@ -103,7 +103,7 @@ public class User extends BaseModel {
         ml.userid = id;
         ml.money = money;
         ml.description = description;
-        ml.type = MoneyLogs.Type.REMOVE_MONEY;
+        ml.type = MoneyLogs.Type.REMOVE_MONEY.toString();
 
         return  ml.insert();
     }
