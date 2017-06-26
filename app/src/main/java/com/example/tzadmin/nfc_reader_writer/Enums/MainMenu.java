@@ -5,10 +5,11 @@ package com.example.tzadmin.nfc_reader_writer.Enums;
  */
 
 public class MainMenu {
-    /*enum menus*/
+    /*enum main menus*/
     public final static int REGISTER = 0;
-    public final static int VALIDATOR = 1;
-    public final static int CUBES = 2;
-    public final static int TEST = 3;
-    public final static int RegisterTeam = 4;
+    public final static int REGISTER_TEAM = 1;
+    public final static int CHEKIN_SCANER = 2;
+    public final static int CUBES = 3;
+    public final static int REGISTER_ROUTES = 4;
+    public final static int REGISTER_SPICKERS = 5;
 }
