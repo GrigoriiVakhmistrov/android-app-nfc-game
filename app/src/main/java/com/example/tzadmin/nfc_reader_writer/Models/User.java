@@ -157,12 +157,29 @@ public class User extends BaseModel {
         return true;
     }
 
-    public Route getRoute(Integer userId){
-        Route r = new Route();
-        r.id = cRouteId;
+    public Route getRoute(){
+        Route route = new Route();
+        route.id = cRouteId;
 
-        r = (Route)r.selectOneByParams();
-        return r;
+        route = (Route)route.selectOneByParams();
+        return route;
+    }
+
+    public Group getGroup(){
+        Group group = new Group();
+        group.id = cGroupId;
+
+        group = (Group)group.selectOneByParams();
+        return  group;
+    }
+
+    public Collection<MoneyLogs> getMoneyLog(){
+        MoneyLogs moneyLogs = new MoneyLogs();
+        moneyLogs.userid = id;
+
+        Collection<MoneyLogs> moneyLogsList = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
+        return moneyLogsList;
+
     }
 
 }
