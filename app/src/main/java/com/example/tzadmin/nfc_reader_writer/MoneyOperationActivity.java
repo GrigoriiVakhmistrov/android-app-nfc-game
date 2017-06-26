@@ -46,8 +46,8 @@ public class MoneyOperationActivity extends AppCompatActivity implements View.On
     }
 
     private void fillTextViews () {
+        user = new User().selectUserByRfcId(RfcId);
         if(user != null) {
-            user = new User().selectUserByRfcId(RfcId);
             ((TextView) findViewById(R.id.moneyOperation_balance)).setText(
                     Message.concatFio(user) + " ваш баланс = " + user.getBallance());
         }
