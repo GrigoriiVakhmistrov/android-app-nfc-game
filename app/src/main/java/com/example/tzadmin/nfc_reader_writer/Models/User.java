@@ -157,4 +157,12 @@ public class User extends BaseModel {
         return true;
     }
 
+    public Route getRoute(Integer userId){
+        Route r = new Route();
+        r.id = cRouteId;
+
+        r = (Route)r.selectOneByParams();
+        return r;
+    }
+
 }
