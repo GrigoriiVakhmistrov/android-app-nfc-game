@@ -19,6 +19,7 @@ public class User extends BaseModel {
 //        cBatchId = "-1";
         cRouteId = -1;
         cIsCap = 0;
+        cIsNew = 0;
         cIsDeleted = "-1";
     }
 
@@ -40,6 +41,8 @@ public class User extends BaseModel {
     public Integer cRouteId;
     @MAnnotation
     public Integer cIsCap;
+    @MAnnotation
+    public Integer cIsNew;
     @MAnnotation
     public String cIsDeleted;
 
@@ -180,6 +183,21 @@ public class User extends BaseModel {
         Collection<MoneyLogs> moneyLogsList = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
         return moneyLogsList;
 
+    }
+
+    public Integer getRating(){
+        MoneyLogs moneyLogs = new MoneyLogs();
+        moneyLogs.userid = id;
+
+        Collection<MoneyLogs> moneyLogsCollection = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
+        Integer sum = 0;
+
+        for (MoneyLogs tempmoneyLog : moneyLogsCollection){
+            if(tempmoneyLog.type == MoneyLogs.Type.ADD_MONEY.toString()){
+                sum += tempmoneyLog.money;
+            }
+        }
+        return sum;
     }
 
 }

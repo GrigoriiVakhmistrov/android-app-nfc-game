@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 //+ "cBatchId text,"
                 + "cRouteId text,"
                 + "cIsCap text,"
+                + "cIsNew text,"
                 + "cIsDeleted text" + ");");
 
         db.execSQL("create table log_tbUsers ("

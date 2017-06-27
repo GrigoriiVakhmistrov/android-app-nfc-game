@@ -33,7 +33,7 @@ public class ValidationActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.tv_valid_points)).setText(user.getBallance());
 
                 //TODO set rating
-                //((TextView) findViewById(R.id.tv_valid_rating)).setText();
+                ((TextView) findViewById(R.id.tv_valid_rating)).setText(user.getRating());
 
                 //TODO set routes
                 ((TextView) findViewById(R.id.tv_valid_routes)).setText(user.getRoute().name);
