@@ -4,13 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import java.util.ArrayList;
 
-
 public class SpickersActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //TODO use image lib picaso
     ArrayList<Morda> spickers;
     Morda spicker = null;
     String RfcId;
@@ -29,19 +31,20 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         spickers = (ArrayList<Morda>) new Morda().selectAll();
         switch (v.getId()) {
             case R.id.image_chekin_spicker1:
-                spicker = spickers.get(0);
+                spicker = spickers.get(0) != null ? spickers.get(0)  : null ;
                 break;
             case R.id.image_chekin_spicker2:
-                spicker = spickers.get(1);
+                spicker = spickers.get(1) != null ? spickers.get(1)  : null;
                 break;
             case R.id.image_chekin_spicker3:
-                spicker = spickers.get(2);
+                spicker = spickers.get(2) != null ? spickers.get(2)  : null;
                 break;
             case R.id.image_chekin_spicker4:
-                spicker = spickers.get(3);
+                spicker = spickers.get(3) != null ? spickers.get(3)  : null;
                 break;
         }
-        startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+        if(spicker != null)
+            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
     }
 
     @Override
@@ -49,10 +52,14 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         if(resultCode == RESULT_OK) {
             this.RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
-            if(user != null && spicker != null) {
-                //TODO
-                //Известны Юзер - Спикер
-                //Подписать юзера на спикера
+            if(user != null) {
+                user.subscribe(spicker.id);
+                user.update();
+                Toast.makeText(this,
+                        Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
             }
         }
     }
