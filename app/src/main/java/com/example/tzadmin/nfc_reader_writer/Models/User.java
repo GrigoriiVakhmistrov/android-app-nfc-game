@@ -185,4 +185,19 @@ public class User extends BaseModel {
 
     }
 
+    public Integer getRating(){
+        MoneyLogs moneyLogs = new MoneyLogs();
+        moneyLogs.userid = id;
+
+        Collection<MoneyLogs> moneyLogsCollection = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
+        Integer sum = 0;
+
+        for (MoneyLogs tempmoneyLog : moneyLogsCollection){
+            if(tempmoneyLog.type == MoneyLogs.Type.ADD_MONEY.toString()){
+                sum += tempmoneyLog.money;
+            }
+        }
+        return sum;
+    }
+
 }

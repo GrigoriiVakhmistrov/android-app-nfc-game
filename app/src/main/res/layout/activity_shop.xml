@@ -8,7 +8,7 @@
     android:background="@drawable/shop_xxxhdpi">
 
     <GridView
-        android:id="@+id/gridView_main"
+        android:id="@+id/gridView_shop_main"
         android:layout_width="896dp"
         android:layout_height="297dp"
         android:columnWidth="100dp"
