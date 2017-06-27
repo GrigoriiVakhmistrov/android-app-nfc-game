@@ -17,6 +17,7 @@ public class Shop {
     public String name;
     @MAnnotation
     public String info;
+
     public Button btn;
 
     public Shop(){

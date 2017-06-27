@@ -19,6 +19,7 @@ public class User extends BaseModel {
 //        cBatchId = "-1";
         cRouteId = -1;
         cIsCap = 0;
+        cIsNew = 0;
         cIsDeleted = "-1";
     }
 
@@ -40,6 +41,8 @@ public class User extends BaseModel {
     public Integer cRouteId;
     @MAnnotation
     public Integer cIsCap;
+    @MAnnotation
+    public Integer cIsNew;
     @MAnnotation
     public String cIsDeleted;
 
