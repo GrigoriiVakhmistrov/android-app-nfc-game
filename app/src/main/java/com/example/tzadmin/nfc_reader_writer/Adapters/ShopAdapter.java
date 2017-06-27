@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by forz on 22.06.17.
  */
 
-public class ShopAdapter extends BaseAdapter implements View.OnClickListener {
+public class ShopAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Shop> items;
 
@@ -61,18 +61,11 @@ public class ShopAdapter extends BaseAdapter implements View.OnClickListener {
             name.setText(items.get(position).name);
             info.setText(items.get(position).info);
             btn.setTag(items.get(position).id);
-            btn.setOnClickListener(this);
 
         } else {
             shop = convertView;
         }
 
         return shop;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Integer tag = (Integer) v.getTag(); //TODO check return value
-
     }
 }

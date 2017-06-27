@@ -1,8 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
-import android.media.Image;
 import android.widget.Button;
-import android.widget.ImageView;
 
 /**
  * Created by forz on 22.06.17.
@@ -24,6 +22,5 @@ public class Shop {
         image = -1;
         name = "-1";
         info = "-1";
-
     }
 }

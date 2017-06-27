@@ -58,9 +58,6 @@
             android:name=".CheckinScaner"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".QuestActivity"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".ActivitysesActivity"
             android:screenOrientation="landscape" />
         <activity
@@ -73,7 +70,7 @@
             android:name=".ClanRegistration"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MoneyOperationActivity"
+            android:name=".QuestActivity"
             android:screenOrientation="landscape" />
     </application>
 
