@@ -29,8 +29,8 @@ package com.example.tzadmin.nfc_reader_writer.NET;
  *      Morda (Необходимо)
  */
 
-public class Synс {
-    public Synс () {
+public class Sync {
+    public Sync () {
 
     }
 
@@ -41,5 +41,9 @@ public class Synс {
     */
     public void syncShop () {
         
+    }
+
+    public void syncevents() {
+
     }
 }
