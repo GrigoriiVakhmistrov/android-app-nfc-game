@@ -31,7 +31,7 @@ public class Shop extends BaseModel{
 
     public Collection<Shop> GetAllItems(){
 
-        return (Collection<Shop>) new Shop().selectAllByParams();
+        return (Collection<Shop>) new Shop().selectAll();
     }
 
 
