@@ -15,6 +15,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
     //TODO use image lib picaso
     ArrayList<Morda> spickers;
     Morda spicker = null;
+    boolean isSubscrube;
     String RfcId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.image_chekin_spicker2).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker3).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
+        isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
     }
 
     @Override
@@ -53,10 +55,14 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             this.RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                user.subscribe(spicker.id);
-                user.update();
-                Toast.makeText(this,
-                        Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                if(isSubscrube) {
+                    user.subscribe(spicker.id);
+                    user.update();
+                    Toast.makeText(this,
+                            Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO its chekin check
+                }
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
