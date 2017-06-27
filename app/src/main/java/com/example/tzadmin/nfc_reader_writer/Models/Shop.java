@@ -4,11 +4,13 @@ import android.media.Image;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.Collection;
+
 /**
  * Created by forz on 22.06.17.
  */
 
-public class Shop {
+public class Shop extends BaseModel{
     @MAnnotation(PrimaryKey = true)
     public Integer id;
     @MAnnotation
@@ -25,6 +27,16 @@ public class Shop {
         image = -1;
         name = "-1";
         info = "-1";
+    }
 
+    public Collection<Shop> GetAllItems(){
+
+        return (Collection<Shop>) new Shop().selectAllByParams();
+    }
+
+
+    @Override
+    public String GetTableName() {
+        return "tbShop";
     }
 }
