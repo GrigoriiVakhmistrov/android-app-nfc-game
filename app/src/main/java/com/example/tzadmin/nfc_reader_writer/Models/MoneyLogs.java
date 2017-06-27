@@ -26,6 +26,7 @@ public class MoneyLogs extends BaseModel {
         userid = -1;
         type = "-1";
         description = "-1";
+        money = -1;
     }
 
     @Override

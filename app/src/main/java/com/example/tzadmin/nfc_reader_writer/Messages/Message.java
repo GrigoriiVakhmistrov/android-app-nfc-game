@@ -14,6 +14,7 @@ public class Message {
     public static final String DEVICE_NOT_FOUND_NFC_ADAPTHER = "Устройство не поддерживает NFC сканер браслета, либо NFC сканер вылючен";
     public static final String SUCCESSFULLY = "Успешно";
     public static final String REGISTER_ERROR_SUB_ALREADY = "Ошибка. Пользователь уже подписан на маршрут";
+    public static final String MONEY_LOW = "Ошибка. Не достаточно средств";
 
 
     public static String isUserHaveBraced(User user) {
