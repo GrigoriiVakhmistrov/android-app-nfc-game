@@ -16,14 +16,17 @@ public class Shop extends BaseModel{
     public String name;
     @MAnnotation
     public String info;
+    @MAnnotation
+    public Integer money;
 
-    public Button btn;
+    //public Button btn;
 
     public Shop() {
         id = -1;
         image = -1;
         name = "-1";
         info = "-1";
+        money = -1;
     }
 
     public Collection<Shop> GetAllItems(){
