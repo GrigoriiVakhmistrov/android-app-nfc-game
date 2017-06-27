@@ -18,7 +18,7 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_money_operation);
+        setContentView(R.layout.activity_quest);
         value = (EditText) findViewById(R.id.moneyOperation_value);
         description = (EditText) findViewById(R.id.moneyOperation_desc);
         findViewById(R.id.moneyOperation_write).setOnClickListener(this);

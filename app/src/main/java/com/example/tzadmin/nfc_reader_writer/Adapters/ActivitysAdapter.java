@@ -1,12 +1,13 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
+import android.widget.TextView;
 import com.example.tzadmin.nfc_reader_writer.Models.Activitys;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
+import com.example.tzadmin.nfc_reader_writer.R;
 
 import java.util.ArrayList;
 
@@ -21,16 +22,17 @@ public class ActivitysAdapter extends BaseAdapter {
 
     public  ActivitysAdapter (Context context, ArrayList<Activitys> activityses) {
         this.context = context;
+        this.activityses = activityses;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return activityses.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return activityses.get(position);
     }
 
     @Override
@@ -40,6 +42,23 @@ public class ActivitysAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        View activitys;
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if (convertView == null) {
+            activitys = inflater.inflate(R.layout.activity_item, null);
+
+            TextView name = (TextView) activitys.findViewById(R.id.tv_activity_item_name);
+            TextView price = (TextView) activitys.findViewById(R.id.tv_activity_item_price);
+
+            name.setText(activityses.get(position).name);
+            price.setText(activityses.get(position).price.toString());
+
+        } else {
+            activitys = convertView;
+        }
+
+        return activitys;
     }
 }

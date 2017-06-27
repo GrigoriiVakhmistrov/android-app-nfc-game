@@ -5,6 +5,6 @@ package com.example.tzadmin.nfc_reader_writer.Models;
  */
 
 public class Activitys {
-    String name;
-    Integer price;
+    public String name;
+    public Integer price;
 }
