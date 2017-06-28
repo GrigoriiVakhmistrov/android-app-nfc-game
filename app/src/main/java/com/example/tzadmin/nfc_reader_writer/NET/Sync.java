@@ -29,21 +29,44 @@ package com.example.tzadmin.nfc_reader_writer.NET;
  *      Morda (Необходимо)
  */
 
-public class Sync {
+public class Sync implements RequestDelegate {
+
+    private static final String ShopURL = "";
+    private static final String eventURL = "";
+    private static final String mordaURL = "";
+    private static final String groupURL = "";
+    private static final String routeURL = "";
+
+    /* стадия 1 -
+        поиск и синхронизация таблиц пользователя
+        1 - поиск таблицы пользователей и перелив их в основное хранилище
+            с замещением айдишников
+        2 - заливка всех остальных данных с привязкой к уже новому id
+
+        Стадия 2
+
+            Получение всего остального
+     */
+    private int stage = 0;
+
     public Sync () {
-
+        if (stage == 0) {
+            
+        }
     }
 
 
-    /*
-    * Нам нужно только сливать данные магазина, и все. При этом так как тут никакой контент не создается
-    * то и заливать обратно ничего не надо
-    */
-    public void syncShop () {
-        
-    }
 
-    public void syncevents() {
+
+
+    @Override
+    public void RequestDone(String url, Object result) {
 
     }
+
+    @Override
+    public void TaskDone(Boolean success) {
+
+    }
+
 }
