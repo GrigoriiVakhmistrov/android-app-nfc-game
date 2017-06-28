@@ -29,7 +29,7 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
         //TODO fix me
         activitys = null;
         //activitys = new Activitys().getAllActivitys();
-        
+
         adapter = new ActivitysAdapter(this, activitys);
         if(activitys != null) {
             lv_main.setAdapter(adapter);

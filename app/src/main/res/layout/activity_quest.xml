@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.887"
         app:layout_constraintHorizontal_bias="0.641" />
 
-    <Button
+    <!--<Button
         android:id="@+id/moneyOperation_remove"
         android:layout_width="201dp"
         android:layout_height="55dp"
@@ -72,6 +72,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.887"
-        app:layout_constraintHorizontal_bias="0.377" />
+        app:layout_constraintHorizontal_bias="0.377" />-->
 
 </android.support.constraint.ConstraintLayout>
