@@ -19,13 +19,15 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
     ArrayList<Route> states = new ArrayList<>();
     Route targetRoute = null;
     GridView routeGridVie;
-
+    Boolean isSubscrube;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
         states = new ArrayList(new Route().selectAll());
+
+        isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
 
         routeGridVie = (GridView)findViewById(R.id.route_grid);
         RouteViewAdapter routeViewAdapter = new RouteViewAdapter(this, states);
@@ -48,15 +50,20 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
             if(targetRoute != null) {
                 String RfcId = data.getStringExtra("RfcId");
                 User user = new User().selectUserByRfcId(RfcId);
-                if(user != null) {
-                    if(user.cRouteId == -1) {
-                        user.cRouteId = targetRoute.id;
-                        user.update();
-                        //TODO сомнения по слдеющей функции, переотрисует ли она адаптер
-                        routeGridVie.invalidateViews();
-                        Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
-                    } else
-                        Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
+                if (user != null) {
+                    if(isSubscrube) {
+                        if (user.cRouteId == -1) {
+                            user.cRouteId = targetRoute.id;
+                            user.update();
+                            //TODO сомнения по слдеющей функции, переотрисует ли она адаптер
+                            routeGridVie.invalidateViews();
+                            Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
+                    } else {
+                        //TODO its chekin route
+                        finish();
+                    }
                 } else
                     Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
             }

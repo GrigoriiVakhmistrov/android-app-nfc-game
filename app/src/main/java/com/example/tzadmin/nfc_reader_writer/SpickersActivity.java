@@ -31,22 +31,24 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         spickers = (ArrayList<Morda>) new Morda().selectAll();
-        switch (v.getId()) {
-            case R.id.image_chekin_spicker1:
-                spicker = spickers.get(0) != null ? spickers.get(0)  : null ;
-                break;
-            case R.id.image_chekin_spicker2:
-                spicker = spickers.get(1) != null ? spickers.get(1)  : null;
-                break;
-            case R.id.image_chekin_spicker3:
-                spicker = spickers.get(2) != null ? spickers.get(2)  : null;
-                break;
-            case R.id.image_chekin_spicker4:
-                spicker = spickers.get(3) != null ? spickers.get(3)  : null;
-                break;
+        if(spicker != null) {
+            switch (v.getId()) {
+                case R.id.image_chekin_spicker1:
+                    spicker = spickers.get(0) != null ? spickers.get(0) : null;
+                    break;
+                case R.id.image_chekin_spicker2:
+                    spicker = spickers.get(1) != null ? spickers.get(1) : null;
+                    break;
+                case R.id.image_chekin_spicker3:
+                    spicker = spickers.get(2) != null ? spickers.get(2) : null;
+                    break;
+                case R.id.image_chekin_spicker4:
+                    spicker = spickers.get(3) != null ? spickers.get(3) : null;
+                    break;
+            }
+            if (spicker != null)
+                startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
         }
-        if(spicker != null)
-            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
     }
 
     @Override
@@ -61,7 +63,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this,
                             Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else {
-                    //TODO its chekin check
+                    //TODO its chekin check spiker
+                    finish();
                 }
             } else {
                 Toast.makeText(this,

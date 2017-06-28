@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class ShopActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ArrayList<Shop> shops = new ArrayList<>();
-    //ShopAdapter shopAdapter;
     Shop shop = null;
     GridView lv_shop;
     @Override
@@ -38,12 +37,6 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
         lv_shop.setOnItemClickListener(this);
     }
 
-    public void subscrubeListener (ArrayList<Shop> items) {
-        for (Shop item : items) {
-            //item.btn =
-        }
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         shop = shops.get(position);
@@ -51,7 +44,6 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent(this, ScanNfcActivity.class);
         intent.putExtra("name", shop.name);
         startActivityForResult(intent, 200);
-
     }
 
     @Override

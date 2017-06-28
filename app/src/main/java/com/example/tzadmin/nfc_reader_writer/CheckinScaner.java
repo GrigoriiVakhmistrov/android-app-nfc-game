@@ -13,13 +13,19 @@ public class CheckinScaner extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkin_scaner);
+        findViewById(R.id.btn_chekin_spikers).setOnClickListener(this);
+        findViewById(R.id.btn_chekin_activity).setOnClickListener(this);
+        findViewById(R.id.btn_chekin_quest).setOnClickListener(this);
+        findViewById(R.id.btn_chekin_route).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_chekin_spikers:
-                //startActivityForResult();
+                Intent intentSpikers = new Intent();
+                intentSpikers.putExtra("isSubscrube", false);
+                startActivity(intentSpikers);
                 break;
             case R.id.btn_chekin_activity:
                 startActivity(new Intent(this, Activitys.class));
@@ -28,7 +34,9 @@ public class CheckinScaner extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, QuestActivity.class));
                 break;
             case R.id.btn_chekin_route:
-                //startActivity(new Intent(this, .class));
+                Intent intentRoute = new Intent();
+                intentRoute.putExtra("isSubscrube", false);
+                startActivity(intentRoute);
                 break;
         }
     }

@@ -10,6 +10,7 @@ import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
+import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "Chekin Scaner",
             "Кубики",
             "Регистрация на маршрут",
-            "Регистрация на спикера"
+            "Регистрация на спикера",
+            "Магазин"
     };
     
     int[] imageId = {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             R.drawable.register_teamxxxhdpi,
             R.drawable.main_chekin,
             R.drawable.main_cubes_xxxhdpi,
+            R.drawable.mainiconreg,
             R.drawable.mainiconreg,
             R.drawable.mainiconreg
     };
@@ -66,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case MainMenu.REGISTER_SPICKERS:
                 startActivity(new Intent(this, SpickersActivity.class));
+                break;
+            case MainMenu.SHOP:
+                startActivity(new Intent(this, ShopActivity.class));
                 break;
         }
     }
