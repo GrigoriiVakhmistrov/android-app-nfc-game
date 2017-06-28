@@ -20,6 +20,33 @@ public abstract class BaseModel implements ModelInterface {
         return "log_" + GetTableName();
     }
 
+    public Map<String, String> getMap() {
+        Map<String, String> data = new HashMap<>();
+
+        Field[] fields = getClass().getFields();
+        for (Field item : fields) {
+            if (item.isAnnotationPresent(MAnnotation.class)) {
+                MAnnotation a = item.getAnnotation(MAnnotation.class);
+
+                String key = item.getName();
+                if (!a.FieldName().equals(""))
+                    key = a.FieldName();
+                String val = null;
+
+                try {
+                    val = item.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+                data.put(key, val);
+            }
+        }
+
+
+        return data;
+    }
+
     @Nullable
     public Collection<? extends BaseModel> selectAll() {
         return select(getClass(), null, null, null, null);

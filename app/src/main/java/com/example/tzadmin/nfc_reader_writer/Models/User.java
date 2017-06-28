@@ -200,4 +200,21 @@ public class User extends BaseModel {
         return sum;
     }
 
+    public boolean updateAllId(Integer id) {
+        UserMorda m = new UserMorda();
+        m.userid = this.id;
+
+        Collection<UserMorda> mordas = (Collection<UserMorda>) m.selectAllByParams();
+
+        for (UserMorda item : mordas) {
+            item.userid = id;
+            item.update();
+        }
+
+        this.id = id;
+        update();
+
+        return true;
+    }
+
 }
