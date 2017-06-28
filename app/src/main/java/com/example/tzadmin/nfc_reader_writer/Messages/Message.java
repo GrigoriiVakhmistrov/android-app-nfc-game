@@ -16,6 +16,7 @@ public class Message {
     public static final String REGISTER_ERROR_SUB_ALREADY = "Ошибка. Пользователь уже подписан на маршрут";
     public static final String MONEY_LOW = "Ошибка. Не достаточно средств";
     public static final String ACTIVITYS_NOT_FOUND = "Ошибка. Список активностей пуст";
+    public static final String ITEMS_SHOP_NOT_FOUND = "Ошибка. Товаров в магазине нет";
 
 
     public static String isUserHaveBraced(User user) {

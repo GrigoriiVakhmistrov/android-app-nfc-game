@@ -31,10 +31,16 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
 
         shops = new ArrayList(new Shop().selectAll());
         lv_shop = (GridView) findViewById(R.id.route_grid);
-        ShopAdapter shopAdapter = new ShopAdapter(this, shops );
+        ShopAdapter shopAdapter = new ShopAdapter(this, shops);
 
-        lv_shop.setAdapter(shopAdapter);
-        lv_shop.setOnItemClickListener(this);
+        if(shops != null && shops.size() > 0) {
+            lv_shop.setAdapter(shopAdapter);
+            lv_shop.setOnItemClickListener(this);
+        } else {
+            Toast.makeText(this,
+                    Message.ITEMS_SHOP_NOT_FOUND, Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override
