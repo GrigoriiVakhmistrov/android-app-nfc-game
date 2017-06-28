@@ -26,12 +26,19 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.image_chekin_spicker3).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
+        spickers = (ArrayList<Morda>) new Morda().selectAll();
+
+        if(spickers.size() == 0 || spickers == null) {
+            findViewById(R.id.image_chekin_spicker1).setBackgroundResource(R.drawable.ic_spiker_not_found);
+            findViewById(R.id.image_chekin_spicker2).setBackgroundResource(R.drawable.ic_spiker_not_found);
+            findViewById(R.id.image_chekin_spicker3).setBackgroundResource(R.drawable.ic_spiker_not_found);
+            findViewById(R.id.image_chekin_spicker4).setBackgroundResource(R.drawable.ic_spiker_not_found);
+        }
     }
 
     @Override
     public void onClick(View v) {
-        spickers = (ArrayList<Morda>) new Morda().selectAll();
-        if(spicker != null) {
+        if(spickers != null && spickers.size() > 0) {
             switch (v.getId()) {
                 case R.id.image_chekin_spicker1:
                     spicker = spickers.get(0) != null ? spickers.get(0) : null;
