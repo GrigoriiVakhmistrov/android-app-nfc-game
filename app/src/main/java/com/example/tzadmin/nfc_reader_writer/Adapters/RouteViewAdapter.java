@@ -52,7 +52,7 @@ public class RouteViewAdapter extends BaseAdapter {
         Route route = states.get(position);
 
         myrectangle.setText(route.name);
-        square.setText(route.getLeft().toString());
+        square.setText(String.valueOf(route.getLeft()));
 
         return convertView;
     }

@@ -121,7 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into tbGroups (totemname, totemimage) values ('Волки', 'wolf_xxxhdpi');");
         db.execSQL("insert into tbGroups (totemname, totemimage) values ('Зебры', 'zebra_xxxhdpi');");
 
-        db.execSQL("insert into tbRoutes (name, capacity) values ('Route1', '15');");
+        db.execSQL("insert into tbRoutes (name, capacity) values ('Route1asdasdasdasdasdasdasdasdasd', '15');");
         db.execSQL("insert into tbRoutes (name, capacity) values ('Route2', '45');");
         db.execSQL("insert into tbRoutes (name, capacity) values ('Route3', '5');");
         db.execSQL("insert into tbRoutes (name, capacity) values ('Route4', '14');");
