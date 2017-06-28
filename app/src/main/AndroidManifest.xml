@@ -67,9 +67,6 @@
             android:name=".RouteActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ClanRegistration"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".QuestActivity"
             android:screenOrientation="landscape" />
     </application>
