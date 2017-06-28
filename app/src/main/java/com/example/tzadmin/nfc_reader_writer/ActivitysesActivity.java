@@ -26,10 +26,19 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activityses);
         lv_main = (ListView) findViewById(R.id.lv_activitys_main);
+        //TODO fix me
+        activitys = null;
         //activitys = new Activitys().getAllActivitys();
+        
         adapter = new ActivitysAdapter(this, activitys);
-        lv_main.setAdapter(adapter);
-        lv_main.setOnItemClickListener(this);
+        if(activitys != null) {
+            lv_main.setAdapter(adapter);
+            lv_main.setOnItemClickListener(this);
+        } else {
+            Toast.makeText(this,
+                    Message.ACTIVITYS_NOT_FOUND, Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override

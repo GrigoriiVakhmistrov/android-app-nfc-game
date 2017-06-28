@@ -23,18 +23,18 @@ public class CheckinScaner extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_chekin_spikers:
-                Intent intentSpikers = new Intent();
+                Intent intentSpikers = new Intent(this, SpickersActivity.class);
                 intentSpikers.putExtra("isSubscrube", false);
                 startActivity(intentSpikers);
                 break;
             case R.id.btn_chekin_activity:
-                startActivity(new Intent(this, Activitys.class));
+                startActivity(new Intent(this, ActivitysesActivity.class));
                 break;
             case R.id.btn_chekin_quest:
                 startActivity(new Intent(this, QuestActivity.class));
                 break;
             case R.id.btn_chekin_route:
-                Intent intentRoute = new Intent();
+                Intent intentRoute = new Intent(this, RouteActivity.class);
                 intentRoute.putExtra("isSubscrube", false);
                 startActivity(intentRoute);
                 break;
