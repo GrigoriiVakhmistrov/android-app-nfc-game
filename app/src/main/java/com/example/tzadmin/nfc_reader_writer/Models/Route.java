@@ -37,18 +37,13 @@ public class Route extends BaseModel {
     }
 
     public Integer getLeft() {
-        Collection<User> users = (Collection<User>) new User().selectAll();
+        User u = new User();
+        u.routeid = id;
+        Collection<User> users = (Collection<User>) u.selectAllByParams();
         if(users == null)
             return capacity;
 
-        int cap = capacity;
-
-        for (User item : users) {
-            if (item.groupid.equals(id))
-                cap--;
-        }
-
-        return cap;
+        return capacity - users.size();
     }
 
     public Collection<User> getUsers() {
