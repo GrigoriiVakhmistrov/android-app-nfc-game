@@ -76,8 +76,8 @@ public class User extends BaseModel {
             return retdata;
 
         for (MoneyLogs l : moneys) {
-            if (l.type == MoneyLogs.Type.ADD_MONEY.toString()) retdata += l.money;
-            if (l.type == MoneyLogs.Type.REMOVE_MONEY.toString()) retdata -= l.money;
+            if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) retdata += l.money;
+            if (l.type.equals(MoneyLogs.Type.REMOVE_MONEY.toString())) retdata -= l.money;
         }
 
         return retdata;
