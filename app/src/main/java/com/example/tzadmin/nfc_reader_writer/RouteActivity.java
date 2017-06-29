@@ -55,13 +55,12 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                         if (user.routeid == -1) {
                             user.routeid = targetRoute.id;
                             user.update();
-                            //TODO сомнения по слдеющей функции, переотрисует ли она адаптер
                             routeGridVie.invalidateViews();
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
                     } else {
-                        //TODO its chekin route
+                        user.AddMoney(10, "Пользователь посетил маршрут - " + targetRoute.name);
                         finish();
                     }
                 } else

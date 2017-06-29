@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class SpickersActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,6 +36,35 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             findViewById(R.id.image_chekin_spicker2).setBackgroundResource(R.drawable.ic_spiker_not_found);
             findViewById(R.id.image_chekin_spicker3).setBackgroundResource(R.drawable.ic_spiker_not_found);
             findViewById(R.id.image_chekin_spicker4).setBackgroundResource(R.drawable.ic_spiker_not_found);
+        } else {
+            try {
+                if(spickers.get(0) == null)
+                    findViewById(R.id.image_chekin_spicker1).setBackgroundResource(R.drawable.ic_spiker_not_found);
+                else
+                    Picasso.with(this).load(spickers.get(0).pic).into((ImageView)findViewById(R.id.image_chekin_spicker1));
+
+                if(spickers.get(1) == null)
+                    findViewById(R.id.image_chekin_spicker2).setBackgroundResource(R.drawable.ic_spiker_not_found);
+                else
+                    Picasso.with(this).load(spickers.get(1).pic).into((ImageView)findViewById(R.id.image_chekin_spicker2));
+
+
+                if(spickers.get(2) == null)
+                    findViewById(R.id.image_chekin_spicker3).setBackgroundResource(R.drawable.ic_spiker_not_found);
+                else
+                    Picasso.with(this).load(spickers.get(2).pic).into((ImageView)findViewById(R.id.image_chekin_spicker3));
+
+
+                if(spickers.get(3) == null)
+                    findViewById(R.id.image_chekin_spicker4).setBackgroundResource(R.drawable.ic_spiker_not_found);
+                else
+                    Picasso.with(this).load(spickers.get(3).pic).into((ImageView)findViewById(R.id.image_chekin_spicker4));
+            } catch (Exception ex) {
+                Toast.makeText(this,
+                        "Ошибка URL картинки спикера, обратитесь к администратору",
+                        Toast.LENGTH_LONG).show();
+                finish();
+            }
         }
     }
 
@@ -70,7 +102,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this,
                             Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else {
-                    //TODO its chekin check spiker
+                    user.AddMoney(10, "Пользователь посетил семинар - " + spicker.fio);
                     finish();
                 }
             } else {

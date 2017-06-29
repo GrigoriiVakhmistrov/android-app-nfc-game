@@ -7,31 +7,28 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Adapters.ActivitysAdapter;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Activitys;
+import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-
 import java.util.ArrayList;
 
 public class ActivitysesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ActivitysAdapter adapter;
-    ArrayList<Activitys> activitys;
+    ArrayList<Event> activitys;
     ListView lv_main;
-    Activitys thisActivity = null;
+    Event thisActivity = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activityses);
         lv_main = (ListView) findViewById(R.id.lv_activitys_main);
-        //TODO fix me
-        activitys = null;
-        //activitys = new Activitys().getAllActivitys();
 
+        activitys = (ArrayList) new Event().selectAll();
         adapter = new ActivitysAdapter(this, activitys);
-        if(activitys != null) {
+
+        if(activitys != null && activitys.size() > 0) {
             lv_main.setAdapter(adapter);
             lv_main.setOnItemClickListener(this);
         } else {
