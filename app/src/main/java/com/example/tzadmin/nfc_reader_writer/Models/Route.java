@@ -58,4 +58,28 @@ public class Route extends BaseModel {
         return (Collection<User>)u.selectAllByParams();
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Route)) return false;
+
+        Route route = (Route) o;
+
+        if(id != null ? !id.equals(route.id) : route.id != null) return false;
+        if(name != null ? !name.equals(route.name) : route.name != null) return false;
+        if(description != null ? !description.equals(route.description) : route.description != null) return false;
+        if(capacity != null ? !capacity.equals(route.capacity) : route.capacity != null) return false;
+        return price != null ? price.equals(route.price) : route.price == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        return result;
+    }
 }

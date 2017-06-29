@@ -1,5 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer.network;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
@@ -16,11 +17,14 @@ import com.koushikdutta.async.http.AsyncHttpResponse;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.Future;
 
 /**
  * This class send requests to server and return callbacks
  */
+//TODO move server api to json
 public final class NetworkManager {
     private static final CopyOnWriteArraySet<ErrorHandler> errorHandlers = new CopyOnWriteArraySet<>();
 
@@ -102,6 +106,64 @@ public final class NetworkManager {
 
     public static void getUserMordas(Callback<List<UserMorda>> callback) {
         RequestManager.get(userMordaURL, new JsonParseCallback<>(callback, userMordaListType));
+    }
+
+    public static Future<AsyncHttpResponse> addUser(User user) {
+        String params = buildParams(user.getMap());
+        return RequestManager.post(addUserUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> addPriority(GroupActivity activity) {
+        String params = buildParams(activity.getMap());
+        return RequestManager.post(addPriorityUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> addMoney(MoneyLogs money) {
+        String params = buildParams(money.getMap());
+        return RequestManager.post(addMoneyUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> addUserMords(UserMorda morda) {
+        String params = buildParams(morda.getMap());
+        return RequestManager.post(addUserMordaUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> setUser(User user) {
+        String params = buildParams(user.getMap());
+        return RequestManager.post(setUserUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> setPriority(GroupActivity activity) {
+        String params = buildParams(activity.getMap());
+        return RequestManager.post(setPriorityUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> setMoney(MoneyLogs money) {
+        String params = buildParams(money.getMap());
+        return RequestManager.post(setMoneyUrl.concat(params));
+    }
+
+    public static Future<AsyncHttpResponse> setUserMords(UserMorda morda) {
+        String params = buildParams(morda.getMap());
+        return RequestManager.post(setUserMordaUrl.concat(params));
+    }
+
+    @NonNull
+    static String buildParams(Map<String, String> map) {
+        StringBuilder params = new StringBuilder("?");
+        boolean notFirst = false;
+        for(Map.Entry<String, String> stringStringEntry : map.entrySet()) {
+            if(notFirst) {
+                params.append('&');
+            } else {
+                notFirst = true;
+            }
+
+            params.append(stringStringEntry.getKey());
+            params.append('=');
+            params.append(stringStringEntry.getValue());
+        }
+        return params.toString();
     }
 
     private static void reportError(int code, AsyncHttpResponse response) {
