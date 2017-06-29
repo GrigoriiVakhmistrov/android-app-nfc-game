@@ -85,7 +85,7 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
     private Integer getValueFromButton(Button btn) {
         String text = btn.getText().toString();
 
-        Integer retData = Integer.getInteger(text, -1);
+        Integer retData = Integer.parseInt(text);
         if (retData != -1) return retData;
 
         if (text.equals("Нос")) return 1;

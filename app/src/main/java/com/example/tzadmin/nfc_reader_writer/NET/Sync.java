@@ -121,7 +121,7 @@ public class Sync implements RequestDelegate {
     private void stage1Done(String url, String body, Object backParam) {
         User u = (User) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Integer.parseInt(body);
 
         if (!newId.equals(-1)) {
 
@@ -171,7 +171,7 @@ public class Sync implements RequestDelegate {
     private void stage2Done(String url, String body, Object backParam) {
         User u = (User) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Integer.parseInt(body);
 
         if (!newId.equals(-1)) {
 
@@ -223,7 +223,7 @@ public class Sync implements RequestDelegate {
     private void stage3_4Done(String url, String body, Object backParam) {
         UserMorda u = (UserMorda) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Integer.parseInt(body);
 
         if (!newId.equals(-1)) {
             u.id = newId;
@@ -285,7 +285,7 @@ public class Sync implements RequestDelegate {
     private void stage5_6Done(String url, String body, Object backParam) {
         MoneyLogs u = (MoneyLogs) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Integer.parseInt(body);
 
         if (!newId.equals(-1)) {
             u.id = newId;
@@ -366,7 +366,7 @@ public class Sync implements RequestDelegate {
     private void stage7_8Done(String url, String body, Object backParam) {
         GroupActivity u = (GroupActivity) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Integer.parseInt(body);
 
         if (!newId.equals(-1)) {
             u.id = newId;
@@ -390,15 +390,15 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.pic = Integer.getInteger(o.getAsJsonObject().get("pic").getAsString(), -1);
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.pic = Integer.parseInt(o.getAsJsonObject().get("pic").getAsString());
+                e.price = Integer.parseInt(o.getAsJsonObject().get("price").getAsString());
 
                 objects.add(e);
             }
             new Shop().deleteAll();
 
             for (Shop i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(eventURL)) {
             List<Event> objects = new ArrayList<>();
 
@@ -409,14 +409,14 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.price = Integer.parseInt(o.getAsJsonObject().get("price").getAsString());
 
                 objects.add(e);
             }
             new Event().deleteAll();
 
             for (Event i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(mordaURL)) {
             List<Morda> objects = new ArrayList<>();
 
@@ -434,7 +434,7 @@ public class Sync implements RequestDelegate {
             new Morda().deleteAll();
 
             for (Morda i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(groupURL)) {
             List<Group> objects = new ArrayList<>();
 
@@ -449,15 +449,15 @@ public class Sync implements RequestDelegate {
                 e.totemimage = o.getAsJsonObject().get("totemimage").getAsString();
                 e.color = o.getAsJsonObject().get("color").getAsString();
                 e.colorhex = o.getAsJsonObject().get("colorhex").getAsString();
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
-                e.vip = Integer.getInteger(o.getAsJsonObject().get("vip").getAsString(), 0);
+                e.price = Integer.parseInt(o.getAsJsonObject().get("price").getAsString());
+                e.vip = Integer.parseInt(o.getAsJsonObject().get("vip").getAsString());
 
                 objects.add(e);
             }
             new Group().deleteAll();
 
             for (Group i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(routeURL)) {
             List<Route> objects = new ArrayList<>();
 
@@ -468,15 +468,15 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.capacity = Integer.getInteger(o.getAsJsonObject().get("capacity").getAsString(), 0);
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.capacity = Integer.parseInt(o.getAsJsonObject().get("capacity").getAsString());
+                e.price = Integer.parseInt(o.getAsJsonObject().get("price").getAsString());
 
                 objects.add(e);
             }
             new Route().deleteAll();
 
             for (Route i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(userURL)) {
             List<User> objects = new ArrayList<>();
 
@@ -490,9 +490,9 @@ public class Sync implements RequestDelegate {
                 e.patronymic = o.getAsJsonObject().get("patronymic").getAsString();
                 e.rfcid = o.getAsJsonObject().get("rfcid").getAsString();
                 if (!o.getAsJsonObject().get("groupid").isJsonNull())
-                    e.groupid = Integer.getInteger(o.getAsJsonObject().get("groupid").getAsString(), -1);
+                    e.groupid = Integer.parseInt(o.getAsJsonObject().get("groupid").getAsString());
                 if (!o.getAsJsonObject().get("routeid").isJsonNull())
-                    e.routeid = Integer.getInteger(o.getAsJsonObject().get("routeid").getAsString(), -1);
+                    e.routeid = Integer.parseInt(o.getAsJsonObject().get("routeid").getAsString());
                 e.iscap = o.getAsJsonObject().get("iscap").getAsInt();
 
                 objects.add(e);
@@ -500,7 +500,7 @@ public class Sync implements RequestDelegate {
             new User().deleteAll();
 
             for (User i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(moneyURL)) {
             List<MoneyLogs> objects = new ArrayList<>();
 
@@ -509,8 +509,8 @@ public class Sync implements RequestDelegate {
                 MoneyLogs e = new MoneyLogs();
 
                 e.id = o.getAsJsonObject().get("id").getAsInt();
-                e.userid = Integer.getInteger(o.getAsJsonObject().get("userid").getAsString(), -1);
-                e.money = Integer.getInteger(o.getAsJsonObject().get("money").getAsString(), 0);
+                e.userid = Integer.parseInt(o.getAsJsonObject().get("userid").getAsString());
+                e.money = Integer.parseInt(o.getAsJsonObject().get("money").getAsString());
                 e.type = o.getAsJsonObject().get("type").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
 
@@ -519,7 +519,7 @@ public class Sync implements RequestDelegate {
             new MoneyLogs().deleteAll();
 
             for (MoneyLogs i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(priorityURL)) {
             List<GroupActivity> objects = new ArrayList<>();
 
@@ -528,18 +528,18 @@ public class Sync implements RequestDelegate {
                 GroupActivity e = new GroupActivity();
 
                 e.id = o.getAsJsonObject().get("id").getAsInt();
-                e.groupid = Integer.getInteger(o.getAsJsonObject().get("groupid").getAsString(), -1);
-                e.p1 = Integer.getInteger(o.getAsJsonObject().get("p1").getAsString(), 0);
-                e.p2 = Integer.getInteger(o.getAsJsonObject().get("p2").getAsString(), 0);
-                e.p3 = Integer.getInteger(o.getAsJsonObject().get("p3").getAsString(), 0);
-                e.p4 = Integer.getInteger(o.getAsJsonObject().get("p4").getAsString(), 0);
+                e.groupid = Integer.parseInt(o.getAsJsonObject().get("groupid").getAsString());
+                e.p1 = Integer.parseInt(o.getAsJsonObject().get("p1").getAsString());
+                e.p2 = Integer.parseInt(o.getAsJsonObject().get("p2").getAsString());
+                e.p3 = Integer.parseInt(o.getAsJsonObject().get("p3").getAsString());
+                e.p4 = Integer.parseInt(o.getAsJsonObject().get("p4").getAsString());
 
                 objects.add(e);
             }
             new GroupActivity().deleteAll();
 
             for (GroupActivity i : objects)
-                i.insert();
+                i.insert("0");
         } else if (url.equals(userMordaURL)) {
             List<UserMorda> objects = new ArrayList<>();
 
@@ -548,15 +548,15 @@ public class Sync implements RequestDelegate {
                 UserMorda e = new UserMorda();
 
                 e.id = o.getAsJsonObject().get("id").getAsInt();
-                e.userid = Integer.getInteger(o.getAsJsonObject().get("userid").getAsString(), -1);
-                e.mordaid = Integer.getInteger(o.getAsJsonObject().get("mordaid").getAsString(), -1);
+                e.userid = Integer.parseInt(o.getAsJsonObject().get("userid").getAsString());
+                e.mordaid = Integer.parseInt(o.getAsJsonObject().get("mordaid").getAsString());
 
                 objects.add(e);
             }
             new GroupActivity().deleteAll();
 
             for (UserMorda i : objects)
-                i.insert();
+                i.insert("0");
         }
     }
 
