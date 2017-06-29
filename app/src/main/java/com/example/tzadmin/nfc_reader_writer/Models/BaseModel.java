@@ -122,6 +122,8 @@ public abstract class BaseModel implements ModelInterface {
                     //Ignore
                 }
 
+                if (val == null) val = "-1";
+
                 if (annotation.SyncField())
                     val = setSync;
 
@@ -181,6 +183,8 @@ public abstract class BaseModel implements ModelInterface {
                 } catch (IllegalAccessException e) {
                     //Ignore
                 }
+
+                if (val == null) val = "-1";
 
                 if (a.SyncField())
                     val = setSync;

@@ -96,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table tbUserMorda ("
                 + "id integer primary key autoincrement,"
                 + "userid text,"
+                + "syncFlag text,"
                 + "mordaid text" + ");");
 
         db.execSQL("create table Event ("

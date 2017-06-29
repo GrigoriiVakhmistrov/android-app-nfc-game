@@ -13,7 +13,7 @@ import java.util.Map;
 public class RequestNode {
     public String url;
     public RequestMethod method;
-    public Map<String, String> params;
+    public Map<String, String> params = new HashMap<>();
     public Object backParam;
 
     void initIt() {

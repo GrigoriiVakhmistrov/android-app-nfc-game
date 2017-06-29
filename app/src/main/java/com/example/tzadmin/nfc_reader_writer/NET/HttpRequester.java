@@ -51,10 +51,10 @@ public class HttpRequester extends AsyncTask<RequestNode, ResponceNode, Integer>
         try {
             for (RequestNode item : urls) {
                 if (item.method == RequestMethod.GET) {
-                    String body = HttpRequest.get(item.url, item.params, false).body();
+                    String body = HttpRequest.get(item.url, item.params, true).body();
                     publishProgress( new ResponceNode(item.url, body, item.backParam) );
                 } else if (item.method == RequestMethod.POST) {
-                    String body = HttpRequest.post(item.url, item.params, false).body();
+                    String body = HttpRequest.post(item.url).form(item.params).body();
                     publishProgress( new ResponceNode(item.url, body, item.backParam) );
                 }
             }

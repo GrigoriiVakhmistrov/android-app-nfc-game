@@ -10,9 +10,17 @@ import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -367,74 +375,184 @@ public class Sync implements RequestDelegate {
     }
 
     private void stage9Done(String url, String body, Object backParam) {
-        if (url.equals(shopURL)) {
-            Gson gson = new Gson();
+        if (!body.startsWith("[")) return;
 
-            Shop[] objects = gson.fromJson(body, Shop[].class);
+        JsonParser parser = new JsonParser();
+        JsonArray array = parser.parse(body).getAsJsonArray();
+
+        if (url.equals(shopURL)) {
+            List<Shop> objects = new ArrayList<>();
+
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                Shop e = new Shop();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.name = o.getAsJsonObject().get("name").getAsString();
+                e.description = o.getAsJsonObject().get("description").getAsString();
+                e.pic = Integer.getInteger(o.getAsJsonObject().get("pic").getAsString(), -1);
+                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+
+                objects.add(e);
+            }
             new Shop().deleteAll();
 
             for (Shop i : objects)
                 i.insert();
         } else if (url.equals(eventURL)) {
-            Gson gson = new Gson();
+            List<Event> objects = new ArrayList<>();
 
-            Event[] objects = gson.fromJson(body, Event[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                Event e = new Event();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.name = o.getAsJsonObject().get("name").getAsString();
+                e.description = o.getAsJsonObject().get("description").getAsString();
+                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+
+                objects.add(e);
+            }
             new Event().deleteAll();
 
             for (Event i : objects)
                 i.insert();
         } else if (url.equals(mordaURL)) {
-            Gson gson = new Gson();
+            List<Morda> objects = new ArrayList<>();
 
-            Morda[] objects = gson.fromJson(body, Morda[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                Morda e = new Morda();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.fio = o.getAsJsonObject().get("fio").getAsString();
+                e.description = o.getAsJsonObject().get("description").getAsString();
+                e.pic = o.getAsJsonObject().get("pic").getAsString();
+
+                objects.add(e);
+            }
             new Morda().deleteAll();
 
             for (Morda i : objects)
                 i.insert();
         } else if (url.equals(groupURL)) {
-            Gson gson = new Gson();
+            List<Group> objects = new ArrayList<>();
 
-            Group[] objects = gson.fromJson(body, Group[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                Group e = new Group();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.name = o.getAsJsonObject().get("name").getAsString();
+                e.description = o.getAsJsonObject().get("description").getAsString();
+                e.totemname = o.getAsJsonObject().get("totemname").getAsString();
+                e.totemimage = o.getAsJsonObject().get("totemimage").getAsString();
+                e.color = o.getAsJsonObject().get("color").getAsString();
+                e.colorhex = o.getAsJsonObject().get("colorhex").getAsString();
+                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.vip = Integer.getInteger(o.getAsJsonObject().get("vip").getAsString(), 0);
+
+                objects.add(e);
+            }
             new Group().deleteAll();
 
             for (Group i : objects)
                 i.insert();
         } else if (url.equals(routeURL)) {
-            Gson gson = new Gson();
+            List<Route> objects = new ArrayList<>();
 
-            Route[] objects = gson.fromJson(body, Route[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                Route e = new Route();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.name = o.getAsJsonObject().get("name").getAsString();
+                e.description = o.getAsJsonObject().get("description").getAsString();
+                e.capacity = Integer.getInteger(o.getAsJsonObject().get("capacity").getAsString(), 0);
+                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+
+                objects.add(e);
+            }
             new Route().deleteAll();
 
             for (Route i : objects)
                 i.insert();
         } else if (url.equals(userURL)) {
-            Gson gson = new Gson();
+            List<User> objects = new ArrayList<>();
 
-            User[] objects = gson.fromJson(body, User[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                User e = new User();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.firstname = o.getAsJsonObject().get("firstname").getAsString();
+                e.lastname = o.getAsJsonObject().get("lastname").getAsString();
+                e.patronymic = o.getAsJsonObject().get("patronymic").getAsString();
+                e.rfcid = o.getAsJsonObject().get("rfcid").getAsString();
+                if (!o.getAsJsonObject().get("groupid").isJsonNull())
+                    e.groupid = Integer.getInteger(o.getAsJsonObject().get("groupid").getAsString(), -1);
+                if (!o.getAsJsonObject().get("routeid").isJsonNull())
+                    e.routeid = Integer.getInteger(o.getAsJsonObject().get("routeid").getAsString(), -1);
+                e.iscap = o.getAsJsonObject().get("iscap").getAsInt();
+
+                objects.add(e);
+            }
             new User().deleteAll();
 
             for (User i : objects)
                 i.insert();
         } else if (url.equals(moneyURL)) {
-            Gson gson = new Gson();
+            List<MoneyLogs> objects = new ArrayList<>();
 
-            MoneyLogs[] objects = gson.fromJson(body, MoneyLogs[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                MoneyLogs e = new MoneyLogs();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.userid = Integer.getInteger(o.getAsJsonObject().get("userid").getAsString(), -1);
+                e.money = Integer.getInteger(o.getAsJsonObject().get("money").getAsString(), 0);
+                e.type = o.getAsJsonObject().get("type").getAsString();
+                e.description = o.getAsJsonObject().get("description").getAsString();
+
+                objects.add(e);
+            }
             new MoneyLogs().deleteAll();
 
             for (MoneyLogs i : objects)
                 i.insert();
         } else if (url.equals(priorityURL)) {
-            Gson gson = new Gson();
+            List<GroupActivity> objects = new ArrayList<>();
 
-            GroupActivity[] objects = gson.fromJson(body, GroupActivity[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                GroupActivity e = new GroupActivity();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.groupid = Integer.getInteger(o.getAsJsonObject().get("groupid").getAsString(), -1);
+                e.p1 = Integer.getInteger(o.getAsJsonObject().get("p1").getAsString(), 0);
+                e.p2 = Integer.getInteger(o.getAsJsonObject().get("p2").getAsString(), 0);
+                e.p3 = Integer.getInteger(o.getAsJsonObject().get("p3").getAsString(), 0);
+                e.p4 = Integer.getInteger(o.getAsJsonObject().get("p4").getAsString(), 0);
+
+                objects.add(e);
+            }
             new GroupActivity().deleteAll();
 
             for (GroupActivity i : objects)
                 i.insert();
         } else if (url.equals(userMordaURL)) {
-            Gson gson = new Gson();
+            List<UserMorda> objects = new ArrayList<>();
 
-            UserMorda[] objects = gson.fromJson(body, UserMorda[].class);
+            for (JsonElement o : array) {
+                if (!o.isJsonObject()) continue;
+                UserMorda e = new UserMorda();
+
+                e.id = o.getAsJsonObject().get("id").getAsInt();
+                e.userid = Integer.getInteger(o.getAsJsonObject().get("userid").getAsString(), -1);
+                e.mordaid = Integer.getInteger(o.getAsJsonObject().get("mordaid").getAsString(), -1);
+
+                objects.add(e);
+            }
             new GroupActivity().deleteAll();
 
             for (UserMorda i : objects)

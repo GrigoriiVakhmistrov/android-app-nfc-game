@@ -16,7 +16,7 @@ public class Group extends BaseModel {
         totemimage = "-1";
         color = "-1";
         colorhex = "-1";
-        isdeleted = "-1";
+//        isdeleted = "-1";
         price = 0;
         vip = 0;
     }
@@ -35,8 +35,8 @@ public class Group extends BaseModel {
     public String color;
     @MAnnotation
     public String colorhex;
-    @MAnnotation
-    public String isdeleted;
+//    @MAnnotation
+//    public String isdeleted;
     @MAnnotation
     public Integer price;
     @MAnnotation

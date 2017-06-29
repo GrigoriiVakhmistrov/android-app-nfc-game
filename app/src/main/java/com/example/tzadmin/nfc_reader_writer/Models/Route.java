@@ -14,7 +14,7 @@ public class Route extends BaseModel {
         this.description = "-1";
         this.capacity = -1;
         this.price = 0;
-        this.isdeleted = "-1";
+//        this.isdeleted = "-1";
     }
 
     @MAnnotation(PrimaryKey = true)
@@ -27,8 +27,8 @@ public class Route extends BaseModel {
     public Integer capacity;
     @MAnnotation
     public Integer price;
-    @MAnnotation
-    public String isdeleted;
+//    @MAnnotation
+//    public String isdeleted;
 
 
     @Override

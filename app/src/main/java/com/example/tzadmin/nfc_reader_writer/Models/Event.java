@@ -13,12 +13,12 @@ public class Event extends BaseModel {
     @MAnnotation
     public String description;
     @MAnnotation
-    public String price;
+    public Integer price;
 
     public Event() {
         id = -1;
         name = "-1";
-        price = "-1";
+        price = -1;
         description = "";
     }
 
