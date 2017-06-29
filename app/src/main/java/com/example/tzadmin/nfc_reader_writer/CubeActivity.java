@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
+import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -85,7 +87,7 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
     private Integer getValueFromButton(Button btn) {
         String text = btn.getText().toString();
 
-        Integer retData = Integer.parseInt(text);
+        Integer retData = Utilites.tryParseInt(text, -1);
         if (retData != -1) return retData;
 
         if (text.equals("Нос")) return 1;
@@ -106,6 +108,8 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
             ga.p1 = mark1;
             ga.p2 = mark2;
             ga.p3 = mark3;
+
+            ga.update();
 
             finish();
         } else {

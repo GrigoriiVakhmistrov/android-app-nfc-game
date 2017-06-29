@@ -40,7 +40,7 @@ public class GroupActivity extends BaseModel {
         Group g = new Group();
         g.id = groupId;
 
-        g = (Group) g.selectAllByParams();
+        g = (Group) g.selectOneByParams();
         if (g == null) return  null;
 
         GroupActivity ga = new GroupActivity();
