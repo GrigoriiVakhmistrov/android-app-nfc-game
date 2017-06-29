@@ -1,5 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer.network;
 
+import android.util.Log;
 import com.example.tzadmin.nfc_reader_writer.Models.BaseModel;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
 import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
@@ -13,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 //TODO check null problems for all methods
+//TODO future cleanup
 public final class SynchronizationTask implements Runnable {
     @Override
     public void run() {
@@ -174,6 +176,8 @@ public final class SynchronizationTask implements Runnable {
 
             param.id = newId;
             param.update("0");
+
+            Log.d("[Sync][New]", "Synchronized user with id " + param.id);
         }
     }
 
@@ -202,6 +206,8 @@ public final class SynchronizationTask implements Runnable {
                 param.id = newId;
             }
             param.update("0");
+
+            Log.d("[Sync][Change]", "Synchronized user with id " + param.id);
         }
     }
 
@@ -216,6 +222,8 @@ public final class SynchronizationTask implements Runnable {
                 param.id = newId;
                 param.update("0");
             }
+
+            Log.d("[Sync]", "Synchronized morda with id " + param.id);
         }
     }
 
@@ -230,6 +238,8 @@ public final class SynchronizationTask implements Runnable {
                 param.id = newId;
                 param.update("0");
             }
+
+            Log.d("[Sync]", "Synchronized moneyLog with id " + param.id);
         }
     }
 
@@ -244,6 +254,8 @@ public final class SynchronizationTask implements Runnable {
                 param.id = newId;
                 param.update("0");
             }
+
+            Log.d("[Sync]", "Synchronized activity with id " + param.id);
         }
     }
 
@@ -255,11 +267,14 @@ public final class SynchronizationTask implements Runnable {
             if(baseModels.isEmpty()) //Can't get any base model
                 return;
 
-            baseModels.get(0).deleteAll();
+            BaseModel first = baseModels.get(0);
+            first.deleteAll();
 
             for(BaseModel baseModel : baseModels) {
                 baseModel.insert();
             }
+
+            Log.d("[Sync][Change]", "Synchronized class " + first.getClass().getCanonicalName());
         }
     }
 }

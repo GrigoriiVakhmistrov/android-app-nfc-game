@@ -1,8 +1,9 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -10,7 +11,7 @@ import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
-import com.example.tzadmin.nfc_reader_writer.network.Sync;
+import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -54,7 +55,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Sync();
+                Log.i("[Sync]", "Synchronization started!");
+                new SynchronizationTask().run();
+                Log.i("[Sync]", "Synchronization finished!");
             }
         });
     }

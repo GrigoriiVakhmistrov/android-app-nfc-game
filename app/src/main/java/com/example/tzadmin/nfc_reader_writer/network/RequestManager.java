@@ -1,5 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer.network;
 
+import android.util.Log;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpGet;
@@ -25,16 +26,19 @@ public final class RequestManager {
     }
 
     public static Future<AsyncHttpResponse> post(String uri) {
+        Log.d("[RequestManager][POST]", uri);
         AsyncHttpPost post = new AsyncHttpPost(uri);
         return client.execute(post, EMPTY_CALLBACK);
     }
 
     public static Future<AsyncHttpResponse> get(String uri, HttpConnectCallback callback) {
+        Log.d("[RequestManager][GET]", uri);
         AsyncHttpGet get = new AsyncHttpGet(uri);
         return client.execute(get, callback);
     }
 
     public static Future<String> get(String uri, AsyncHttpClient.StringCallback callback) {
+        Log.d("[RequestManager][GET]", uri);
         AsyncHttpGet get = new AsyncHttpGet(uri);
         return client.executeString(get, callback);
     }

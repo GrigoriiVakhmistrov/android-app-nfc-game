@@ -34,6 +34,15 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public final class NetworkManager {
     private static final CopyOnWriteArraySet<ErrorHandler> errorHandlers = new CopyOnWriteArraySet<>();
 
+    static {
+        errorHandlers.add(new ErrorHandler() {
+            @Override
+            public void handleHttpError(int code, AsyncHttpResponse response) {
+                Log.e("[NetworkManager][" + code + "]", "Request: " + response.getRequest().getUri() + ", response: " + response.message());
+            }
+        });
+    }
+
     private static final Type shopListType = new TypeToken<List<Shop>>(){}.getType();
     private static final Type eventListType = new TypeToken<List<Event>>(){}.getType();
     private static final Type mordaListType = new TypeToken<List<Morda>>(){}.getType();
