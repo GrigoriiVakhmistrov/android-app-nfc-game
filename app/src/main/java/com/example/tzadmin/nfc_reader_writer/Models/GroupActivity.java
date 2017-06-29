@@ -9,24 +9,27 @@ public class GroupActivity extends BaseModel {
     public GroupActivity() {
         id = -1;
         groupid = -1;
-        p1 = -1;
-        p2 = -1;
-        p3 = -1;
-        p4 = -1;
+        p1 = 0;
+        p2 = 0;
+        p3 = 0;
+        p4 = 0;
+        syncFlag = 0;
     }
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
     @MAnnotation
     public Integer groupid;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer p1;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer p2;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer p3;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer p4;
+    @MAnnotation(SyncField = true)
+    public Integer syncFlag;
 
     @Override
     public String GetTableName() {
@@ -37,7 +40,7 @@ public class GroupActivity extends BaseModel {
         Group g = new Group();
         g.id = groupId;
 
-        g = (Group) g.selectAllByParams();
+        g = (Group) g.selectOneByParams();
         if (g == null) return  null;
 
         GroupActivity ga = new GroupActivity();

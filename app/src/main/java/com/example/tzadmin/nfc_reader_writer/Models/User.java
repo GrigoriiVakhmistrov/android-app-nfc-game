@@ -1,5 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import android.support.annotation.IntegerRes;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,40 +13,37 @@ public class User extends BaseModel {
 
     public User () {
         id = -1;
-        cFirstName = "-1";
-        cLastName = "-1";
-        cSurname = "-1";
-        cRfcId = "-1";
-        cGroupId = -1;
+        firstname = "";
+        lastname = "";
+        patronymic = "";
+        rfcid = "";
+        groupid = -1;
 //        cBatchId = "-1";
-        cRouteId = -1;
-        cIsCap = 0;
-        cIsNew = 0;
-        cIsDeleted = "-1";
+        routeid = -1;
+        iscap = 0;
+        syncFlag = 0;
     }
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
+    @MAnnotation(DefaultValue = "")
+    public String firstname;
+    @MAnnotation(DefaultValue = "")
+    public String lastname;
+    @MAnnotation(DefaultValue = "")
+    public String patronymic;
+    @MAnnotation(DefaultValue = "")
+    public String rfcid;
     @MAnnotation
-    public String cFirstName;
-    @MAnnotation
-    public String cLastName;
-    @MAnnotation
-    public String cSurname;
-    @MAnnotation
-    public String cRfcId;
-    @MAnnotation
-    public Integer cGroupId;
+    public Integer groupid;
 //    @MAnotation
 //    public String cBatchId;
     @MAnnotation
-    public Integer cRouteId;
-    @MAnnotation
-    public Integer cIsCap;
-    @MAnnotation
-    public Integer cIsNew;
-    @MAnnotation
-    public String cIsDeleted;
+    public Integer routeid;
+    @MAnnotation(DefaultValue = "0")
+    public Integer iscap;
+    @MAnnotation(SyncField = true)
+    public Integer syncFlag;
 
 
     //### MODEL INTERFACE ###//
@@ -53,7 +52,7 @@ public class User extends BaseModel {
     }
 
     public boolean isNfcIdAlreadyExist (String RfcId) {
-        this.cRfcId = RfcId;
+        this.rfcid = RfcId;
 
         User u = (User) selectOneByParams();
 
@@ -61,7 +60,7 @@ public class User extends BaseModel {
     }
 
     public User selectUserByRfcId  (String RfcId) {
-        this.cRfcId = RfcId;
+        this.rfcid = RfcId;
 
         return (User) selectOneByParams();
     }
@@ -112,7 +111,7 @@ public class User extends BaseModel {
     }
 
     public boolean subscribeToRoute(Integer route) {
-        cRouteId = route;
+        routeid = route;
 
         return update();
     }
@@ -162,7 +161,7 @@ public class User extends BaseModel {
 
     public Route getRoute(){
         Route route = new Route();
-        route.id = cRouteId;
+        route.id = routeid;
 
         route = (Route)route.selectOneByParams();
         return route;
@@ -170,7 +169,7 @@ public class User extends BaseModel {
 
     public Group getGroup(){
         Group group = new Group();
-        group.id = cGroupId;
+        group.id = groupid;
 
         group = (Group)group.selectOneByParams();
         return  group;
@@ -183,6 +182,13 @@ public class User extends BaseModel {
         Collection<MoneyLogs> moneyLogsList = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
         return moneyLogsList;
 
+    }
+
+    public Collection<UserMorda> getUserMordas() {
+        UserMorda morda = new UserMorda();
+        morda.userid = id;
+
+        return (Collection<UserMorda>)morda.selectAllByParams();
     }
 
     public Integer getRating(){

@@ -10,6 +10,7 @@ public class UserMorda extends BaseModel {
         id = -1;
         userid = -1;
         mordaid = -1;
+        syncFlag = 0;
     }
 
     @MAnnotation(PrimaryKey=true)
@@ -18,6 +19,8 @@ public class UserMorda extends BaseModel {
     public Integer userid;
     @MAnnotation
     public Integer mordaid;
+    @MAnnotation(SyncField = true)
+    public Integer syncFlag;
 
     @Override
     public String GetTableName() {

@@ -10,23 +10,25 @@ import java.util.Collection;
 public class Shop extends BaseModel{
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
-    public Integer image;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String name;
+    @MAnnotation(DefaultValue = "")
+    public String description;
     @MAnnotation
-    public String info;
-    @MAnnotation
-    public Integer money;
+    public Integer pic;
+    @MAnnotation(DefaultValue = "0")
+    public Integer price;
+
+
 
     //public Button btn;
 
     public Shop() {
         id = -1;
-        image = -1;
-        name = "-1";
-        info = "-1";
-        money = -1;
+        pic = -1;
+        name = "";
+        description = "";
+        price = 0;
     }
 
     public Collection<Shop> GetAllItems(){

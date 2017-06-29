@@ -67,6 +67,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void clearFields() {
+        firstName.setText("");
+        lastName.setText("");
+        surName.setText("");
+        et_search.setText("");
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
@@ -81,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this,
                             Message.userSuccessfullyRegistered(register(RfcId)),
                             Toast.LENGTH_SHORT).show();
+                    clearFields();
                     break;
                 case _bindCode:
                     bind(RfcId);
@@ -95,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         users = (ArrayList<User>) new User().selectAll();
         selectedUser = users.get(position);
 
-        if(new User().isNfcIdAlreadyExist(selectedUser.cRfcId)) {
+        if(new User().isNfcIdAlreadyExist(selectedUser.rfcid)) {
             Toast.makeText(this,
                     Message.isUserHaveBraced(selectedUser),
                     Toast.LENGTH_LONG).show();
@@ -108,10 +116,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private User register (String RfcId) {
         User user = new User();
-        user.cFirstName = firstName.getText().toString();
-        user.cLastName = lastName.getText().toString();
-        user.cSurname = surName.getText().toString();
-        user.cRfcId = RfcId;
+        user.firstname = firstName.getText().toString();
+        user.lastname = lastName.getText().toString();
+        user.patronymic = surName.getText().toString();
+        user.rfcid = RfcId;
 
         user.insert();
 
@@ -121,9 +129,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void bind (String RfcId) {
-        selectedUser.cRfcId = RfcId;
+        selectedUser.rfcid = RfcId;
 
         selectedUser.update();
+        clearFields();
         //Database.update("tbUsers", selectedUser);
         //Database.update("tbUsers_cache", selectedUser);
     }

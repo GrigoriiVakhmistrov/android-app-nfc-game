@@ -98,8 +98,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "userid text,"
                 + "syncFlag text,"
                 + "mordaid text" + ");");
-<<<<<<< HEAD
-=======
 
         db.execSQL("create table Event ("
                 + "id integer primary key autoincrement,"
@@ -141,7 +139,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        db.execSQL("insert into tbRoutes (name, capacity) values ('Route10', '7');");
 //        db.execSQL("insert into tbRoutes (name, capacity) values ('Route11', '8');");
 //        db.execSQL("insert into tbRoutes (name, capacity) values ('Route12', '11');");
->>>>>>> a0c73b75b8a4c759b54b239cc7edae25939cf192
     }
 
     @Override

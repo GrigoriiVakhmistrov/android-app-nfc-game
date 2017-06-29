@@ -1,6 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
 import android.content.ContentValues;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
@@ -47,6 +48,47 @@ public abstract class BaseModel implements ModelInterface {
         return data;
     }
 
+    public int deleteAll() {
+        return Database.get().delete(GetTableName(), null, null);
+    }
+
+    public int changeId(String newId) {
+        ContentValues values = new ContentValues();
+        String where = "";
+        String[] whereARGS = new String[1];
+
+        Field[] fields = getClass().getFields();
+        for (Field item : fields) {
+            if (item.isAnnotationPresent(MAnnotation.class)) {
+                MAnnotation a = item.getAnnotation(MAnnotation.class);
+
+                if (a.SyncField()) continue;
+
+                String key = item.getName();
+                if (!a.FieldName().equals(""))
+                    key = a.FieldName();
+                String val = null;
+
+                try {
+                    val = item.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+                if (a.PrimaryKey()) {
+                    values.put(key, newId);
+
+                    where = key + " = ? ";
+                    whereARGS[0] = val;
+
+                    setItemValue(newId, this, item);
+                }
+            }
+        }
+
+        return Database.get().update(GetTableName(), values, where, whereARGS);
+    }
+
     @Nullable
     public Collection<? extends BaseModel> selectAll() {
         return select(getClass(), null, null, null, null);
@@ -54,12 +96,20 @@ public abstract class BaseModel implements ModelInterface {
 
     @Nullable
     public Collection<? extends BaseModel> selectAllByParams() {
+        return selectAllByParams(false);
+    }
+
+    @Nullable
+    public Collection<? extends BaseModel> selectAllByParams(boolean withSync) {
         Map<String, String> findParams = new HashMap<>();
 
         Field[] fields = getClass().getFields();
         for (Field item : fields) {
             if (item.isAnnotationPresent(MAnnotation.class)) {
                 MAnnotation a = item.getAnnotation(MAnnotation.class);
+
+                if (!withSync)
+                    if (a.SyncField()) continue;
 
                 String key = item.getName();
                 if (!a.FieldName().equals(""))
@@ -96,7 +146,7 @@ public abstract class BaseModel implements ModelInterface {
         return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];
     }
 
-    public boolean insert() {
+    public boolean insert(String setSync, boolean insertId) {
         ContentValues values = new ContentValues();
 
         Field[] fields = getClass().getFields();
@@ -117,8 +167,17 @@ public abstract class BaseModel implements ModelInterface {
                     //Ignore
                 }
 
+                if (val == null) val = "-1";
+
+                if (annotation.SyncField())
+                    val = setSync;
+
                 if (!annotation.PrimaryKey())
                     values.put(key, val);
+
+                if (insertId)
+                    if (annotation.PrimaryKey())
+                        values.put(key, val);
             }
         }
 
@@ -142,7 +201,15 @@ public abstract class BaseModel implements ModelInterface {
         return true;
     }
 
+    public boolean insert() {
+        return insert("1", false);
+    }
+
     public boolean update() {
+        return update("2");
+    }
+
+    public boolean update(String setSync) {
         ContentValues values = new ContentValues();
         String where = "";
         String[] whereARGS = new String[1];
@@ -165,6 +232,11 @@ public abstract class BaseModel implements ModelInterface {
                 } catch (IllegalAccessException e) {
                     //Ignore
                 }
+
+                if (val == null) val = "-1";
+
+                if (a.SyncField())
+                    val = setSync;
 
                 if (!a.PrimaryKey()) {
                     values.put(key, val);
@@ -262,6 +334,18 @@ public abstract class BaseModel implements ModelInterface {
     private void setItemValue(Map<String, String> item, BaseModel m, Field f, String key) {
         try {
             String value = item.get(key);
+            if (f.getType() == String.class) {
+                f.set(m, value);
+            } else if (f.getType() == Integer.class) {
+                f.set(m, Integer.valueOf(value));
+            }
+        } catch (IllegalAccessException e) {
+            //Ignore
+        }
+    }
+
+    private void setItemValue(String value, BaseModel m, Field f) {
+        try {
             if (f.getType() == String.class) {
                 f.set(m, value);
             } else if (f.getType() == Integer.class) {

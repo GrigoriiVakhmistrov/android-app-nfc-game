@@ -74,6 +74,18 @@ public class Database {
         }
     }
 
+    public int delete(String table, String whereClause, String[] whereArgs) {
+        try {
+            threadMutex.acquire();
+            return db.delete(table, whereClause, whereArgs);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return -1;
+        } finally {
+            threadMutex.release();
+        }
+    }
+
     public Collection<Map<String, String>> select(String table, String[] columns, String selection,
                                                   String[] selectionArgs, String groupBy, String having,
                                                   String orderBy, String limit) {

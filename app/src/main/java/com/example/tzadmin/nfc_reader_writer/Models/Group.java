@@ -10,31 +10,39 @@ public class Group extends BaseModel {
 
     public Group () {
         id = -1;
-        name = "-1";
-        description = "-1";
-        totemname = "-1";
-        totemimage = "-1";
-        color = "-1";
-        colorhex = "-1";
-        isdeleted = "-1";
+        name = "";
+        description = "";
+        totemname = "";
+        totemimage = "";
+        color = "";
+        colorhex = "";
+//        isdeleted = "-1";
+        price = 0;
+        vip = 0;
     }
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String name;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String description;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String totemname;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String totemimage;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String color;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String colorhex;
-    @MAnnotation
-    public String isdeleted;
+//    @MAnnotation
+//    public String isdeleted;
+    @MAnnotation(DefaultValue = "0")
+    public Integer price;
+    @MAnnotation(DefaultValue = "0")
+    public Integer vip;
+
+
 
     @Override
     public String GetTableName() {
@@ -43,7 +51,7 @@ public class Group extends BaseModel {
 
     public Collection<User> getUsers() {
         User u = new User();
-        u.cGroupId = id;
+        u.groupid = id;
 
         return (Collection<User>)u.selectAllByParams();
     }

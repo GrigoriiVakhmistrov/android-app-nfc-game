@@ -28,6 +28,6 @@ public class Message {
     }
 
     public static String concatFio(User user) {
-        return user.cFirstName + " " + user.cLastName + " " + user.cSurname;
+        return user.firstname + " " + user.lastname + " " + user.patronymic;
     }
 }
