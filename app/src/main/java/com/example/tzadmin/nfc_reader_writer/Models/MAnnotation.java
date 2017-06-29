@@ -14,8 +14,6 @@ import java.lang.annotation.Target;
 public @interface MAnnotation {
     boolean PrimaryKey() default false;
     boolean Sortable() default false;
-    boolean SyncField() default false;
     String FieldName() default "";
     String DefaultValue() default "-1";
-    String RemoteName() default "";
 }

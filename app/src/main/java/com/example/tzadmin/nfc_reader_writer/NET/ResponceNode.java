@@ -6,12 +6,10 @@ package com.example.tzadmin.nfc_reader_writer.NET;
 
 public class ResponceNode {
     public String url;
-    public String responce;
-    public Object passData;
+    public Object value;
 
-    public ResponceNode(String url, String responce, Object passData) {
+    public ResponceNode(String url, Object value) {
         this.url = url;
-        this.responce = responce;
-        this.passData = passData;
+        this.value = value;
     }
 }

@@ -8,23 +8,20 @@ public class Event extends BaseModel {
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation(DefaultValue = "")
+    @MAnnotation
     public String name;
-    @MAnnotation(DefaultValue = "")
-    public String description;
-    @MAnnotation(DefaultValue = "0")
-    public Integer price;
+    @MAnnotation
+    public String price;
 
     public Event() {
         id = -1;
-        name = "";
-        price = 0;
-        description = "";
+        name = "-1";
+        price = "-1";
     }
 
     @Override
     public String GetTableName() {
-        return "Event";
+        return null;
     }
 
 }

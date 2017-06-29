@@ -54,9 +54,9 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
         if (convertView == null) {
             view = inflater.inflate(android.R.layout.simple_dropdown_item_1line, null);
-            ((TextView)view).setText(users.get(position).firstname + " " +
-                    users.get(position).lastname + " " +
-                        users.get(position).patronymic);
+            ((TextView)view).setText(users.get(position).cFirstName + " " +
+                    users.get(position).cLastName + " " +
+                        users.get(position).cSurname);
         } else {
             view = convertView;
         }
@@ -68,7 +68,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         @Override
         public String convertResultToString(Object resultValue) {
             User u = (User) resultValue;
-            return u.firstname + " " + u.lastname + " " + u.patronymic;
+            return u.cFirstName + " " + u.cLastName + " " + u.cSurname;
         }
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -88,11 +88,11 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
                         suggestions.add(u);
                     }
                     */
-                    if((u.firstname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                    if((u.cFirstName).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
-                    }else if((u.lastname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                    }else if((u.cLastName).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
-                    }else if((u.patronymic).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                    }else if((u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
                     }
 

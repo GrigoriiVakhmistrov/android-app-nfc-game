@@ -14,22 +14,19 @@ public class MoneyLogs extends BaseModel {
     public Integer id;
     @MAnnotation
     public Integer userid;
-    @MAnnotation(DefaultValue = "0")
+    @MAnnotation
     public Integer money;
     @MAnnotation
     public String type;
     @MAnnotation
     public String description;
-    @MAnnotation(SyncField = true)
-    public Integer syncFlag;
 
     public MoneyLogs(){
         id = -1;
         userid = -1;
         type = "-1";
         description = "-1";
-        money = 0;
-        syncFlag = 0;
+        money = -1;
     }
 
     @Override

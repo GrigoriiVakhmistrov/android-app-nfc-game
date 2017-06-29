@@ -29,8 +29,6 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        lv_shop = (GridView)findViewById(R.id.gridView_shop_main);
-
         shops = new ArrayList(new Shop().selectAll());
         lv_shop = (GridView) findViewById(R.id.route_grid);
         ShopAdapter shopAdapter = new ShopAdapter(this, shops);
@@ -61,8 +59,8 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
                 String RfcId = data.getStringExtra("RfcId");
                 User user = new User().selectUserByRfcId(RfcId);
                 if(user != null) {
-                    if(user.getBallance() >= shop.price){
-                        user.RemoveMoney(shop.price, "покупка " + shop.name);
+                    if(user.getBallance() >= shop.money){
+                        user.RemoveMoney(shop.money, "покупка " + shop.name);
                         user.update();
 
                         Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();

@@ -18,28 +18,26 @@ import java.util.Objects;
  * Created by velor on 6/27/17.
  */
 
-public class HttpRequester extends AsyncTask<RequestNode, ResponceNode, Integer> {
+public class HttpRequester extends AsyncTask<RequestNode, ResponceNode, Boolean> {
 
     private RequestDelegate delegate;
-    private Integer stage;
 
-    public HttpRequester (RequestDelegate delegate, Integer stage) {
+    public HttpRequester (RequestDelegate delegate) {
         this.delegate = delegate;
-        this.stage = stage;
     }
 
     @Override
     protected void onProgressUpdate(ResponceNode... values) {
         if (delegate != null) {
             for (ResponceNode item : values)
-                delegate.RequestDone(item.url, item.responce, item.passData, stage);
+                delegate.RequestDone(item.url, item.value);
         }
 
         super.onProgressUpdate(values);
     }
 
     @Override
-    protected void onPostExecute(Integer success) {
+    protected void onPostExecute(Boolean success) {
         if (delegate != null)
             delegate.TaskDone(success);
 
@@ -47,21 +45,21 @@ public class HttpRequester extends AsyncTask<RequestNode, ResponceNode, Integer>
     }
 
     @Override
-    protected Integer doInBackground(RequestNode... urls) {
+    protected Boolean doInBackground(RequestNode... urls) {
         try {
             for (RequestNode item : urls) {
                 if (item.method == RequestMethod.GET) {
-                    String body = HttpRequest.get(item.url, item.params, true).body();
-                    publishProgress( new ResponceNode(item.url, body, item.backParam) );
+                    String body = HttpRequest.get(item.url, item.params, false).body();
+                    publishProgress( new ResponceNode(item.url, body) );
                 } else if (item.method == RequestMethod.POST) {
-                    String body = HttpRequest.post(item.url).form(item.params).body();
-                    publishProgress( new ResponceNode(item.url, body, item.backParam) );
+                    String body = HttpRequest.post(item.url, item.params, false).body();
+                    publishProgress( new ResponceNode(item.url, body) );
                 }
             }
         } catch (HttpRequest.HttpRequestException exception) {
-            return stage;
+            return false;
         }
 
-        return stage;
+        return true;
     }
 }

@@ -66,8 +66,8 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                if (user.groupid == -1) {
-                    user.groupid = currentGroup.id;
+                if (user.cGroupId == -1) {
+                    user.cGroupId = currentGroup.id;
                     user.update();
                     Toast.makeText(this, "Пользователь успешно вступил в клан", Toast.LENGTH_SHORT).show();
                 } else

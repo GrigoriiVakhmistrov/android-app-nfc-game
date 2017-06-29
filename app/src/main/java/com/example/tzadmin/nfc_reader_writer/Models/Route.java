@@ -10,25 +10,22 @@ public class Route extends BaseModel {
 
     public Route () {
         this.id = -1;
-        this.name = "";
-        this.description = "";
-        this.capacity = 0;
-        this.price = 0;
-//        this.isdeleted = "-1";
+        this.name = "-1";
+        this.description = "-1";
+        this.capacity = -1;
+        this.isdeleted = "-1";
     }
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation(DefaultValue = "")
+    @MAnnotation
     public String name;
-    @MAnnotation(DefaultValue = "")
+    @MAnnotation
     public String description;
-    @MAnnotation(DefaultValue = "0")
+    @MAnnotation
     public Integer capacity;
-    @MAnnotation(DefaultValue = "0")
-    public Integer price;
-//    @MAnnotation
-//    public String isdeleted;
+    @MAnnotation
+    public String isdeleted;
 
 
     @Override
@@ -44,7 +41,7 @@ public class Route extends BaseModel {
         int cap = capacity;
 
         for (User item : users) {
-            if (item.groupid.equals(id))
+            if (item.cGroupId.equals(id))
                 cap--;
         }
 
@@ -53,7 +50,7 @@ public class Route extends BaseModel {
 
     public Collection<User> getUsers() {
         User u = new User();
-        u.routeid = id;
+        u.cRouteId = id;
 
         return (Collection<User>)u.selectAllByParams();
 
