@@ -1,5 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.NET;
 
+import android.app.Application;
+import android.widget.Toast;
+
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
@@ -9,6 +12,7 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
+import com.example.tzadmin.nfc_reader_writer.SharedApplication;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -614,6 +618,8 @@ public class Sync implements RequestDelegate {
             stage8();
         } else if (success == 8) {
             stage9();
+        } else if (success == 9) {
+            Toast.makeText(SharedApplication.get(), "sdfasdfasdf", Toast.LENGTH_LONG).show();
         }
     }
 

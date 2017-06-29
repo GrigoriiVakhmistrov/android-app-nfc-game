@@ -103,6 +103,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                             Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else {
                     user.AddMoney(10, "Пользователь посетил семинар - " + spicker.fio);
+                    //todo
                     finish();
                 }
             } else {

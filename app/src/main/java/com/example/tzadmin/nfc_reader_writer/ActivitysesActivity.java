@@ -54,6 +54,9 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
             if(user != null) {
                 if(user.getBallance() >= thisActivity.price) {
                     user.AddMoney(thisActivity.price, "баллы за активность");
+                    //todo
+                    //timer sync
+                    //
                 } else
                     Toast.makeText(this,
                             Message.MONEY_LOW, Toast.LENGTH_SHORT).show();

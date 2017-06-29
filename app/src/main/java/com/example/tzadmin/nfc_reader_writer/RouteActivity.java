@@ -61,6 +61,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                             Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
                     } else {
                         user.AddMoney(10, "Пользователь посетил маршрут - " + targetRoute.name);
+                        //todo
                         finish();
                     }
                 } else
