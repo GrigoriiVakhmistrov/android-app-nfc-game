@@ -1,6 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -117,6 +119,7 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View view) {
         Button btn = (Button) view;
@@ -141,9 +144,12 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
 
 
         for (Button b : buttons) {
-            b.setBackgroundColor(Color.TRANSPARENT);
+
+            b.setBackground(getDrawable(R.drawable.btn_gradient));
+            //b.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        btn.setBackgroundColor(Color.GREEN);
+        //btn.setBackgroundColor(Color.GREEN);
+        btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
     }
 }
