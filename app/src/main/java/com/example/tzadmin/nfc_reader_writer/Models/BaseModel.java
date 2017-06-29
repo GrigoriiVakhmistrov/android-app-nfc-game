@@ -48,6 +48,10 @@ public abstract class BaseModel implements ModelInterface {
         return data;
     }
 
+    public int deleteAll() {
+        return Database.get().delete(GetTableName(), null, null);
+    }
+
     @Nullable
     public Collection<? extends BaseModel> selectAll() {
         return select(getClass(), null, null, null, null);

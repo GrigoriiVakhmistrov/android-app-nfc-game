@@ -5,6 +5,6 @@ package com.example.tzadmin.nfc_reader_writer.NET;
  */
 
 public interface RequestDelegate {
-    public void RequestDone(String url, Object result);
-    public void TaskDone(Boolean success);
+    public void RequestDone(String url, String body, Object backParam, Integer stage);
+    public void TaskDone(Integer success);
 }

@@ -184,6 +184,13 @@ public class User extends BaseModel {
 
     }
 
+    public Collection<UserMorda> getUserMordas() {
+        UserMorda morda = new UserMorda();
+        morda.userid = id;
+
+        return (Collection<UserMorda>)morda.selectAllByParams();
+    }
+
     public Integer getRating(){
         MoneyLogs moneyLogs = new MoneyLogs();
         moneyLogs.userid = id;
