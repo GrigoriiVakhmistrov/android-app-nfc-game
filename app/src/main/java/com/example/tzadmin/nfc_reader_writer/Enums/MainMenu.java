@@ -13,4 +13,5 @@ public class MainMenu {
     public final static int REGISTER_ROUTES = 4;
     public final static int REGISTER_SPICKERS = 5;
     public final static int SHOP = 6;
+    public final static int VALIDATION = 7;
 }

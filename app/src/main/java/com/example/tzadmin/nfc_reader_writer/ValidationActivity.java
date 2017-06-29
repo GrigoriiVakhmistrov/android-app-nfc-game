@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 
@@ -16,7 +18,7 @@ public class ValidationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation);
-        startActivityForResult(new Intent(this, ScanNfcActivity.class), RESULT_OK);
+        startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
     }
 
     @Override
@@ -25,20 +27,20 @@ public class ValidationActivity extends AppCompatActivity {
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                //TODO set adapter history
 
-                ((ListView) findViewById(R.id.lv_history_valid)).setAdapter((ListAdapter) user.getMoneyLog());
+                if(user.getMoneyLog().size() > 0)
+                    ((ListView) findViewById(R.id.lv_history_valid)).setAdapter((ListAdapter) user.getMoneyLog());
 
                 ((TextView) findViewById(R.id.tv_valid_fio)).setText(Message.concatFio(user));
-                ((TextView) findViewById(R.id.tv_valid_points)).setText(user.getBallance());
 
-                //TODO set rating
-                ((TextView) findViewById(R.id.tv_valid_rating)).setText(user.getRating());
+                ((TextView) findViewById(R.id.tv_valid_points)).setText(String.valueOf(user.getBallance()));
 
-                //TODO set routes
-                ((TextView) findViewById(R.id.tv_valid_routes)).setText(user.getRoute().name);
+                ((TextView) findViewById(R.id.tv_valid_rating)).setText(String.valueOf(user.getRating()));
 
-                //TODO set image clan
+                if(user.getRoute() != null)
+                    ((TextView) findViewById(R.id.tv_valid_routes)).setText(user.getRoute().name);
+
+                //TODO FIX ME : THIS EXEPTION ->
                 try {
                     ((ImageView) findViewById(R.id.image_valid)).setImageResource(R.drawable.class.getField(user.getGroup().name).getInt(getResources()));
                 } catch (IllegalAccessException e) {
@@ -49,6 +51,9 @@ public class ValidationActivity extends AppCompatActivity {
 
                 ((TextView) findViewById(R.id.nameClan_valid)).setText(Message.concatFio(user));
                 ((TextView) findViewById(R.id.route_valid)).setText(Message.concatFio(user));
+            } else {
+                Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_LONG).show();
+                finish();
             }
         }
     }
