@@ -151,7 +151,7 @@ public final class JSON {
             object.add("color", new JsonPrimitive(src.color));
             object.add("colorhex", new JsonPrimitive(src.colorhex));
             object.add("price", new JsonPrimitive(src.price.toString()));
-            object.add("vip", new JsonPrimitive(src.price.toString()));
+            object.add("vip", new JsonPrimitive(src.vip.toString()));
             return object;
         }
     }
@@ -211,7 +211,8 @@ public final class JSON {
             JsonObject object = new JsonObject();
             object.add("id", new JsonPrimitive(src.id));
             object.add("firstname", new JsonPrimitive(src.firstname));
-            object.add("lastname", new JsonPrimitive(src.patronymic));
+            object.add("lastname", new JsonPrimitive(src.lastname));
+            object.add("patronymic", new JsonPrimitive(src.patronymic));
             object.add("rfcid", new JsonPrimitive(src.rfcid));
             if(src.groupid != null)
                 object.add("groupid", new JsonPrimitive(src.groupid.toString()));
