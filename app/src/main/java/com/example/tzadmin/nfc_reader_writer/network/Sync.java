@@ -46,6 +46,7 @@ import java.util.List;
  *      Morda (Необходимо)
  */
 
+@SuppressWarnings("Duplicates")
 @Deprecated
 public class Sync implements RequestDelegate {
     private static final String apiUrl = "http://194.67.194.82/sync/";

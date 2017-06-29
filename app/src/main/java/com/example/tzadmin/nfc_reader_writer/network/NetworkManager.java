@@ -11,6 +11,7 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
+import com.example.tzadmin.nfc_reader_writer.util.FutureWithParam;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpResponse;
@@ -19,7 +20,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.Future;
 
 /**
  * This class send requests to server and return callbacks
@@ -108,44 +108,44 @@ public final class NetworkManager {
         RequestManager.get(userMordaURL, new JsonParseCallback<>(callback, userMordaListType));
     }
 
-    public static Future<AsyncHttpResponse> addUser(User user) {
+    public static FutureWithParam<AsyncHttpResponse, User> addUser(User user) {
         String params = buildParams(user.getMap());
-        return RequestManager.post(addUserUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(addUserUrl.concat(params)), user);
     }
 
-    public static Future<AsyncHttpResponse> addPriority(GroupActivity activity) {
+    public static FutureWithParam<AsyncHttpResponse, GroupActivity> addPriority(GroupActivity activity) {
         String params = buildParams(activity.getMap());
-        return RequestManager.post(addPriorityUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(addPriorityUrl.concat(params)), activity);
     }
 
-    public static Future<AsyncHttpResponse> addMoney(MoneyLogs money) {
+    public static FutureWithParam<AsyncHttpResponse, MoneyLogs> addMoney(MoneyLogs money) {
         String params = buildParams(money.getMap());
-        return RequestManager.post(addMoneyUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(addMoneyUrl.concat(params)), money);
     }
 
-    public static Future<AsyncHttpResponse> addUserMords(UserMorda morda) {
+    public static FutureWithParam<AsyncHttpResponse, UserMorda> addUserMords(UserMorda morda) {
         String params = buildParams(morda.getMap());
-        return RequestManager.post(addUserMordaUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(addUserMordaUrl.concat(params)), morda);
     }
 
-    public static Future<AsyncHttpResponse> setUser(User user) {
+    public static FutureWithParam<AsyncHttpResponse, User> setUser(User user) {
         String params = buildParams(user.getMap());
-        return RequestManager.post(setUserUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(setUserUrl.concat(params)), user);
     }
 
-    public static Future<AsyncHttpResponse> setPriority(GroupActivity activity) {
+    public static FutureWithParam<AsyncHttpResponse, GroupActivity> setPriority(GroupActivity activity) {
         String params = buildParams(activity.getMap());
-        return RequestManager.post(setPriorityUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(setPriorityUrl.concat(params)), activity);
     }
 
-    public static Future<AsyncHttpResponse> setMoney(MoneyLogs money) {
+    public static FutureWithParam<AsyncHttpResponse, MoneyLogs> setMoney(MoneyLogs money) {
         String params = buildParams(money.getMap());
-        return RequestManager.post(setMoneyUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(setMoneyUrl.concat(params)), money);
     }
 
-    public static Future<AsyncHttpResponse> setUserMords(UserMorda morda) {
+    public static FutureWithParam<AsyncHttpResponse, UserMorda> setUserMords(UserMorda morda) {
         String params = buildParams(morda.getMap());
-        return RequestManager.post(setUserMordaUrl.concat(params));
+        return FutureWithParam.fromCache(RequestManager.post(setUserMordaUrl.concat(params)), morda);
     }
 
     @NonNull

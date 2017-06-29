@@ -1,12 +1,11 @@
 package com.example.tzadmin.nfc_reader_writer.network;
 
+import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpGet;
 import com.koushikdutta.async.http.AsyncHttpPost;
 import com.koushikdutta.async.http.AsyncHttpResponse;
 import com.koushikdutta.async.http.callback.HttpConnectCallback;
-
-import java.util.concurrent.Future;
 
 /**
  * This class contains {@link AsyncHttpClient} for app and provide GET/POST functions
