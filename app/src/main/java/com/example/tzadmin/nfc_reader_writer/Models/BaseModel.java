@@ -141,7 +141,6 @@ public abstract class BaseModel implements ModelInterface {
 
     @Nullable
     public BaseModel selectOneByParams() {
-        Collection<? extends BaseModel> alltest = selectAll();
         Collection<? extends BaseModel> all = selectAllByParams();
 
         return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];

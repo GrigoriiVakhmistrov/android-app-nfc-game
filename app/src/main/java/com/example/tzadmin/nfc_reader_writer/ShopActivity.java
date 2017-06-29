@@ -29,6 +29,8 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
+        lv_shop = (GridView)findViewById(R.id.gridView_shop_main);
+
         shops = new ArrayList(new Shop().selectAll());
         lv_shop = (GridView) findViewById(R.id.route_grid);
         ShopAdapter shopAdapter = new ShopAdapter(this, shops);
