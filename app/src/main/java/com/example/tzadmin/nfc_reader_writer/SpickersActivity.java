@@ -70,7 +70,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this,
                             Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else {
-                    //TODO its chekin check spiker
+                    user.AddMoney(10, "Пользователь посетил семинар " + spicker.fio);
                     finish();
                 }
             } else {
