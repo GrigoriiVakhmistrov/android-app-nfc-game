@@ -1,4 +1,4 @@
-package com.example.tzadmin.nfc_reader_writer.NET;
+package com.example.tzadmin.nfc_reader_writer.network;
 
 import org.junit.Test;
 

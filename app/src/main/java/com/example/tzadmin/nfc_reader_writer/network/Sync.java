@@ -1,4 +1,4 @@
-package com.example.tzadmin.nfc_reader_writer.NET;
+package com.example.tzadmin.nfc_reader_writer.network;
 
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
@@ -9,20 +9,13 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created by velor on 6/27/17.
@@ -53,28 +46,29 @@ import java.util.StringTokenizer;
  *      Morda (Необходимо)
  */
 
+@Deprecated
 public class Sync implements RequestDelegate {
+    private static final String apiUrl = "http://194.67.194.82/sync/";
 
-    private static final String shopURL = "http://194.67.194.82/sync/get-shop";
-    private static final String eventURL = "http://194.67.194.82/sync/get-events";
-    private static final String mordaURL = "http://194.67.194.82/sync/get-morda";
-    private static final String groupURL = "http://194.67.194.82/sync/get-group";
-    private static final String routeURL = "http://194.67.194.82/sync/get-route";
-    private static final String userURL = "http://194.67.194.82/sync/get-user";
-    private static final String moneyURL = "http://194.67.194.82/sync/get-money";
-    private static final String priorityURL = "http://194.67.194.82/sync/get-priority";
-    private static final String userMordaURL = "http://194.67.194.82/sync/get-user-morda";
+    private static final String shopURL = apiUrl + "get-shop";
+    private static final String eventURL = apiUrl + "get-events";
+    private static final String mordaURL = apiUrl + "get-morda";
+    private static final String groupURL = apiUrl + "get-group";
+    private static final String routeURL = apiUrl + "get-route";
+    private static final String userURL = apiUrl + "get-user";
+    private static final String moneyURL = apiUrl + "get-money";
+    private static final String priorityURL = apiUrl + "get-priority";
+    private static final String userMordaURL = apiUrl + "get-user-morda";
 
+    private static final String addUserUrl = apiUrl + "add-user";
+    private static final String addPriorityUrl = apiUrl + "add-priority";
+    private static final String addMoneyUrl = apiUrl + "add-money";
+    private static final String addUserMordaUrl = apiUrl + "add-user-morda";
 
-    private static final String addUserUrl = "http://194.67.194.82/sync/add-user";
-    private static final String addPriorityUrl = "http://194.67.194.82/sync/add-priority";
-    private static final String addMoneyUrl = "http://194.67.194.82/sync/add-money";
-    private static final String addUserMordaUrl = "http://194.67.194.82/sync/add-user-morda";
-
-    private static final String setUserUrl = "http://194.67.194.82/sync/set-user";
-    private static final String setPriorityUrl = "http://194.67.194.82/sync/set-priority";
-    private static final String setMoneyUrl = "http://194.67.194.82/sync/set-money";
-    private static final String setUserMordaUrl = "http://194.67.194.82/sync/set-user-morda";
+    private static final String setUserUrl = apiUrl + "set-user";
+    private static final String setPriorityUrl = apiUrl + "set-priority";
+    private static final String setMoneyUrl = apiUrl + "set-money";
+    private static final String setUserMordaUrl = apiUrl + "set-user-morda";
 
 
     /* стадия 1 -

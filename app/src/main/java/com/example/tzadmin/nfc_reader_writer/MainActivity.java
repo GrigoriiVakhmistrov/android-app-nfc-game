@@ -3,7 +3,6 @@ package com.example.tzadmin.nfc_reader_writer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -11,9 +10,7 @@ import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
-import com.example.tzadmin.nfc_reader_writer.Models.Route;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
-import com.example.tzadmin.nfc_reader_writer.NET.Sync;
+import com.example.tzadmin.nfc_reader_writer.network.Sync;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
