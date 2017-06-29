@@ -8,18 +8,18 @@ public class Morda extends BaseModel {
 
     public Morda () {
         id = -1;
-        fio = "-1";
-        description = "-1";
-        pic = "-1";
+        fio = "";
+        description = "";
+        pic = "";
     }
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String fio;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String description;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String pic;
 
     @Override

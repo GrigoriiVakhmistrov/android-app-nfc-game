@@ -66,6 +66,8 @@ public abstract class BaseModel implements ModelInterface {
             if (item.isAnnotationPresent(MAnnotation.class)) {
                 MAnnotation a = item.getAnnotation(MAnnotation.class);
 
+                if (a.SyncField()) continue;
+
                 String key = item.getName();
                 if (!a.FieldName().equals(""))
                     key = a.FieldName();

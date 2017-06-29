@@ -10,22 +10,22 @@ public class Route extends BaseModel {
 
     public Route () {
         this.id = -1;
-        this.name = "-1";
-        this.description = "-1";
-        this.capacity = -1;
+        this.name = "";
+        this.description = "";
+        this.capacity = 0;
         this.price = 0;
 //        this.isdeleted = "-1";
     }
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String name;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String description;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer capacity;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer price;
 //    @MAnnotation
 //    public String isdeleted;

@@ -10,12 +10,12 @@ public class Group extends BaseModel {
 
     public Group () {
         id = -1;
-        name = "-1";
-        description = "-1";
-        totemname = "-1";
-        totemimage = "-1";
-        color = "-1";
-        colorhex = "-1";
+        name = "";
+        description = "";
+        totemname = "";
+        totemimage = "";
+        color = "";
+        colorhex = "";
 //        isdeleted = "-1";
         price = 0;
         vip = 0;
@@ -23,23 +23,23 @@ public class Group extends BaseModel {
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String name;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String description;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String totemname;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String totemimage;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String color;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String colorhex;
 //    @MAnnotation
 //    public String isdeleted;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer price;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer vip;
 
 

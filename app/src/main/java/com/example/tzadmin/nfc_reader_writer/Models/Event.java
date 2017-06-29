@@ -8,17 +8,17 @@ public class Event extends BaseModel {
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String name;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String description;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer price;
 
     public Event() {
         id = -1;
-        name = "-1";
-        price = -1;
+        name = "";
+        price = 0;
         description = "";
     }
 
