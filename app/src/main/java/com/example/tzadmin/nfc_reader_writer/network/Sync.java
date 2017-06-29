@@ -164,54 +164,36 @@ public class Sync implements RequestDelegate {
     }
 
     private void stage2Done(String url, String body, Object backParam) {
-        User u = (User) backParam;
-
-        Integer newId = Integer.getInteger(body, -1);
-
-        if (!newId.equals(-1)) {
-
-            if (!newId.equals(u.id)) {
-                Collection<UserMorda> mordas = u.getUserMordas();
-                for (UserMorda m : mordas) {
-                    m.userid = newId;
-                    m.update(m.syncFlag.toString());
-                }
-
-                Collection<MoneyLogs> logs = u.getMoneyLog();
-                for (MoneyLogs l : logs) {
-                    l.userid = newId;
-                    l.update(l.syncFlag.toString());
-                }
-
-                u.id = newId;
-            }
-            u.update("0");
-
-        }
+//        User u = (User) backParam;
+//
+//        Integer newId = Integer.getInteger(body, -1);
+//
+//        if (!newId.equals(-1)) {
+//
+//            if (!newId.equals(u.id)) {
+//                Collection<UserMorda> mordas = u.getUserMordas();
+//                for (UserMorda m : mordas) {
+//                    m.userid = newId;
+//                    m.update(m.syncFlag.toString());
+//                }
+//
+//                Collection<MoneyLogs> logs = u.getMoneyLog();
+//                for (MoneyLogs l : logs) {
+//                    l.userid = newId;
+//                    l.update(l.syncFlag.toString());
+//                }
+//
+//                u.id = newId;
+//            }
+//            u.update("0");
+//
+//        }
     }
 
     //Синхроним добавленные морды
     private void stage3() {
         stage = 3;
-        UserMorda newUserMorda = new UserMorda();
-        newUserMorda.syncFlag = 1;
-        Collection<UserMorda> users = (Collection<UserMorda>) newUserMorda.selectAllByParams();
 
-        if (users.size() == 0) {
-            stage4();
-            return;
-        }
-
-        RequestNode[] nodes = new RequestNode[users.size()];
-
-        int i = 0;
-        for (UserMorda u : users) {
-            RequestNode node = new RequestNode(addUserMordaUrl, RequestMethod.POST, u, u.getMap());
-            nodes[i] = node;
-            i++;
-        }
-
-        new HttpRequester(this, stage).execute(nodes);
 
     }
 

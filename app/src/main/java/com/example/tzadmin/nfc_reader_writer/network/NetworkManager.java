@@ -2,6 +2,7 @@ package com.example.tzadmin.nfc_reader_writer.network;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import com.example.tzadmin.nfc_reader_writer.Models.BaseModel;
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
@@ -22,7 +23,12 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- * This class send requests to server and return callbacks
+ * This class send requests to server and return callbacks.
+ * If you want to use getters, you need to pass wanted type as T (<code>T extends {@link BaseModel}</code>):<br>
+ * <pre>
+ *     {@code NetworkManager.<Shop>getShops(Callback())}
+ * </pre>
+ *
  */
 //TODO move server api to json
 public final class NetworkManager {
@@ -72,39 +78,39 @@ public final class NetworkManager {
         errorHandlers.remove(handler);
     }
 
-    public static void getShops(Callback<List<Shop>> callback) {
+    static <T extends BaseModel> void getShops(Callback<List<T>> callback) {
         RequestManager.get(shopURL, new JsonParseCallback<>(callback, shopListType));
     }
 
-    public static void getEvents(Callback<List<Event>> callback) {
+    public static <T extends BaseModel> void getEvents(Callback<List<T>> callback) {
         RequestManager.get(eventURL, new JsonParseCallback<>(callback, eventListType));
     }
 
-    public static void getMordas(Callback<List<Morda>> callback) {
+    public static <T extends BaseModel> void getMordas(Callback<List<T>> callback) {
         RequestManager.get(mordaURL, new JsonParseCallback<>(callback, mordaListType));
     }
 
-    public static void getGroups(Callback<List<Group>> callback) {
+    public static <T extends BaseModel> void getGroups(Callback<List<T>> callback) {
         RequestManager.get(groupURL, new JsonParseCallback<>(callback, groupListType));
     }
 
-    public static void getRoutes(Callback<List<Route>> callback) {
+    public static <T extends BaseModel> void getRoutes(Callback<List<T>> callback) {
         RequestManager.get(routeURL, new JsonParseCallback<>(callback, routeListType));
     }
 
-    public static void getUsers(Callback<List<User>> callback) {
+    public static <T extends BaseModel> void getUsers(Callback<List<T>> callback) {
         RequestManager.get(userURL, new JsonParseCallback<>(callback, userListType));
     }
 
-    public static void getMoney(Callback<List<MoneyLogs>> callback) {
+    public static <T extends BaseModel> void getMoney(Callback<List<T>> callback) {
         RequestManager.get(moneyURL, new JsonParseCallback<>(callback, moneyListType));
     }
 
-    public static void getPriority(Callback<List<GroupActivity>> callback) {
+    public static <T extends BaseModel> void getPriority(Callback<List<T>> callback) {
         RequestManager.get(priorityURL, new JsonParseCallback<>(callback, priorityListType));
     }
 
-    public static void getUserMordas(Callback<List<UserMorda>> callback) {
+    public static <T extends BaseModel> void getUserMordas(Callback<List<T>> callback) {
         RequestManager.get(userMordaURL, new JsonParseCallback<>(callback, userMordaListType));
     }
 
@@ -123,7 +129,7 @@ public final class NetworkManager {
         return FutureWithParam.fromCache(RequestManager.post(addMoneyUrl.concat(params)), money);
     }
 
-    public static FutureWithParam<AsyncHttpResponse, UserMorda> addUserMords(UserMorda morda) {
+    public static FutureWithParam<AsyncHttpResponse, UserMorda> addUserMorda(UserMorda morda) {
         String params = buildParams(morda.getMap());
         return FutureWithParam.fromCache(RequestManager.post(addUserMordaUrl.concat(params)), morda);
     }
@@ -143,7 +149,7 @@ public final class NetworkManager {
         return FutureWithParam.fromCache(RequestManager.post(setMoneyUrl.concat(params)), money);
     }
 
-    public static FutureWithParam<AsyncHttpResponse, UserMorda> setUserMords(UserMorda morda) {
+    public static FutureWithParam<AsyncHttpResponse, UserMorda> setUserMorda(UserMorda morda) {
         String params = buildParams(morda.getMap());
         return FutureWithParam.fromCache(RequestManager.post(setUserMordaUrl.concat(params)), morda);
     }
