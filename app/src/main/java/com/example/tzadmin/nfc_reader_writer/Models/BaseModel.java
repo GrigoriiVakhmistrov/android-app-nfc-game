@@ -1,6 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
 import android.content.ContentValues;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
@@ -96,7 +97,7 @@ public abstract class BaseModel implements ModelInterface {
         return (all == null || all.size() == 0) ? null : (BaseModel) all.toArray()[0];
     }
 
-    public boolean insert() {
+    public boolean insert(String setSync) {
         ContentValues values = new ContentValues();
 
         Field[] fields = getClass().getFields();
@@ -116,6 +117,9 @@ public abstract class BaseModel implements ModelInterface {
                 } catch (IllegalAccessException e) {
                     //Ignore
                 }
+
+                if (annotation.SyncField())
+                    val = setSync;
 
                 if (!annotation.PrimaryKey())
                     values.put(key, val);
@@ -142,7 +146,15 @@ public abstract class BaseModel implements ModelInterface {
         return true;
     }
 
+    public boolean insert() {
+        return insert("1");
+    }
+
     public boolean update() {
+        return update("2");
+    }
+
+    public boolean update(String setSync) {
         ContentValues values = new ContentValues();
         String where = "";
         String[] whereARGS = new String[1];
@@ -165,6 +177,9 @@ public abstract class BaseModel implements ModelInterface {
                 } catch (IllegalAccessException e) {
                     //Ignore
                 }
+
+                if (a.SyncField())
+                    val = setSync;
 
                 if (!a.PrimaryKey()) {
                     values.put(key, val);

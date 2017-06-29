@@ -18,34 +18,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table tbUsers ("
                 + "id integer primary key autoincrement,"
-                + "cFirstName text,"
-                + "cLastName text,"
-                + "cSurname text,"
-                + "cRfcId text,"
-                + "cGroupId text,"
+                + "firstname text,"
+                + "lastname text,"
+                + "patronymic text,"
+                + "rfcid text,"
+                + "groupid text,"
                 //+ "cBatchId text,"
-                + "cRouteId text,"
-                + "cIsCap text,"
-                + "cIsNew text,"
-                + "cIsDeleted text" + ");");
+                + "routeid text,"
+                + "iscap text,"
+                + "syncFlag text" + ");");
 
-        db.execSQL("create table log_tbUsers ("
-                + "id integer primary key autoincrement,"
-                + "cFirstName text,"
-                + "cLastName text,"
-                + "cSurname text,"
-                + "cRfcId text,"
-                + "cGroupId text,"
-                //+ "cBatchId text,"
-                + "cRouteId text,"
-                + "cIsCap text,"
-                + "cIsDeleted text" + ");");
+//        db.execSQL("create table log_tbUsers ("
+//                + "id integer primary key autoincrement,"
+//                + "cFirstName text,"
+//                + "cLastName text,"
+//                + "cSurname text,"
+//                + "cRfcId text,"
+//                + "cGroupId text,"
+//                //+ "cBatchId text,"
+//                + "cRouteId text,"
+//                + "cIsCap text,"
+//                + "cIsDeleted text" + ");");
 
         db.execSQL("create table tbRoutes ("
                 + "id integer primary key autoincrement,"
                 + "name text,"
                 + "description text,"
                 + "capacity text,"
+                + "price text,"
                 + "isdeleted text" + ");");
 
         db.execSQL("create table tbGroups ("
@@ -56,6 +56,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "totemimage text,"
                 + "color text,"
                 + "colorhex text,"
+                + "price text,"
+                + "vip text,"
                 + "isdeleted text" + ");");
 
         db.execSQL("create table tbMoneyLogs ("
@@ -64,6 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "money text,"
                 + "type text,"
                 + "description text,"
+                + "syncFlag text,"
                 + "isdeleted text" + ");");
 
         db.execSQL("create table tbShop ("
@@ -81,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "p1 text,"
                 + "p2 text,"
                 + "p3 text,"
+                + "syncFlag text,"
                 + "p4 text" + ");");
 
         db.execSQL("create table tbMorda ("
@@ -98,6 +102,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "id integer primary key autoincrement,"
                 + "userid text,"
                 + "mordaid text" + ");");
+
+        db.execSQL("create table Event ("
+                + "id integer primary key autoincrement,"
+                + "name text,"
+                + "description text,"
+                + "price text" + ");");
 
 
 

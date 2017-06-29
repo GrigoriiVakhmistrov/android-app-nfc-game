@@ -13,6 +13,7 @@ public class GroupActivity extends BaseModel {
         p2 = -1;
         p3 = -1;
         p4 = -1;
+        syncFlag = 0;
     }
 
     @MAnnotation(PrimaryKey = true)
@@ -27,6 +28,8 @@ public class GroupActivity extends BaseModel {
     public Integer p3;
     @MAnnotation
     public Integer p4;
+    @MAnnotation(SyncField = true)
+    public Integer syncFlag;
 
     @Override
     public String GetTableName() {

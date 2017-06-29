@@ -57,9 +57,9 @@ public class ShopAdapter extends BaseAdapter {
             TextView info = (TextView) shop.findViewById(R.id.tv_shop_item_info);
             Button btn = (Button) shop.findViewById(R.id.btn_shop_item_add);
 
-            imageView.setImageResource(items.get(position).image);
+            imageView.setImageResource(items.get(position).pic);
             name.setText(items.get(position).name);
-            info.setText(items.get(position).info);
+            info.setText(items.get(position).description);
             btn.setTag(items.get(position).id);
 
         } else {

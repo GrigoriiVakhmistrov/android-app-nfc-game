@@ -20,6 +20,8 @@ public class MoneyLogs extends BaseModel {
     public String type;
     @MAnnotation
     public String description;
+    @MAnnotation(SyncField = true)
+    public Integer syncFlag;
 
     public MoneyLogs(){
         id = -1;
@@ -27,6 +29,7 @@ public class MoneyLogs extends BaseModel {
         type = "-1";
         description = "-1";
         money = -1;
+        syncFlag = 0;
     }
 
     @Override

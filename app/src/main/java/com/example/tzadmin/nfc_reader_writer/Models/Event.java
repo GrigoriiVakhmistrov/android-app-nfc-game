@@ -11,17 +11,20 @@ public class Event extends BaseModel {
     @MAnnotation
     public String name;
     @MAnnotation
+    public String description;
+    @MAnnotation
     public String price;
 
     public Event() {
         id = -1;
         name = "-1";
         price = "-1";
+        description = "";
     }
 
     @Override
     public String GetTableName() {
-        return null;
+        return "Event";
     }
 
 }

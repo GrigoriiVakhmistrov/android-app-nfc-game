@@ -59,8 +59,8 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
                 String RfcId = data.getStringExtra("RfcId");
                 User user = new User().selectUserByRfcId(RfcId);
                 if(user != null) {
-                    if(user.getBallance() >= shop.money){
-                        user.RemoveMoney(shop.money, "покупка " + shop.name);
+                    if(user.getBallance() >= shop.price){
+                        user.RemoveMoney(shop.price, "покупка " + shop.name);
                         user.update();
 
                         Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();

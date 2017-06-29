@@ -13,6 +13,7 @@ public class Route extends BaseModel {
         this.name = "-1";
         this.description = "-1";
         this.capacity = -1;
+        this.price = 0;
         this.isdeleted = "-1";
     }
 
@@ -24,6 +25,8 @@ public class Route extends BaseModel {
     public String description;
     @MAnnotation
     public Integer capacity;
+    @MAnnotation
+    public Integer price;
     @MAnnotation
     public String isdeleted;
 
@@ -41,7 +44,7 @@ public class Route extends BaseModel {
         int cap = capacity;
 
         for (User item : users) {
-            if (item.cGroupId.equals(id))
+            if (item.groupid.equals(id))
                 cap--;
         }
 
@@ -50,7 +53,7 @@ public class Route extends BaseModel {
 
     public Collection<User> getUsers() {
         User u = new User();
-        u.cRouteId = id;
+        u.routeid = id;
 
         return (Collection<User>)u.selectAllByParams();
 
