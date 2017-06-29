@@ -52,7 +52,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                 User user = new User().selectUserByRfcId(RfcId);
                 if (user != null) {
                     if(isSubscrube) {
-                        if (user.routeid == -1) {
+                        if (user.routeid.equals(-1)) {
                             user.routeid = targetRoute.id;
                             user.update();
                             routeGridVie.invalidateViews();

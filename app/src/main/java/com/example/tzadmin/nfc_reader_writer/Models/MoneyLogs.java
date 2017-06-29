@@ -48,17 +48,7 @@ public class MoneyLogs extends BaseModel {
     }
 
     public enum Type {
-        ADD_MONEY("Add"),
-        REMOVE_MONEY("Remove");
-
-        private final String name;
-
-        Type(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
+        ADD_MONEY,
+        REMOVE_MONEY
     }
 }
