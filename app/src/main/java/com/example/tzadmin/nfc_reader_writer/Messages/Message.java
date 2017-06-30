@@ -23,6 +23,7 @@ public class Message {
     public static final String USER_NOT_SUBSCRUBE_TO_SPIKER = "Пользователь небыл подписан на семинар";
     public static final String USER_ALREADY_SUBSCRUBE_CLAN = "Пользователь уже состоит в клане";
     public static final String SYNC_OK = "Синхронизация закончена";
+    public static final String GROUP_NO_THROW_SELECTED = "Группа для броска не выбрана";
 
     public static String userVisitRoute(String routeName) {
         return "Пользователь посетил маршрут - " + routeName;

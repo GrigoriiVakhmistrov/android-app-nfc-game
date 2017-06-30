@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         timerSync = new Timer();
         timerSyncTask = new MyTimerTask();
-        timerSync.schedule(timerSyncTask, 1000, 30000);
+        timerSync.schedule(timerSyncTask, 1000, 50000);
     }
 
     @Override
