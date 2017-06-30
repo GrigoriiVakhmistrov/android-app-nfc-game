@@ -11,7 +11,8 @@
         android:id="@+id/route_rectangle"
         android:textSize="20sp"
         android:gravity="center"
-        android:background="@drawable/round_squere"
+        android:background="@drawable/btn_gradient_black"
+        android:textColor="@color/colorWhite"
         android:layout_weight="1" />
     <TextView
         android:layout_width="65dp"
@@ -20,8 +21,7 @@
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:textSize="20sp"
-        android:background="@drawable/round_squere"
-        android:textColor="@color/colorBlack"
-        />
+        android:background="@drawable/btn_gradient_black"
+        android:textColor="@color/colorWhite"        />
 
 </LinearLayout>
