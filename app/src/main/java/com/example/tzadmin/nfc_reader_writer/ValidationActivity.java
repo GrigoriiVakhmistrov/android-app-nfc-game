@@ -48,7 +48,6 @@ public class ValidationActivity extends AppCompatActivity {
                 else
                     ((TextView) findViewById(R.id.tv_valid_routes)).setText("Маршрут: не выбран");
 
-                //TODO FIX ME : THIS EXEPTION ->
                 try {
                     Group userGroup = user.getGroup();
                     if (userGroup != null) {
@@ -71,6 +70,7 @@ public class ValidationActivity extends AppCompatActivity {
                 Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_LONG).show();
                 finish();
             }
-        }
+        } else
+            finish();
     }
 }

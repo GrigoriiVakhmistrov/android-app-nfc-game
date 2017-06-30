@@ -1,4 +1,7 @@
-package com.example.tzadmin.nfc_reader_writer.network;
+package com.example.tzadmin.nfc_reader_writer.NET;
+
+import android.app.Application;
+import android.widget.Toast;
 
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
@@ -9,13 +12,22 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
+import com.example.tzadmin.nfc_reader_writer.SharedApplication;
+import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created by velor on 6/27/17.
@@ -46,30 +58,28 @@ import java.util.List;
  *      Morda (Необходимо)
  */
 
-@SuppressWarnings("Duplicates")
-@Deprecated
 public class Sync implements RequestDelegate {
-    private static final String apiUrl = "http://194.67.194.82/sync/";
 
-    private static final String shopURL = apiUrl + "get-shop";
-    private static final String eventURL = apiUrl + "get-events";
-    private static final String mordaURL = apiUrl + "get-morda";
-    private static final String groupURL = apiUrl + "get-group";
-    private static final String routeURL = apiUrl + "get-route";
-    private static final String userURL = apiUrl + "get-user";
-    private static final String moneyURL = apiUrl + "get-money";
-    private static final String priorityURL = apiUrl + "get-priority";
-    private static final String userMordaURL = apiUrl + "get-user-morda";
+    private static final String shopURL = "http://194.67.194.82/sync/get-shop";
+    private static final String eventURL = "http://194.67.194.82/sync/get-events";
+    private static final String mordaURL = "http://194.67.194.82/sync/get-morda";
+    private static final String groupURL = "http://194.67.194.82/sync/get-group";
+    private static final String routeURL = "http://194.67.194.82/sync/get-route";
+    private static final String userURL = "http://194.67.194.82/sync/get-user";
+    private static final String moneyURL = "http://194.67.194.82/sync/get-money";
+    private static final String priorityURL = "http://194.67.194.82/sync/get-priority";
+    private static final String userMordaURL = "http://194.67.194.82/sync/get-user-morda";
 
-    private static final String addUserUrl = apiUrl + "add-user";
-    private static final String addPriorityUrl = apiUrl + "add-priority";
-    private static final String addMoneyUrl = apiUrl + "add-money";
-    private static final String addUserMordaUrl = apiUrl + "add-user-morda";
 
-    private static final String setUserUrl = apiUrl + "set-user";
-    private static final String setPriorityUrl = apiUrl + "set-priority";
-    private static final String setMoneyUrl = apiUrl + "set-money";
-    private static final String setUserMordaUrl = apiUrl + "set-user-morda";
+    private static final String addUserUrl = "http://194.67.194.82/sync/add-user";
+    private static final String addPriorityUrl = "http://194.67.194.82/sync/add-priority";
+    private static final String addMoneyUrl = "http://194.67.194.82/sync/add-money";
+    private static final String addUserMordaUrl = "http://194.67.194.82/sync/add-user-morda";
+
+    private static final String setUserUrl = "http://194.67.194.82/sync/set-user";
+    private static final String setPriorityUrl = "http://194.67.194.82/sync/set-priority";
+    private static final String setMoneyUrl = "http://194.67.194.82/sync/set-money";
+    private static final String setUserMordaUrl = "http://194.67.194.82/sync/set-user-morda";
 
 
     /* стадия 1 -
@@ -93,7 +103,7 @@ public class Sync implements RequestDelegate {
         stage = 1;
         User newUser = new User();
         newUser.syncFlag = 1;
-        Collection<User> users = (Collection<User>) newUser.selectAllByParams();
+        Collection<User> users = (Collection<User>) newUser.selectAllByParams(true);
 
         if (users.size() == 0) {
             stage2();
@@ -116,7 +126,7 @@ public class Sync implements RequestDelegate {
     private void stage1Done(String url, String body, Object backParam) {
         User u = (User) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Utilites.tryParseInt(body, -1);
 
         if (!newId.equals(-1)) {
 
@@ -132,10 +142,9 @@ public class Sync implements RequestDelegate {
                 l.update(l.syncFlag.toString());
             }
 
-            u.id = newId;
-            u.update("0");
-
+            u.changeId(newId.toString());
         }
+        u.update("0");
     }
 
     //Синхроним измененных пользователей
@@ -143,7 +152,7 @@ public class Sync implements RequestDelegate {
         stage = 2;
         User newUser = new User();
         newUser.syncFlag = 2;
-        Collection<User> users = (Collection<User>) newUser.selectAllByParams();
+        Collection<User> users = (Collection<User>) newUser.selectAllByParams(true);
 
         if (users.size() == 0) {
             stage3();
@@ -164,48 +173,65 @@ public class Sync implements RequestDelegate {
     }
 
     private void stage2Done(String url, String body, Object backParam) {
-//        User u = (User) backParam;
-//
-//        Integer newId = Integer.getInteger(body, -1);
-//
-//        if (!newId.equals(-1)) {
-//
-//            if (!newId.equals(u.id)) {
-//                Collection<UserMorda> mordas = u.getUserMordas();
-//                for (UserMorda m : mordas) {
-//                    m.userid = newId;
-//                    m.update(m.syncFlag.toString());
-//                }
-//
-//                Collection<MoneyLogs> logs = u.getMoneyLog();
-//                for (MoneyLogs l : logs) {
-//                    l.userid = newId;
-//                    l.update(l.syncFlag.toString());
-//                }
-//
-//                u.id = newId;
-//            }
-//            u.update("0");
-//
-//        }
+        User u = (User) backParam;
+
+        Integer newId = Utilites.tryParseInt(body, -1);
+
+        if (!newId.equals(-1)) {
+
+            if (!newId.equals(u.id)) {
+                Collection<UserMorda> mordas = u.getUserMordas();
+                for (UserMorda m : mordas) {
+                    m.userid = newId;
+                    m.update(m.syncFlag.toString());
+                }
+
+                Collection<MoneyLogs> logs = u.getMoneyLog();
+                for (MoneyLogs l : logs) {
+                    l.userid = newId;
+                    l.update(l.syncFlag.toString());
+                }
+
+                u.changeId(newId.toString());
+            }
+        }
+        u.update("0");
     }
 
     //Синхроним добавленные морды
     private void stage3() {
         stage = 3;
+        UserMorda newUserMorda = new UserMorda();
+        newUserMorda.syncFlag = 1;
+        Collection<UserMorda> users = (Collection<UserMorda>) newUserMorda.selectAllByParams(true);
 
+        if (users.size() == 0) {
+            stage4();
+            return;
+        }
+
+        RequestNode[] nodes = new RequestNode[users.size()];
+
+        int i = 0;
+        for (UserMorda u : users) {
+            RequestNode node = new RequestNode(addUserMordaUrl, RequestMethod.POST, u, u.getMap());
+            nodes[i] = node;
+            i++;
+        }
+
+        new HttpRequester(this, stage).execute(nodes);
 
     }
 
     private void stage3_4Done(String url, String body, Object backParam) {
         UserMorda u = (UserMorda) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Utilites.tryParseInt(body, -1);
 
         if (!newId.equals(-1)) {
-            u.id = newId;
-            u.update("0");
+            u.changeId(newId.toString());
         }
+        u.update("0");
     }
 
 
@@ -214,7 +240,7 @@ public class Sync implements RequestDelegate {
         stage = 4;
         UserMorda newUserMorda = new UserMorda();
         newUserMorda.syncFlag = 2;
-        Collection<UserMorda> users = (Collection<UserMorda>) newUserMorda.selectAllByParams();
+        Collection<UserMorda> users = (Collection<UserMorda>) newUserMorda.selectAllByParams(true);
 
         if (users.size() == 0) {
             stage5();
@@ -239,7 +265,7 @@ public class Sync implements RequestDelegate {
         stage = 5;
         MoneyLogs l = new MoneyLogs();
         l.syncFlag = 1;
-        Collection<MoneyLogs> logs = (Collection<MoneyLogs>) l.selectAllByParams();
+        Collection<MoneyLogs> logs = (Collection<MoneyLogs>) l.selectAllByParams(true);
 
         if (logs.size() == 0) {
             stage6();
@@ -262,12 +288,12 @@ public class Sync implements RequestDelegate {
     private void stage5_6Done(String url, String body, Object backParam) {
         MoneyLogs u = (MoneyLogs) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Utilites.tryParseInt(body, -1);
 
         if (!newId.equals(-1)) {
-            u.id = newId;
-            u.update("0");
+            u.changeId(newId.toString());
         }
+        u.update("0");
     }
 
     //Синхроним обновленные money
@@ -275,7 +301,7 @@ public class Sync implements RequestDelegate {
         stage = 6;
         MoneyLogs l = new MoneyLogs();
         l.syncFlag = 2;
-        Collection<MoneyLogs> logs = (Collection<MoneyLogs>) l.selectAllByParams();
+        Collection<MoneyLogs> logs = (Collection<MoneyLogs>) l.selectAllByParams(true);
 
         if (logs.size() == 0) {
             stage7();
@@ -298,7 +324,7 @@ public class Sync implements RequestDelegate {
         stage = 7;
         GroupActivity l = new GroupActivity();
         l.syncFlag = 1;
-        Collection<GroupActivity> acivityes = (Collection<GroupActivity>) l.selectAllByParams();
+        Collection<GroupActivity> acivityes = (Collection<GroupActivity>) l.selectAllByParams(true);
 
         if (acivityes.size() == 0) {
             stage8();
@@ -321,7 +347,7 @@ public class Sync implements RequestDelegate {
         stage = 8;
         GroupActivity l = new GroupActivity();
         l.syncFlag = 2;
-        Collection<GroupActivity> acivityes = (Collection<GroupActivity>) l.selectAllByParams();
+        Collection<GroupActivity> acivityes = (Collection<GroupActivity>) l.selectAllByParams(true);
 
         if (acivityes.size() == 0) {
             stage9();
@@ -343,12 +369,12 @@ public class Sync implements RequestDelegate {
     private void stage7_8Done(String url, String body, Object backParam) {
         GroupActivity u = (GroupActivity) backParam;
 
-        Integer newId = Integer.getInteger(body, -1);
+        Integer newId = Utilites.tryParseInt(body, -1);
 
         if (!newId.equals(-1)) {
-            u.id = newId;
-            u.update("0");
+            u.changeId(newId.toString());
         }
+        u.update("0");
     }
 
     private void stage9Done(String url, String body, Object backParam) {
@@ -367,15 +393,15 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.pic = Integer.getInteger(o.getAsJsonObject().get("pic").getAsString(), -1);
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.pic = o.getAsJsonObject().get("pic").getAsString();
+                e.price = Utilites.tryParseInt(o.getAsJsonObject().get("price").getAsString(), 0);
 
                 objects.add(e);
             }
             new Shop().deleteAll();
 
             for (Shop i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(eventURL)) {
             List<Event> objects = new ArrayList<>();
 
@@ -386,14 +412,14 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.price = Utilites.tryParseInt(o.getAsJsonObject().get("price").getAsString(), 0);
 
                 objects.add(e);
             }
             new Event().deleteAll();
 
             for (Event i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(mordaURL)) {
             List<Morda> objects = new ArrayList<>();
 
@@ -411,7 +437,7 @@ public class Sync implements RequestDelegate {
             new Morda().deleteAll();
 
             for (Morda i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(groupURL)) {
             List<Group> objects = new ArrayList<>();
 
@@ -426,15 +452,15 @@ public class Sync implements RequestDelegate {
                 e.totemimage = o.getAsJsonObject().get("totemimage").getAsString();
                 e.color = o.getAsJsonObject().get("color").getAsString();
                 e.colorhex = o.getAsJsonObject().get("colorhex").getAsString();
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
-                e.vip = Integer.getInteger(o.getAsJsonObject().get("vip").getAsString(), 0);
+                e.price = Utilites.tryParseInt(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.vip = Utilites.tryParseInt(o.getAsJsonObject().get("vip").getAsString(), 0);
 
                 objects.add(e);
             }
             new Group().deleteAll();
 
             for (Group i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(routeURL)) {
             List<Route> objects = new ArrayList<>();
 
@@ -445,15 +471,15 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.capacity = Integer.getInteger(o.getAsJsonObject().get("capacity").getAsString(), 0);
-                e.price = Integer.getInteger(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.capacity = Utilites.tryParseInt(o.getAsJsonObject().get("capacity").getAsString(), 0);
+                e.price = Utilites.tryParseInt(o.getAsJsonObject().get("price").getAsString(), 0);
 
                 objects.add(e);
             }
             new Route().deleteAll();
 
             for (Route i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(userURL)) {
             List<User> objects = new ArrayList<>();
 
@@ -467,9 +493,9 @@ public class Sync implements RequestDelegate {
                 e.patronymic = o.getAsJsonObject().get("patronymic").getAsString();
                 e.rfcid = o.getAsJsonObject().get("rfcid").getAsString();
                 if (!o.getAsJsonObject().get("groupid").isJsonNull())
-                    e.groupid = Integer.getInteger(o.getAsJsonObject().get("groupid").getAsString(), -1);
+                    e.groupid = Utilites.tryParseInt(o.getAsJsonObject().get("groupid").getAsString(), -1);
                 if (!o.getAsJsonObject().get("routeid").isJsonNull())
-                    e.routeid = Integer.getInteger(o.getAsJsonObject().get("routeid").getAsString(), -1);
+                    e.routeid = Utilites.tryParseInt(o.getAsJsonObject().get("routeid").getAsString(), -1);
                 e.iscap = o.getAsJsonObject().get("iscap").getAsInt();
 
                 objects.add(e);
@@ -477,7 +503,7 @@ public class Sync implements RequestDelegate {
             new User().deleteAll();
 
             for (User i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(moneyURL)) {
             List<MoneyLogs> objects = new ArrayList<>();
 
@@ -486,8 +512,8 @@ public class Sync implements RequestDelegate {
                 MoneyLogs e = new MoneyLogs();
 
                 e.id = o.getAsJsonObject().get("id").getAsInt();
-                e.userid = Integer.getInteger(o.getAsJsonObject().get("userid").getAsString(), -1);
-                e.money = Integer.getInteger(o.getAsJsonObject().get("money").getAsString(), 0);
+                e.userid = Utilites.tryParseInt(o.getAsJsonObject().get("userid").getAsString(), -1);
+                e.money = Utilites.tryParseInt(o.getAsJsonObject().get("money").getAsString(), 0);
                 e.type = o.getAsJsonObject().get("type").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
 
@@ -496,7 +522,7 @@ public class Sync implements RequestDelegate {
             new MoneyLogs().deleteAll();
 
             for (MoneyLogs i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(priorityURL)) {
             List<GroupActivity> objects = new ArrayList<>();
 
@@ -505,18 +531,18 @@ public class Sync implements RequestDelegate {
                 GroupActivity e = new GroupActivity();
 
                 e.id = o.getAsJsonObject().get("id").getAsInt();
-                e.groupid = Integer.getInteger(o.getAsJsonObject().get("groupid").getAsString(), -1);
-                e.p1 = Integer.getInteger(o.getAsJsonObject().get("p1").getAsString(), 0);
-                e.p2 = Integer.getInteger(o.getAsJsonObject().get("p2").getAsString(), 0);
-                e.p3 = Integer.getInteger(o.getAsJsonObject().get("p3").getAsString(), 0);
-                e.p4 = Integer.getInteger(o.getAsJsonObject().get("p4").getAsString(), 0);
+                e.groupid = Utilites.tryParseInt(o.getAsJsonObject().get("groupid").getAsString(), -1);
+                e.p1 = Utilites.tryParseInt(o.getAsJsonObject().get("p1").getAsString(), 0);
+                e.p2 = Utilites.tryParseInt(o.getAsJsonObject().get("p2").getAsString(), 0);
+                e.p3 = Utilites.tryParseInt(o.getAsJsonObject().get("p3").getAsString(), 0);
+                e.p4 = Utilites.tryParseInt(o.getAsJsonObject().get("p4").getAsString(), 0);
 
                 objects.add(e);
             }
             new GroupActivity().deleteAll();
 
             for (GroupActivity i : objects)
-                i.insert();
+                i.insert("0", true);
         } else if (url.equals(userMordaURL)) {
             List<UserMorda> objects = new ArrayList<>();
 
@@ -525,15 +551,15 @@ public class Sync implements RequestDelegate {
                 UserMorda e = new UserMorda();
 
                 e.id = o.getAsJsonObject().get("id").getAsInt();
-                e.userid = Integer.getInteger(o.getAsJsonObject().get("userid").getAsString(), -1);
-                e.mordaid = Integer.getInteger(o.getAsJsonObject().get("mordaid").getAsString(), -1);
+                e.userid = Utilites.tryParseInt(o.getAsJsonObject().get("userid").getAsString(), -1);
+                e.mordaid = Utilites.tryParseInt(o.getAsJsonObject().get("mordaid").getAsString(), -1);
 
                 objects.add(e);
             }
-            new GroupActivity().deleteAll();
+            new UserMorda().deleteAll();
 
             for (UserMorda i : objects)
-                i.insert();
+                i.insert("0", true);
         }
     }
 
@@ -592,6 +618,8 @@ public class Sync implements RequestDelegate {
             stage8();
         } else if (success == 8) {
             stage9();
+        } else if (success == 9) {
+            Toast.makeText(SharedApplication.get(), "Cинхронизация закончена", Toast.LENGTH_LONG).show();
         }
     }
 
