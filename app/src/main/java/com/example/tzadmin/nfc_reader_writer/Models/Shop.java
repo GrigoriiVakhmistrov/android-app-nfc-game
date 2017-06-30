@@ -13,8 +13,8 @@ public class Shop extends BaseModel{
     public String name;
     @MAnnotation(DefaultValue = "")
     public String description;
-    @MAnnotation
-    public Integer pic;
+    @MAnnotation(DefaultValue = "")
+    public String pic;
     @MAnnotation(DefaultValue = "0")
     public Integer price;
 
@@ -24,7 +24,7 @@ public class Shop extends BaseModel{
 
     public Shop() {
         id = -1;
-        pic = -1;
+        pic = "";
         name = "";
         description = "";
         price = 0;
