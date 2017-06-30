@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
@@ -112,10 +114,10 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
             ga.p3 = mark3;
 
             ga.update();
-
+            Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(this, "Не все данные выбраны", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Message.NOT_ALL_DATA_IS_SELECTED, Toast.LENGTH_LONG).show();
         }
     }
 

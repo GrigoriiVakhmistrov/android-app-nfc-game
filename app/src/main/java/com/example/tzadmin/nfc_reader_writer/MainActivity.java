@@ -20,10 +20,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] values = {
             "Регистрация",
             "В команду",
-            "Chekin Scaner",
+            "Chekin",
             "Кубики",
-            "Регистрация на маршрут",
-            "Регистрация на спикера",
+            "Маршруты",
+            "Спикеры",
             "Магазин",
             "Валидация"
     };
