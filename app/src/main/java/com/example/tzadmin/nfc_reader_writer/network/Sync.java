@@ -1,4 +1,4 @@
-package com.example.tzadmin.nfc_reader_writer.NET;
+package com.example.tzadmin.nfc_reader_writer.network;
 
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
@@ -16,6 +16,7 @@ import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

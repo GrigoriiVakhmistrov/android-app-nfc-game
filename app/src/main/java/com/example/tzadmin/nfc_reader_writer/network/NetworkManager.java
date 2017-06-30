@@ -84,7 +84,7 @@ public final class NetworkManager {
         errorHandlers.add(handler);
     }
 
-    public static void removeErrorhandler(ErrorHandler handler) {
+    public static void removeErrorHandler(ErrorHandler handler) {
         errorHandlers.remove(handler);
     }
 

@@ -14,9 +14,6 @@ import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.executor.Executor;
 import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -114,10 +111,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     class MyTimerTask extends TimerTask {
+        private final SynchronizationTask task = new SynchronizationTask();
 
         @Override
         public void run() {
-            new Sync(true);
+            task.run();
         }
     }
 }
