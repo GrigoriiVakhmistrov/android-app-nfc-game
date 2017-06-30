@@ -22,6 +22,7 @@ public class Message {
     public static final String ERROR_URL_IMAGE = "Ошибка URL картинки спикера, обратитесь к администратору";
     public static final String USER_NOT_SUBSCRUBE_TO_SPIKER = "Пользователь небыл подписан на семинар";
     public static final String USER_ALREADY_SUBSCRUBE_CLAN = "Пользователь уже состоит в клане";
+    public static final String SYNC_OK = "Синхронизация закончена";
 
     public static String userVisitRoute(String routeName) {
         return "Пользователь посетил маршрут - " + routeName;

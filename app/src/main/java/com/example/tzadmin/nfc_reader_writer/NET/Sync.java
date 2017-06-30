@@ -1,8 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.NET;
 
-import android.app.Application;
 import android.widget.Toast;
-
+import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
@@ -14,20 +13,12 @@ import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
 import com.example.tzadmin.nfc_reader_writer.SharedApplication;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created by velor on 6/27/17.
@@ -59,6 +50,8 @@ import java.util.StringTokenizer;
  */
 
 public class Sync implements RequestDelegate {
+
+    private boolean isAutoSync = false;
 
     private static final String shopURL = "http://194.67.194.82/sync/get-shop";
     private static final String eventURL = "http://194.67.194.82/sync/get-events";
@@ -95,6 +88,11 @@ public class Sync implements RequestDelegate {
     private int stage = 0;
 
     public Sync() {
+        stage1();
+    }
+
+    public Sync(boolean isAutoSync) {
+        this.isAutoSync = isAutoSync;
         stage1();
     }
 
@@ -619,7 +617,9 @@ public class Sync implements RequestDelegate {
         } else if (success == 8) {
             stage9();
         } else if (success == 9) {
-            Toast.makeText(SharedApplication.get(), "Cинхронизация закончена", Toast.LENGTH_LONG).show();
+            if(!this.isAutoSync)
+                Toast.makeText(SharedApplication.get(),
+                        Message.SYNC_OK, Toast.LENGTH_LONG).show();
         }
     }
 

@@ -15,8 +15,16 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    Timer timerSync;
+    MyTimerTask timerSyncTask;
     String[] values = {
             "Регистрация",
             "В команду",
@@ -62,6 +70,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 new Sync();
             }
         });
+
+        timerSync = new Timer();
+        timerSyncTask = new MyTimerTask();
+        timerSync.schedule(timerSyncTask, 1000, 30000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timerSync.cancel();
     }
 
     @Override
@@ -92,6 +110,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case MainMenu.VALIDATION:
                 startActivity(new Intent(this, ValidationActivity.class));
                 break;
+        }
+    }
+
+    class MyTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            new Sync(true);
         }
     }
 }
