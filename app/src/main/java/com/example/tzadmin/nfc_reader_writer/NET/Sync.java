@@ -393,7 +393,7 @@ public class Sync implements RequestDelegate {
                 e.id = o.getAsJsonObject().get("id").getAsInt();
                 e.name = o.getAsJsonObject().get("name").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
-                e.pic = Utilites.tryParseInt(o.getAsJsonObject().get("pic").getAsString(), -1);
+                e.pic = o.getAsJsonObject().get("pic").getAsString();
                 e.price = Utilites.tryParseInt(o.getAsJsonObject().get("price").getAsString(), 0);
 
                 objects.add(e);
