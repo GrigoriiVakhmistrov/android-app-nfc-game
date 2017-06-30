@@ -70,6 +70,7 @@ public class ValidationActivity extends AppCompatActivity {
                 Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_LONG).show();
                 finish();
             }
-        }
+        } else
+            finish();
     }
 }
