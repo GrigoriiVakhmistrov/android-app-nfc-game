@@ -98,7 +98,7 @@ public class User extends BaseModel {
 
     public Boolean RemoveMoney(Integer money, String description) {
         if (money < 1) return false;
-        if (money < getBallance()) return false;
+        if (money > getBallance()) return false;
         if (description.equals("")) description = "Без описания";
 
         MoneyLogs ml = new MoneyLogs();
