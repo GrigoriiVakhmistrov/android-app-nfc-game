@@ -11,10 +11,10 @@ public class User extends BaseModel {
 
     public User () {
         id = -1;
-        firstname = "-1";
-        lastname = "-1";
-        patronymic = "-1";
-        rfcid = "-1";
+        firstname = "";
+        lastname = "";
+        patronymic = "";
+        rfcid = "";
         groupid = -1;
 //        cBatchId = "-1";
         routeid = -1;
@@ -24,13 +24,13 @@ public class User extends BaseModel {
 
     @MAnnotation(PrimaryKey = true)
     public Integer id;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String firstname;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String lastname;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String patronymic;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String rfcid;
     @MAnnotation
     public Integer groupid;
@@ -38,7 +38,7 @@ public class User extends BaseModel {
 //    public String cBatchId;
     @MAnnotation
     public Integer routeid;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "0")
     public Integer iscap;
     @MAnnotation(SyncField = true)
     public Integer syncFlag;
@@ -74,8 +74,8 @@ public class User extends BaseModel {
             return retdata;
 
         for (MoneyLogs l : moneys) {
-            if (l.type == MoneyLogs.Type.ADD_MONEY.toString()) retdata += l.money;
-            if (l.type == MoneyLogs.Type.REMOVE_MONEY.toString()) retdata -= l.money;
+            if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) retdata += l.money;
+            if (l.type.equals(MoneyLogs.Type.REMOVE_MONEY.toString())) retdata -= l.money;
         }
 
         return retdata;
@@ -197,7 +197,7 @@ public class User extends BaseModel {
         Integer sum = 0;
 
         for (MoneyLogs tempmoneyLog : moneyLogsCollection){
-            if(tempmoneyLog.type == MoneyLogs.Type.ADD_MONEY.toString()){
+            if(tempmoneyLog.type.equals(MoneyLogs.Type.ADD_MONEY.toString())){
                 sum += tempmoneyLog.money;
             }
         }

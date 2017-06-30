@@ -1,6 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
+import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -85,7 +89,7 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
     private Integer getValueFromButton(Button btn) {
         String text = btn.getText().toString();
 
-        Integer retData = Integer.getInteger(text, -1);
+        Integer retData = Utilites.tryParseInt(text, -1);
         if (retData != -1) return retData;
 
         if (text.equals("Нос")) return 1;
@@ -107,12 +111,15 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
             ga.p2 = mark2;
             ga.p3 = mark3;
 
+            ga.update();
+
             finish();
         } else {
             Toast.makeText(this, "Не все данные выбраны", Toast.LENGTH_LONG).show();
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View view) {
         Button btn = (Button) view;
@@ -137,9 +144,12 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
 
 
         for (Button b : buttons) {
-            b.setBackgroundColor(Color.TRANSPARENT);
+
+            b.setBackground(getDrawable(R.drawable.btn_gradient));
+            //b.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        btn.setBackgroundColor(Color.GREEN);
+        //btn.setBackgroundColor(Color.GREEN);
+        btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
     }
 }

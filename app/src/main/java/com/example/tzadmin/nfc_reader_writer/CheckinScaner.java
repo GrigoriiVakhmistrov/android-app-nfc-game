@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.tzadmin.nfc_reader_writer.Models.Activitys;
-
 public class CheckinScaner extends AppCompatActivity implements View.OnClickListener {
 
     @Override

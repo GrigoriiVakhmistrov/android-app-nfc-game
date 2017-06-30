@@ -67,6 +67,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void clearFields() {
+        firstName.setText("");
+        lastName.setText("");
+        surName.setText("");
+        et_search.setText("");
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
@@ -81,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this,
                             Message.userSuccessfullyRegistered(register(RfcId)),
                             Toast.LENGTH_SHORT).show();
+                    clearFields();
                     break;
                 case _bindCode:
                     bind(RfcId);
@@ -124,6 +132,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         selectedUser.rfcid = RfcId;
 
         selectedUser.update();
+        clearFields();
         //Database.update("tbUsers", selectedUser);
         //Database.update("tbUsers_cache", selectedUser);
     }

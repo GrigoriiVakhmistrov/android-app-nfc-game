@@ -1,14 +1,23 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Adapters.MoneyAdapter;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
+import com.example.tzadmin.nfc_reader_writer.Models.Group;
+import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+
+import java.util.Collection;
 
 public class ValidationActivity extends AppCompatActivity {
 
@@ -16,7 +25,7 @@ public class ValidationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation);
-        startActivityForResult(new Intent(this, ScanNfcActivity.class), RESULT_OK);
+        startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
     }
 
     @Override
@@ -25,30 +34,42 @@ public class ValidationActivity extends AppCompatActivity {
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                //TODO set adapter history
 
-                ((ListView) findViewById(R.id.lv_history_valid)).setAdapter((ListAdapter) user.getMoneyLog());
+                ((ListView) findViewById(R.id.lv_history_valid)).setAdapter(new MoneyAdapter(this, (Collection<MoneyLogs>)user.getMoneyLog()));
 
                 ((TextView) findViewById(R.id.tv_valid_fio)).setText(Message.concatFio(user));
-                ((TextView) findViewById(R.id.tv_valid_points)).setText(user.getBallance());
 
-                //TODO set rating
-                ((TextView) findViewById(R.id.tv_valid_rating)).setText(user.getRating());
+                ((TextView) findViewById(R.id.tv_valid_points)).setText("Баллы: " + String.valueOf(user.getBallance()));
 
-                //TODO set routes
-                ((TextView) findViewById(R.id.tv_valid_routes)).setText(user.getRoute().name);
+                ((TextView) findViewById(R.id.tv_valid_rating)).setText("Рейтинг: " + String.valueOf(user.getRating()));
 
-                //TODO set image clan
+                if(user.getRoute() != null)
+                    ((TextView) findViewById(R.id.tv_valid_routes)).setText("Маршрут: " + user.getRoute().name);
+                else
+                    ((TextView) findViewById(R.id.tv_valid_routes)).setText("Маршрут: не выбран");
+
+                //TODO FIX ME : THIS EXEPTION ->
                 try {
-                    ((ImageView) findViewById(R.id.image_valid)).setImageResource(R.drawable.class.getField(user.getGroup().name).getInt(getResources()));
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (NoSuchFieldException e) {
+                    Group userGroup = user.getGroup();
+                    if (userGroup != null) {
+                        Resources res = getResources();
+                        String mDrawableName = userGroup.totemimage;
+                        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
+                        Drawable drawable = res.getDrawable(resID );
+
+                        ((ImageView) findViewById(R.id.image_valid)).setBackground(drawable);
+
+                        ((TextView) findViewById(R.id.nameClan_valid)).setText(userGroup.totemname);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                ((TextView) findViewById(R.id.nameClan_valid)).setText(Message.concatFio(user));
-                ((TextView) findViewById(R.id.route_valid)).setText(Message.concatFio(user));
+
+//                ((TextView) findViewById(R.id.route_valid)).setText(Message.concatFio(user));
+            } else {
+                Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_LONG).show();
+                finish();
             }
         }
     }

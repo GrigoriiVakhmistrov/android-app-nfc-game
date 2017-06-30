@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "Кубики",
             "Регистрация на маршрут",
             "Регистрация на спикера",
-            "Магазин"
+            "Магазин",
+            "Валидация"
     };
     
     int[] imageId = {
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             R.drawable.register_teamxxxhdpi,
             R.drawable.main_chekin,
             R.drawable.main_cubes_xxxhdpi,
+            R.drawable.mainiconreg,
             R.drawable.mainiconreg,
             R.drawable.mainiconreg,
             R.drawable.mainiconreg
@@ -86,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case MainMenu.SHOP:
                 startActivity(new Intent(this, ShopActivity.class));
+                break;
+            case MainMenu.VALIDATION:
+                startActivity(new Intent(this, ValidationActivity.class));
                 break;
         }
     }

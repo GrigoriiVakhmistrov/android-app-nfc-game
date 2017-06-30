@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.example.tzadmin.nfc_reader_writer.Models.Activitys;
+import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.R;
 
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class ActivitysAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Activitys> activityses;
+    private ArrayList<Event> activityses;
 
-    public  ActivitysAdapter (Context context, ArrayList<Activitys> activityses) {
+    public  ActivitysAdapter (Context context, ArrayList<Event> activityses) {
         this.context = context;
         this.activityses = activityses;
     }

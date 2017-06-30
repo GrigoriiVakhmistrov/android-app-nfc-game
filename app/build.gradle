@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25"
     defaultConfig {
         applicationId "com.example.tzadmin.nfc_reader_writer"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
