@@ -162,6 +162,8 @@ public final class SynchronizationTask implements Runnable {
             if(newId.equals(-1))
                 return;
 
+            Log.d("[Sync][New]", "Synchronized user with id " + param.id);
+
             Collection<UserMorda> mordas = param.getUserMordas();
             for (UserMorda m : mordas) {
                 m.userid = newId;
@@ -177,7 +179,6 @@ public final class SynchronizationTask implements Runnable {
             param.id = newId;
             param.update("0");
 
-            Log.d("[Sync][New]", "Synchronized user with id " + param.id);
         }
     }
 
@@ -189,6 +190,8 @@ public final class SynchronizationTask implements Runnable {
             Integer newId = Utils.parseIntDefault(result.message(), 10, -1);
             if(newId.equals(-1))
                 return;
+
+            Log.d("[Sync][Change]", "Synchronized user with id " + param.id);
 
             if (!newId.equals(param.id)) {
                 Collection<UserMorda> mordas = param.getUserMordas();
@@ -207,7 +210,6 @@ public final class SynchronizationTask implements Runnable {
             }
             param.update("0");
 
-            Log.d("[Sync][Change]", "Synchronized user with id " + param.id);
         }
     }
 
@@ -274,7 +276,7 @@ public final class SynchronizationTask implements Runnable {
                 baseModel.insert();
             }
 
-            Log.d("[Sync][Change]", "Synchronized class " + first.getClass().getCanonicalName());
+            Log.d("[Sync]", "Synchronized class " + first.getClass().getCanonicalName());
         }
     }
 }

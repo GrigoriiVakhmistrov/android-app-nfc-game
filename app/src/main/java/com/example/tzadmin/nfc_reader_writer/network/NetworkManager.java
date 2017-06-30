@@ -12,6 +12,7 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
+import com.example.tzadmin.nfc_reader_writer.Utils;
 import com.example.tzadmin.nfc_reader_writer.util.FutureWithParam;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.AsyncHttpClient;
@@ -174,9 +175,9 @@ public final class NetworkManager {
                 notFirst = true;
             }
 
-            params.append(stringStringEntry.getKey());
+            params.append(Utils.encodeWebString(stringStringEntry.getKey()));
             params.append('=');
-            params.append(stringStringEntry.getValue());
+            params.append(Utils.encodeWebString(stringStringEntry.getValue()));
         }
         return params.toString();
     }

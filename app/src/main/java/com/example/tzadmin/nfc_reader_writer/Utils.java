@@ -2,6 +2,8 @@ package com.example.tzadmin.nfc_reader_writer;
 
 import android.support.annotation.Nullable;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -14,9 +16,17 @@ public final class Utils {
         return iterator.hasNext() ? iterator.next() : null;
     }
 
+    public static String encodeWebString(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new Error(e);
+        }
+    }
+
     public static int parseIntDefault(String s, int radix, int def) {
         if (s == null) {
-            throw new NumberFormatException("null");
+            return def;
         }
 
         if (radix < Character.MIN_RADIX) {

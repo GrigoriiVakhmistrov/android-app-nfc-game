@@ -11,6 +11,7 @@ import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
+import com.example.tzadmin.nfc_reader_writer.executor.Executor;
 import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -56,8 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 Log.i("[Sync]", "Synchronization started!");
-                new SynchronizationTask().run();
-                Log.i("[Sync]", "Synchronization finished!");
+                Executor.execute(new SynchronizationTask());
             }
         });
     }
