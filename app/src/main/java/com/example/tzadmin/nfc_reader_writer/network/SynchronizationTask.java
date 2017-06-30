@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 
 //TODO check null problems for all methods
-//TODO future cleanup
 public final class SynchronizationTask implements Runnable {
     @Override
     public void run() {
@@ -55,7 +54,9 @@ public final class SynchronizationTask implements Runnable {
             return;
 
         for (User u : users) {
-            NetworkManager.setUser(u).setCallback(SecondStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, User> asyncHttpResponseUserFutureWithParam = NetworkManager.setUser(u);
+            asyncHttpResponseUserFutureWithParam.setCallback(SecondStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseUserFutureWithParam);
         }
     }
 
@@ -68,7 +69,9 @@ public final class SynchronizationTask implements Runnable {
             return;
 
         for (UserMorda u : users) {
-            NetworkManager.addUserMorda(u).setCallback(ThirdAndFourthStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, UserMorda> asyncHttpResponseUserMordaFutureWithParam = NetworkManager.addUserMorda(u);
+            asyncHttpResponseUserMordaFutureWithParam.setCallback(ThirdAndFourthStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseUserMordaFutureWithParam);
         }
     }
 
@@ -82,7 +85,9 @@ public final class SynchronizationTask implements Runnable {
 
 
         for (UserMorda u : users) {
-            NetworkManager.setUserMorda(u).setCallback(ThirdAndFourthStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, UserMorda> asyncHttpResponseUserMordaFutureWithParam = NetworkManager.setUserMorda(u);
+            asyncHttpResponseUserMordaFutureWithParam.setCallback(ThirdAndFourthStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseUserMordaFutureWithParam);
         }
     }
 
@@ -96,7 +101,9 @@ public final class SynchronizationTask implements Runnable {
 
 
         for (MoneyLogs u : logs) {
-            NetworkManager.addMoney(u).setCallback(FifthAndSixthStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, MoneyLogs> asyncHttpResponseMoneyLogsFutureWithParam = NetworkManager.addMoney(u);
+            asyncHttpResponseMoneyLogsFutureWithParam.setCallback(FifthAndSixthStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseMoneyLogsFutureWithParam);
         }
     }
 
@@ -110,7 +117,9 @@ public final class SynchronizationTask implements Runnable {
 
 
         for (MoneyLogs u : logs) {
-            NetworkManager.setMoney(u).setCallback(FifthAndSixthStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, MoneyLogs> asyncHttpResponseMoneyLogsFutureWithParam = NetworkManager.setMoney(u);
+            asyncHttpResponseMoneyLogsFutureWithParam.setCallback(FifthAndSixthStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseMoneyLogsFutureWithParam);
         }
     }
 
@@ -123,7 +132,9 @@ public final class SynchronizationTask implements Runnable {
             return;
 
         for (GroupActivity u : activities) {
-            NetworkManager.addPriority(u).setCallback(SeventhAndEightStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, GroupActivity> asyncHttpResponseGroupActivityFutureWithParam = NetworkManager.addPriority(u);
+            asyncHttpResponseGroupActivityFutureWithParam.setCallback(SeventhAndEightStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseGroupActivityFutureWithParam);
         }
     }
 
@@ -136,7 +147,9 @@ public final class SynchronizationTask implements Runnable {
             return;
 
         for (GroupActivity u : activities) {
-            NetworkManager.setPriority(u).setCallback(SeventhAndEightStageCallback.INSTANCE);
+            FutureWithParam<AsyncHttpResponse, GroupActivity> asyncHttpResponseGroupActivityFutureWithParam = NetworkManager.setPriority(u);
+            asyncHttpResponseGroupActivityFutureWithParam.setCallback(SeventhAndEightStageCallback.INSTANCE);
+            FutureWithParam.addFutureToCheck(asyncHttpResponseGroupActivityFutureWithParam);
         }
     }
 

@@ -16,6 +16,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class FutureWithParam<T, P> implements FutureCallback<T> {
     private static final List<FutureWithParam> cache;
+    private static final FutureReaper reaper;
 
     static {
         List<FutureWithParam> cacheInit = new ArrayList<>();
@@ -23,6 +24,8 @@ public class FutureWithParam<T, P> implements FutureCallback<T> {
             cacheInit.add(new FutureWithParam());
         }
         cache = Collections.synchronizedList(cacheInit);
+        reaper = new FutureReaper();
+        reaper.start();
     }
 
     private Future<T> future;
@@ -59,6 +62,10 @@ public class FutureWithParam<T, P> implements FutureCallback<T> {
         future.param = null;
         future.future = null;
         cache.add(future);
+    }
+
+    public static void addFutureToCheck(FutureWithParam futureWithParam) {
+        reaper.put(futureWithParam);
     }
 
     public void setCallback(Callback<T, P> callback) {
