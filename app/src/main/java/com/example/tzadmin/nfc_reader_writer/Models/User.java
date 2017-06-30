@@ -199,7 +199,7 @@ public class User extends BaseModel {
         Integer sum = 0;
 
         for (MoneyLogs tempmoneyLog : moneyLogsCollection){
-            if(tempmoneyLog.type == MoneyLogs.Type.ADD_MONEY.toString()){
+            if(tempmoneyLog.type.equals(MoneyLogs.Type.ADD_MONEY.toString())){
                 sum += tempmoneyLog.money;
             }
         }
