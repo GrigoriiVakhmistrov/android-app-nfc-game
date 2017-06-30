@@ -24,6 +24,9 @@ public class Message {
     public static final String USER_ALREADY_SUBSCRUBE_CLAN = "Пользователь уже состоит в клане";
     public static final String SYNC_OK = "Синхронизация закончена";
     public static final String GROUP_NO_THROW_SELECTED = "Группа для броска не выбрана";
+    public static final String NO_CLAN = "Не состоит в клане";
+    public static final String NO_ROUTE = "Маршрут: Не подписан на маршрут";
+
 
     public static String userVisitRoute(String routeName) {
         return "Пользователь посетил маршрут - " + routeName;
