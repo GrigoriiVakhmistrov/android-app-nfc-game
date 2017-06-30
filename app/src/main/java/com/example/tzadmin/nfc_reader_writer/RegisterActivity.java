@@ -123,8 +123,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         user.insert();
 
-        //Database.insert("tbUsers", user);
-        //Database.insert("tbUsers_cache", user);
         return user;
     }
 
@@ -133,7 +131,5 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         selectedUser.update();
         clearFields();
-        //Database.update("tbUsers", selectedUser);
-        //Database.update("tbUsers_cache", selectedUser);
     }
 }

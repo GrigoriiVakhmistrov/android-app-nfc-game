@@ -14,15 +14,23 @@ import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.executor.Executor;
 import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    Timer timerSync;
+    MyTimerTask timerSyncTask;
     String[] values = {
             "Регистрация",
             "В команду",
-            "Chekin Scaner",
+            "Chekin",
             "Кубики",
-            "Регистрация на маршрут",
-            "Регистрация на спикера",
+            "Маршруты",
+            "Спикеры",
             "Магазин",
             "Валидация"
     };
@@ -62,6 +70,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Executor.execute(new SynchronizationTask());
             }
         });
+
+        timerSync = new Timer();
+        timerSyncTask = new MyTimerTask();
+        timerSync.schedule(timerSyncTask, 1000, 30000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timerSync.cancel();
     }
 
     @Override
@@ -92,6 +110,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case MainMenu.VALIDATION:
                 startActivity(new Intent(this, ValidationActivity.class));
                 break;
+        }
+    }
+
+    class MyTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            new Sync(true);
         }
     }
 }

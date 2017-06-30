@@ -84,7 +84,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 }
             } catch (Exception ex) {
                 Toast.makeText(this,
-                        "Ошибка URL картинки спикера, обратитесь к администратору",
+                        Message.ERROR_URL_IMAGE,
                         Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -129,14 +129,14 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
 
                     for (Morda m : subscribes) {
                         if (m.id.equals(spicker.id)) {
-                            user.AddMoney(10, "Пользователь посетил семинар - " + spicker.fio);
-                            Toast.makeText(this, "Пользователь успешно посетил семинар", Toast.LENGTH_LONG).show();
+                            user.AddMoney(10, Message.userVisitSpiker(spicker.fio));
+                            Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
                             finish();
                             return;
                         }
                     }
 
-                    Toast.makeText(this, "Пользователь небыл подписан на семинар", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_SPIKER, Toast.LENGTH_LONG).show();
                     finish();
                 }
             } else {

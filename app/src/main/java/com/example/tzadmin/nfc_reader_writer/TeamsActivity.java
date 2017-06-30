@@ -69,9 +69,9 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
                 if (user.groupid == -1) {
                     user.groupid = currentGroup.id;
                     user.update();
-                    Toast.makeText(this, "Пользователь успешно вступил в клан", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(this, "Пользователь уже состоит в клане", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, Message.USER_ALREADY_SUBSCRUBE_CLAN, Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
         }

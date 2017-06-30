@@ -17,7 +17,20 @@ public class Message {
     public static final String MONEY_LOW = "Ошибка. Не достаточно средств";
     public static final String ACTIVITYS_NOT_FOUND = "Ошибка. Список активностей пуст";
     public static final String ITEMS_SHOP_NOT_FOUND = "Ошибка. Товаров в магазине нет";
+    public static final String NOT_ALL_DATA_IS_SELECTED = "Не все данные выбраны";
+    public static final String USER_NOT_SUBSCRUBE_TO_ROUTE = "Пользователь не был подписан на маршрут";
+    public static final String ERROR_URL_IMAGE = "Ошибка URL картинки спикера, обратитесь к администратору";
+    public static final String USER_NOT_SUBSCRUBE_TO_SPIKER = "Пользователь небыл подписан на семинар";
+    public static final String USER_ALREADY_SUBSCRUBE_CLAN = "Пользователь уже состоит в клане";
+    public static final String SYNC_OK = "Синхронизация закончена";
 
+    public static String userVisitRoute(String routeName) {
+        return "Пользователь посетил маршрут - " + routeName;
+    }
+
+    public static String userVisitSpiker(String spikerName) {
+        return "Пользователь посетил семинар - " + spikerName;
+    }
 
     public static String isUserHaveBraced(User user) {
         return "У пользователя " + concatFio(user) + " уже привязан браслет";
