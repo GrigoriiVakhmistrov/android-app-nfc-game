@@ -619,7 +619,7 @@ public class Sync implements RequestDelegate {
         } else if (success == 8) {
             stage9();
         } else if (success == 9) {
-            Toast.makeText(SharedApplication.get(), "sdfasdfasdf", Toast.LENGTH_LONG).show();
+            Toast.makeText(SharedApplication.get(), "Cинхронизация закончена", Toast.LENGTH_LONG).show();
         }
     }
 
