@@ -67,6 +67,10 @@
         <activity
             android:name=".QuestActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".CreaseBuy"
+            android:label="@string/title_activity_crease_buy"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
