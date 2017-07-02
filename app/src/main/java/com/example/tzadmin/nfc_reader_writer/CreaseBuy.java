@@ -140,10 +140,18 @@ public class CreaseBuy extends AppCompatActivity implements View.OnClickListener
             intent.putExtra("name", currentShop.name);
             startActivityForResult(intent, 200);
         } else if (v.getId() == R.id.buttonSave) {
-            //TODO if price == 0 for logs item save close
+            if (!price.getText().equals("0")) {
+                Toast.makeText(this, "Вы недобрали баллов!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            for (MoneyLogs item : logs) {
+                item.insert();
+            }
+
+            Toast.makeText(this, "Покупка успешна!", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
