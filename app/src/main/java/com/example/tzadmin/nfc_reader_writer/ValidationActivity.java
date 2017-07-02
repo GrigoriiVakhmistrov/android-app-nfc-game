@@ -11,7 +11,10 @@ import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MoneyAdapter;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
+import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+
+import java.util.ArrayList;
 
 public class ValidationActivity extends AppCompatActivity {
 
@@ -48,27 +51,28 @@ public class ValidationActivity extends AppCompatActivity {
                     ((TextView) findViewById(R.id.tv_valid_routes)).
                             setText(Message.NO_ROUTE);
 
-                //if(user.get)
+                if(user.getSubscribed().size() == 1) {
+                    ArrayList<Morda> spiker = (ArrayList)user.getSubscribed();
+                    ((TextView)findViewById(R.id.spiker_valid)).setText("Спикер: " + spiker.get(0).fio);
+                } else
+                    ((TextView)findViewById(R.id.spiker_valid)).setText(Message.NO_SPIKER);
 
                 try {
                     Group userGroup = user.getGroup();
                     if (userGroup != null && !user.groupid.equals(-1)) {
                         Resources res = getResources();
-                        String mDrawableName = userGroup.totemimage;
+                        String mDrawableName = userGroup.totemimage + "_v2";
                         int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
                         Drawable drawable = res.getDrawable(resID );
 
                         findViewById(R.id.image_valid).
                                 setBackground(drawable);
 
-                        ((TextView) findViewById(R.id.nameClan_valid)).
-                                setText(userGroup.totemname);
                     } else {
                          findViewById(R.id.image_valid).
                                  setBackgroundResource(R.drawable.ic_spiker_not_found);
 
-                        ((TextView) findViewById(R.id.nameClan_valid)).
-                                setText(Message.NO_CLAN);
+                        ((TextView)findViewById(R.id.text_team_valid)).setText(Message.NO_CLAN);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
