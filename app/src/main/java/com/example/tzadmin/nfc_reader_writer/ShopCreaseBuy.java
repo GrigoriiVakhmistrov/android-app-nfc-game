@@ -48,7 +48,7 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_crease_buy);
 
-        shopImage = (ImageView) findViewById(R.id.imageView);
+        shopImage = (ImageView) findViewById(R.id.image_shop_crease);
 
         name = (TextView) findViewById(R.id.name);
         name.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
@@ -94,12 +94,12 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
         addButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
 
-
-
-        Picasso.with(this)
-                .load(currentShop.pic)
-                .placeholder(R.drawable.shop_circle)
-                .into(shopImage);
+        if(!currentShop.pic.equals("")) {
+            Picasso.with(this)
+                    .load(currentShop.pic)
+                    .placeholder(R.drawable.shop_circle)
+                    .into(shopImage);
+        }
 
         name.setText(currentShop.name);
         description.setText(currentShop.description);

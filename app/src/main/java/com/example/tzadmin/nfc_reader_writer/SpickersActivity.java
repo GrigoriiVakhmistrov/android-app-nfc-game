@@ -54,7 +54,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
         if(!isSubscrube)
-            findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.scan_activity);
+            findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.checkin_out_spiker);
 
         spickers = (ArrayList<Morda>) new Morda().selectAll();
 

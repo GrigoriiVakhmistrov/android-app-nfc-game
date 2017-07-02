@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             R.drawable.main_cube,
             R.drawable.main_route,
             R.drawable.main_spikers,
-            R.drawable.main_register,
-            R.drawable.main_chekin
+            R.drawable.main_shop,
+            R.drawable.main_validation
     };
 
     GridView gridView;
