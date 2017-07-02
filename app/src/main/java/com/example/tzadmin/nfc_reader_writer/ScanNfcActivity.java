@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.skyfishjy.library.RippleBackground;
 
@@ -26,6 +28,7 @@ public class ScanNfcActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_nfc);
         infoScan = (TextView)findViewById(R.id.infoScan);
+        infoScan.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");

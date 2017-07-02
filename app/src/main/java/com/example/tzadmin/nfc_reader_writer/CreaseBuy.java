@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tzadmin.nfc_reader_writer.Adapters.CreaseBuyAdapter;
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
@@ -52,8 +53,11 @@ public class CreaseBuy extends AppCompatActivity implements View.OnClickListener
 
         shopImage = (ImageView) findViewById(R.id.imageView);
         name = (TextView) findViewById(R.id.name);
+        name.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
         price = (TextView) findViewById(R.id.price);
+        price.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
         description = (TextView) findViewById(R.id.description);
+        description.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
         money = (EditText) findViewById(R.id.money);
 
