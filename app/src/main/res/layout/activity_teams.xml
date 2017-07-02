@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.TeamsActivity"
-    android:background="@drawable/team_xxxhdpi"
-    android:id="@+id/team_constraint_layout">
+    android:id="@+id/team_constraint_layout"
+    android:background="@drawable/team_xxxhdpi">
 
     <ImageButton
         android:background="@drawable/bigimot_xxxhdpi"
@@ -16,8 +16,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintVertical_bias="0.577"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintVertical_bias="0.576"
         android:tag="bigimot_xxxhdpi"/>
 
     <ImageButton
@@ -28,7 +28,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.199"
+        app:layout_constraintHorizontal_bias="0.189"
         app:layout_constraintVertical_bias="0.576"
         android:tag="slon_xxxhdpi"/>
 
@@ -38,7 +38,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintHorizontal_bias="0.293"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,7 +51,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintHorizontal_bias="0.396"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,8 +68,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.576"
-        app:layout_constraintHorizontal_bias="0.51"
-        android:tag="crocodile_xxxhdpi"/>
+        android:tag="crocodile_xxxhdpi" />
 
     <ImageButton
         android:background="@drawable/monkey_xxxhdpi"
@@ -77,7 +76,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +89,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -103,7 +102,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.809"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -118,127 +117,127 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintVertical_bias="0.576"
         android:tag="lion_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/nosorog_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="nosorog_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/bear_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="bear_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/wolf_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.249"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="wolf_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/antilop_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.346"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="antilop_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/snake_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.436"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="snake_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/mouse_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="mouse_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/tiger_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826"
-        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintVertical_bias="0.844"
+        app:layout_constraintHorizontal_bias="0.637"
         android:tag="tiger_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/jaba_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.74"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.734"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="jaba_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/albat_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="albat_xxxhdpi"/>
 
     <ImageButton
         android:background="@drawable/leo_xxxhdpi"
-        android:layout_width="90dp"
+        android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintVertical_bias="0.844"
         android:tag="leo_xxxhdpi"/>
 </android.support.constraint.ConstraintLayout>
