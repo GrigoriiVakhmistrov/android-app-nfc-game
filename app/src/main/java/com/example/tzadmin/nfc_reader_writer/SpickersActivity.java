@@ -120,10 +120,14 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
                 if(isSubscrube) {
-                    user.subscribe(spicker.id);
-                    user.update();
-                    Toast.makeText(this,
-                            Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                    if(user.getSubscribed() == null || user.getSubscribed().size() == 0) {
+                        user.subscribe(spicker.id);
+                        user.update();
+                        Toast.makeText(this,
+                                Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(this,
+                                Message.USER_ALREADY_SUBSCRUBE_SPIKER, Toast.LENGTH_LONG).show();
                 } else {
                     Collection<Morda> subscribes = user.getSubscribed();
 
@@ -135,9 +139,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                             return;
                         }
                     }
-
                     Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_SPIKER, Toast.LENGTH_LONG).show();
-                    finish();
                 }
             } else {
                 Toast.makeText(this,

@@ -48,6 +48,8 @@ public class ValidationActivity extends AppCompatActivity {
                     ((TextView) findViewById(R.id.tv_valid_routes)).
                             setText(Message.NO_ROUTE);
 
+                //if(user.get)
+
                 try {
                     Group userGroup = user.getGroup();
                     if (userGroup != null && !user.groupid.equals(-1)) {
