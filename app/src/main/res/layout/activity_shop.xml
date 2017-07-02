@@ -13,7 +13,7 @@
         android:layout_height="247dp"
         android:gravity="top"
         android:horizontalSpacing="10dp"
-        android:numColumns="3"
+        android:numColumns="2"
         android:verticalSpacing="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
