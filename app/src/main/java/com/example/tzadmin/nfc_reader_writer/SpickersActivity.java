@@ -10,15 +10,12 @@ import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class SpickersActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //TODO use image lib picaso
     ArrayList<Morda> spickers;
     Morda spicker = null;
     boolean isSubscrube;
@@ -44,6 +41,9 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.image_chekin_spicker3).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
+        if(!isSubscrube)
+            findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.scan_activity);
+
         spickers = (ArrayList<Morda>) new Morda().selectAll();
 
         if(spickers.size() == 0 || spickers == null) {

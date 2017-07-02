@@ -18,7 +18,7 @@ public class ScanNfcActivity extends AppCompatActivity {
 
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-    String name, textTeam = null, imageTeam = null;
+    String name, imageTeam = null;
     TextView infoScan;
 
     @Override
@@ -31,11 +31,8 @@ public class ScanNfcActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
 
         imageTeam = intent.getStringExtra("imageTeam");
-        textTeam = intent.getStringExtra("textTeam");
-        if(imageTeam != null && textTeam != null) {
+        if(imageTeam != null )
             findViewById(R.id.scan_image_team).setBackground(getDrawable(imageTeam));
-            ((TextView) findViewById(R.id.scan_text_team)).setText(textTeam);
-        }
 
         infoScan.setText(name);
 
@@ -97,6 +94,7 @@ public class ScanNfcActivity extends AppCompatActivity {
     }
 
     private Drawable getDrawable (String drawableName) {
+        drawableName += "_v2";
         Resources res = getResources();
         int resID = res.getIdentifier(drawableName , "drawable", getPackageName());
         return res.getDrawable(resID );
