@@ -57,7 +57,7 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
 
         currentGroup = (Group)group.selectOneByParams();
         if(currentGroup != null)
-            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+            startActivityForResultTeam();
     }
 
     @Override
@@ -74,6 +74,14 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, Message.USER_ALREADY_SUBSCRUBE_CLAN, Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
+            startActivityForResultTeam();
         }
+    }
+
+    private void startActivityForResultTeam () {
+        Intent intent = new Intent(this, ScanNfcActivity.class);
+        intent.putExtra("imageTeam", currentGroup.totemimage);
+        intent.putExtra("textTeam", currentGroup.totemname);
+        startActivityForResult(intent, 200);
     }
 }

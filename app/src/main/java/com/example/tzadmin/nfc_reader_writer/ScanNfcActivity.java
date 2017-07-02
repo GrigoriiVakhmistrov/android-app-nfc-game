@@ -2,10 +2,13 @@ package com.example.tzadmin.nfc_reader_writer;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
@@ -15,7 +18,7 @@ public class ScanNfcActivity extends AppCompatActivity {
 
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-    String name;
+    String name, textTeam = null, imageTeam = null;
     TextView infoScan;
 
     @Override
@@ -26,6 +29,14 @@ public class ScanNfcActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
+
+        imageTeam = intent.getStringExtra("imageTeam");
+        textTeam = intent.getStringExtra("textTeam");
+        if(imageTeam != null && textTeam != null) {
+            findViewById(R.id.scan_image_team).setBackground(getDrawable(imageTeam));
+            ((TextView) findViewById(R.id.scan_text_team)).setText(textTeam);
+        }
+
         infoScan.setText(name);
 
         adapter = NfcAdapter.getDefaultAdapter(this);
@@ -84,4 +95,11 @@ public class ScanNfcActivity extends AppCompatActivity {
         }
         return sb.toString();
     }
+
+    private Drawable getDrawable (String drawableName) {
+        Resources res = getResources();
+        int resID = res.getIdentifier(drawableName , "drawable", getPackageName());
+        return res.getDrawable(resID );
+    }
+
 }
