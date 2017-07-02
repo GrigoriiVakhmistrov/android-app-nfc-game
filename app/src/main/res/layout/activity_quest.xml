@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.QuestActivity"
-    android:background="@drawable/scan_activity">
+    android:background="@drawable/quest">
 
     <TextView
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,6 +54,7 @@
         android:layout_height="55dp"
         android:background="@drawable/btn_gradient_black"
         android:text="Начислить"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

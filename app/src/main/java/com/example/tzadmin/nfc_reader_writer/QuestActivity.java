@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 
@@ -49,8 +51,10 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
     private void fillTextViews () {
         user = new User().selectUserByRfcId(RfcId);
         if(user != null) {
-            ((TextView) findViewById(R.id.moneyOperation_balance)).setText(
-                    Message.concatFio(user) + " ваш баланс = " + user.getBallance());
+            TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
+            moneyOperationBalance.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+            moneyOperationBalance.setText(Message.concatFio(user) + " ваш баланс = " + user.getBallance());
+            moneyOperationBalance.setTextColor(getResources().getColor(R.color.colorBtn));
         }
     }
 

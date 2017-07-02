@@ -9,9 +9,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.tzadmin.nfc_reader_writer.Adapters.ShopAdapter;
+import com.example.tzadmin.nfc_reader_writer.Adapters.ShopAdapterV2;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
@@ -24,17 +26,22 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<Shop> shops = new ArrayList<>();
     Shop shop = null;
     GridView lv_shop;
+    Switch buySwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+
+        buySwitch = (Switch) findViewById(R.id.buySwitch);
+
         shops = new ArrayList(new Shop().selectAll());
 
 
 
         lv_shop = (GridView)findViewById(R.id.gridView_shop_main);
         //lv_shop = (GridView) findViewById(R.id.route_grid);
-        ShopAdapter shopAdapter = new ShopAdapter(this, shops);
+        ShopAdapterV2 shopAdapter = new ShopAdapterV2(this, shops);
 
         if(shops != null && shops.size() > 0) {
             lv_shop.setAdapter(shopAdapter);
@@ -50,9 +57,15 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         shop = shops.get(position);
 
-        Intent intent = new Intent(this, ScanNfcActivity.class);
-        intent.putExtra("name", shop.name);
-        startActivityForResult(intent, 200);
+        if (!buySwitch.isChecked()) {
+            Intent intent = new Intent(this, ScanNfcActivity.class);
+            intent.putExtra("name", shop.name);
+            startActivityForResult(intent, 200);
+        } else {
+            Intent intent = new Intent(this, ShopCreaseBuy.class);
+            intent.putExtra("id", shop.id);
+            startActivity(intent);
+        }
     }
 
     @Override

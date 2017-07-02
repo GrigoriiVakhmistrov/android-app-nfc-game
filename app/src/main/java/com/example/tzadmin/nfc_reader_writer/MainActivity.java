@@ -22,25 +22,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Timer timerSync;
     MyTimerTask timerSyncTask;
     String[] values = {
-            "Регистрация",
-            "В команду",
-            "Chekin",
-            "Кубики",
-            "Маршруты",
-            "Спикеры",
-            "Магазин",
-            "Валидация"
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
     };
     
     int[] imageId = {
-            R.drawable.mainiconreg,
-            R.drawable.register_teamxxxhdpi,
+            R.drawable.main_register,
+            R.drawable.main_team,
             R.drawable.main_chekin,
-            R.drawable.main_cubes_xxxhdpi,
-            R.drawable.mainiconreg,
-            R.drawable.mainiconreg,
-            R.drawable.mainiconreg,
-            R.drawable.mainiconreg
+            R.drawable.main_cube,
+            R.drawable.main_route,
+            R.drawable.main_spikers,
+            R.drawable.main_register,
+            R.drawable.main_chekin
     };
 
     GridView gridView;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         timerSync = new Timer();
         timerSyncTask = new MyTimerTask();
-        timerSync.schedule(timerSyncTask, 1000, 30000);
+        timerSync.schedule(timerSyncTask, 1000, 50000);
     }
 
     @Override

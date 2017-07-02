@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
+import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
@@ -37,18 +38,53 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         groupId = getIntent().getIntExtra("GroupId", -1);
 
         if (groupId.equals(-1)) {
-            Toast.makeText(this, "Группа для броска не выбрана", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Message.GROUP_NO_THROW_SELECTED, Toast.LENGTH_LONG).show();
             finish();
+            return;
         }
-
-        mark1 = 0;
-        mark2 = 0;
-        mark3 = 0;
-
 
         ll_cube_block1 = (LinearLayout) findViewById(R.id.ll_cube_block1);
         ll_cube_block2 = (LinearLayout) findViewById(R.id.ll_cube_block2);
         ll_cube_block3 = (LinearLayout) findViewById(R.id.ll_cube_block3);
+
+        GroupActivity groupActivity =
+                new GroupActivity().GetGroupScoreModel(groupId);
+
+        mark1 = groupActivity.p1;
+        mark2 = groupActivity.p2;
+        mark3 = groupActivity.p3;
+
+        //TODO FIX ME PLEEEAASEEE !!!!! fucking hardcoder
+        //-----------------------------------------------
+        Collection<Button> buttons = new ArrayList<>();
+        buttons = getAllByBlock(ll_cube_block1);
+
+        for (Button btn : buttons) {
+            if(Integer.valueOf(btn.getText().toString()) == groupActivity.p1)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        buttons = getAllByBlock(ll_cube_block2);
+
+        for (Button btn : buttons) {
+            if(Integer.valueOf(btn.getText().toString()) == groupActivity.p2)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        buttons = getAllByBlock(ll_cube_block3);
+
+        for (Button btn : buttons) {
+            if(getValueFromButton(btn) == groupActivity.p3)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        //-----------------------------------------------
 
         setAllClickListner(getAllByBlock(ll_cube_block1));
         setAllClickListner(getAllByBlock(ll_cube_block2));
@@ -61,7 +97,6 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
                 checkResult();
             }
         });
-
     }
 
     private Collection<Button> getAllByBlock(ViewGroup group) {
@@ -77,10 +112,8 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
                 buttons.add((Button) v);
             }
         }
-
         return buttons;
     }
-
 
     private void setAllClickListner(Collection<Button> buttons) {
         for (Button b : buttons) {
@@ -144,14 +177,10 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
             mark3 = result;
         }
 
-
         for (Button b : buttons) {
-
             b.setBackground(getDrawable(R.drawable.btn_gradient));
-            //b.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        //btn.setBackgroundColor(Color.GREEN);
         btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
     }
 }

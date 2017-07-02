@@ -52,11 +52,11 @@
         app:layout_constraintHorizontal_bias="0.727" />
 
     <EditText
-        android:id="@+id/et_lastname_register"
+        android:id="@+id/et_name_register"
         android:layout_width="286dp"
         android:layout_height="68dp"
         android:ems="10"
-        android:hint="@string/lastname"
+        android:hint="@string/firstname"
         android:textColor="@color/colorBlack"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -67,12 +67,12 @@
         app:layout_constraintVertical_bias="0.781" />
 
     <EditText
-        android:id="@+id/et_name_register"
+        android:id="@+id/et_lastname_register"
         android:layout_width="286dp"
         android:layout_height="68dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="@string/firstname"
+        android:hint="@string/lastname"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

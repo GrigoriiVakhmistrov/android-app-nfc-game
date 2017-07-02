@@ -2,12 +2,17 @@ package com.example.tzadmin.nfc_reader_writer;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.skyfishjy.library.RippleBackground;
 
@@ -15,7 +20,7 @@ public class ScanNfcActivity extends AppCompatActivity {
 
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-    String name;
+    String name, imageTeam = null;
     TextView infoScan;
 
     @Override
@@ -23,9 +28,19 @@ public class ScanNfcActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_nfc);
         infoScan = (TextView)findViewById(R.id.infoScan);
+        infoScan.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        infoScan.setTextColor(getResources().getColor(R.color.colorBtn));
+
+        ((TextView)findViewById(R.id.grid_text)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        ((TextView)findViewById(R.id.grid_text)).setTextColor(getResources().getColor(R.color.colorBtn));
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
+
+        imageTeam = intent.getStringExtra("imageTeam");
+        if(imageTeam != null )
+            findViewById(R.id.scan_image_team).setBackground(getDrawable(imageTeam));
+
         infoScan.setText(name);
 
         adapter = NfcAdapter.getDefaultAdapter(this);
@@ -44,6 +59,8 @@ public class ScanNfcActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(
             this, 0, new Intent(this,
                         getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
+
     }
 
     @Override
@@ -84,4 +101,12 @@ public class ScanNfcActivity extends AppCompatActivity {
         }
         return sb.toString();
     }
+
+    private Drawable getDrawable (String drawableName) {
+        drawableName += "_v2";
+        Resources res = getResources();
+        int resID = res.getIdentifier(drawableName , "drawable", getPackageName());
+        return res.getDrawable(resID );
+    }
+
 }

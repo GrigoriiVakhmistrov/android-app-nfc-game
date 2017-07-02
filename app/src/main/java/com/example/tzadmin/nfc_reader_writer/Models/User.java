@@ -1,5 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
+import android.support.annotation.IntegerRes;
+import android.support.annotation.StringDef;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -55,6 +58,10 @@ public class User extends BaseModel {
         User u = (User) selectOneByParams();
 
         return u != null;
+    }
+
+    public String getFIO() {
+        return lastname + " " + firstname + " " +patronymic;
     }
 
     public User selectUserByRfcId  (String RfcId) {

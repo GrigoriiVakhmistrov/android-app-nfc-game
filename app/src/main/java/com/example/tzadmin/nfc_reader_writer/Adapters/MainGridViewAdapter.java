@@ -1,12 +1,15 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.R;
 
 /**
@@ -49,6 +52,7 @@ public class MainGridViewAdapter extends BaseAdapter {
             grid = inflater.inflate(R.layout.grid_item, null);
             TextView textView = (TextView) grid.findViewById(R.id.grid_text);
             ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
+            textView.setTypeface(SingletonFonts.getInstanse(mContext).getKarlson());
             textView.setText(web[position]);
             imageView.setImageResource(Imageid[position]);
         } else {

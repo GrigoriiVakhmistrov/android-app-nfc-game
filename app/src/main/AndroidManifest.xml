@@ -53,9 +53,6 @@
             android:name=".ShopActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ScanNfcNonstopActivity"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".CheckinScaner"
             android:screenOrientation="landscape" />
         <activity
@@ -69,6 +66,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".QuestActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ShopCreaseBuy"
             android:screenOrientation="landscape" />
     </application>
 

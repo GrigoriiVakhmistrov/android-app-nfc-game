@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.R;
 import java.util.ArrayList;
@@ -48,6 +50,9 @@ public class RouteViewAdapter extends BaseAdapter {
 
         TextView myrectangle = (TextView)convertView.findViewById(R.id.route_rectangle);
         TextView square = (TextView)convertView.findViewById(R.id.route_square);
+
+        myrectangle.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+        square.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
 
         Route route = states.get(position);
 

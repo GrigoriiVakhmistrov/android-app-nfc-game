@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.support.annotation.RequiresApi;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.Event;
 import com.example.tzadmin.nfc_reader_writer.R;
 
@@ -51,6 +54,9 @@ public class ActivitysAdapter extends BaseAdapter {
 
             TextView name = (TextView) activitys.findViewById(R.id.tv_activity_item_name);
             TextView price = (TextView) activitys.findViewById(R.id.tv_activity_item_price);
+
+            name.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+            price.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
 
             name.setText(activityses.get(position).name);
             price.setText(activityses.get(position).price.toString());

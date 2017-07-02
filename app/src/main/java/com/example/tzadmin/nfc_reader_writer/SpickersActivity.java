@@ -7,18 +7,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-import com.example.tzadmin.nfc_reader_writer.Models.UserMorda;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class SpickersActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //TODO use image lib picaso
     ArrayList<Morda> spickers;
     Morda spicker = null;
     boolean isSubscrube;
@@ -39,11 +38,24 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         text3 = (TextView)findViewById(R.id.tv_checkin_spiker3);
         text4 = (TextView)findViewById(R.id.tv_checkin_spiker4);
 
+        text1.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        text2.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        text3.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        text4.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+
+        text1.setTextColor(getResources().getColor(R.color.colorBtn));
+        text2.setTextColor(getResources().getColor(R.color.colorBtn));
+        text3.setTextColor(getResources().getColor(R.color.colorBtn));
+        text4.setTextColor(getResources().getColor(R.color.colorBtn));
+
         findViewById(R.id.image_chekin_spicker1).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker2).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker3).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
+        if(!isSubscrube)
+            findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.scan_activity);
+
         spickers = (ArrayList<Morda>) new Morda().selectAll();
 
         if(spickers.size() == 0 || spickers == null) {
@@ -120,10 +132,14 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
                 if(isSubscrube) {
-                    user.subscribe(spicker.id);
-                    user.update();
-                    Toast.makeText(this,
-                            Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                    if(user.getSubscribed() == null || user.getSubscribed().size() == 0) {
+                        user.subscribe(spicker.id);
+                        user.update();
+                        Toast.makeText(this,
+                                Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(this,
+                                Message.USER_ALREADY_SUBSCRUBE_SPIKER, Toast.LENGTH_LONG).show();
                 } else {
                     Collection<Morda> subscribes = user.getSubscribed();
 
@@ -135,9 +151,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                             return;
                         }
                     }
-
                     Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_SPIKER, Toast.LENGTH_LONG).show();
-                    finish();
                 }
             } else {
                 Toast.makeText(this,

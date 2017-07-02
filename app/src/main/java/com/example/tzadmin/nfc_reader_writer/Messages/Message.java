@@ -23,6 +23,12 @@ public class Message {
     public static final String USER_NOT_SUBSCRUBE_TO_SPIKER = "Пользователь небыл подписан на семинар";
     public static final String USER_ALREADY_SUBSCRUBE_CLAN = "Пользователь уже состоит в клане";
     public static final String SYNC_OK = "Синхронизация закончена";
+    public static final String GROUP_NO_THROW_SELECTED = "Группа для броска не выбрана";
+    public static final String NO_CLAN = "Не состоит в клане";
+    public static final String NO_ROUTE = "Маршрут: Нет маршрута";
+    public static final String USER_ALREADY_SUBSCRUBE_SPIKER = "Ошибка. Пользователь уже подписан на спикера";
+    public static final String NO_SPIKER = "Спикер: Не подписан";
+
 
     public static String userVisitRoute(String routeName) {
         return "Пользователь посетил маршрут - " + routeName;
@@ -41,6 +47,6 @@ public class Message {
     }
 
     public static String concatFio(User user) {
-        return "Ф.И.О.: " + user.firstname + " " + user.lastname + " " + user.patronymic;
+        return "Ф.И.О.: " + user.lastname + " " + user.firstname + " " + user.patronymic;
     }
 }
