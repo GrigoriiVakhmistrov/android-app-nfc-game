@@ -1,6 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.annotation.RequiresApi;
 
 import com.example.tzadmin.nfc_reader_writer.Adapters.CreaseBuyAdapter;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
@@ -46,18 +49,25 @@ public class CreaseBuy extends AppCompatActivity implements View.OnClickListener
 
     int currentMoney = -1;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crease_buy);
 
         shopImage = (ImageView) findViewById(R.id.imageView);
+
         name = (TextView) findViewById(R.id.name);
         name.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        name.setTextColor(getColor(R.color.colorBtn));
+
         price = (TextView) findViewById(R.id.price);
         price.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        price.setTextColor(getColor(R.color.colorBtn));
+
         description = (TextView) findViewById(R.id.description);
         description.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        price.setTextColor(getColor(R.color.colorBtn));
 
         money = (EditText) findViewById(R.id.money);
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.R;
 import com.squareup.picasso.Picasso;
@@ -58,7 +59,14 @@ public class ShopAdapter extends BaseAdapter {
         ImageView imageView = (ImageView)convertView.findViewById(R.id.image_shop_item);
         TextView name = (TextView) convertView.findViewById(R.id.tv_shop_item_name);
         TextView info = (TextView) convertView.findViewById(R.id.tv_shop_item_info);
+
         //Button btn = (Button) shop.findViewById(R.id.btn_shop_item_add);
+
+        name.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+        info.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+
+        name.setTextColor(context.getResources().getColor(R.color.colorBtn));
+        info.setTextColor(context.getResources().getColor(R.color.colorBtn));
 
         //imageView.setImageResource(items.get(position).pic);
         Picasso.with(context)

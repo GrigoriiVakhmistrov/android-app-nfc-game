@@ -1,6 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
-import android.content.Context;
+import  android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.R;
 
@@ -44,6 +47,7 @@ public class MoneyAdapter extends BaseAdapter {
         return ((MoneyLogs)items[position]).id;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -58,6 +62,12 @@ public class MoneyAdapter extends BaseAdapter {
         ImageView operation = (ImageView) convertView.findViewById(R.id.action);
         TextView money = (TextView)convertView.findViewById(R.id.money);
         TextView description = (TextView)convertView.findViewById(R.id.text);
+
+        money.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+        description.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+
+        money.setTextColor(context.getResources().getColor(R.color.colorBtn));
+        description.setTextColor(context.getResources().getColor(R.color.colorBtn));
 
         if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) {
             operation.setBackgroundResource(R.drawable.arrow_up);
