@@ -26,6 +26,7 @@ public class Message {
     public static final String GROUP_NO_THROW_SELECTED = "Группа для броска не выбрана";
     public static final String NO_CLAN = "Не состоит в клане";
     public static final String NO_ROUTE = "Маршрут: Нет маршрута";
+    public static final String USER_ALREADY_SUBSCRUBE_SPIKER = "Ошибка. Пользователь уже подписан на спикера";
 
 
     public static String userVisitRoute(String routeName) {
