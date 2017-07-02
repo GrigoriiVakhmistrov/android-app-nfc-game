@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
@@ -35,6 +37,11 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         text2 = (TextView)findViewById(R.id.tv_checkin_spiker2);
         text3 = (TextView)findViewById(R.id.tv_checkin_spiker3);
         text4 = (TextView)findViewById(R.id.tv_checkin_spiker4);
+
+        text1.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        text2.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        text3.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        text4.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
         findViewById(R.id.image_chekin_spicker1).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker2).setOnClickListener(this);

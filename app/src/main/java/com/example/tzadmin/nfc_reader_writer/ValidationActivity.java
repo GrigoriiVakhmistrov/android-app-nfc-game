@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MoneyAdapter;
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
@@ -27,24 +28,28 @@ public class ValidationActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
-            if(user != null) {
+            if (user != null) {
 
                 ((ListView) findViewById(R.id.lv_history_valid)).
                         setAdapter(new MoneyAdapter(this, user.getMoneyLog()));
 
-                ((TextView) findViewById(R.id.tv_valid_fio)).
-                        setText(Message.concatFio(user));
+                TextView validFio = ((TextView) findViewById(R.id.tv_valid_fio));
+                validFio.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                validFio.setText(Message.concatFio(user));
 
-                ((TextView) findViewById(R.id.tv_valid_points)).
-                        setText("Баллы: " + String.valueOf(user.getBallance()));
+                TextView validPoints = ((TextView) findViewById(R.id.tv_valid_points));
+                validPoints.setText("Баллы: " + String.valueOf(user.getBallance()));
+                validPoints.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
-                ((TextView) findViewById(R.id.tv_valid_rating)).
-                        setText("Рейтинг: " + String.valueOf(user.getRating()));
+                TextView validRating = ((TextView) findViewById(R.id.tv_valid_rating));
+                validRating.setText("Рейтинг: " + String.valueOf(user.getRating()));
+                validRating.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
-                if(user.getRoute() != null && !user.routeid.equals(-1))
+
+                if (user.getRoute() != null && !user.routeid.equals(-1))
                     ((TextView) findViewById(R.id.tv_valid_routes)).
                             setText("Маршрут: " + user.getRoute().name);
                 else
@@ -69,8 +74,8 @@ public class ValidationActivity extends AppCompatActivity {
                                 setBackground(drawable);
 
                     } else {
-                         findViewById(R.id.image_valid).
-                                 setBackgroundResource(R.drawable.ic_spiker_not_found);
+                        findViewById(R.id.image_valid).
+                                setBackgroundResource(R.drawable.ic_spiker_not_found);
 
                         ((TextView)findViewById(R.id.text_team_valid)).setText(Message.NO_CLAN);
                     }
