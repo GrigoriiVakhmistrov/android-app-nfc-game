@@ -26,14 +26,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Timer timerSync;
     MyTimerTask timerSyncTask;
     String[] values = {
-            "1",
-            "1",
-            "1",
-            "1",
-            "1",
-            "1",
-            "1",
-            "1"
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
     };
     
     int[] imageId = {
