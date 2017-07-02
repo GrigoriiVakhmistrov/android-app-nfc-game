@@ -59,10 +59,14 @@ public class ShopAdapter extends BaseAdapter {
         ImageView imageView = (ImageView)convertView.findViewById(R.id.image_shop_item);
         TextView name = (TextView) convertView.findViewById(R.id.tv_shop_item_name);
         TextView info = (TextView) convertView.findViewById(R.id.tv_shop_item_info);
+
         //Button btn = (Button) shop.findViewById(R.id.btn_shop_item_add);
 
         name.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
         info.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+
+        name.setTextColor(context.getResources().getColor(R.color.colorBtn));
+        info.setTextColor(context.getResources().getColor(R.color.colorBtn));
 
         //imageView.setImageResource(items.get(position).pic);
         Picasso.with(context)

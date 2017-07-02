@@ -29,6 +29,10 @@ public class ScanNfcActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_nfc);
         infoScan = (TextView)findViewById(R.id.infoScan);
         infoScan.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        infoScan.setTextColor(getResources().getColor(R.color.colorBtn));
+
+        ((TextView)findViewById(R.id.grid_text)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        ((TextView)findViewById(R.id.grid_text)).setTextColor(getResources().getColor(R.color.colorBtn));
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
@@ -55,6 +59,8 @@ public class ScanNfcActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(
             this, 0, new Intent(this,
                         getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
+
     }
 
     @Override

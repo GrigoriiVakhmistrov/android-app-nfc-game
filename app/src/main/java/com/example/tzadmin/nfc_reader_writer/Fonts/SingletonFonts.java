@@ -34,7 +34,12 @@ public class SingletonFonts {
                     instanse = localInstanse = new SingletonFonts();
                 }
             }
-            SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/karlson.ttf"));
+            //SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/8365.otf"));
+            //SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/Candara.ttf"));
+            SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/Candarab.ttf"));
+            //SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/Candarai.ttf"));
+            //SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/Candaraz.ttf"));
+            //SetKarlson(Typeface.createFromAsset(activity.getAssets(), "fonts/karlson.ttf"));
         }
         return localInstanse;
     }

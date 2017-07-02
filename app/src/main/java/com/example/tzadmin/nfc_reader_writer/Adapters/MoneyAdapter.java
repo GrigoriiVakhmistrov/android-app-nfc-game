@@ -1,6 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
-import android.content.Context;
+import  android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,7 @@ public class MoneyAdapter extends BaseAdapter {
         return ((MoneyLogs)items[position]).id;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -62,6 +65,9 @@ public class MoneyAdapter extends BaseAdapter {
 
         money.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
         description.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+
+        money.setTextColor(context.getResources().getColor(R.color.colorBtn));
+        description.setTextColor(context.getResources().getColor(R.color.colorBtn));
 
         if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) {
             operation.setBackgroundResource(R.drawable.arrow_up);

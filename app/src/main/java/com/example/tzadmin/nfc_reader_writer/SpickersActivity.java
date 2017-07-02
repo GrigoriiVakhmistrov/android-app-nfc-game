@@ -43,6 +43,11 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         text3.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
         text4.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
+        text1.setTextColor(getResources().getColor(R.color.colorBtn));
+        text2.setTextColor(getResources().getColor(R.color.colorBtn));
+        text3.setTextColor(getResources().getColor(R.color.colorBtn));
+        text4.setTextColor(getResources().getColor(R.color.colorBtn));
+
         findViewById(R.id.image_chekin_spicker1).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker2).setOnClickListener(this);
         findViewById(R.id.image_chekin_spicker3).setOnClickListener(this);
