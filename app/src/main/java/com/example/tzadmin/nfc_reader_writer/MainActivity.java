@@ -37,14 +37,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     };
     
     int[] imageId = {
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi,
-            R.drawable.jiraf_xxxhdpi
+            R.drawable.main_register,
+            R.drawable.main_team,
+            R.drawable.main_chekin,
+            R.drawable.main_cube,
+            R.drawable.main_route,
+            R.drawable.main_spikers,
+            R.drawable.main_register,
+            R.drawable.main_chekin
     };
 
     GridView gridView;

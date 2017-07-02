@@ -7,6 +7,19 @@
     android:background="@drawable/mainback"
     tools:context="com.example.tzadmin.nfc_reader_writer.MainActivity">
 
+    <Button
+        android:id="@+id/btnRefresh"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_sync_ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintVertical_bias="0.096"
+        />
+
     <GridView
         android:id="@+id/gridView_main"
         android:layout_width="fill_parent"
@@ -21,18 +34,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77" />
-    
-    <Button
-        android:id="@+id/btnRefresh"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/ic_sync_ok"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
-        app:layout_constraintVertical_bias="0.096"
-        />
+        app:layout_constraintVertical_bias="0.898" />
 </android.support.constraint.ConstraintLayout>

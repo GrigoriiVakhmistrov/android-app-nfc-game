@@ -1,14 +1,9 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ButtonBarLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.annotation.RequiresApi;
-
 import com.example.tzadmin.nfc_reader_writer.Adapters.CreaseBuyAdapter;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
@@ -26,10 +20,9 @@ import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
-public class CreaseBuy extends AppCompatActivity implements View.OnClickListener {
+public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickListener {
 
     int currentShopId = -1;
     Shop currentShop = null;
@@ -53,21 +46,21 @@ public class CreaseBuy extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crease_buy);
+        setContentView(R.layout.activity_shop_crease_buy);
 
         shopImage = (ImageView) findViewById(R.id.imageView);
 
         name = (TextView) findViewById(R.id.name);
         name.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
-        name.setTextColor(getColor(R.color.colorBtn));
+        name.setTextColor(getResources().getColor(R.color.colorBtn));
 
         price = (TextView) findViewById(R.id.price);
         price.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
-        price.setTextColor(getColor(R.color.colorBtn));
+        price.setTextColor(getResources().getColor(R.color.colorBtn));
 
         description = (TextView) findViewById(R.id.description);
         description.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
-        price.setTextColor(getColor(R.color.colorBtn));
+        price.setTextColor(getResources().getColor(R.color.colorBtn));
 
         money = (EditText) findViewById(R.id.money);
 
@@ -115,10 +108,6 @@ public class CreaseBuy extends AppCompatActivity implements View.OnClickListener
         logs = new ArrayList<>();
 
         GView.setAdapter(new CreaseBuyAdapter(this, logs));
-
-        //Обновление стейта
-        //GView.invalidateViews();
-
     }
 
     @Override
@@ -150,6 +139,7 @@ public class CreaseBuy extends AppCompatActivity implements View.OnClickListener
             }
 
             Toast.makeText(this, "Покупка успешна!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 

@@ -42,9 +42,7 @@ public class MoneyLogs extends BaseModel {
         User u = new User(); //TODO this object is useless. Maybe it created for selectAllByParams() ?
         u.id = userid;
 
-        Collection<User> users = (Collection<User>) new User().selectAllByParams();
-
-        return (users == null || users.size() == 0) ? null : Utils.getFirst(users);
+        return (User) u.selectOneByParams();
     }
 
     public enum Type {
