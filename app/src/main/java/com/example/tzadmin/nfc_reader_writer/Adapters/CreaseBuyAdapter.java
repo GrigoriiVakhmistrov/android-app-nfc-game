@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.R;
@@ -51,6 +52,9 @@ public class CreaseBuyAdapter extends BaseAdapter {
 
         TextView myrectangle = (TextView)convertView.findViewById(R.id.route_rectangle);
         TextView square = (TextView)convertView.findViewById(R.id.route_square);
+
+        myrectangle.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+        square.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
 
         MoneyLogs route = states.get(position);
 

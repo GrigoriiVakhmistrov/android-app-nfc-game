@@ -49,18 +49,25 @@ public class ValidationActivity extends AppCompatActivity {
                 validRating.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
 
 
-                if (user.getRoute() != null && !user.routeid.equals(-1))
-                    ((TextView) findViewById(R.id.tv_valid_routes)).
-                            setText("Маршрут: " + user.getRoute().name);
-                else
+                if (user.getRoute() != null && !user.routeid.equals(-1)) {
+                    TextView validRoutes = ((TextView) findViewById(R.id.tv_valid_routes));
+    validRoutes.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                    validRoutes.setText("Маршрут: " + user.getRoute().name);
+                }else {
                     ((TextView) findViewById(R.id.tv_valid_routes)).
                             setText(Message.NO_ROUTE);
+                    ((TextView) findViewById(R.id.tv_valid_routes)).
+                            setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                }
 
                 if(user.getSubscribed().size() == 1) {
                     ArrayList<Morda> spiker = (ArrayList)user.getSubscribed();
                     ((TextView)findViewById(R.id.spiker_valid)).setText("Спикер: " + spiker.get(0).fio);
-                } else
-                    ((TextView)findViewById(R.id.spiker_valid)).setText(Message.NO_SPIKER);
+                    ((TextView)findViewById(R.id.spiker_valid)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                } else {
+                    ((TextView) findViewById(R.id.spiker_valid)).setText(Message.NO_SPIKER);
+                    ((TextView) findViewById(R.id.spiker_valid)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                }
 
                 try {
                     Group userGroup = user.getGroup();
@@ -78,6 +85,7 @@ public class ValidationActivity extends AppCompatActivity {
                                 setBackgroundResource(R.drawable.ic_spiker_not_found);
 
                         ((TextView)findViewById(R.id.text_team_valid)).setText(Message.NO_CLAN);
+                        ((TextView)findViewById(R.id.text_team_valid)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
