@@ -71,7 +71,8 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
                     user.update();
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(this, Message.USER_ALREADY_SUBSCRUBE_CLAN, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,
+                            Message.getUserAlreadySubscrubeClan(user.getGroup()), Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
             startActivityForResultTeam();

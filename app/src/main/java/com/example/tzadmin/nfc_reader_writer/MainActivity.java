@@ -14,6 +14,12 @@ import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.executor.Executor;
 import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
 
+import com.example.tzadmin.nfc_reader_writer.Models.Route;
+import com.example.tzadmin.nfc_reader_writer.Models.Shop;
+import com.example.tzadmin.nfc_reader_writer.NET.Sync;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,12 +41,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     int[] imageId = {
             R.drawable.main_register,
             R.drawable.main_team,
-            R.drawable.main_chekin,
             R.drawable.main_cube,
             R.drawable.main_route,
             R.drawable.main_spikers,
-            R.drawable.main_register,
-            R.drawable.main_chekin
+            R.drawable.main_shop,
+            R.drawable.main_chekin,
+            R.drawable.main_validation
     };
 
     GridView gridView;
@@ -70,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         timerSync = new Timer();
         timerSyncTask = new MyTimerTask();
-        timerSync.schedule(timerSyncTask, 1000, 50000);
+        timerSync.schedule(timerSyncTask, 10, 50000);
     }
 
     @Override

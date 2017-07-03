@@ -54,7 +54,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.image_chekin_spicker4).setOnClickListener(this);
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
         if(!isSubscrube)
-            findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.scan_activity);
+            findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.checkin_out_spiker);
 
         spickers = (ArrayList<Morda>) new Morda().selectAll();
 
@@ -69,14 +69,14 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     findViewById(R.id.image_chekin_spicker1).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
                     Picasso.with(this).load(spickers.get(0).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker1));
-                    text1.setText(spickers.get(0).fio + "\n\n" + spickers.get(0).description);
+                    text1.setText(spickers.get(0).fio);
                 }
 
                 if(spickers.get(1) == null)
                     findViewById(R.id.image_chekin_spicker2).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
                     Picasso.with(this).load(spickers.get(1).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker2));
-                    text2.setText(spickers.get(1).fio + "\n\n" + spickers.get(1).description);
+                    text2.setText(spickers.get(1).fio);
                 }
 
 
@@ -84,7 +84,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     findViewById(R.id.image_chekin_spicker3).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
                     Picasso.with(this).load(spickers.get(2).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker3));
-                    text3.setText(spickers.get(2).fio + "\n\n" + spickers.get(2).description);
+                    text3.setText(spickers.get(2).fio);
                 }
 
 
@@ -92,7 +92,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     findViewById(R.id.image_chekin_spicker4).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
                     Picasso.with(this).load(spickers.get(3).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker4));
-                    text4.setText(spickers.get(3).fio + "\n\n" + spickers.get(3).description);
+                    text4.setText(spickers.get(3).fio);
                 }
             } catch (Exception ex) {
                 Toast.makeText(this,
@@ -137,9 +137,12 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                         user.update();
                         Toast.makeText(this,
                                 Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
-                    } else
+                    } else {
+                        ArrayList<Morda> mordas = (ArrayList)user.getSubscribed();
                         Toast.makeText(this,
-                                Message.USER_ALREADY_SUBSCRUBE_SPIKER, Toast.LENGTH_LONG).show();
+                                Message.getUserAlreadySubscrubeSpiker(
+                                        mordas.get(0)), Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Collection<Morda> subscribes = user.getSubscribed();
 

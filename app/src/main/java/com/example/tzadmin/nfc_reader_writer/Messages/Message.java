@@ -1,5 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.Messages;
 
+import com.example.tzadmin.nfc_reader_writer.Models.Group;
+import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 
 /**
@@ -21,14 +23,19 @@ public class Message {
     public static final String USER_NOT_SUBSCRUBE_TO_ROUTE = "Пользователь не был подписан на маршрут";
     public static final String ERROR_URL_IMAGE = "Ошибка URL картинки спикера, обратитесь к администратору";
     public static final String USER_NOT_SUBSCRUBE_TO_SPIKER = "Пользователь небыл подписан на семинар";
-    public static final String USER_ALREADY_SUBSCRUBE_CLAN = "Пользователь уже состоит в клане";
     public static final String SYNC_OK = "Синхронизация закончена";
     public static final String GROUP_NO_THROW_SELECTED = "Группа для броска не выбрана";
     public static final String NO_CLAN = "Не состоит в клане";
     public static final String NO_ROUTE = "Маршрут: Нет маршрута";
-    public static final String USER_ALREADY_SUBSCRUBE_SPIKER = "Ошибка. Пользователь уже подписан на спикера";
     public static final String NO_SPIKER = "Спикер: Не подписан";
 
+    public static String getUserAlreadySubscrubeSpiker (Morda morda) {
+        return "Пользователь уже подписан на спикера \"" + morda.fio + "\"";
+    }
+
+    public static String getUserAlreadySubscrubeClan (Group group) {
+        return "Пользователь уже состоит в команде \"" + group.totemname + "\"";
+    }
 
     public static String userVisitRoute(String routeName) {
         return "Пользователь посетил маршрут - " + routeName;
@@ -39,7 +46,7 @@ public class Message {
     }
 
     public static String isUserHaveBraced(User user) {
-        return "У пользователя " + concatFio(user) + " уже привязан браслет";
+        return "У пользователя: " + concatFio(user) + " - уже привязан браслет";
     }
 
     public static String userSuccessfullyRegistered(User user) {
@@ -47,6 +54,6 @@ public class Message {
     }
 
     public static String concatFio(User user) {
-        return "Ф.И.О.: " + user.lastname + " " + user.firstname + " " + user.patronymic;
+        return user.lastname + " " + user.firstname + " " + user.patronymic;
     }
 }

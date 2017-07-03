@@ -59,8 +59,8 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         if (convertView == null) {
             view = inflater.inflate(android.R.layout.simple_dropdown_item_1line, null);
             ((TextView)view).setTypeface(SingletonFonts.getInstanse(context).getKarlson());
-            ((TextView)view).setText(users.get(position).firstname + " " +
-                    users.get(position).lastname + " " +
+            ((TextView)view).setText(users.get(position).lastname + " " +
+                    users.get(position).firstname + " " +
                         users.get(position).patronymic);
         } else {
             view = convertView;
@@ -73,7 +73,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         @Override
         public String convertResultToString(Object resultValue) {
             User u = (User) resultValue;
-            return u.firstname + " " + u.lastname + " " + u.patronymic;
+            return u.lastname + " " + u.firstname + " " + u.patronymic;
         }
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {

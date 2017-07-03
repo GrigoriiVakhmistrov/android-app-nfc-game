@@ -45,26 +45,22 @@ public class ActivitysAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View activitys;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            activitys = inflater.inflate(R.layout.activity_item, null);
-
-            TextView name = (TextView) activitys.findViewById(R.id.tv_activity_item_name);
-            TextView price = (TextView) activitys.findViewById(R.id.tv_activity_item_price);
-
-            name.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
-            price.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
-
-            name.setText(activityses.get(position).name);
-            price.setText(activityses.get(position).price.toString());
-
-        } else {
-            activitys = convertView;
+            convertView = inflater.inflate(R.layout.activity_item, null);
         }
 
-        return activitys;
+        TextView name = (TextView) convertView.findViewById(R.id.tv_activity_item_name);
+        TextView price = (TextView) convertView.findViewById(R.id.tv_activity_item_price);
+
+        name.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+        price.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+
+        name.setText(activityses.get(position).name);
+        price.setText(activityses.get(position).price.toString());
+
+        return convertView;
     }
 }
