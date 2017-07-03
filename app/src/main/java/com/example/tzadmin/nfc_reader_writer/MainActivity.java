@@ -14,7 +14,6 @@ import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -32,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "",
             "",
             "",
-            "",
             ""
+            //""
     };
     
     int[] imageId = {
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             R.drawable.main_cube,
             R.drawable.main_route,
             R.drawable.main_spikers,
-            R.drawable.main_shop,
-            R.drawable.main_validation
+            R.drawable.main_shop
+            //R.drawable.main_validation
     };
 
     GridView gridView;
@@ -107,9 +106,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case MainMenu.SHOP:
                 startActivity(new Intent(this, ShopActivity.class));
                 break;
-            case MainMenu.VALIDATION:
-                startActivity(new Intent(this, ValidationActivity.class));
-                break;
+            //case MainMenu.VALIDATION:
+                //startActivity(new Intent(this, ValidationActivity.class));
+                //break;
         }
     }
 
