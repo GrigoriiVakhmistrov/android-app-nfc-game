@@ -31,19 +31,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "",
             "",
             "",
+            "",
             ""
-            //""
     };
     
     int[] imageId = {
             R.drawable.main_register,
             R.drawable.main_team,
-            R.drawable.main_chekin,
             R.drawable.main_cube,
             R.drawable.main_route,
             R.drawable.main_spikers,
-            R.drawable.main_shop
-            //R.drawable.main_validation
+            R.drawable.main_shop,
+            R.drawable.main_chekin,
+            R.drawable.main_validation
     };
 
     GridView gridView;
@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case MainMenu.SHOP:
                 startActivity(new Intent(this, ShopActivity.class));
                 break;
-            //case MainMenu.VALIDATION:
-                //startActivity(new Intent(this, ValidationActivity.class));
-                //break;
+            case MainMenu.VALIDATION:
+                startActivity(new Intent(this, ValidationActivity.class));
+                break;
         }
     }
 
