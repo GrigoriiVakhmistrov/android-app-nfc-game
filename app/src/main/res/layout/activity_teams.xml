@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.TeamsActivity"
     android:id="@+id/team_constraint_layout"
-    android:background="@drawable/team_xxxhdpi">
+    android:background="@drawable/team_reg">
 
     <ImageButton
         android:background="@drawable/bigimot_xxxhdpi"
@@ -16,8 +16,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="bigimot_xxxhdpi"/>
 
     <ImageButton
@@ -28,8 +28,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="slon_xxxhdpi"/>
 
     <ImageButton
@@ -42,7 +42,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="jiraf_xxxhdpi"/>
 
     <ImageButton
@@ -55,7 +55,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="popygai_xxxhdpi"/>
 
     <ImageButton
@@ -67,7 +67,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="crocodile_xxxhdpi"
         app:layout_constraintHorizontal_bias="0.44" />
 
@@ -81,7 +81,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="monkey_xxxhdpi"/>
 
     <ImageButton
@@ -94,7 +94,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="zebra_xxxhdpi"/>
 
     <ImageButton
@@ -103,11 +103,11 @@
         android:layout_width="85dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.723"
+        app:layout_constraintHorizontal_bias="0.738"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="enot_xxxhdpi"/>
 
     <ImageButton
@@ -118,8 +118,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintVertical_bias="0.638"
+        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintVertical_bias="0.583"
         android:tag="lion_xxxhdpi"/>
 
     <ImageButton
@@ -214,7 +214,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintHorizontal_bias="0.738"
         app:layout_constraintVertical_bias="0.844"
         android:tag="jaba_xxxhdpi"/>
 
@@ -226,7 +226,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintVertical_bias="0.844"
         android:tag="albat_xxxhdpi"/>
 
@@ -238,7 +238,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintVertical_bias="0.844"
         android:tag="leo_xxxhdpi"/>
+
+    <ImageButton
+        android:background="@drawable/dico_xxxhdpi"
+        android:layout_width="85dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintVertical_bias="0.583"
+        android:tag="dico_xxxhdpi" />
 </android.support.constraint.ConstraintLayout>
