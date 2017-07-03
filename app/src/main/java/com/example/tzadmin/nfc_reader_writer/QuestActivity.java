@@ -53,7 +53,8 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
         if(user != null) {
             TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
             moneyOperationBalance.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
-            moneyOperationBalance.setText(Message.concatFio(user) + " ваш баланс = " + user.getBallance());
+            moneyOperationBalance.setText(Message.concatFioClear(user) +
+                    " - текущий баланс = " + user.getBallance() + " баллов");
             moneyOperationBalance.setTextColor(getResources().getColor(R.color.colorBtn));
         }
     }
