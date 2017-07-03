@@ -39,7 +39,7 @@ public class Message {
     }
 
     public static String isUserHaveBraced(User user) {
-        return "У пользователя " + concatFio(user) + " уже привязан браслет";
+        return "У пользователя: " + concatFioClear(user) + " - уже привязан браслет";
     }
 
     public static String userSuccessfullyRegistered(User user) {
@@ -48,5 +48,9 @@ public class Message {
 
     public static String concatFio(User user) {
         return "Ф.И.О.: " + user.lastname + " " + user.firstname + " " + user.patronymic;
+    }
+
+    public static String concatFioClear(User user) {
+        return user.lastname + " " + user.firstname + " " + user.patronymic;
     }
 }
