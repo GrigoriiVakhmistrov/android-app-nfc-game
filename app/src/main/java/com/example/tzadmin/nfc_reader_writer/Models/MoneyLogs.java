@@ -3,7 +3,9 @@ package com.example.tzadmin.nfc_reader_writer.Models;
 import android.support.annotation.Nullable;
 import com.example.tzadmin.nfc_reader_writer.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by velor on 6/23/17.
@@ -22,6 +24,8 @@ public class MoneyLogs extends BaseModel {
     public String description;
     @MAnnotation(SyncField = true)
     public Integer syncFlag;
+    @MAnnotation
+    public String date;
 
     public MoneyLogs(){
         id = -1;
@@ -30,6 +34,7 @@ public class MoneyLogs extends BaseModel {
         description = "-1";
         money = 0;
         syncFlag = 0;
+        date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
 
     @Override

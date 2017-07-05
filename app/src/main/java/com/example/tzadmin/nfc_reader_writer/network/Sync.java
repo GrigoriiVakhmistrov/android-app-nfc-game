@@ -89,12 +89,18 @@ public class Sync implements RequestDelegate {
     private int stage = 0;
 
     public Sync() {
-        stage1();
+        if (!SharedApplication.get().syncActive) {
+            SharedApplication.get().syncActive = true;
+            stage1();
+        }
     }
 
     public Sync(boolean isAutoSync) {
-        this.isAutoSync = isAutoSync;
-        stage1();
+        if (!SharedApplication.get().syncActive) {
+            SharedApplication.get().syncActive = true;
+            this.isAutoSync = isAutoSync;
+            stage1();
+        }
     }
 
     //Синхроним новых пользователей
@@ -618,6 +624,7 @@ public class Sync implements RequestDelegate {
         } else if (success == 8) {
             stage9();
         } else if (success == 9) {
+            SharedApplication.get().syncActive = false;
             if(!this.isAutoSync)
                 Toast.makeText(SharedApplication.get(),
                         Message.SYNC_OK, Toast.LENGTH_LONG).show();
