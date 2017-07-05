@@ -10,9 +10,11 @@ public class SharedApplication extends Application {
     private static SharedApplication instance;
     public static SharedApplication get() { return instance; }
 
+    public boolean syncActive;
 
     @Override
     public void onCreate() {
+        syncActive = false;
         super.onCreate();
         instance = this;
     }
