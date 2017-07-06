@@ -56,8 +56,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         !surName.getText().toString().equals("")) {
                     Intent intent = new Intent(this, ScanNfcActivity.class);
                     intent.putExtra("name",
+                            lastName.getText().toString() + " " +
                             firstName.getText().toString() + " " +
-                                    lastName.getText().toString() + " " +
                                     surName.getText().toString());
                     startActivityForResult(intent, _registerCode);
                 } else {
