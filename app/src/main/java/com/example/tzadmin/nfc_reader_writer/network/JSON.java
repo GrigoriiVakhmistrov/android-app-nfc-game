@@ -68,7 +68,7 @@ public final class JSON {
             object.add("id", new JsonPrimitive(src.id));
             object.add("name", new JsonPrimitive(src.name));
             object.add("description", new JsonPrimitive(src.description));
-            object.add("pic", new JsonPrimitive(src.pic.toString()));
+            object.add("pic", new JsonPrimitive(src.pic));
             object.add("price", new JsonPrimitive(src.price.toString()));
             return object;
         }
@@ -83,7 +83,7 @@ public final class JSON {
             shop.id = object.get("id").getAsInt();
             shop.name = object.get("name").getAsString();
             shop.description = object.get("description").getAsString();
-            shop.pic = parseIntDefault(object.get("pic").getAsString(), 10, -1);
+            shop.pic = object.get("pic").getAsString();
             shop.price = parseIntDefault(object.get("price").getAsString(), 10, 0);
             return shop;
         }
@@ -185,6 +185,7 @@ public final class JSON {
             object.add("description", new JsonPrimitive(src.description));
             object.add("capacity", new JsonPrimitive(src.capacity.toString()));
             object.add("price", new JsonPrimitive(src.price.toString()));
+            object.add("isvip", new JsonPrimitive(src.isvip.toString()));
             return object;
         }
     }
@@ -200,6 +201,7 @@ public final class JSON {
             route.description = object.get("description").getAsString();
             route.capacity = parseIntDefault(object.get("capacity").getAsString(), 10, 0);
             route.price = parseIntDefault(object.get("price").getAsString(), 10, 0);
+            route.isvip = parseIntDefault(object.get("isvip").getAsString(), 10, 0);
             return route;
         }
     }
@@ -252,6 +254,7 @@ public final class JSON {
             object.add("userid", new JsonPrimitive(src.userid.toString()));
             object.add("money", new JsonPrimitive(src.money.toString()));
             object.add("type", new JsonPrimitive(src.type));
+            object.add("date", new JsonPrimitive(src.date));
             object.add("description", new JsonPrimitive(src.description));
             return object;
         }
@@ -268,6 +271,7 @@ public final class JSON {
             logs.money = parseIntDefault(object.get("money").getAsString(), 10, 0);
             logs.type = object.get("type").getAsString();
             logs.description = object.get("description").getAsString();
+            logs.date = object.get("date").getAsString();
             return logs;
         }
     }

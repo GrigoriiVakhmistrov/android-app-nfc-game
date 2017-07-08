@@ -498,6 +498,7 @@ public class Sync implements RequestDelegate {
                 e.lastname = o.getAsJsonObject().get("lastname").getAsString();
                 e.patronymic = o.getAsJsonObject().get("patronymic").getAsString();
                 e.rfcid = o.getAsJsonObject().get("rfcid").getAsString();
+                //noinspection Duplicates
                 if (!o.getAsJsonObject().get("groupid").isJsonNull())
                     e.groupid = Utilites.tryParseInt(o.getAsJsonObject().get("groupid").getAsString(), -1);
                 if (!o.getAsJsonObject().get("routeid").isJsonNull())
