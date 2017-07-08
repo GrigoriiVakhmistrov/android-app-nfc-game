@@ -54,6 +54,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(!firstName.getText().toString().equals("") &&
                         !lastName.getText().toString().equals("") &&
                         !surName.getText().toString().equals("")) {
+
+                    User u = new User();
+                    u.firstname = firstName.getText().toString();
+                    u.lastname = lastName.getText().toString();
+                    u.patronymic = surName.getText().toString();
+
+                    u = (User) u.selectOneByParams();
+                    if (u != null) {
+                        Toast.makeText(this, Message.DUBLICATE_USER, Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+
+
                     Intent intent = new Intent(this, ScanNfcActivity.class);
                     intent.putExtra("name",
                             lastName.getText().toString() + " " +

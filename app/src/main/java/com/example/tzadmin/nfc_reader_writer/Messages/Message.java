@@ -11,6 +11,7 @@ import com.example.tzadmin.nfc_reader_writer.Models.User;
 public class Message {
     public static final String BRACER_ALREADY_EXIST = "Ошибка. Браслет уже зарегистрирован";
     public static final String FIELDS_NOT_FILLED = "Ошибка. Не все поля заполнены";
+    public static final String DUBLICATE_USER = "Ошибка. Пользователь уже существует";
     public static final String USER_THIS_BRACER_NOT_FOUND = "Ошибка. Пользователь с таким браслетом не зарегистрирован";
     public static final String CLEAR_RFCID_SUCCESSFULLY = "Браслет успешно сброшен";
     public static final String DEVICE_NOT_FOUND_NFC_ADAPTHER = "Устройство не поддерживает NFC сканер браслета, либо NFC сканер вылючен";

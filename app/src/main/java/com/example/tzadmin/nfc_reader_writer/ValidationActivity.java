@@ -68,7 +68,7 @@ public class ValidationActivity extends AppCompatActivity {
                             setTextColor(getResources().getColor(R.color.colorBtn));
                 }
 
-                if(user.getSubscribed().size() == 1) {
+                if(user.getSubscribed().size() > 0) {
                     ArrayList<Morda> spiker = (ArrayList)user.getSubscribed();
                     ((TextView)findViewById(R.id.spiker_valid)).setText("Спикер: " + spiker.get(0).fio);
                     ((TextView)findViewById(R.id.spiker_valid)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
