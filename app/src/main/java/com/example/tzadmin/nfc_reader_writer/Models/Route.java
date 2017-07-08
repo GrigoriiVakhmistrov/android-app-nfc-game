@@ -14,6 +14,7 @@ public class Route extends BaseModel {
         this.description = "";
         this.capacity = 0;
         this.price = 0;
+        this.isvip = -1;
 //        this.isdeleted = "-1";
     }
 
@@ -27,6 +28,8 @@ public class Route extends BaseModel {
     public Integer capacity;
     @MAnnotation(DefaultValue = "0")
     public Integer price;
+    @MAnnotation(DefaultValue = "-1")
+    public Integer isvip;
 //    @MAnnotation
 //    public String isdeleted;
 

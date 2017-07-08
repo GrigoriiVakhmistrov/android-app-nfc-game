@@ -24,7 +24,7 @@ public class MoneyLogs extends BaseModel {
     public String description;
     @MAnnotation(SyncField = true)
     public Integer syncFlag;
-    @MAnnotation
+    @MAnnotation(DefaultValue = "")
     public String date;
 
     public MoneyLogs(){
@@ -34,7 +34,7 @@ public class MoneyLogs extends BaseModel {
         description = "-1";
         money = 0;
         syncFlag = 0;
-        date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        date = "";
     }
 
     @Override

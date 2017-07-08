@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "description text,"
                 + "capacity text,"
                 + "price text,"
+                + "isvip text,"
                 + "isdeleted text" + ");");
 
         db.execSQL("create table tbGroups ("
@@ -67,6 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "type text,"
                 + "description text,"
                 + "syncFlag text,"
+                + "date text,"
                 + "isdeleted text" + ");");
 
         db.execSQL("create table tbShop ("

@@ -478,6 +478,7 @@ public class Sync implements RequestDelegate {
                 e.description = o.getAsJsonObject().get("description").getAsString();
                 e.capacity = Utilites.tryParseInt(o.getAsJsonObject().get("capacity").getAsString(), 0);
                 e.price = Utilites.tryParseInt(o.getAsJsonObject().get("price").getAsString(), 0);
+                e.isvip = Utilites.tryParseInt(o.getAsJsonObject().get("isvip").getAsString(), 0);
 
                 objects.add(e);
             }
@@ -520,6 +521,7 @@ public class Sync implements RequestDelegate {
                 e.userid = Utilites.tryParseInt(o.getAsJsonObject().get("userid").getAsString(), -1);
                 e.money = Utilites.tryParseInt(o.getAsJsonObject().get("money").getAsString(), 0);
                 e.type = o.getAsJsonObject().get("type").getAsString();
+                e.date = o.getAsJsonObject().get("date").getAsString();
                 e.description = o.getAsJsonObject().get("description").getAsString();
 
                 objects.add(e);

@@ -3,8 +3,10 @@ package com.example.tzadmin.nfc_reader_writer.Models;
 import android.support.annotation.IntegerRes;
 import android.support.annotation.StringDef;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by forz on 11.06.17.
@@ -97,6 +99,7 @@ public class User extends BaseModel {
         ml.money = money;
         ml.description = description;
         ml.type = MoneyLogs.Type.ADD_MONEY.toString();
+        ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
         return  ml.insert();
     }
@@ -111,6 +114,7 @@ public class User extends BaseModel {
         ml.money = money;
         ml.description = description;
         ml.type = MoneyLogs.Type.REMOVE_MONEY.toString();
+        ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
         return  ml.insert();
     }
