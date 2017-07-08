@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.ActivitysAdapter;
@@ -17,13 +18,13 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
 
     ActivitysAdapter adapter;
     ArrayList<Event> activitys;
-    ListView lv_main;
+    GridView lv_main;
     Event thisActivity = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activityses);
-        lv_main = (ListView) findViewById(R.id.lv_activitys_main);
+        lv_main = (GridView) findViewById(R.id.lv_activitys_main);
 
         activitys = (ArrayList) new Event().selectAll();
         adapter = new ActivitysAdapter(this, activitys);
