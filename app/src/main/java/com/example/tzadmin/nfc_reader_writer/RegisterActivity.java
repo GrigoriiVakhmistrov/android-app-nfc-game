@@ -104,6 +104,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     clearFields();
                     break;
                 case _bindCode:
+                    if (new User().isNfcIdAlreadyExist(RfcId)) {
+                        Toast.makeText(this, Message.BRACER_ALREADY_EXIST, Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    Toast.makeText(this,
+                            Message.userSuccessfullyRegistered(register(RfcId)),
+                            Toast.LENGTH_SHORT).show();
                     bind(RfcId);
                     break;
             }
@@ -114,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
         selectedUser = (User) parent.getItemAtPosition(position);
-        if(new User().isNfcIdAlreadyExist(selectedUser.rfcid)) {
+        if(!selectedUser.rfcid.equals("")) {
             Toast.makeText(this,
                     Message.isUserHaveBraced(selectedUser),
                     Toast.LENGTH_LONG).show();
