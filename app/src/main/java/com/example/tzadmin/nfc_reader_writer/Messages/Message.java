@@ -39,11 +39,11 @@ public class Message {
     }
 
     public static String userVisitRoute(String routeName) {
-        return "Пользователь посетил маршрут - " + routeName;
+        return "Маршрут - " + routeName;
     }
 
     public static String userVisitSpiker(String spikerName) {
-        return "Пользователь посетил семинар - " + spikerName;
+        return "Семинар - " + spikerName;
     }
 
     public static String isUserHaveBraced(User user) {

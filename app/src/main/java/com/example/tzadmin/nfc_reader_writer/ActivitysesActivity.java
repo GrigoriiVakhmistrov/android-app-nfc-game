@@ -54,7 +54,7 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
                 user.AddMoney(thisActivity.price,
-                        "баллы за активность - " + thisActivity.name);
+                        "Активность - " + thisActivity.name);
                 Toast.makeText(this,
                         Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
             } else
