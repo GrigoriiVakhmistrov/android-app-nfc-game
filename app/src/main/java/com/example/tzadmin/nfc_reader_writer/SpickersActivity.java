@@ -160,6 +160,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
             }
+            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
         }
     }
 }

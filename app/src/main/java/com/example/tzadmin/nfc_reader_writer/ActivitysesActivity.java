@@ -59,6 +59,7 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
             } else
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
+            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
         }
     }
 }
