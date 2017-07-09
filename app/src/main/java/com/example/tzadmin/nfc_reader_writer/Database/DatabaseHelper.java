@@ -92,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table tbMorda ("
                 + "id integer primary key autoincrement,"
                 + "fio text,"
+                + "capacity text,"
                 + "description text,"
                 + "pic text" + ");");
 

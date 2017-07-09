@@ -70,6 +70,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 else {
                     Picasso.with(this).load(spickers.get(0).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker1));
                     text1.setText(spickers.get(0).fio);
+                    ((TextView)findViewById(R.id.tv_checkin_capacity1)).setText("Свободно мест - " + spickers.get(0).getLeft());
                 }
 
                 if(spickers.get(1) == null)
@@ -77,6 +78,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 else {
                     Picasso.with(this).load(spickers.get(1).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker2));
                     text2.setText(spickers.get(1).fio);
+                    ((TextView)findViewById(R.id.tv_checkin_capacity2)).setText("Свободно мест - " + spickers.get(1).getLeft());
+
                 }
 
 
@@ -85,6 +88,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 else {
                     Picasso.with(this).load(spickers.get(2).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker3));
                     text3.setText(spickers.get(2).fio);
+                    ((TextView)findViewById(R.id.tv_checkin_capacity3)).setText("Свободно мест - " + spickers.get(2).getLeft());
+
                 }
 
 
@@ -93,6 +98,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 else {
                     Picasso.with(this).load(spickers.get(3).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker4));
                     text4.setText(spickers.get(3).fio);
+                    ((TextView)findViewById(R.id.tv_checkin_capacity4)).setText("Свободно мест - " + spickers.get(3).getLeft());
+
                 }
             } catch (Exception ex) {
                 Toast.makeText(this,
