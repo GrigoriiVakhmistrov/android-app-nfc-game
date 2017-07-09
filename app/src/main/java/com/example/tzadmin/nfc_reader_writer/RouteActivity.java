@@ -13,6 +13,7 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class RouteActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -25,7 +26,10 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
-        states = new ArrayList(new Route().selectAll());
+        Route tmp = new Route();
+        tmp.isvip = 0;
+
+        states = new ArrayList(tmp.selectAllByParams());
 
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
 

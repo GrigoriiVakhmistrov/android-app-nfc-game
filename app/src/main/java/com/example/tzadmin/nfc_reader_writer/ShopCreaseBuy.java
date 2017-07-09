@@ -20,7 +20,10 @@ import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickListener {
 
@@ -156,6 +159,7 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
                         m.description = "Покупка - " + currentShop.name;
                         m.money = currentMoney;
                         m.type = MoneyLogs.Type.REMOVE_MONEY.toString();
+                        m.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
                         logs.add(m);
                         GView.invalidateViews();

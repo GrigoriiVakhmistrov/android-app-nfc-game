@@ -3,13 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false">
-
+    android:baselineAligned="false"
+    android:weightSum="1">
+<!--
     <ImageView
         android:id="@+id/action"
         android:layout_width="50dp"
         android:layout_height="60dp"
         android:background="@drawable/arrow_down" />
+        -->
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="error"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
 
     <TextView
         android:id="@+id/money"

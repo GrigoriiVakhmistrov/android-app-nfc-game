@@ -59,22 +59,29 @@ public class MoneyAdapter extends BaseAdapter {
 
         MoneyLogs l = (MoneyLogs) items[position];
 
-        ImageView operation = (ImageView) convertView.findViewById(R.id.action);
+        //ImageView operation = (ImageView) convertView.findViewById(R.id.action);
+        TextView date = (TextView)convertView.findViewById(R.id.date);
         TextView money = (TextView)convertView.findViewById(R.id.money);
         TextView description = (TextView)convertView.findViewById(R.id.text);
 
+        date.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
         money.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
         description.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
 
+        date.setTextColor(context.getResources().getColor(R.color.colorBtn));
         money.setTextColor(context.getResources().getColor(R.color.colorBtn));
         description.setTextColor(context.getResources().getColor(R.color.colorBtn));
 
+        /*
         if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) {
             operation.setBackgroundResource(R.drawable.arrow_up);
         } else {
             operation.setBackgroundResource(R.drawable.arrow_down);
         }
+        */
 
+        l.date.replace(" ", "\\n");
+        date.setText(l.date);
         money.setText(l.money.toString());
         description.setText(l.description);
 
