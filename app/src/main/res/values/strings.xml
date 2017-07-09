@@ -12,5 +12,6 @@
     /*CubeActivity*/
     <string name="write">Записать</string>
     <string name="title_activity_crease_buy">CreaseBuy</string>
+    <string name="title_activity_main_validation">MainValidationActivity</string>
 
 </resources>

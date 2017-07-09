@@ -70,6 +70,7 @@
         <activity
             android:name=".ShopCreaseBuy"
             android:screenOrientation="landscape" />
+        <activity android:name=".MainValidationActivity"></activity>
     </application>
 
 </manifest>

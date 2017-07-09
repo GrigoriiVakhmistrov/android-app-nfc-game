@@ -71,6 +71,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Picasso.with(this).load(spickers.get(0).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker1));
                     text1.setText(spickers.get(0).fio);
                     ((TextView)findViewById(R.id.tv_checkin_capacity1)).setText("Свободно мест - " + spickers.get(0).getLeft());
+                    ((TextView)findViewById(R.id.tv_checkin_capacity1)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                    ((TextView)findViewById(R.id.tv_checkin_capacity1)).setTextColor(getResources().getColor(R.color.colorBtn));
                 }
 
                 if(spickers.get(1) == null)
@@ -79,7 +81,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Picasso.with(this).load(spickers.get(1).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker2));
                     text2.setText(spickers.get(1).fio);
                     ((TextView)findViewById(R.id.tv_checkin_capacity2)).setText("Свободно мест - " + spickers.get(1).getLeft());
-
+                    ((TextView)findViewById(R.id.tv_checkin_capacity2)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                    ((TextView)findViewById(R.id.tv_checkin_capacity2)).setTextColor(getResources().getColor(R.color.colorBtn));
                 }
 
 
@@ -89,7 +92,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Picasso.with(this).load(spickers.get(2).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker3));
                     text3.setText(spickers.get(2).fio);
                     ((TextView)findViewById(R.id.tv_checkin_capacity3)).setText("Свободно мест - " + spickers.get(2).getLeft());
-
+                    ((TextView)findViewById(R.id.tv_checkin_capacity3)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                    ((TextView)findViewById(R.id.tv_checkin_capacity3)).setTextColor(getResources().getColor(R.color.colorBtn));
                 }
 
 
@@ -99,7 +103,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Picasso.with(this).load(spickers.get(3).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker4));
                     text4.setText(spickers.get(3).fio);
                     ((TextView)findViewById(R.id.tv_checkin_capacity4)).setText("Свободно мест - " + spickers.get(3).getLeft());
-
+                    ((TextView)findViewById(R.id.tv_checkin_capacity4)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                    ((TextView)findViewById(R.id.tv_checkin_capacity4)).setTextColor(getResources().getColor(R.color.colorBtn));
                 }
             } catch (Exception ex) {
                 Toast.makeText(this,
@@ -155,7 +160,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
 
                     for (Morda m : subscribes) {
                         if (m.id.equals(spicker.id)) {
-                            user.AddMoney(10, Message.userVisitSpiker(spicker.fio));
+                            user.AddMoney(800, Message.userVisitSpiker(spicker.fio));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
                             finish();
                             return;

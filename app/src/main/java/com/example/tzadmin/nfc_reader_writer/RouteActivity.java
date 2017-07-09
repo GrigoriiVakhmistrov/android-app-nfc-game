@@ -63,7 +63,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                             Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
                     } else {
                         if(user.routeid == targetRoute.id) {
-                            user.AddMoney(10, Message.userVisitRoute(targetRoute.name));
+                            user.AddMoney(targetRoute.price, Message.userVisitRoute(targetRoute.name));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_ROUTE, Toast.LENGTH_SHORT).show();
