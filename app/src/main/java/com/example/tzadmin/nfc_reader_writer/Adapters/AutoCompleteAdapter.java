@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+import com.example.tzadmin.nfc_reader_writer.R;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         View view;
 
         if (convertView == null) {
-            view = inflater.inflate(android.R.layout.simple_dropdown_item_1line, null);
+            view = inflater.inflate(R.layout.auto_completed_item, null);
             ((TextView)view).setTypeface(SingletonFonts.getInstanse(context).getKarlson());
             ((TextView)view).setText(users.get(position).lastname + " " +
                     users.get(position).firstname + " " +
