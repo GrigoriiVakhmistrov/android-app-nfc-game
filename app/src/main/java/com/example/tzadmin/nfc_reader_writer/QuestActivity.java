@@ -18,13 +18,12 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
 
     User user;
     String RfcId;
-    EditText value, description;
+    EditText value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest);
         value = (EditText) findViewById(R.id.moneyOperation_value);
-        description = (EditText) findViewById(R.id.moneyOperation_desc);
         findViewById(R.id.moneyOperation_write).setOnClickListener(this);
 
 
@@ -42,13 +41,13 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
             if(user != null) {
                 if(value.getText().length() != 0) {
                     user.AddMoney(Integer.valueOf(
-                           value.getText().toString()), description.getText().toString());
+                           value.getText().toString()), "Квест");
                     user.update();
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 }
 
                 Intent i = new Intent(this, ScanNfcActivity.class);
-                i.putExtra("name", "Добавление квеста - " + description.getText() + " со стоимостью - " + value.getText());
+                i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
                 startActivityForResult(i, 200);
 
             } else {
@@ -75,7 +74,6 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
 
     private void clearEditBoxs () {
         value.getText().clear();
-        description.getText().clear();
     }
 
     @Override
@@ -83,14 +81,13 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.moneyOperation_write:
 
-                if (value.getText().equals("") ||
-                        description.getText().equals("")) {
+                if (value.getText().equals("")) {
                     Toast.makeText(this, "Все поля обязательны для заполнения", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 Intent i = new Intent(this, ScanNfcActivity.class);
-                i.putExtra("name", "Добавление квеста - " + description.getText() + " со стоимостью - " + value.getText());
+                i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
                 startActivityForResult(i, 200);
                 break;
         }

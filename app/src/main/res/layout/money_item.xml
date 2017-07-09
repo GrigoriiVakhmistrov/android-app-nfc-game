@@ -12,36 +12,10 @@
         android:layout_height="60dp"
         android:background="@drawable/arrow_down" />
         -->
-    <LinearLayout
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/validation_time"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="error"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            />
-
-        <TextView
-            android:id="@+id/validation_date"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="error"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            />
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/money"
-        android:layout_width="60dp"
+        android:layout_width="65dp"
         android:layout_height="60dp"
         android:text="1234"
         android:paddingLeft="10dp"
