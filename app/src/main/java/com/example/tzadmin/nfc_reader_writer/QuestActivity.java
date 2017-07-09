@@ -45,16 +45,14 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
                     user.update();
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 }
-
-                Intent i = new Intent(this, ScanNfcActivity.class);
-                i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
-                startActivityForResult(i, 200);
-
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
                 //finish();
             }
+            Intent i = new Intent(this, ScanNfcActivity.class);
+            i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
+            startActivityForResult(i, 200);
         }
 
         if(resultCode == RESULT_CANCELED)
