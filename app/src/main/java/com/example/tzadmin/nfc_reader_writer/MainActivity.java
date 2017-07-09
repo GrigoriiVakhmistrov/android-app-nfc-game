@@ -25,6 +25,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    public static boolean itsOnlyValidationApp = true;
+
     Timer timerSync;
     MyTimerTask timerSyncTask;
     String[] values = {
@@ -59,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
+        timerSync = new Timer();
+        timerSyncTask = new MyTimerTask();
+        timerSync.schedule(timerSyncTask, 10, 50000);
+
         gridView = (GridView) findViewById(R.id.gridView_main);
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
         gridView.setAdapter(adapter);
@@ -74,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        timerSync = new Timer();
-        timerSyncTask = new MyTimerTask();
-        timerSync.schedule(timerSyncTask, 10, 50000);
+        if(itsOnlyValidationApp) {
+            startActivityForResult(new Intent(this, MainValidationActivity.class), 200);
+        }
     }
 
     @Override
@@ -116,6 +122,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if(itsOnlyValidationApp)
+            finish();
+    }
     class MyTimerTask extends TimerTask {
         private final SynchronizationTask task = new SynchronizationTask();
 

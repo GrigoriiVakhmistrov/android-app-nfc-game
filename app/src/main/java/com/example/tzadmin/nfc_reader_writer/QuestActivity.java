@@ -18,16 +18,19 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
 
     User user;
     String RfcId;
-    EditText value, description;
+    EditText value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest);
         value = (EditText) findViewById(R.id.moneyOperation_value);
-        description = (EditText) findViewById(R.id.moneyOperation_desc);
         findViewById(R.id.moneyOperation_write).setOnClickListener(this);
 
-        startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+
+        TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
+        moneyOperationBalance.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        moneyOperationBalance.setText("Введите название квеста и его сумму");
+        moneyOperationBalance.setTextColor(getResources().getColor(R.color.colorBtn));
     }
 
     @Override
@@ -36,12 +39,20 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
             RfcId = data.getStringExtra("RfcId");
             user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                fillTextViews();
+                if(value.getText().length() != 0) {
+                    user.AddMoney(Integer.valueOf(
+                           value.getText().toString()), "Квест");
+                    user.update();
+                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
-                finish();
+                //finish();
             }
+            Intent i = new Intent(this, ScanNfcActivity.class);
+            i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
+            startActivityForResult(i, 200);
         }
 
         if(resultCode == RESULT_CANCELED)
@@ -61,22 +72,23 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
 
     private void clearEditBoxs () {
         value.getText().clear();
-        description.getText().clear();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.moneyOperation_write:
-                if(value.getText().length() != 0) {
-                    user.AddMoney(Integer.valueOf(
-                           value.getText().toString()), description.getText().toString());
-                    user.update();
-                    clearEditBoxs();
-                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+
+                if (value.getText().equals("")) {
+                    Toast.makeText(this, "Все поля обязательны для заполнения", Toast.LENGTH_LONG).show();
+                    return;
                 }
+
+                Intent i = new Intent(this, ScanNfcActivity.class);
+                i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
+                startActivityForResult(i, 200);
                 break;
         }
-        fillTextViews();
+//        fillTextViews();
     }
 }

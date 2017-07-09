@@ -43,9 +43,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view,
                             int position, long id) {
         targetRoute = states.get(position);
-        Intent intent = new Intent(this, ScanNfcActivity.class);
-        intent.putExtra("name", states.get(position).name);
-        startActivityForResult(intent, 200);
+        startActivityForResult(states.get(position).name);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                             Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
                     } else {
                         if(user.routeid == targetRoute.id) {
-                            user.AddMoney(10, Message.userVisitRoute(targetRoute.name));
+                            user.AddMoney(targetRoute.price, Message.userVisitRoute(targetRoute.name));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_ROUTE, Toast.LENGTH_SHORT).show();
@@ -73,7 +71,14 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 } else
                     Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
+                startActivityForResult(targetRoute.name);
             }
         }
+    }
+
+    public void startActivityForResult(String name) {
+        Intent intent = new Intent(this, ScanNfcActivity.class);
+        intent.putExtra("name", name);
+        startActivityForResult(intent, 200);
     }
 }

@@ -12,19 +12,10 @@
         android:layout_height="60dp"
         android:background="@drawable/arrow_down" />
         -->
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="error"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        />
 
     <TextView
         android:id="@+id/money"
-        android:layout_width="60dp"
+        android:layout_width="65dp"
         android:layout_height="60dp"
         android:text="1234"
         android:paddingLeft="10dp"

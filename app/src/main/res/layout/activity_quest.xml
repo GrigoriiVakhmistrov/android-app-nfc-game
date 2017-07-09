@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.QuestActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:background="@drawable/quest">
 
     <TextView
@@ -22,7 +24,7 @@
         app:layout_constraintVertical_bias="0.279">
     </TextView>
 
-    <EditText
+    <!--<EditText
         android:id="@+id/moneyOperation_desc"
         android:layout_width="410dp"
         android:layout_height="61dp"
@@ -33,7 +35,7 @@
         android:ems="10"
         android:hint="Введите описание"
         android:inputType="text"
-        app:layout_constraintVertical_bias="0.645" />
+        app:layout_constraintVertical_bias="0.645" />-->
 
     <EditText
         android:id="@+id/moneyOperation_value"
@@ -46,7 +48,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811"
+        app:layout_constraintVertical_bias="0.761"
         app:layout_constraintHorizontal_bias="0.361" />
 
     <Button
@@ -60,7 +62,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintVertical_bias="0.752"
         app:layout_constraintHorizontal_bias="0.637" />
 
     <!--<Button

@@ -1,6 +1,5 @@
 package com.example.tzadmin.nfc_reader_writer;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -53,38 +49,6 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         mark1 = groupActivity.p1;
         mark2 = groupActivity.p2;
         mark3 = groupActivity.p3;
-
-        //TODO FIX ME PLEEEAASEEE !!!!! fucking hardcoder
-        //-----------------------------------------------
-        Collection<Button> buttons = new ArrayList<>();
-        buttons = getAllByBlock(ll_cube_block1);
-
-        for (Button btn : buttons) {
-            if(Integer.valueOf(btn.getText().toString()) == groupActivity.p1)
-                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
-            else
-                btn.setBackground(getDrawable(R.drawable.btn_gradient));
-        }
-
-        buttons = getAllByBlock(ll_cube_block2);
-
-        for (Button btn : buttons) {
-            if(Integer.valueOf(btn.getText().toString()) == groupActivity.p2)
-                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
-            else
-                btn.setBackground(getDrawable(R.drawable.btn_gradient));
-        }
-
-        buttons = getAllByBlock(ll_cube_block3);
-
-        for (Button btn : buttons) {
-            if(getValueFromButton(btn) == groupActivity.p3)
-                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
-            else
-                btn.setBackground(getDrawable(R.drawable.btn_gradient));
-        }
-
-        //-----------------------------------------------
 
         setAllClickListner(getAllByBlock(ll_cube_block1));
         setAllClickListner(getAllByBlock(ll_cube_block2));

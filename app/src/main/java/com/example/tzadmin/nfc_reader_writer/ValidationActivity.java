@@ -16,11 +16,16 @@ import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+import com.example.tzadmin.nfc_reader_writer.NET.Sync;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ValidationActivity extends AppCompatActivity {
 
+    Timer timerSync;
+    MyTimerTask timerSyncTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,11 @@ public class ValidationActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
+            if(MainActivity.itsOnlyValidationApp) {
+                timerSync = new Timer();
+                timerSyncTask = new MyTimerTask();
+                timerSync.schedule(timerSyncTask, 20000);
+            }
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if (user != null) {
@@ -57,8 +67,9 @@ public class ValidationActivity extends AppCompatActivity {
 
                 if (user.getRoute() != null && !user.routeid.equals(-1)) {
                     TextView validRoutes = ((TextView) findViewById(R.id.tv_valid_routes));
-    validRoutes.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     validRoutes.setText("Маршрут: " + user.getRoute().name);
+                    validRoutes.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+                    validRoutes.setTextColor(getResources().getColor(R.color.colorBtn));
                 }else {
                     ((TextView) findViewById(R.id.tv_valid_routes)).
                             setText(Message.NO_ROUTE);
@@ -107,5 +118,19 @@ public class ValidationActivity extends AppCompatActivity {
             }
         } else
             finish();
+    }
+
+    class MyTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    finish();
+                }
+            });
+        }
     }
 }

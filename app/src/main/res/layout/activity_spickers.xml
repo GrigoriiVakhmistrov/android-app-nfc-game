@@ -13,54 +13,122 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_checkin_capacity1"
+        android:text="Нет спикера"
+        android:textColor="@color/colorBlack"
+        android:layout_width="202dp"
+        android:layout_height="23dp"
+        android:textAlignment="center"
+        android:layout_marginTop="152dp"
+        android:textSize="18sp"
+        app:layout_constraintVertical_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.051">
+    </TextView>
+
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_checkin_capacity2"
+        android:text="Нет спикера"
+        android:textColor="@color/colorBlack"
+        android:layout_width="202dp"
+        android:layout_height="23dp"
+        android:textAlignment="center"
+        android:layout_marginTop="152dp"
+        android:textSize="18sp"
+        app:layout_constraintVertical_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.34">
+    </TextView>
+
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_checkin_capacity3"
+        android:text="Нет спикера"
+        android:textColor="@color/colorBlack"
+        android:layout_width="202dp"
+        android:layout_height="23dp"
+        android:textAlignment="center"
+        android:layout_marginTop="152dp"
+        android:textSize="18sp"
+        app:layout_constraintVertical_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.629">
+    </TextView>
+
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_checkin_capacity4"
+        android:text="Нет спикера"
+        android:textColor="@color/colorBlack"
+        android:layout_width="202dp"
+        android:layout_height="23dp"
+        android:textAlignment="center"
+        android:layout_marginTop="152dp"
+        android:textSize="18sp"
+        app:layout_constraintVertical_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.936">
+    </TextView>
+
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tv_checkin_spiker2"
         android:text="Нет спикера"
         android:textColor="@color/colorBlack"
         android:layout_width="202dp"
-        android:layout_height="123dp"
+        android:layout_height="100dp"
         android:textAlignment="center"
         android:layout_marginTop="152dp"
         android:textSize="18sp"
-        app:layout_constraintVertical_bias="0.869"
+        app:layout_constraintVertical_bias="0.796"
         app:layout_constraintHorizontal_bias="0.34">
     </TextView>
 
     <TextView
         android:id="@+id/tv_checkin_spiker4"
         android:layout_width="202dp"
-        android:layout_height="123dp"
+        android:layout_height="100dp"
         android:layout_marginTop="90dp"
         android:text="Нет спикера"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894"></TextView>
+        app:layout_constraintVertical_bias="0.833"></TextView>
 
     <TextView
         android:id="@+id/tv_checkin_spiker3"
         android:layout_width="202dp"
-        android:layout_height="123dp"
+        android:layout_height="100dp"
         android:layout_marginTop="152dp"
         android:text="Нет спикера"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.637"
+        app:layout_constraintHorizontal_bias="0.629"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869"></TextView>
+        app:layout_constraintVertical_bias="0.796"></TextView>
 
     <TextView
         android:id="@+id/tv_checkin_spiker1"
         android:layout_width="202dp"
-        android:layout_height="123dp"
+        android:layout_height="100dp"
         android:layout_marginTop="152dp"
         android:text="Нет спикера"
         android:textAlignment="center"
@@ -71,7 +139,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869"></TextView>
+        app:layout_constraintVertical_bias="0.796"></TextView>
 
     <ImageView
         android:id="@+id/image_chekin_spicker2"
