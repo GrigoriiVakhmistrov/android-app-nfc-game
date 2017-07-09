@@ -27,7 +27,11 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
         description = (EditText) findViewById(R.id.moneyOperation_desc);
         findViewById(R.id.moneyOperation_write).setOnClickListener(this);
 
-        startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+
+        TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
+        moneyOperationBalance.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
+        moneyOperationBalance.setText("Введите название квеста и его сумму");
+        moneyOperationBalance.setTextColor(getResources().getColor(R.color.colorBtn));
     }
 
     @Override
@@ -36,11 +40,21 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
             RfcId = data.getStringExtra("RfcId");
             user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                fillTextViews();
+                if(value.getText().length() != 0) {
+                    user.AddMoney(Integer.valueOf(
+                           value.getText().toString()), description.getText().toString());
+                    user.update();
+                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                }
+
+                Intent i = new Intent(this, ScanNfcActivity.class);
+                i.putExtra("name", "Добавление квеста - " + description.getText() + " со стоимостью - " + value.getText());
+                startActivityForResult(i, 200);
+
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
-                finish();
+                //finish();
             }
         }
 
@@ -68,15 +82,18 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.moneyOperation_write:
-                if(value.getText().length() != 0) {
-                    user.AddMoney(Integer.valueOf(
-                           value.getText().toString()), description.getText().toString());
-                    user.update();
-                    clearEditBoxs();
-                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+
+                if (value.getText().equals("") ||
+                        description.getText().equals("")) {
+                    Toast.makeText(this, "Все поля обязательны для заполнения", Toast.LENGTH_LONG).show();
+                    return;
                 }
+
+                Intent i = new Intent(this, ScanNfcActivity.class);
+                i.putExtra("name", "Добавление квеста - " + description.getText() + " со стоимостью - " + value.getText());
+                startActivityForResult(i, 200);
                 break;
         }
-        fillTextViews();
+//        fillTextViews();
     }
 }
