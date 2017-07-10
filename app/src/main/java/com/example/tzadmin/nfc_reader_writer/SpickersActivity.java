@@ -166,7 +166,10 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                             return;
                         }
                     }
-                    Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_SPIKER, Toast.LENGTH_LONG).show();
+                    user.AddMoney(400, Message.userVisitSpikerNotOwn(spicker.fio));
+                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
+                    finish();
+                    return;
                 }
             } else {
                 Toast.makeText(this,

@@ -46,6 +46,10 @@ public class Message {
         return "Семинар - " + spikerName;
     }
 
+    public static String userVisitSpikerNotOwn(String spikerName) {
+        return "Семинар(-50%) - " + spikerName;
+    }
+
     public static String isUserHaveBraced(User user) {
         return "У пользователя: " + concatFio(user) + " - уже привязан браслет";
     }
