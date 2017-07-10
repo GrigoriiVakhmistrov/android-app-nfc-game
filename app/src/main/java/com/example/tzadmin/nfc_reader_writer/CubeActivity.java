@@ -91,12 +91,12 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         Integer retData = Utilites.tryParseInt(text, -1);
         if (retData != -1) return retData;
 
-        if (text.equals("Нос")) return 1;
-        if (text.equals("Глаз")) return 2;
-        if (text.equals("Ухо")) return 3;
-        if (text.equals("Крылья")) return 4;
-        if (text.equals("Лапа")) return 5;
-        if (text.equals("Хвост")) return 6;
+        if (text.equals("Нос")) return 6;
+        if (text.equals("Глаз")) return 5;
+        if (text.equals("Ухо")) return 4;
+        if (text.equals("Крылья")) return 3;
+        if (text.equals("Лапа")) return 2;
+        if (text.equals("Хвост")) return 1;
 
         return 0;
     }
