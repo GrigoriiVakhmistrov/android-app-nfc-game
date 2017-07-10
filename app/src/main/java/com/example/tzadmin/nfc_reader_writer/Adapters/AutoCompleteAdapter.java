@@ -55,19 +55,17 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-
         if (convertView == null) {
-            view = inflater.inflate(R.layout.auto_completed_item, null);
-            ((TextView)view).setTypeface(SingletonFonts.getInstanse(context).getKarlson());
-            ((TextView)view).setText(users.get(position).lastname + " " +
-                    users.get(position).firstname + " " +
-                        users.get(position).patronymic);
-        } else {
-            view = convertView;
+            convertView = inflater.inflate(R.layout.auto_completed_item, null);
+
         }
 
-        return view;
+        ((TextView)convertView).setTypeface(SingletonFonts.getInstanse(context).getKarlson());
+        ((TextView)convertView).setText(users.get(position).lastname + " " +
+                users.get(position).firstname + " " +
+                users.get(position).patronymic);
+
+        return convertView;
     }
 
     Filter nameFilter = new Filter() {
