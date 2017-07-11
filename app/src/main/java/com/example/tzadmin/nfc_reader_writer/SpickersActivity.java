@@ -162,20 +162,23 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                         if (m.id.equals(spicker.id)) {
                             user.AddMoney(800, Message.userVisitSpiker(spicker.fio));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
-                            finish();
+                            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+                            //finish();
                             return;
                         }
                     }
                     user.AddMoney(400, Message.userVisitSpikerNotOwn(spicker.fio));
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
-                    finish();
+                    startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+                    //finish();
                     return;
                 }
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
+                startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+
             }
-            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
         }
     }
 }
