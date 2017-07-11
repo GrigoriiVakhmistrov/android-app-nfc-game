@@ -104,6 +104,7 @@
         android:textSize="17dp"
         android:text=""
         app:layout_constraintHorizontal_bias="0.508" />
+
     <ListView
         android:id="@+id/lv_history_valid"
         android:layout_width="292dp"
