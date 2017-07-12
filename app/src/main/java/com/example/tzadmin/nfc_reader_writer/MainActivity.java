@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         timerFullSync = new Timer();
         timerFullSyncTask = new MyTimerTaskFullSync();
-        timerFullSync.schedule(timerFullSyncTask, 15000, 280000);
+        timerFullSync.schedule(timerFullSyncTask, 30000, 300000);
 
         timerImplSync = new Timer();
         timerImplSyncTask = new MyTimerTaskImplSync();
-        timerImplSync.schedule(timerImplSyncTask, 10, 50000);
+        timerImplSync.schedule(timerImplSyncTask, 1000, 120000);
 
         gridView = (GridView) findViewById(R.id.gridView_main);
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onDestroy() {
         super.onDestroy();
         timerFullSync.cancel();
+        timerImplSync.cancel();
     }
 
     @Override
