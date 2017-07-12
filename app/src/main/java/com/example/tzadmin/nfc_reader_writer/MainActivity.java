@@ -14,6 +14,8 @@ import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
+import com.example.tzadmin.nfc_reader_writer.Utilites.CheckInetConnection;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -22,10 +24,14 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    public static boolean itsOnlyValidationApp = true;
+    public static boolean itsOnlyValidationApp = false;
 
-    Timer timerSync;
-    MyTimerTask timerSyncTask;
+    Timer timerFullSync;
+    MyTimerTaskFullSync timerFullSyncTask;
+
+    Timer timerImplSync;
+    MyTimerTaskImplSync timerImplSyncTask;
+
     String[] values = {
             "",
             "",
@@ -58,9 +64,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
-        timerSync = new Timer();
-        timerSyncTask = new MyTimerTask();
-        timerSync.schedule(timerSyncTask, 10, 50000);
+        timerFullSync = new Timer();
+        timerFullSyncTask = new MyTimerTaskFullSync();
+        timerFullSync.schedule(timerFullSyncTask, 15000, 280000);
+
+        timerImplSync = new Timer();
+        timerImplSyncTask = new MyTimerTaskImplSync();
+        timerImplSync.schedule(timerImplSyncTask, 10, 50000);
 
         gridView = (GridView) findViewById(R.id.gridView_main);
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
@@ -72,7 +82,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Sync();
+                //Full sync
+                if(CheckInetConnection.InetHasConnection(getBaseContext()))
+                    new Sync();
             }
         });
 
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timerSync.cancel();
+        timerFullSync.cancel();
     }
 
     @Override
@@ -124,11 +136,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(itsOnlyValidationApp)
             finish();
     }
-    class MyTimerTask extends TimerTask {
+
+    class MyTimerTaskFullSync extends TimerTask {
 
         @Override
         public void run() {
-            new Sync(true);
+            //Full sync
+            if(CheckInetConnection.InetHasConnection(getBaseContext()))
+                new Sync(true);
+        }
+    }
+
+    class MyTimerTaskImplSync extends TimerTask {
+
+        @Override
+        public void run() {
+            //impl sync
+            if(CheckInetConnection.InetHasConnection(getBaseContext()))
+                new Sync(true, false);
         }
     }
 }
