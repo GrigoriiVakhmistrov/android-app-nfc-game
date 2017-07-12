@@ -50,6 +50,35 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         mark2 = groupActivity.p2;
         mark3 = groupActivity.p3;
 
+        Collection<Button> buttons = new ArrayList<>();
+        buttons = getAllByBlock(ll_cube_block1);
+
+        for (Button btn : buttons) {
+            if (Integer.valueOf(btn.getText().toString()) == groupActivity.p1)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        buttons = getAllByBlock(ll_cube_block2);
+
+        for (Button btn : buttons) {
+            if (Integer.valueOf(btn.getText().toString()) == groupActivity.p2)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        buttons = getAllByBlock(ll_cube_block3);
+
+        for (Button btn : buttons) {
+            if (getValueFromButton(btn) == groupActivity.p3)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+
         setAllClickListner(getAllByBlock(ll_cube_block1));
         setAllClickListner(getAllByBlock(ll_cube_block2));
         setAllClickListner(getAllByBlock(ll_cube_block3));

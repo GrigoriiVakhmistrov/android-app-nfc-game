@@ -22,7 +22,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    public static boolean itsOnlyValidationApp = false;
+    public static boolean itsOnlyValidationApp = true;
 
     Timer timerSync;
     MyTimerTask timerSyncTask;

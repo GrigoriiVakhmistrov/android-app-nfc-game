@@ -117,7 +117,7 @@
         android:textColor="@color/colorBlack"
         android:textAlignment="center"
         android:textSize="17dp"
-        android:text="v 1.213"
+        android:text="v 1.214"
         app:layout_constraintHorizontal_bias="0.959" />
 
 
