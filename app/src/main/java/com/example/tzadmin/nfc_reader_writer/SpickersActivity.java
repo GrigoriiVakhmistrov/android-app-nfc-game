@@ -145,10 +145,13 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             if(user != null) {
                 if(isSubscrube) {
                     if(user.getSubscribed() == null || user.getSubscribed().size() == 0) {
-                        user.subscribe(spicker.id);
-                        user.update();
-                        Toast.makeText(this,
-                                Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                        if(spicker.getLeft() > 0) {
+                            user.subscribe(spicker.id);
+                            user.update();
+                            Toast.makeText(this,
+                                    Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(this, Message.COUNT_FULL, Toast.LENGTH_LONG).show();
                     } else {
                         ArrayList<Morda> mordas = (ArrayList)user.getSubscribed();
                         Toast.makeText(this,

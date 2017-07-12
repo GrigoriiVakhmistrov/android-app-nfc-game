@@ -55,10 +55,13 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                 if (user != null) {
                     if(isSubscrube) {
                         if (user.routeid.equals(-1)) {
-                            user.routeid = targetRoute.id;
-                            user.update();
-                            routeGridVie.invalidateViews();
-                            Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                            if(targetRoute.getLeft() > 0) {
+                                user.routeid = targetRoute.id;
+                                user.update();
+                                routeGridVie.invalidateViews();
+                                Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(this, Message.COUNT_FULL, Toast.LENGTH_LONG).show();
                         } else
                             Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
                     } else {

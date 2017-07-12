@@ -29,6 +29,7 @@ public class Message {
     public static final String NO_CLAN = "Не состоит в клане";
     public static final String NO_ROUTE = "Маршрут: Нет маршрута";
     public static final String NO_SPIKER = "Спикер: Не подписан";
+    public static final String COUNT_FULL = "Ошибка. Закончилось количество свободных мест";
 
     public static String getUserAlreadySubscrubeSpiker (Morda morda) {
         return "Пользователь уже подписан на спикера \"" + morda.fio + "\"";
