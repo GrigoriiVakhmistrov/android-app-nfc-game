@@ -152,9 +152,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         public void run() {
             //impl sync
-            if(CheckInetConnection.InetHasConnection(getBaseContext())) {
-                //TODO тут частичная синхронизация
-            }
+            if(CheckInetConnection.InetHasConnection(getBaseContext()))
+                new Sync(true, false);
         }
     }
 }
