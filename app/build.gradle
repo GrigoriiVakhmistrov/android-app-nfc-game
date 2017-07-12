@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-
+        config {
+            storeFile file('/home/forz/StudioProjects/nfc-reader-writer/keystore.jks')
+        }
     }
     compileSdkVersion 25
     buildToolsVersion "25"
