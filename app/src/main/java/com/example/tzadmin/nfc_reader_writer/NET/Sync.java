@@ -87,7 +87,14 @@ public class Sync implements RequestDelegate {
      */
     private int stage = 0;
 
+    /**
+     * true - полная
+     * false - частичная
+     */
+    private boolean isFullSync;
+
     public Sync() {
+        isFullSync = true;
         if (!SharedApplication.get().syncActive) {
             SharedApplication.get().syncActive = true;
             stage1();
@@ -95,6 +102,15 @@ public class Sync implements RequestDelegate {
     }
 
     public Sync(boolean isAutoSync) {
+        isFullSync = false;
+        if (!SharedApplication.get().syncActive) {
+            SharedApplication.get().syncActive = true;
+            this.isAutoSync = isAutoSync;
+            stage1();
+        }
+    }
+    public Sync(boolean isAutoSync, boolean isFullSync) {
+        this.isFullSync = isFullSync;
         if (!SharedApplication.get().syncActive) {
             SharedApplication.get().syncActive = true;
             this.isAutoSync = isAutoSync;
@@ -624,7 +640,14 @@ public class Sync implements RequestDelegate {
         } else if (success == 7) {
             stage8();
         } else if (success == 8) {
-            stage9();
+            if (isFullSync)
+                stage9();
+            else {
+                SharedApplication.get().syncActive = false;
+                if(!this.isAutoSync)
+                    Toast.makeText(SharedApplication.get(),
+                            Message.SYNC_OK, Toast.LENGTH_LONG).show();
+            }
         } else if (success == 9) {
             SharedApplication.get().syncActive = false;
             if(!this.isAutoSync)
