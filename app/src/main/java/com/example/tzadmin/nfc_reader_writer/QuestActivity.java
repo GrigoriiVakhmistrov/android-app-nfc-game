@@ -18,14 +18,14 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
 
     User user;
     String RfcId;
-    EditText value;
+    EditText value, desc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest);
         value = (EditText) findViewById(R.id.moneyOperation_value);
+        desc = (EditText) findViewById(R.id.moneyOperation_desc);
         findViewById(R.id.moneyOperation_write).setOnClickListener(this);
-
 
         TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
         moneyOperationBalance.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
@@ -41,17 +41,17 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
             if(user != null) {
                 if(value.getText().length() != 0) {
                     user.AddMoney(Integer.valueOf(
-                           value.getText().toString()), "Квест");
+                           value.getText().toString()), desc.getText().toString());
                     user.update();
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
-                //finish();
             }
             Intent i = new Intent(this, ScanNfcActivity.class);
-            i.putExtra("name", "Добавление квеста со стоимостью - " + value.getText());
+            i.putExtra("name", "Добавление квеста - "
+                    + desc.getText().toString() + " со стоимостью - " + value.getText());
             startActivityForResult(i, 200);
         }
 
@@ -59,7 +59,7 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
             finish();
     }
 
-    private void fillTextViews () {
+    /*private void fillTextViews () {
         user = new User().selectUserByRfcId(RfcId);
         if(user != null) {
             TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
@@ -72,15 +72,16 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
 
     private void clearEditBoxs () {
         value.getText().clear();
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.moneyOperation_write:
 
-                if (value.getText().equals("")) {
-                    Toast.makeText(this, "Все поля обязательны для заполнения", Toast.LENGTH_LONG).show();
+                if (value.getText().equals("") || desc.getText().equals("")) {
+                    Toast.makeText(this,
+                            "Все поля обязательны для заполнения", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -89,6 +90,5 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(i, 200);
                 break;
         }
-//        fillTextViews();
     }
 }

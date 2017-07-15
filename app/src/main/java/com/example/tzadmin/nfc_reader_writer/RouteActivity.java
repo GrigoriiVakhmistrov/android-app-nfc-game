@@ -70,7 +70,6 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_ROUTE, Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 } else
                     Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();

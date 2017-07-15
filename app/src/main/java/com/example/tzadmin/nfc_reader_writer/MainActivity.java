@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        //описание квестов
         if(itsOnlyValidationApp) {
             startActivityForResult(new Intent(this, MainValidationActivity.class), 200);
         }
