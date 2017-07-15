@@ -3,7 +3,6 @@ package com.example.tzadmin.nfc_reader_writer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -11,14 +10,9 @@ import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
-import com.example.tzadmin.nfc_reader_writer.Models.Route;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
-import com.example.tzadmin.nfc_reader_writer.Utilites.CheckInetConnection;
+import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -83,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 //Full sync
-                if(CheckInetConnection.InetHasConnection(getBaseContext()))
+                if(Utilites.InetHasConnection(getBaseContext()))
                     new Sync();
             }
         });
@@ -144,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         public void run() {
             //Full sync
-            if(CheckInetConnection.InetHasConnection(getBaseContext()))
+            if(Utilites.InetHasConnection(getBaseContext()))
                 new Sync(true);
         }
     }
@@ -154,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         public void run() {
             //impl sync
-            if(CheckInetConnection.InetHasConnection(getBaseContext()))
+            if(Utilites.InetHasConnection(getBaseContext()))
                 new Sync(true, false);
         }
     }

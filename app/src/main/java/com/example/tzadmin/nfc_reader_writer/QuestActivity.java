@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
+import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
 public class QuestActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +27,8 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
         value = (EditText) findViewById(R.id.moneyOperation_value);
         desc = (EditText) findViewById(R.id.moneyOperation_desc);
         findViewById(R.id.moneyOperation_write).setOnClickListener(this);
+
+        Utilites.setFilterEditBox(value, 9);
 
         TextView moneyOperationBalance = ((TextView) findViewById(R.id.moneyOperation_balance));
         moneyOperationBalance.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
