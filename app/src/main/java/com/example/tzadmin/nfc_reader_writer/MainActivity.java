@@ -16,19 +16,21 @@ import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
 
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
-import com.example.tzadmin.nfc_reader_writer.NET.Sync;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    public static boolean itsOnlyValidationApp = true;
+    public static boolean itsOnlyValidationApp = false;
 
-    Timer timerSync;
-    MyTimerTask timerSyncTask;
+    Timer timerFullSync;
+    MyTimerTaskFullSync timerFullSyncTask;
+
+    Timer timerImplSync;
+    MyTimerTaskImplSync timerImplSyncTask;
+
     String[] values = {
             "",
             "",
@@ -61,9 +63,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
-        timerSync = new Timer();
-        timerSyncTask = new MyTimerTask();
-        timerSync.schedule(timerSyncTask, 10, 50000);
+        timerFullSync = new Timer();
+        timerFullSyncTask = new MyTimerTaskFullSync();
+        timerFullSync.schedule(timerFullSyncTask, 30000, 300000);
+
+        timerImplSync = new Timer();
+        timerImplSyncTask = new MyTimerTaskImplSync();
+        timerImplSync.schedule(timerImplSyncTask, 1000, 120000);
 
         gridView = (GridView) findViewById(R.id.gridView_main);
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
@@ -75,11 +81,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Full sync
+                if(Utilites.InetHasConnection(getBaseContext()))
+                    new Sync();
                 Log.i("[Sync]", "Synchronization started!");
                 Executor.execute(new SynchronizationTask());
             }
         });
 
+        //описание квестов
         if(itsOnlyValidationApp) {
             startActivityForResult(new Intent(this, MainValidationActivity.class), 200);
         }
@@ -88,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timerSync.cancel();
+        timerFullSync.cancel();
+        timerImplSync.cancel();
     }
 
     @Override
@@ -128,12 +139,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(itsOnlyValidationApp)
             finish();
     }
+
+    class MyTimerTaskFullSync extends TimerTask {
     class MyTimerTask extends TimerTask {
         private final SynchronizationTask task = new SynchronizationTask();
 
         @Override
         public void run() {
+            //Full sync
+            if(Utilites.InetHasConnection(getBaseContext()))
+                new Sync(true);
             task.run();
+        }
+    }
+
+    class MyTimerTaskImplSync extends TimerTask {
+
+        @Override
+        public void run() {
+            //impl sync
+            if(Utilites.InetHasConnection(getBaseContext()))
+                new Sync(true, false);
         }
     }
 }

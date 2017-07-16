@@ -145,10 +145,13 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
             if(user != null) {
                 if(isSubscrube) {
                     if(user.getSubscribed() == null || user.getSubscribed().size() == 0) {
-                        user.subscribe(spicker.id);
-                        user.update();
-                        Toast.makeText(this,
-                                Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                        if(spicker.getLeft() > 0) {
+                            user.subscribe(spicker.id);
+                            user.update();
+                            Toast.makeText(this,
+                                    Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(this, Message.COUNT_FULL, Toast.LENGTH_LONG).show();
                     } else {
                         ArrayList<Morda> mordas = (ArrayList)user.getSubscribed();
                         Toast.makeText(this,
@@ -162,17 +165,23 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                         if (m.id.equals(spicker.id)) {
                             user.AddMoney(800, Message.userVisitSpiker(spicker.fio));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
-                            finish();
+                            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+                            //finish();
                             return;
                         }
                     }
-                    Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_SPIKER, Toast.LENGTH_LONG).show();
+                    user.AddMoney(400, Message.userVisitSpikerNotOwn(spicker.fio));
+                    Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
+                    startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+                    //finish();
+                    return;
                 }
             } else {
                 Toast.makeText(this,
                         Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
+                startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
+
             }
-            startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
         }
     }
 }

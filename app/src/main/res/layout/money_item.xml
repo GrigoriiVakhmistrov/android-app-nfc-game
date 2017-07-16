@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:weightSum="1">
-<!--
+
     <ImageView
         android:id="@+id/action"
         android:layout_width="50dp"
         android:layout_height="60dp"
         android:background="@drawable/arrow_down" />
-        -->
 
     <TextView
         android:id="@+id/money"

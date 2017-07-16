@@ -50,6 +50,35 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         mark2 = groupActivity.p2;
         mark3 = groupActivity.p3;
 
+        Collection<Button> buttons = new ArrayList<>();
+        buttons = getAllByBlock(ll_cube_block1);
+
+        for (Button btn : buttons) {
+            if (Integer.valueOf(btn.getText().toString()) == groupActivity.p1)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        buttons = getAllByBlock(ll_cube_block2);
+
+        for (Button btn : buttons) {
+            if (Integer.valueOf(btn.getText().toString()) == groupActivity.p2)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+        buttons = getAllByBlock(ll_cube_block3);
+
+        for (Button btn : buttons) {
+            if (getValueFromButton(btn) == groupActivity.p3)
+                btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
+            else
+                btn.setBackground(getDrawable(R.drawable.btn_gradient));
+        }
+
+
         setAllClickListner(getAllByBlock(ll_cube_block1));
         setAllClickListner(getAllByBlock(ll_cube_block2));
         setAllClickListner(getAllByBlock(ll_cube_block3));
@@ -91,12 +120,12 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         Integer retData = Utilites.tryParseInt(text, -1);
         if (retData != -1) return retData;
 
-        if (text.equals("Нос")) return 1;
-        if (text.equals("Глаз")) return 2;
-        if (text.equals("Ухо")) return 3;
-        if (text.equals("Крылья")) return 4;
-        if (text.equals("Лапа")) return 5;
-        if (text.equals("Хвост")) return 6;
+        if (text.equals("Нос")) return 6;
+        if (text.equals("Глаз")) return 5;
+        if (text.equals("Ухо")) return 4;
+        if (text.equals("Крылья")) return 3;
+        if (text.equals("Лапа")) return 2;
+        if (text.equals("Хвост")) return 1;
 
         return 0;
     }
