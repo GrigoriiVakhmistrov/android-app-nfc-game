@@ -18,6 +18,8 @@ import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
+import org.litepal.LitePal;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LitePal.initialize(this);
 
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 

@@ -36,9 +36,8 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-
     compile 'com.koushikdutta.async:androidasync:2.2.1'
-
+    compile 'org.litepal.android:core:1.5.1'
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:2.8.9"
 }
