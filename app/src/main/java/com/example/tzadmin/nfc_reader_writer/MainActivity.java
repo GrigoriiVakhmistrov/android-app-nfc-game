@@ -1,8 +1,9 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -10,7 +11,11 @@ import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
-import com.example.tzadmin.nfc_reader_writer.NET.Sync;
+import com.example.tzadmin.nfc_reader_writer.executor.Executor;
+import com.example.tzadmin.nfc_reader_writer.network.SynchronizationTask;
+
+import com.example.tzadmin.nfc_reader_writer.Models.Route;
+import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
 import org.litepal.LitePal;
@@ -83,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //Full sync
                 if(Utilites.InetHasConnection(getBaseContext()))
                     new Sync();
+                Log.i("[Sync]", "Synchronization started!");
+                Executor.execute(new SynchronizationTask());
             }
         });
 
@@ -138,12 +145,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     class MyTimerTaskFullSync extends TimerTask {
+    class MyTimerTask extends TimerTask {
+        private final SynchronizationTask task = new SynchronizationTask();
 
         @Override
         public void run() {
             //Full sync
             if(Utilites.InetHasConnection(getBaseContext()))
                 new Sync(true);
+            task.run();
         }
     }
 

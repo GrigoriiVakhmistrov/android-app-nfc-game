@@ -232,4 +232,35 @@ public class User extends BaseModel {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if(id != null ? !id.equals(user.id) : user.id != null) return false;
+        if(firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) return false;
+        if(lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) return false;
+        if(patronymic != null ? !patronymic.equals(user.patronymic) : user.patronymic != null) return false;
+        if(rfcid != null ? !rfcid.equals(user.rfcid) : user.rfcid != null) return false;
+        if(groupid != null ? !groupid.equals(user.groupid) : user.groupid != null) return false;
+        if(routeid != null ? !routeid.equals(user.routeid) : user.routeid != null) return false;
+        if(iscap != null ? !iscap.equals(user.iscap) : user.iscap != null) return false;
+        return syncFlag != null ? syncFlag.equals(user.syncFlag) : user.syncFlag == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (patronymic != null ? patronymic.hashCode() : 0);
+        result = 31 * result + (rfcid != null ? rfcid.hashCode() : 0);
+        result = 31 * result + (groupid != null ? groupid.hashCode() : 0);
+        result = 31 * result + (routeid != null ? routeid.hashCode() : 0);
+        result = 31 * result + (iscap != null ? iscap.hashCode() : 0);
+        result = 31 * result + (syncFlag != null ? syncFlag.hashCode() : 0);
+        return result;
+    }
 }

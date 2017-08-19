@@ -1,4 +1,4 @@
-package com.example.tzadmin.nfc_reader_writer.NET;
+package com.example.tzadmin.nfc_reader_writer.network;
 
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
@@ -16,6 +16,7 @@ import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -514,6 +515,7 @@ public class Sync implements RequestDelegate {
                 e.lastname = o.getAsJsonObject().get("lastname").getAsString();
                 e.patronymic = o.getAsJsonObject().get("patronymic").getAsString();
                 e.rfcid = o.getAsJsonObject().get("rfcid").getAsString();
+                //noinspection Duplicates
                 if (!o.getAsJsonObject().get("groupid").isJsonNull())
                     e.groupid = Utilites.tryParseInt(o.getAsJsonObject().get("groupid").getAsString(), -1);
                 if (!o.getAsJsonObject().get("routeid").isJsonNull())

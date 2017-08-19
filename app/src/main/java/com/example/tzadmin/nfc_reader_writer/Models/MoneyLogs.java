@@ -50,6 +50,32 @@ public class MoneyLogs extends BaseModel {
         return (User) u.selectOneByParams();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof MoneyLogs)) return false;
+
+        MoneyLogs logs = (MoneyLogs) o;
+
+        if(id != null ? !id.equals(logs.id) : logs.id != null) return false;
+        if(userid != null ? !userid.equals(logs.userid) : logs.userid != null) return false;
+        if(money != null ? !money.equals(logs.money) : logs.money != null) return false;
+        if(type != null ? !type.equals(logs.type) : logs.type != null) return false;
+        if(description != null ? !description.equals(logs.description) : logs.description != null) return false;
+        return syncFlag != null ? syncFlag.equals(logs.syncFlag) : logs.syncFlag == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (userid != null ? userid.hashCode() : 0);
+        result = 31 * result + (money != null ? money.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (syncFlag != null ? syncFlag.hashCode() : 0);
+        return result;
+    }
+
     public enum Type {
         ADD_MONEY,
         REMOVE_MONEY

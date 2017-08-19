@@ -1,8 +1,7 @@
-package com.example.tzadmin.nfc_reader_writer.NET;
+package com.example.tzadmin.nfc_reader_writer.network;
 
 import android.util.Pair;
 
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import java.util.Map;
  * Created by velor on 6/28/17.
  */
 
+@Deprecated
 public class RequestNode {
     public String url;
     public RequestMethod method;
