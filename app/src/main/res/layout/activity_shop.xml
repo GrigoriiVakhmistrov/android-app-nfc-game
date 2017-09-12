@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tzadmin.nfc_reader_writer.ShopActivity"
-    android:background="@drawable/shop_xxxhdpi">
+    tools:context="com.example.tzadmin.nfc_reader_writer.ShopActivity">
+    <!--android:background="@drawable/shop_xxxhdpi"-->
 
     <GridView
         android:id="@+id/gridView_shop_main"

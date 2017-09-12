@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/scan_activity"
     tools:context="com.example.tzadmin.nfc_reader_writer.ScanNfcActivity">
+    <!--android:background="@drawable/scan_activity"-->
 
     <ImageView
         android:id="@+id/scan_image_team"

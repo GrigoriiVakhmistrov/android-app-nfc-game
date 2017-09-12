@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainback"
     tools:context="com.example.tzadmin.nfc_reader_writer.MainActivity">
+    <!--android:background="@drawable/mainback"-->
 
     <Button
         android:id="@+id/btnRefresh"
