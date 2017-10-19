@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         timerFullSync = new Timer();
         timerFullSyncTask = new MyTimerTaskFullSync();
-        timerFullSync.schedule(timerFullSyncTask, 30000, 300000);
+        timerFullSync.schedule(timerFullSyncTask, 100, 5000);
 
-        timerImplSync = new Timer();
-        timerImplSyncTask = new MyTimerTaskImplSync();
-        timerImplSync.schedule(timerImplSyncTask, 1000, 120000);
+        //timerImplSync = new Timer();
+        //timerImplSyncTask = new MyTimerTaskImplSync();
+        //timerImplSync.schedule(timerImplSyncTask, 1000, 120000);
 
         gridView = (GridView) findViewById(R.id.gridView_main);
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
@@ -77,8 +77,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 //Full sync
-                if(Utilites.InetHasConnection(getBaseContext()))
-                    new Sync();
+                if(Utilites.InetHasConnection(getBaseContext())) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            new Sync();
+                        }
+                    }).start();
+                }
             }
         });
 
@@ -89,10 +95,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onResume() {
+        super.onResume();
+        timerFullSync = new Timer();
+        timerFullSyncTask = new MyTimerTaskFullSync();
+        timerFullSync.schedule(timerFullSyncTask, 100, 5000);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
         timerFullSync.cancel();
-        timerImplSync.cancel();
+        //timerImplSync.cancel();
+        timerFullSyncTask.cancel();
+       // timerImplSyncTask.cancel();
     }
 
     @Override
@@ -134,22 +150,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     class MyTimerTaskFullSync extends TimerTask {
-
         @Override
         public void run() {
             //Full sync
-            if(Utilites.InetHasConnection(getBaseContext()))
-                new Sync(true);
+            if(Utilites.InetHasConnection(getBaseContext())) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Sync(true);
+                    }
+                }).start();
+            }
         }
     }
 
     class MyTimerTaskImplSync extends TimerTask {
-
         @Override
         public void run() {
             //impl sync
-            if(Utilites.InetHasConnection(getBaseContext()))
-                new Sync(true, false);
+            if(Utilites.InetHasConnection(getBaseContext())) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Sync(true, false);
+                    }
+                }).start();
+            }
         }
     }
 }

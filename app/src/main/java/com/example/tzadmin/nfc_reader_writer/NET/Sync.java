@@ -26,7 +26,7 @@ import java.util.List;
  *
  * У нс есть сл. таблицы для работы:
  *
- * Изменяемые:
+ * Изменяемые:https://github.com/barbeu/android-app-nfc-game
  *
  * User, UserMorda, MoneyLog
  *
@@ -53,26 +53,26 @@ public class Sync implements RequestDelegate {
 
     private boolean isAutoSync = false;
 
-    private static final String shopURL = "http://194.67.194.82/sync/get-shop";
-    private static final String eventURL = "http://194.67.194.82/sync/get-events";
-    private static final String mordaURL = "http://194.67.194.82/sync/get-morda";
-    private static final String groupURL = "http://194.67.194.82/sync/get-group";
-    private static final String routeURL = "http://194.67.194.82/sync/get-route";
-    private static final String userURL = "http://194.67.194.82/sync/get-user";
-    private static final String moneyURL = "http://194.67.194.82/sync/get-money";
-    private static final String priorityURL = "http://194.67.194.82/sync/get-priority";
-    private static final String userMordaURL = "http://194.67.194.82/sync/get-user-morda";
+    private static final String shopURL = "http://193.124.191.37/sync/get-shop";
+    private static final String eventURL = "http://193.124.191.37/sync/get-events";
+    private static final String mordaURL = "http://193.124.191.37/sync/get-morda";
+    private static final String groupURL = "http://193.124.191.37/sync/get-group";
+    private static final String routeURL = "http://193.124.191.37/sync/get-route";
+    private static final String userURL = "http://193.124.191.37/sync/get-user";
+    private static final String moneyURL = "http://193.124.191.37/sync/get-money";
+    private static final String priorityURL = "http://193.124.191.37/sync/get-priority";
+    private static final String userMordaURL = "http://193.124.191.37/sync/get-user-morda";
 
 
-    private static final String addUserUrl = "http://194.67.194.82/sync/add-user";
-    private static final String addPriorityUrl = "http://194.67.194.82/sync/add-priority";
-    private static final String addMoneyUrl = "http://194.67.194.82/sync/add-money";
-    private static final String addUserMordaUrl = "http://194.67.194.82/sync/add-user-morda";
+    private static final String addUserUrl = "http://193.124.191.37/sync/add-user";
+    private static final String addPriorityUrl = "http://193.124.191.37/sync/add-priority";
+    private static final String addMoneyUrl = "http://193.124.191.37/sync/add-money";
+    private static final String addUserMordaUrl = "http://193.124.191.37/sync/add-user-morda";
 
-    private static final String setUserUrl = "http://194.67.194.82/sync/set-user";
-    private static final String setPriorityUrl = "http://194.67.194.82/sync/set-priority";
-    private static final String setMoneyUrl = "http://194.67.194.82/sync/set-money";
-    private static final String setUserMordaUrl = "http://194.67.194.82/sync/set-user-morda";
+    private static final String setUserUrl = "http://193.124.191.37/sync/set-user";
+    private static final String setPriorityUrl = "http://193.124.191.37/sync/set-priority";
+    private static final String setMoneyUrl = "http://193.124.191.37/sync/set-money";
+    private static final String setUserMordaUrl = "http://193.124.191.37/sync/set-user-morda";
 
 
     /* стадия 1 -
