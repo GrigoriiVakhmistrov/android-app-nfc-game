@@ -8,10 +8,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MainGridViewAdapter;
-import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
+
+import org.litepal.LitePal;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,12 +52,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     GridView gridView;
 
     Button refreshButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        LitePal.initialize(this);
 
         timerFullSync = new Timer();
         timerFullSyncTask = new MyTimerTaskFullSync();

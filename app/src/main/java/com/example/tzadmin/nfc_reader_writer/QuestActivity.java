@@ -1,18 +1,16 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
-import android.media.audiofx.AudioEffect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.EventLogTags;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 
 public class QuestActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,7 +43,7 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
                 if(value.getText().length() != 0) {
                     user.AddMoney(Integer.valueOf(
                            value.getText().toString()), desc.getText().toString());
-                    user.update();
+                    user.update(user.id);
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 }
             } else {

@@ -1,43 +1,24 @@
-package com.example.tzadmin.nfc_reader_writer.Models;
+package com.example.tzadmin.nfc_reader_writer.Database;
+
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
 /**
- * Created by velor on 6/24/17.
+ * Created by yurii on 19.10.2017.
  */
 
-public class GroupActivity extends BaseModel {
-
-    public GroupActivity() {
-        id = -1;
-        groupid = -1;
-        p1 = 0;
-        p2 = 0;
-        p3 = 0;
-        p4 = 0;
-        syncFlag = 0;
-    }
-
-    @MAnnotation(PrimaryKey = true)
+public class GroupActivity extends DataSupport {
+    @Column(unique = true)
     public Integer id;
-    @MAnnotation
     public Integer groupid;
-    @MAnnotation(DefaultValue = "0")
     public Integer p1;
-    @MAnnotation(DefaultValue = "0")
     public Integer p2;
-    @MAnnotation(DefaultValue = "0")
     public Integer p3;
-    @MAnnotation(DefaultValue = "0")
-    public Integer p4;
-    @MAnnotation(SyncField = true)
     public Integer syncFlag;
-
-    @Override
-    public String GetTableName() {
-        return "tbGroupPriority";
-    }
+    public Integer p4;
 
     public GroupActivity GetGroupScoreModel(Integer groupId) {
-        Group g = new Group();
+       /* Group g = new Group();
         g.id = groupId;
 
         g = (Group) g.selectOneByParams();
@@ -60,7 +41,7 @@ public class GroupActivity extends BaseModel {
             ga.insert();
         }
 
-        return ga;
+        return ga;*/
+       return null;
     }
-
 }

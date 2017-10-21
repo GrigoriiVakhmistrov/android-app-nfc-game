@@ -1,17 +1,15 @@
 package com.example.tzadmin.nfc_reader_writer.Adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Database.Shop;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.R;
 import com.squareup.picasso.Picasso;
 

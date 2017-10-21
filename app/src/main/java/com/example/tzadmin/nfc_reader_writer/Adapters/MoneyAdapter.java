@@ -10,13 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Database.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
-import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
 import com.example.tzadmin.nfc_reader_writer.R;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
 
 /**
  * Created by velor on 6/30/17.

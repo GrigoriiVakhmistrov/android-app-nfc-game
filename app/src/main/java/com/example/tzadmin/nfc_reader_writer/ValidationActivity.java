@@ -11,12 +11,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.MoneyAdapter;
+import com.example.tzadmin.nfc_reader_writer.Database.Group;
+import com.example.tzadmin.nfc_reader_writer.Database.Morda;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Group;
-import com.example.tzadmin.nfc_reader_writer.Models.Morda;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
-import com.example.tzadmin.nfc_reader_writer.NET.Sync;
 
 import java.util.ArrayList;
 import java.util.Timer;

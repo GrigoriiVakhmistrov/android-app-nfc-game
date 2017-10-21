@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Database.Shop;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
-import com.example.tzadmin.nfc_reader_writer.Models.Route;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.R;
 
 import java.util.ArrayList;

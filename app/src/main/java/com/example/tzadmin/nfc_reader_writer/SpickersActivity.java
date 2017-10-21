@@ -1,6 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
+import android.database.DataSetObservable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tzadmin.nfc_reader_writer.Database.Morda;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Morda;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.squareup.picasso.Picasso;
+
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -56,7 +60,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
         if(!isSubscrube)
             findViewById(R.id.spikers_layout).setBackgroundResource(R.drawable.checkin_out_spiker);
 
-        spickers = (ArrayList<Morda>) new Morda().selectAll();
+        spickers = (ArrayList<Morda>) DataSupport.findAll(Morda.class);
 
         if(spickers.size() == 0 || spickers == null) {
             findViewById(R.id.image_chekin_spicker1).setBackgroundResource(R.drawable.ic_spiker_not_found);
@@ -147,7 +151,7 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     if(user.getSubscribed() == null || user.getSubscribed().size() == 0) {
                         if(spicker.getLeft() > 0) {
                             user.subscribe(spicker.id);
-                            user.update();
+                            user.update(user.id);
                             Toast.makeText(this,
                                     Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else

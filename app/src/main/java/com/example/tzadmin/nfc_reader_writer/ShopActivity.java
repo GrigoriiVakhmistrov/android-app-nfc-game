@@ -3,21 +3,18 @@ package com.example.tzadmin.nfc_reader_writer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.tzadmin.nfc_reader_writer.Adapters.ShopAdapter;
 import com.example.tzadmin.nfc_reader_writer.Adapters.ShopAdapterV2;
+import com.example.tzadmin.nfc_reader_writer.Database.Shop;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 
@@ -35,9 +32,7 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
 
         buySwitch = (Switch) findViewById(R.id.buySwitch);
 
-        shops = new ArrayList(new Shop().selectAll());
-
-
+        shops = new ArrayList(DataSupport.findAll(Shop.class));
 
         lv_shop = (GridView)findViewById(R.id.gridView_shop_main);
         //lv_shop = (GridView) findViewById(R.id.route_grid);
@@ -77,7 +72,7 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
                 if(user != null) {
                     if(user.getBallance() >= shop.price){
                         user.RemoveMoney(shop.price, "покупка " + shop.name);
-                        user.update();
+                        user.update(user.id);
 
                         Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                     } else

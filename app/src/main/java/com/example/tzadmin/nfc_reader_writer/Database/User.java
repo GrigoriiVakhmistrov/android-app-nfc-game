@@ -1,65 +1,40 @@
-package com.example.tzadmin.nfc_reader_writer.Models;
+package com.example.tzadmin.nfc_reader_writer.Database;
 
-import android.support.annotation.IntegerRes;
-import android.support.annotation.StringDef;
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
-import java.text.SimpleDateFormat;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Created by forz on 11.06.17.
+ * Created by yurii on 19.10.2017.
  */
 
-public class User extends BaseModel {
-
-    public User () {
-        id = -1;
-        firstname = "";
-        lastname = "";
-        patronymic = "";
-        rfcid = "";
-        groupid = -1;
-//        cBatchId = "-1";
-        routeid = -1;
-        iscap = 0;
-        syncFlag = 0;
-    }
-
-    @MAnnotation(PrimaryKey = true)
+public class User extends DataSupport {
+    @Column(unique = true)
     public Integer id;
-    @MAnnotation(DefaultValue = "")
     public String firstname;
-    @MAnnotation(DefaultValue = "")
     public String lastname;
-    @MAnnotation(DefaultValue = "")
     public String patronymic;
-    @MAnnotation(DefaultValue = "")
     public String rfcid;
-    @MAnnotation
     public Integer groupid;
-//    @MAnotation
-//    public String cBatchId;
-    @MAnnotation
     public Integer routeid;
-    @MAnnotation(DefaultValue = "0")
     public Integer iscap;
-    @MAnnotation(SyncField = true)
     public Integer syncFlag;
 
-
-    //### MODEL INTERFACE ###//
-    public String GetTableName() {
-        return "tbUsers";
+    public ArrayList<User> selectAll () {
+        return null;
     }
 
     public boolean isNfcIdAlreadyExist (String RfcId) {
-        this.rfcid = RfcId;
+       /* this.rfcid = RfcId;
 
         User u = (User) selectOneByParams();
-
-        return u != null;
+        return u != null;*/
+       return false;
     }
 
     public String getFIO() {
@@ -67,13 +42,14 @@ public class User extends BaseModel {
     }
 
     public User selectUserByRfcId  (String RfcId) {
-        this.rfcid = RfcId;
+       /* this.rfcid = RfcId;
 
-        return (User) selectOneByParams();
+        return (User) selectOneByParams();*/
+       return null;
     }
 
     public Integer getBallance() {
-        MoneyLogs mLog = new MoneyLogs();
+       /* MoneyLogs mLog = new MoneyLogs();
         mLog.userid = id;
 
         Collection<MoneyLogs> moneys = (Collection<MoneyLogs>) mLog.selectAllByParams();
@@ -87,11 +63,12 @@ public class User extends BaseModel {
             if (l.type.equals(MoneyLogs.Type.REMOVE_MONEY.toString())) retdata -= l.money;
         }
 
-        return retdata;
+        return retdata;*/
+        return null;
     }
 
     public Boolean AddMoney(Integer money, String description) {
-        if (money < 0) return false;
+        /*if (money < 0) return false;
         if (description.equals("")) description = "Без описания";
 
         MoneyLogs ml = new MoneyLogs();
@@ -101,11 +78,12 @@ public class User extends BaseModel {
         ml.type = MoneyLogs.Type.ADD_MONEY.toString();
         ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        return  ml.insert();
+        return  ml.insert();*/
+        return false;
     }
 
     public Boolean RemoveMoney(Integer money, String description) {
-        if (money < 1) return false;
+        /*if (money < 1) return false;
         if (money > getBallance()) return false;
         if (description.equals("")) description = "Без описания";
 
@@ -116,17 +94,19 @@ public class User extends BaseModel {
         ml.type = MoneyLogs.Type.REMOVE_MONEY.toString();
         ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        return  ml.insert();
+        return  ml.insert();*/
+        return null;
     }
 
     public boolean subscribeToRoute(Integer route) {
-        routeid = route;
+       /* routeid = route;
 
-        return update();
+        return update();*/
+        return false;
     }
 
     public Collection<Morda> getSubscribed () {
-        Collection<Morda> retdata = new ArrayList<>();
+        /*Collection<Morda> retdata = new ArrayList<>();
 
         UserMorda m = new UserMorda();
         m.userid = id;
@@ -141,11 +121,12 @@ public class User extends BaseModel {
                 retdata.add(tmp);
         }
 
-        return retdata;
+        return retdata;*/
+        return null;
     }
 
     public boolean subscribe(Integer mordaId) {
-        Morda m = new Morda();
+       /* Morda m = new Morda();
         m.id = mordaId;
 
         m = (Morda) m.selectOneByParams();
@@ -165,43 +146,47 @@ public class User extends BaseModel {
             return um.insert();
         }
 
-        return true;
+        return true;*/
+        return false;
     }
 
     public Route getRoute(){
-        Route route = new Route();
+       /* Route route = new Route();
         route.id = routeid;
 
         route = (Route)route.selectOneByParams();
-        return route;
+        return route;*/
+        return null;
     }
 
     public Group getGroup(){
-        Group group = new Group();
+       /* Group group = new Group();
         group.id = groupid;
 
         group = (Group)group.selectOneByParams();
-        return  group;
+        return  group;*/
+        return null;
     }
 
     public Collection<MoneyLogs> getMoneyLog(){
-        MoneyLogs moneyLogs = new MoneyLogs();
+       /* MoneyLogs moneyLogs = new MoneyLogs();
         moneyLogs.userid = id;
 
         Collection<MoneyLogs> moneyLogsList = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
-        return moneyLogsList;
-
+        return moneyLogsList;*/
+        return null;
     }
 
     public Collection<UserMorda> getUserMordas() {
-        UserMorda morda = new UserMorda();
+       /* UserMorda morda = new UserMorda();
         morda.userid = id;
 
-        return (Collection<UserMorda>)morda.selectAllByParams();
+        return (Collection<UserMorda>)morda.selectAllByParams();*/
+        return null;
     }
 
     public Integer getRating(){
-        MoneyLogs moneyLogs = new MoneyLogs();
+       /* MoneyLogs moneyLogs = new MoneyLogs();
         moneyLogs.userid = id;
 
         Collection<MoneyLogs> moneyLogsCollection = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
@@ -212,11 +197,12 @@ public class User extends BaseModel {
                 sum += tempmoneyLog.money;
             }
         }
-        return sum;
+        return sum;*/
+        return null;
     }
 
     public boolean updateAllId(Integer id) {
-        UserMorda m = new UserMorda();
+        /*UserMorda m = new UserMorda();
         m.userid = this.id;
 
         Collection<UserMorda> mordas = (Collection<UserMorda>) m.selectAllByParams();
@@ -229,7 +215,7 @@ public class User extends BaseModel {
         this.id = id;
         update();
 
-        return true;
+        return true;*/
+        return false;
     }
-
 }

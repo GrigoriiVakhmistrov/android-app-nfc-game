@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.ActivitysAdapter;
+import com.example.tzadmin.nfc_reader_writer.Database.Event;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Event;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+
 import java.util.ArrayList;
 
 public class ActivitysesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {

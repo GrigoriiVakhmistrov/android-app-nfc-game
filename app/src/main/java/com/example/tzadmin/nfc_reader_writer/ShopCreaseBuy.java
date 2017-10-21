@@ -13,13 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.annotation.RequiresApi;
 import com.example.tzadmin.nfc_reader_writer.Adapters.CreaseBuyAdapter;
+import com.example.tzadmin.nfc_reader_writer.Database.MoneyLogs;
+import com.example.tzadmin.nfc_reader_writer.Database.Shop;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.MoneyLogs;
-import com.example.tzadmin.nfc_reader_writer.Models.Shop;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.squareup.picasso.Picasso;
+
+import org.litepal.crud.DataSupport;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,17 +84,13 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        currentShop = new Shop();
-        currentShop.id = currentShopId;
-
-        currentShop = (Shop) currentShop.selectOneByParams();
+        currentShop = DataSupport.where("id like ?", String.valueOf(currentShopId)).findFirst(Shop.class);
 
         if (currentShop == null) {
             Toast.makeText(this, "Товар не найден", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-
 
         addButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
@@ -138,7 +136,7 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
             }
 
             for (MoneyLogs item : logs) {
-                item.insert();
+                item.save();
             }
 
             Toast.makeText(this, "Покупка успешна!", Toast.LENGTH_SHORT).show();

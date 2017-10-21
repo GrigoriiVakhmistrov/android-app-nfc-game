@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.tzadmin.nfc_reader_writer.Database.Group;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Group;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,7 +57,7 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
         Group group = new Group();
         group.totemimage = (String) v.getTag();
 
-        currentGroup = (Group)group.selectOneByParams();
+        currentGroup = DataSupport.where("totemimage", (String) v.getTag()).findFirst(Group.class);
         if(currentGroup != null)
             startActivityForResultTeam();
     }
@@ -68,7 +70,7 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
             if(user != null) {
                 if (user.groupid == -1) {
                     user.groupid = currentGroup.id;
-                    user.update();
+                    user.update(user.id);
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(this,

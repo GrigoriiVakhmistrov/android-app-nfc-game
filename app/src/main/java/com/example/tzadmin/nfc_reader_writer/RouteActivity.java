@@ -8,9 +8,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.RouteViewAdapter;
+import com.example.tzadmin.nfc_reader_writer.Database.Route;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.Route;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,10 +28,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
-        Route tmp = new Route();
-        tmp.isvip = 0;
-
-        states = new ArrayList(tmp.selectAllByParams());
+        states = new ArrayList((Collection) DataSupport.where("isvip like ?", "0").findFirst(Route.class));
 
         isSubscrube = getIntent().getBooleanExtra("isSubscrube", true);
 
@@ -57,7 +56,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                         if (user.routeid.equals(-1)) {
                             if(targetRoute.getLeft() > 0) {
                                 user.routeid = targetRoute.id;
-                                user.update();
+                                user.update(user.id);
                                 routeGridVie.invalidateViews();
                                 Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                             } else

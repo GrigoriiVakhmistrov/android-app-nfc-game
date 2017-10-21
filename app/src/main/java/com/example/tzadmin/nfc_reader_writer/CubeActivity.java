@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.tzadmin.nfc_reader_writer.Database.GroupActivity;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.GroupActivity;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -139,7 +140,8 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
             ga.p2 = mark2;
             ga.p3 = mark3;
 
-            ga.update();
+            ga.update(ga.id);
+
             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
             finish();
         } else {

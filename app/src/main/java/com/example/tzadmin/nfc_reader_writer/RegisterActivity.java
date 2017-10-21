@@ -12,8 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.AutoCompleteAdapter;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
@@ -55,17 +58,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         !lastName.getText().toString().equals("") &&
                         !surName.getText().toString().equals("")) {
 
-                    User u = new User();
-                    u.firstname = firstName.getText().toString();
-                    u.lastname = lastName.getText().toString();
-                    u.patronymic = surName.getText().toString();
+                    User u = DataSupport.where("firstname like ? and lastname like ? and patronymic like ?",
+                            firstName.getText().toString(),
+                            lastName.getText().toString(),
+                            surName.getText().toString()).findFirst(User.class);
 
-                    u = (User) u.selectOneByParams();
                     if (u != null) {
                         Toast.makeText(this, Message.DUBLICATE_USER, Toast.LENGTH_SHORT).show();
                         break;
                     }
-
 
                     Intent intent = new Intent(this, ScanNfcActivity.class);
                     intent.putExtra("name",
@@ -138,15 +139,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         user.lastname = lastName.getText().toString();
         user.patronymic = surName.getText().toString();
         user.rfcid = RfcId;
-
-        user.insert();
+        user.save();
 
         return user;
     }
 
     private void bind (String RfcId) {
         selectedUser.rfcid = RfcId;
-        selectedUser.update();
+        selectedUser.update(selectedUser.id);
         clearFields();
     }
 }

@@ -1,8 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.Messages;
 
-import com.example.tzadmin.nfc_reader_writer.Models.Group;
-import com.example.tzadmin.nfc_reader_writer.Models.Morda;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
+import com.example.tzadmin.nfc_reader_writer.Database.Group;
+import com.example.tzadmin.nfc_reader_writer.Database.Morda;
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 
 /**
  * Created by forz on 14.06.17.

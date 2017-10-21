@@ -10,8 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.example.tzadmin.nfc_reader_writer.Database.User;
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.R;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
     LayoutInflater inflater;
     Context context;
     private ArrayList<User> users;
-    private ArrayList<User> usersAll;
+    private ArrayList<User> userAll;
     private ArrayList<User> suggestions;
 
-    public AutoCompleteAdapter(Context context, ArrayList<User> usersList) {
-        users = usersList;
+    public AutoCompleteAdapter(Context context, ArrayList<User> userList) {
+        users = userList;
         if (users == null) users = new ArrayList<>();
-        usersAll = (ArrayList<User>) users.clone();
+        userAll = (ArrayList<User>) users.clone();
         suggestions = new ArrayList<>();
 
         this.context = context;
@@ -78,15 +78,15 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             if(constraint != null) {
                 suggestions.clear();
-                usersAll = (ArrayList<User>)new User().selectAll();
-                if(usersAll == null) {
+                userAll = new User().selectAll();
+                if(userAll == null) {
                     FilterResults filterResults = new FilterResults();
                     filterResults.values = suggestions;
                     filterResults.count = suggestions.size();
                     return filterResults;
                 }
 
-                for (User u : usersAll) {
+                for (User u : userAll) {
                     /*
                     if((u.cFirstName + " " + u.cLastName + " " + u.cSurname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
