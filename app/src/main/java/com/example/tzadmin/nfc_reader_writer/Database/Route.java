@@ -19,21 +19,14 @@ public class Route extends DataSupport {
     public Integer isvip;
 
     public Integer getLeft() {
-        /*User u = new User();
-        u.routeid = id;
-        Collection<User> users = (Collection<User>) u.selectAllByParams();
+        Collection<User> users = DataSupport.where("routeid like ?", String.valueOf(id)).find(User.class);
         if(users == null)
             return capacity;
 
-        return capacity - users.size();*/
-        return -1;
+        return capacity - users.size();
     }
 
     public Collection<User> getUsers() {
-        /*User u = new User();
-        u.routeid = id;
-
-        return (Collection<User>)u.selectAllByParams();*/
-        return null;
+        return DataSupport.where("routeid like ?", String.valueOf(id)).find(User.class);
     }
 }

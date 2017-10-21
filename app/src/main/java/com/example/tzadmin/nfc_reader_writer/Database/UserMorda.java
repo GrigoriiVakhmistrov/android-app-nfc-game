@@ -15,10 +15,6 @@ public class UserMorda extends DataSupport {
     public Integer mordaid;
 
     public Morda getMorda() {
-        /*Morda m = new Morda();
-        m.id = mordaid;
-
-        return (Morda) m.selectOneByParams();*/
-        return null;
+        return DataSupport.where("id like ?", String.valueOf(mordaid)).findFirst(Morda.class);
     }
 }

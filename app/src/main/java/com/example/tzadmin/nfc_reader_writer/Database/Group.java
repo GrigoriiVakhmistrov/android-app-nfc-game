@@ -22,6 +22,6 @@ public class Group extends DataSupport {
     public Integer vip;
 
     public Collection<User> getUsers() {
-        //return DataSupport.where("groupid like ?", )
+        return DataSupport.where("groupid like ?", String.valueOf(id)).find(User.class);
     }
 }

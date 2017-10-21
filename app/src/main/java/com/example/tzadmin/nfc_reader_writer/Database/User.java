@@ -2,12 +2,10 @@ package com.example.tzadmin.nfc_reader_writer.Database;
 
 import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
-
-import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 
 /**
  * Created by yurii on 19.10.2017.
@@ -26,15 +24,11 @@ public class User extends DataSupport {
     public Integer syncFlag;
 
     public ArrayList<User> selectAll () {
-        return null;
+        return (ArrayList<User>) DataSupport.findAll(User.class);
     }
 
     public boolean isNfcIdAlreadyExist (String RfcId) {
-       /* this.rfcid = RfcId;
-
-        User u = (User) selectOneByParams();
-        return u != null;*/
-       return false;
+       return DataSupport.where("rfcid like ?", RfcId).findFirst(User.class) != null;
     }
 
     public String getFIO() {
@@ -42,17 +36,12 @@ public class User extends DataSupport {
     }
 
     public User selectUserByRfcId  (String RfcId) {
-       /* this.rfcid = RfcId;
-
-        return (User) selectOneByParams();*/
-       return null;
+       return DataSupport.where("rfcid like ?", RfcId).findFirst(User.class);
     }
 
     public Integer getBallance() {
-       /* MoneyLogs mLog = new MoneyLogs();
-        mLog.userid = id;
-
-        Collection<MoneyLogs> moneys = (Collection<MoneyLogs>) mLog.selectAllByParams();
+        Collection<MoneyLogs> moneys =
+                DataSupport.where("userid like ?", String.valueOf(id)).find(MoneyLogs.class);
 
         Integer retdata = 0;
         if(moneys == null)
@@ -63,13 +52,12 @@ public class User extends DataSupport {
             if (l.type.equals(MoneyLogs.Type.REMOVE_MONEY.toString())) retdata -= l.money;
         }
 
-        return retdata;*/
-        return null;
+        return retdata;
     }
 
     public Boolean AddMoney(Integer money, String description) {
-        /*if (money < 0) return false;
-        if (description.equals("")) description = "Без описания";
+        if(money < 0) return false;
+        if(description.equals("")) description = "Без описания";
 
         MoneyLogs ml = new MoneyLogs();
         ml.userid = id;
@@ -78,12 +66,11 @@ public class User extends DataSupport {
         ml.type = MoneyLogs.Type.ADD_MONEY.toString();
         ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        return  ml.insert();*/
-        return false;
+        return ml.save();
     }
 
     public Boolean RemoveMoney(Integer money, String description) {
-        /*if (money < 1) return false;
+        if (money < 1) return false;
         if (money > getBallance()) return false;
         if (description.equals("")) description = "Без описания";
 
@@ -94,24 +81,21 @@ public class User extends DataSupport {
         ml.type = MoneyLogs.Type.REMOVE_MONEY.toString();
         ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        return  ml.insert();*/
-        return null;
+        return ml.save();
     }
 
     public boolean subscribeToRoute(Integer route) {
-       /* routeid = route;
-
-        return update();*/
-        return false;
+        routeid = route;
+        this.update(id);
+        return true;
     }
 
     public Collection<Morda> getSubscribed () {
-        /*Collection<Morda> retdata = new ArrayList<>();
+        Collection<Morda> retdata = new ArrayList<>();
 
-        UserMorda m = new UserMorda();
-        m.userid = id;
+        Collection<UserMorda> mordas =
+                DataSupport.where("userid like ?", String.valueOf(id)).find(UserMorda.class);
 
-        Collection<UserMorda> mordas = (Collection<UserMorda>) m.selectAllByParams();
         if(mordas == null)
             return retdata;
 
@@ -121,101 +105,71 @@ public class User extends DataSupport {
                 retdata.add(tmp);
         }
 
-        return retdata;*/
-        return null;
+        return retdata;
     }
 
     public boolean subscribe(Integer mordaId) {
-       /* Morda m = new Morda();
-        m.id = mordaId;
-
-        m = (Morda) m.selectOneByParams();
+        Morda m =
+                DataSupport.where("id like ?", String.valueOf(mordaId)).findFirst(Morda.class);
 
         if (m == null) return false;
 
-        UserMorda um = new UserMorda();
-        um.userid = id;
-        um.mordaid = mordaId;
-
-        um = (UserMorda) um.selectOneByParams();
+        UserMorda um =
+                DataSupport.where("userid like ? and mordaid like ?",
+                        String.valueOf(id),
+                        String.valueOf(mordaId)).findFirst(UserMorda.class);
 
         if (um == null) {
             um = new UserMorda();
             um.mordaid = mordaId;
             um.userid = id;
-            return um.insert();
+            return um.save();
         }
 
-        return true;*/
-        return false;
+        return true;
     }
 
     public Route getRoute(){
-       /* Route route = new Route();
-        route.id = routeid;
-
-        route = (Route)route.selectOneByParams();
-        return route;*/
-        return null;
+        return DataSupport.where("id like ?", String.valueOf(routeid)).findFirst(Route.class);
     }
 
     public Group getGroup(){
-       /* Group group = new Group();
-        group.id = groupid;
-
-        group = (Group)group.selectOneByParams();
-        return  group;*/
-        return null;
+        return DataSupport.where("id like ?", String.valueOf(groupid)).findFirst(Group.class);
     }
 
     public Collection<MoneyLogs> getMoneyLog(){
-       /* MoneyLogs moneyLogs = new MoneyLogs();
-        moneyLogs.userid = id;
-
-        Collection<MoneyLogs> moneyLogsList = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
-        return moneyLogsList;*/
-        return null;
+        return DataSupport.where("userid like ?", String.valueOf(id)).find(MoneyLogs.class);
     }
 
     public Collection<UserMorda> getUserMordas() {
-       /* UserMorda morda = new UserMorda();
-        morda.userid = id;
-
-        return (Collection<UserMorda>)morda.selectAllByParams();*/
-        return null;
+        return DataSupport.where("userid like ?", String.valueOf(id)).find(UserMorda.class);
     }
 
     public Integer getRating(){
-       /* MoneyLogs moneyLogs = new MoneyLogs();
-        moneyLogs.userid = id;
+        Collection<MoneyLogs> moneyLogsCollection =
+                DataSupport.where("userid like ?", String.valueOf(id)).find(MoneyLogs.class);
 
-        Collection<MoneyLogs> moneyLogsCollection = (Collection<MoneyLogs>)moneyLogs.selectAllByParams();
         Integer sum = 0;
-
         for (MoneyLogs tempmoneyLog : moneyLogsCollection){
             if(tempmoneyLog.type.equals(MoneyLogs.Type.ADD_MONEY.toString())){
                 sum += tempmoneyLog.money;
             }
         }
-        return sum;*/
-        return null;
+        return sum;
     }
 
     public boolean updateAllId(Integer id) {
-        /*UserMorda m = new UserMorda();
-        m.userid = this.id;
-
-        Collection<UserMorda> mordas = (Collection<UserMorda>) m.selectAllByParams();
+        Collection<UserMorda> mordas =
+                DataSupport.where("userid like ?", String.valueOf(this.id)).find(UserMorda.class);
 
         for (UserMorda item : mordas) {
             item.userid = id;
-            item.update();
+            item.save();
         }
 
         this.id = id;
-        update();
+        save();
 
-        return true;*/
-        return false;
+        return true;
     }
 }

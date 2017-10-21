@@ -18,18 +18,10 @@ public class GroupActivity extends DataSupport {
     public Integer p4;
 
     public GroupActivity GetGroupScoreModel(Integer groupId) {
-       /* Group g = new Group();
-        g.id = groupId;
-
-        g = (Group) g.selectOneByParams();
-        if (g == null) return  null;
-
-        GroupActivity ga = new GroupActivity();
-        ga.groupid = groupId;
-
-        ga = (GroupActivity) ga.selectOneByParams();
-
-        if (ga == null) {
+        Group g = DataSupport.where("id like ?", String.valueOf(groupId)).findFirst(Group.class);
+        if(g == null) return null;
+        GroupActivity ga = DataSupport.where("groupid like ?", String.valueOf(groupId)).findFirst(GroupActivity.class);
+        if(ga == null) {
             ga = new GroupActivity();
 
             ga.groupid = groupId;
@@ -38,10 +30,8 @@ public class GroupActivity extends DataSupport {
             ga.p3 = 0;
             ga.p4 = 0;
 
-            ga.insert();
+            ga.save();
         }
-
-        return ga;*/
-       return null;
+        return ga;
     }
 }

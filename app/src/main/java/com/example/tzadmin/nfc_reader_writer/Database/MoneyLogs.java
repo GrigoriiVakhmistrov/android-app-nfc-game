@@ -21,11 +21,7 @@ public class MoneyLogs extends DataSupport {
 
     @Nullable
     public User getUser() {
-       // User u = new User(); //TODO this object is useless. Maybe it created for selectAllByParams() ?
-       // u.id = userid;
-
-        //return (User) u.selectOneByParams();
-        return null;
+        return DataSupport.where("id like ?", String.valueOf(userid)).findFirst(User.class);
     }
 
     public enum Type {

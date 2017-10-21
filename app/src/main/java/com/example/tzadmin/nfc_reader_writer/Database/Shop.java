@@ -18,7 +18,6 @@ public class Shop extends DataSupport {
     public Integer price;
 
     public Collection<Shop> GetAllItems() {
-        //return (Collection<Shop>) new Shop().selectAll();
-        return null;
+        return DataSupport.findAll(Shop.class);
     }
 }
