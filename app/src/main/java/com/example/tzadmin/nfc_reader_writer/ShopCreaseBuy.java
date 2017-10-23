@@ -95,16 +95,16 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
         addButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
 
-        if(!currentShop.pic.equals("")) {
+        if(!currentShop.getPic().equals("")) {
             Picasso.with(this)
-                    .load(currentShop.pic)
+                    .load(currentShop.getPic())
                     .placeholder(R.drawable.shop_circle)
                     .into(shopImage);
         }
 
-        name.setText(currentShop.name);
-        description.setText(currentShop.description);
-        price.setText(currentShop.price.toString());
+        name.setText(currentShop.getName());
+        description.setText(currentShop.getDescription());
+        price.setText(currentShop.getPrice().toString());
 
         logs = new ArrayList<>();
 
@@ -127,7 +127,7 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
             }
 
             Intent intent = new Intent(this, ScanNfcActivity.class);
-            intent.putExtra("name", currentShop.name);
+            intent.putExtra("name", currentShop.getName());
             startActivityForResult(intent, 200);
         } else if (v.getId() == R.id.buttonSave) {
             if (!price.getText().equals("0")) {
@@ -153,11 +153,11 @@ public class ShopCreaseBuy extends AppCompatActivity implements View.OnClickList
                 if(user != null) {
                     if(user.getBallance() >= currentMoney){
                         MoneyLogs m = new MoneyLogs();
-                        m.userid = user.id;
-                        m.description = "Покупка - " + currentShop.name;
-                        m.money = currentMoney;
-                        m.type = MoneyLogs.Type.REMOVE_MONEY.toString();
-                        m.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                        m.setUserid(user.getId());
+                        m.setDescription("Покупка - " + currentShop.getName());
+                        m.setMoney(currentMoney);
+                        m.setType(MoneyLogs.Type.REMOVE_MONEY.toString());
+                        m.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
                         logs.add(m);
                         GView.invalidateViews();

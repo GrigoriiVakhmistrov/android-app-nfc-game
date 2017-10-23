@@ -42,7 +42,7 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view,
                             int position, long id) {
         targetRoute = states.get(position);
-        startActivityForResult(states.get(position).name);
+        startActivityForResult(states.get(position).getName());
     }
 
     @Override
@@ -53,10 +53,10 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                 User user = new User().selectUserByRfcId(RfcId);
                 if (user != null) {
                     if(isSubscrube) {
-                        if (user.routeid.equals(-1)) {
+                        if (user.getRouteid().equals(-1)) {
                             if(targetRoute.getLeft() > 0) {
-                                user.routeid = targetRoute.id;
-                                user.update(user.id);
+                                user.setRouteid(targetRoute.getId());
+                                user.update(user.getId());
                                 routeGridVie.invalidateViews();
                                 Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                             } else
@@ -64,15 +64,15 @@ public class RouteActivity extends AppCompatActivity implements AdapterView.OnIt
                         } else
                             Toast.makeText(this, Message.REGISTER_ERROR_SUB_ALREADY, Toast.LENGTH_SHORT).show();
                     } else {
-                        if(user.routeid == targetRoute.id) {
-                            user.AddMoney(targetRoute.price, Message.userVisitRoute(targetRoute.name));
+                        if(user.getRouteid() == targetRoute.getId()) {
+                            user.AddMoney(targetRoute.getPrice(), Message.userVisitRoute(targetRoute.getName()));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(this, Message.USER_NOT_SUBSCRUBE_TO_ROUTE, Toast.LENGTH_SHORT).show();
                     }
                 } else
                     Toast.makeText(this, Message.USER_THIS_BRACER_NOT_FOUND, Toast.LENGTH_SHORT).show();
-                startActivityForResult(targetRoute.name);
+                startActivityForResult(targetRoute.getName());
             }
         }
     }

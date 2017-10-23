@@ -11,17 +11,85 @@ import java.util.Collection;
 
 public class Group extends DataSupport {
     @Column(unique = true)
-    public Integer id;
-    public String name;
-    public String description;
-    public String totemname;
-    public String totemimage;
-    public String color;
-    public String colorhex;
-    public Integer price;
-    public Integer vip;
+    private Integer id;
+    private String name;
+    private String description;
+    private String totemname;
+    private String totemimage;
+    private String color;
+    private String colorhex;
+    private Integer price;
+    private Integer vip;
 
     public Collection<User> getUsers() {
         return DataSupport.where("groupid like ?", String.valueOf(id)).find(User.class);
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTotemname() {
+        return totemname;
+    }
+
+    public void setTotemname(String totemname) {
+        this.totemname = totemname;
+    }
+
+    public String getTotemimage() {
+        return totemimage;
+    }
+
+    public void setTotemimage(String totemimage) {
+        this.totemimage = totemimage;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getColorhex() {
+        return colorhex;
+    }
+
+    public void setColorhex(String colorhex) {
+        this.colorhex = colorhex;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getVip() {
+        return vip;
+    }
+
+    public void setVip(Integer vip) {
+        this.vip = vip;
     }
 }

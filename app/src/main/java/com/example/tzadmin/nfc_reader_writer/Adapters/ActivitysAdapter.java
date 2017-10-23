@@ -57,8 +57,8 @@ public class ActivitysAdapter extends BaseAdapter {
         name.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
         price.setTypeface(SingletonFonts.getInstanse(context).getKarlson());
 
-        name.setText(activityses.get(position).name);
-        price.setText(activityses.get(position).price.toString());
+        name.setText(activityses.get(position).getName());
+        price.setText(activityses.get(position).getPrice().toString());
 
         return convertView;
     }

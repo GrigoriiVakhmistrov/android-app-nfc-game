@@ -57,8 +57,8 @@ public class ShopAdapterV2 extends BaseAdapter {
 
         Shop route = states.get(position);
 
-        myrectangle.setText(route.name);
-        square.setText(String.valueOf(route.price));
+        myrectangle.setText(route.getName());
+        square.setText(String.valueOf(route.getPrice()));
 
         return convertView;
     }

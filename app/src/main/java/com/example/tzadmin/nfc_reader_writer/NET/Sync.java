@@ -1,5 +1,8 @@
 package com.example.tzadmin.nfc_reader_writer.NET;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Looper;
 import android.provider.ContactsContract;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ import org.litepal.crud.DataSupport;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * Created by velor on 6/27/17.
@@ -102,7 +107,7 @@ public class Sync {
         isFullSync = true;
         if (!SharedApplication.get().syncActive) {
             SharedApplication.get().syncActive = true;
-            //stage1(); TODO start sync
+            stage1(); //TODO start sync
         }
     }
 
@@ -111,7 +116,7 @@ public class Sync {
         if (!SharedApplication.get().syncActive) {
             SharedApplication.get().syncActive = true;
             this.isAutoSync = isAutoSync;
-            //stage1(); TODO start sync
+            stage1(); //TODO start sync
         }
     }
     public Sync(boolean isAutoSync, boolean isFullSync) {
@@ -119,7 +124,11 @@ public class Sync {
         if (!SharedApplication.get().syncActive) {
             SharedApplication.get().syncActive = true;
             this.isAutoSync = isAutoSync;
-            //stage1(); TODO start sync
+            stage1(); //TODO start sync
         }
+    }
+
+    public void stage1 () {
+        SharedApplication.get().syncActive = false;
     }
 }

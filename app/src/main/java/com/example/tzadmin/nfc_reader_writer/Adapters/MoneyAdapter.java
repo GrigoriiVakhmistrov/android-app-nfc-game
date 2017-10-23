@@ -42,7 +42,7 @@ public class MoneyAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return ((MoneyLogs)items[position]).id;
+        return ((MoneyLogs)items[position]).getId();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -70,19 +70,19 @@ public class MoneyAdapter extends BaseAdapter {
         money.setTextColor(context.getResources().getColor(R.color.colorBtn));
         description.setTextColor(context.getResources().getColor(R.color.colorBtn));
 
-        if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) {
+        if (l.getType().equals(MoneyLogs.Type.ADD_MONEY.toString())) {
             operation.setBackgroundResource(R.drawable.arrow_up);
         } else {
             operation.setBackgroundResource(R.drawable.arrow_down);
         }
 
-        l.date.replace(" ", "\\n");
+        l.getDate().replace(" ", "\\n");
         //date.setText(l.date);
-        if (!l.type.equals(MoneyLogs.Type.ADD_MONEY.toString()))
-            money.setText("-" + l.money.toString());
+        if (!l.getType().equals(MoneyLogs.Type.ADD_MONEY.toString()))
+            money.setText("-" + l.getMoney().toString());
         else
-            money.setText(l.money.toString());
-        description.setText(l.description);
+            money.setText(l.getMoney().toString());
+        description.setText(l.getDescription());
 
         return convertView;
     }

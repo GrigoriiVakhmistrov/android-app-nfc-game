@@ -56,7 +56,7 @@ public class RouteViewAdapter extends BaseAdapter {
 
         Route route = states.get(position);
 
-        myrectangle.setText(route.name);
+        myrectangle.setText(route.getName());
         square.setText(String.valueOf(route.getLeft()));
 
         return convertView;

@@ -61,9 +61,9 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         }
 
         ((TextView)convertView).setTypeface(SingletonFonts.getInstanse(context).getKarlson());
-        ((TextView)convertView).setText(users.get(position).lastname + " " +
-                users.get(position).firstname + " " +
-                users.get(position).patronymic);
+        ((TextView)convertView).setText(users.get(position).getLastname() + " " +
+                users.get(position).getFirstname() + " " +
+                users.get(position).getPatronymic());
 
         return convertView;
     }
@@ -72,7 +72,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
         @Override
         public String convertResultToString(Object resultValue) {
             User u = (User) resultValue;
-            return u.lastname + " " + u.firstname + " " + u.patronymic;
+            return u.getLastname() + " " + u.getFirstname() + " " + u.getPatronymic();
         }
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -92,11 +92,11 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable {
                         suggestions.add(u);
                     }
                     */
-                    if((u.firstname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                    if((u.getFirstname()).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
-                    }else if((u.lastname).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                    }else if((u.getLastname()).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
-                    }else if((u.patronymic).toLowerCase().startsWith(constraint.toString().toLowerCase())){
+                    }else if((u.getPatronymic()).toLowerCase().startsWith(constraint.toString().toLowerCase())){
                         suggestions.add(u);
                     }
 

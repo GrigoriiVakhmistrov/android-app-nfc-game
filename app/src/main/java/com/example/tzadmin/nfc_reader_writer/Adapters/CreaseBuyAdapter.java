@@ -58,7 +58,7 @@ public class CreaseBuyAdapter extends BaseAdapter {
         MoneyLogs route = states.get(position);
 
         myrectangle.setText(route.getUser().getFIO());
-        square.setText(String.valueOf(route.money));
+        square.setText(String.valueOf(route.getMoney()));
 
         return convertView;
     }

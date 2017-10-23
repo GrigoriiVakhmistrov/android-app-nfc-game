@@ -64,9 +64,9 @@ public class ValidationActivity extends AppCompatActivity {
                 validRating.setTextColor(getResources().getColor(R.color.colorBtn));
 
 
-                if (user.getRoute() != null && !user.routeid.equals(-1)) {
+                if (user.getRoute() != null && !user.getRouteid().equals(-1)) {
                     TextView validRoutes = ((TextView) findViewById(R.id.tv_valid_routes));
-                    validRoutes.setText("Маршрут: " + user.getRoute().name);
+                    validRoutes.setText("Маршрут: " + user.getRoute().getName());
                     validRoutes.setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     validRoutes.setTextColor(getResources().getColor(R.color.colorBtn));
                 }else {
@@ -80,7 +80,7 @@ public class ValidationActivity extends AppCompatActivity {
 
                 if(user.getSubscribed().size() > 0) {
                     ArrayList<Morda> spiker = (ArrayList)user.getSubscribed();
-                    ((TextView)findViewById(R.id.spiker_valid)).setText("Спикер: " + spiker.get(0).fio);
+                    ((TextView)findViewById(R.id.spiker_valid)).setText("Спикер: " + spiker.get(0).getFio());
                     ((TextView)findViewById(R.id.spiker_valid)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     ((TextView)findViewById(R.id.spiker_valid)).setTextColor(getResources().getColor(R.color.colorBtn));
                 } else {
@@ -91,9 +91,9 @@ public class ValidationActivity extends AppCompatActivity {
 
                 try {
                     Group userGroup = user.getGroup();
-                    if (userGroup != null && !user.groupid.equals(-1)) {
+                    if (userGroup != null && !user.getRouteid().equals(-1)) {
                         Resources res = getResources();
-                        String mDrawableName = userGroup.totemimage + "_v2";
+                        String mDrawableName = userGroup.getTotemimage() + "_v2";
                         int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
                         Drawable drawable = res.getDrawable(resID );
 

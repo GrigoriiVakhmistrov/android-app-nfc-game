@@ -32,11 +32,11 @@ public class Message {
     public static final String COUNT_FULL = "Ошибка. Закончилось количество свободных мест";
 
     public static String getUserAlreadySubscrubeSpiker (Morda morda) {
-        return "Пользователь уже подписан на спикера \"" + morda.fio + "\"";
+        return "Пользователь уже подписан на спикера \"" + morda.getFio() + "\"";
     }
 
     public static String getUserAlreadySubscrubeClan (Group group) {
-        return "Пользователь уже состоит в команде \"" + group.totemname + "\"";
+        return "Пользователь уже состоит в команде \"" + group.getTotemname() + "\"";
     }
 
     public static String userVisitRoute(String routeName) {
@@ -60,6 +60,6 @@ public class Message {
     }
 
     public static String concatFio(User user) {
-        return user.lastname + " " + user.firstname + " " + user.patronymic;
+        return user.getLastname() + " " + user.getFirstname() + " " + user.getPatronymic();
     }
 }

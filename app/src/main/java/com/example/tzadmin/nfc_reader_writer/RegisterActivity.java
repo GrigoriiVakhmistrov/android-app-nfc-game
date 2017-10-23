@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btn_register.setOnClickListener(this);
 
-        users = (ArrayList<User>) new User().selectAll();
+        users = new User().selectAll();
 
         autoCompleted = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         autoCompleted.setAdapter(new AutoCompleteAdapter(this, users));
@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ScanNfcActivity.class);
         selectedUser = (User) parent.getItemAtPosition(position);
-        if(!selectedUser.rfcid.equals("")) {
+        if(!selectedUser.getRfcid().equals("")) {
             Toast.makeText(this,
                     Message.isUserHaveBraced(selectedUser),
                     Toast.LENGTH_LONG).show();
@@ -135,18 +135,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private User register (String RfcId) {
         User user = new User();
-        user.firstname = firstName.getText().toString();
-        user.lastname = lastName.getText().toString();
-        user.patronymic = surName.getText().toString();
-        user.rfcid = RfcId;
+        user.setFirstname(firstName.getText().toString());
+        user.setLastname(lastName.getText().toString());
+        user.setPatronymic(surName.getText().toString());
+        user.setRfcid(RfcId);
         user.save();
 
         return user;
     }
 
     private void bind (String RfcId) {
-        selectedUser.rfcid = RfcId;
-        selectedUser.update(selectedUser.id);
+        selectedUser.setRfcid(RfcId);
+        selectedUser.update(selectedUser.getId());
         clearFields();
     }
 }

@@ -11,13 +11,49 @@ import java.util.Collection;
 
 public class Shop extends DataSupport {
     @Column(unique = true)
-    public Integer id;
-    public String name;
-    public String description;
-    public String pic;
-    public Integer price;
+    private Integer id;
+    private String name;
+    private String description;
+    private String pic;
+    private Integer price;
 
     public Collection<Shop> GetAllItems() {
         return DataSupport.findAll(Shop.class);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

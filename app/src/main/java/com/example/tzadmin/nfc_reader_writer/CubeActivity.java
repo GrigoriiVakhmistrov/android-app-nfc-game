@@ -47,15 +47,15 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         GroupActivity groupActivity =
                 new GroupActivity().GetGroupScoreModel(groupId);
 
-        mark1 = groupActivity.p1;
-        mark2 = groupActivity.p2;
-        mark3 = groupActivity.p3;
+        mark1 = groupActivity.getP1();
+        mark2 = groupActivity.getP2();
+        mark3 = groupActivity.getP3();
 
         Collection<Button> buttons = new ArrayList<>();
         buttons = getAllByBlock(ll_cube_block1);
 
         for (Button btn : buttons) {
-            if (Integer.valueOf(btn.getText().toString()) == groupActivity.p1)
+            if (Integer.valueOf(btn.getText().toString()) == groupActivity.getP1())
                 btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
             else
                 btn.setBackground(getDrawable(R.drawable.btn_gradient));
@@ -64,7 +64,7 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         buttons = getAllByBlock(ll_cube_block2);
 
         for (Button btn : buttons) {
-            if (Integer.valueOf(btn.getText().toString()) == groupActivity.p2)
+            if (Integer.valueOf(btn.getText().toString()) == groupActivity.getP2())
                 btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
             else
                 btn.setBackground(getDrawable(R.drawable.btn_gradient));
@@ -73,7 +73,7 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
         buttons = getAllByBlock(ll_cube_block3);
 
         for (Button btn : buttons) {
-            if (getValueFromButton(btn) == groupActivity.p3)
+            if (getValueFromButton(btn) == groupActivity.getP3())
                 btn.setBackground(getDrawable(R.drawable.btn_gradient_black));
             else
                 btn.setBackground(getDrawable(R.drawable.btn_gradient));
@@ -136,11 +136,11 @@ public class  CubeActivity extends AppCompatActivity  implements View.OnClickLis
 
             GroupActivity ga = new GroupActivity().GetGroupScoreModel(groupId);
 
-            ga.p1 = mark1;
-            ga.p2 = mark2;
-            ga.p3 = mark3;
+            ga.setP1(mark1);
+            ga.setP2(mark2);
+            ga.setP3(mark3);
 
-            ga.update(ga.id);
+            ga.update(ga.getId());
 
             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
             finish();

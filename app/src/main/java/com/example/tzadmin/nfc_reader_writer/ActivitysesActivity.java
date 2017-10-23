@@ -53,8 +53,8 @@ public class ActivitysesActivity extends AppCompatActivity implements AdapterVie
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                user.AddMoney(thisActivity.price,
-                        "Активность - " + thisActivity.name);
+                user.AddMoney(thisActivity.getPrice(),
+                        "Активность - " + thisActivity.getName());
                 Toast.makeText(this,
                         Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
             } else

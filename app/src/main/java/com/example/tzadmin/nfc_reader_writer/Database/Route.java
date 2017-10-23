@@ -11,12 +11,12 @@ import java.util.Collection;
 
 public class Route extends DataSupport {
     @Column(unique = true)
-    public Integer id;
-    public String name;
-    public String description;
-    public Integer capacity;
-    public Integer price;
-    public Integer isvip;
+    private Integer id;
+    private String name;
+    private String description;
+    private Integer capacity;
+    private Integer price;
+    private Integer isvip;
 
     public Integer getLeft() {
         Collection<User> users = DataSupport.where("routeid like ?", String.valueOf(id)).find(User.class);
@@ -28,5 +28,49 @@ public class Route extends DataSupport {
 
     public Collection<User> getUsers() {
         return DataSupport.where("routeid like ?", String.valueOf(id)).find(User.class);
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getCapacity() {
+        return this.capacity;
+    }
+
+    public Integer getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getIsvip() {
+        return this.isvip;
+    }
+
+    public void setIsvip(Integer isvip) {
+        this.isvip = isvip;
     }
 }

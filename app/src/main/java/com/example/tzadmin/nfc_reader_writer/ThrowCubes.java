@@ -54,7 +54,7 @@ public class ThrowCubes extends AppCompatActivity implements View.OnClickListene
         currentGroup = DataSupport.where("totemimage like ?", (String) v.getTag()).findFirst(Group.class);
         if(currentGroup != null) {
             Intent i = new Intent(this, CubeActivity.class);
-            i.putExtra("GroupId", currentGroup.id.intValue());
+            i.putExtra("GroupId", currentGroup.getId().intValue());
             startActivity(i);
         }
     }

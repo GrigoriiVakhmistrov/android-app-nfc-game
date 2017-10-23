@@ -54,11 +54,11 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if (!buySwitch.isChecked()) {
             Intent intent = new Intent(this, ScanNfcActivity.class);
-            intent.putExtra("name", shop.name);
+            intent.putExtra("name", shop.getName());
             startActivityForResult(intent, 200);
         } else {
             Intent intent = new Intent(this, ShopCreaseBuy.class);
-            intent.putExtra("id", shop.id);
+            intent.putExtra("id", shop.getId());
             startActivity(intent);
         }
     }
@@ -70,9 +70,9 @@ public class ShopActivity extends AppCompatActivity implements AdapterView.OnIte
                 String RfcId = data.getStringExtra("RfcId");
                 User user = new User().selectUserByRfcId(RfcId);
                 if(user != null) {
-                    if(user.getBallance() >= shop.price){
-                        user.RemoveMoney(shop.price, "покупка " + shop.name);
-                        user.update(user.id);
+                    if(user.getBallance() >= shop.getPrice()){
+                        user.RemoveMoney(shop.getPrice(), "покупка " + shop.getName());
+                        user.update(user.getId());
 
                         Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                     } else

@@ -11,11 +11,11 @@ import java.util.Collection;
 
 public class Morda extends DataSupport {
     @Column(unique = true)
-    public Integer id;
-    public String fio;
-    public Integer capacity;
-    public String description;
-    public String pic;
+    private Integer id;
+    private String fio;
+    private Integer capacity;
+    private String description;
+    private String pic;
 
     public Integer getLeft() {
         Collection<UserMorda> users = DataSupport.where("mordaid like ?", String.valueOf(id)).find(UserMorda.class);
@@ -23,5 +23,41 @@ public class Morda extends DataSupport {
             return capacity;
 
         return capacity - users.size();
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

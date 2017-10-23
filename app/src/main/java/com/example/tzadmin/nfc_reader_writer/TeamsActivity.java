@@ -55,7 +55,7 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         Group group = new Group();
-        group.totemimage = (String) v.getTag();
+        group.setTotemimage((String)v.getTag());
 
         currentGroup = DataSupport.where("totemimage", (String) v.getTag()).findFirst(Group.class);
         if(currentGroup != null)
@@ -68,9 +68,9 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
             String RfcId = data.getStringExtra("RfcId");
             User user = new User().selectUserByRfcId(RfcId);
             if(user != null) {
-                if (user.groupid == -1) {
-                    user.groupid = currentGroup.id;
-                    user.update(user.id);
+                if (user.getGroupid() == -1) {
+                    user.setGroupid(currentGroup.getId());
+                    user.update(user.getId());
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(this,
@@ -83,8 +83,8 @@ public class TeamsActivity extends AppCompatActivity implements View.OnClickList
 
     private void startActivityForResultTeam () {
         Intent intent = new Intent(this, ScanNfcActivity.class);
-        intent.putExtra("imageTeam", currentGroup.totemimage);
-        intent.putExtra("textTeam", currentGroup.totemname);
+        intent.putExtra("imageTeam", currentGroup.getTotemimage());
+        intent.putExtra("textTeam", currentGroup.getTotemname());
         startActivityForResult(intent, 200);
     }
 }

@@ -43,7 +43,7 @@ public class QuestActivity extends AppCompatActivity implements View.OnClickList
                 if(value.getText().length() != 0) {
                     user.AddMoney(Integer.valueOf(
                            value.getText().toString()), desc.getText().toString());
-                    user.update(user.id);
+                    user.update(user.getId());
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                 }
             } else {

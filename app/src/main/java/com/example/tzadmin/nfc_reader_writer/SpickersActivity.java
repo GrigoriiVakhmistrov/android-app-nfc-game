@@ -72,8 +72,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 if(spickers.get(0) == null)
                     findViewById(R.id.image_chekin_spicker1).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
-                    Picasso.with(this).load(spickers.get(0).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker1));
-                    text1.setText(spickers.get(0).fio);
+                    Picasso.with(this).load(spickers.get(0).getPic()).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker1));
+                    text1.setText(spickers.get(0).getFio());
                     ((TextView)findViewById(R.id.tv_checkin_capacity1)).setText("Свободно мест - " + spickers.get(0).getLeft());
                     ((TextView)findViewById(R.id.tv_checkin_capacity1)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     ((TextView)findViewById(R.id.tv_checkin_capacity1)).setTextColor(getResources().getColor(R.color.colorBtn));
@@ -82,8 +82,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 if(spickers.get(1) == null)
                     findViewById(R.id.image_chekin_spicker2).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
-                    Picasso.with(this).load(spickers.get(1).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker2));
-                    text2.setText(spickers.get(1).fio);
+                    Picasso.with(this).load(spickers.get(1).getPic()).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker2));
+                    text2.setText(spickers.get(1).getFio());
                     ((TextView)findViewById(R.id.tv_checkin_capacity2)).setText("Свободно мест - " + spickers.get(1).getLeft());
                     ((TextView)findViewById(R.id.tv_checkin_capacity2)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     ((TextView)findViewById(R.id.tv_checkin_capacity2)).setTextColor(getResources().getColor(R.color.colorBtn));
@@ -93,8 +93,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 if(spickers.get(2) == null)
                     findViewById(R.id.image_chekin_spicker3).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
-                    Picasso.with(this).load(spickers.get(2).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker3));
-                    text3.setText(spickers.get(2).fio);
+                    Picasso.with(this).load(spickers.get(2).getPic()).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker3));
+                    text3.setText(spickers.get(2).getFio());
                     ((TextView)findViewById(R.id.tv_checkin_capacity3)).setText("Свободно мест - " + spickers.get(2).getLeft());
                     ((TextView)findViewById(R.id.tv_checkin_capacity3)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     ((TextView)findViewById(R.id.tv_checkin_capacity3)).setTextColor(getResources().getColor(R.color.colorBtn));
@@ -104,8 +104,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 if(spickers.get(3) == null)
                     findViewById(R.id.image_chekin_spicker4).setBackgroundResource(R.drawable.ic_spiker_not_found);
                 else {
-                    Picasso.with(this).load(spickers.get(3).pic).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker4));
-                    text4.setText(spickers.get(3).fio);
+                    Picasso.with(this).load(spickers.get(3).getPic()).placeholder(R.drawable.ic_spiker_not_found).into((ImageView) findViewById(R.id.image_chekin_spicker4));
+                    text4.setText(spickers.get(3).getFio());
                     ((TextView)findViewById(R.id.tv_checkin_capacity4)).setText("Свободно мест - " + spickers.get(3).getLeft());
                     ((TextView)findViewById(R.id.tv_checkin_capacity4)).setTypeface(SingletonFonts.getInstanse(this).getKarlson());
                     ((TextView)findViewById(R.id.tv_checkin_capacity4)).setTextColor(getResources().getColor(R.color.colorBtn));
@@ -150,8 +150,8 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                 if(isSubscrube) {
                     if(user.getSubscribed() == null || user.getSubscribed().size() == 0) {
                         if(spicker.getLeft() > 0) {
-                            user.subscribe(spicker.id);
-                            user.update(user.id);
+                            user.subscribe(spicker.getId());
+                            user.update(user.getId());
                             Toast.makeText(this,
                                     Message.SUCCESSFULLY, Toast.LENGTH_SHORT).show();
                         } else
@@ -166,15 +166,15 @@ public class SpickersActivity extends AppCompatActivity implements View.OnClickL
                     Collection<Morda> subscribes = user.getSubscribed();
 
                     for (Morda m : subscribes) {
-                        if (m.id.equals(spicker.id)) {
-                            user.AddMoney(800, Message.userVisitSpiker(spicker.fio));
+                        if (m.getId().equals(spicker.getId())) {
+                            user.AddMoney(800, Message.userVisitSpiker(spicker.getFio()));
                             Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
                             startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
                             //finish();
                             return;
                         }
                     }
-                    user.AddMoney(400, Message.userVisitSpikerNotOwn(spicker.fio));
+                    user.AddMoney(400, Message.userVisitSpikerNotOwn(spicker.getFio()));
                     Toast.makeText(this, Message.SUCCESSFULLY, Toast.LENGTH_LONG).show();
                     startActivityForResult(new Intent(this, ScanNfcActivity.class), 200);
                     //finish();

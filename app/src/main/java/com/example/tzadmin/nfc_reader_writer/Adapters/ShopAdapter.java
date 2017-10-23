@@ -68,11 +68,11 @@ public class ShopAdapter extends BaseAdapter {
 
         //imageView.setImageResource(items.get(position).pic);
         Picasso.with(context)
-                .load(s.pic)
+                .load(s.getPic())
                 .placeholder(R.drawable.shop_circle)
                 .into(imageView);
-        name.setText(s.name + ": " + s.price.toString());
-        info.setText(items.get(position).description);
+        name.setText(s.getName() + ": " + s.getPrice().toString());
+        info.setText(items.get(position).getDescription());
         //btn.setTag(items.get(position).id);
 
         return convertView;

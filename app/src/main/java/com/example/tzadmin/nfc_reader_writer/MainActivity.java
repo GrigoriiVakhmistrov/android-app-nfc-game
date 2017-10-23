@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LitePal.initialize(this);
-
         timerFullSync = new Timer();
         timerFullSyncTask = new MyTimerTaskFullSync();
         timerFullSync.schedule(timerFullSyncTask, 100, 5000);
@@ -99,14 +97,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onResume() {
         super.onResume();
-        timerFullSync = new Timer();
-        timerFullSyncTask = new MyTimerTaskFullSync();
-        timerFullSync.schedule(timerFullSyncTask, 100, 5000);
+        //timerFullSync = new Timer();
+       // timerFullSyncTask = new MyTimerTaskFullSync();
+        //timerFullSync.schedule(timerFullSyncTask, 100, 5000);
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         timerFullSync.cancel();
         //timerImplSync.cancel();
         timerFullSyncTask.cancel();

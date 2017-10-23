@@ -13,15 +13,15 @@ import java.util.Date;
 
 public class User extends DataSupport {
     @Column(unique = true)
-    public Integer id;
-    public String firstname;
-    public String lastname;
-    public String patronymic;
-    public String rfcid;
-    public Integer groupid;
-    public Integer routeid;
-    public Integer iscap;
-    public Integer syncFlag;
+    private Integer id;
+    private String firstname;
+    private String lastname;
+    private String patronymic;
+    private String rfcid;
+    private Integer groupid;
+    private Integer routeid;
+    private Integer iscap;
+    private Integer syncFlag;
 
     public ArrayList<User> selectAll () {
         return (ArrayList<User>) DataSupport.findAll(User.class);
@@ -48,8 +48,8 @@ public class User extends DataSupport {
             return retdata;
 
         for (MoneyLogs l : moneys) {
-            if (l.type.equals(MoneyLogs.Type.ADD_MONEY.toString())) retdata += l.money;
-            if (l.type.equals(MoneyLogs.Type.REMOVE_MONEY.toString())) retdata -= l.money;
+            if (l.getType().equals(MoneyLogs.Type.ADD_MONEY.toString())) retdata += l.getMoney();
+            if (l.getType().equals(MoneyLogs.Type.REMOVE_MONEY.toString())) retdata -= l.getMoney();
         }
 
         return retdata;
@@ -60,11 +60,11 @@ public class User extends DataSupport {
         if(description.equals("")) description = "Без описания";
 
         MoneyLogs ml = new MoneyLogs();
-        ml.userid = id;
-        ml.money = money;
-        ml.description = description;
-        ml.type = MoneyLogs.Type.ADD_MONEY.toString();
-        ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        ml.setUserid(id);
+        ml.setMoney(money);
+        ml.setDescription(description);
+        ml.setType(MoneyLogs.Type.ADD_MONEY.toString());
+        ml.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
         return ml.save();
     }
@@ -75,11 +75,11 @@ public class User extends DataSupport {
         if (description.equals("")) description = "Без описания";
 
         MoneyLogs ml = new MoneyLogs();
-        ml.userid = id;
-        ml.money = money;
-        ml.description = description;
-        ml.type = MoneyLogs.Type.REMOVE_MONEY.toString();
-        ml.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        ml.setUserid(id);
+        ml.setMoney(money);
+        ml.setDescription(description);
+        ml.setType(MoneyLogs.Type.REMOVE_MONEY.toString());
+        ml.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
         return ml.save();
     }
@@ -121,8 +121,8 @@ public class User extends DataSupport {
 
         if (um == null) {
             um = new UserMorda();
-            um.mordaid = mordaId;
-            um.userid = id;
+            um.setMordaid(mordaId);
+            um.setUserid(id);
             return um.save();
         }
 
@@ -151,8 +151,8 @@ public class User extends DataSupport {
 
         Integer sum = 0;
         for (MoneyLogs tempmoneyLog : moneyLogsCollection){
-            if(tempmoneyLog.type.equals(MoneyLogs.Type.ADD_MONEY.toString())){
-                sum += tempmoneyLog.money;
+            if(tempmoneyLog.getType().equals(MoneyLogs.Type.ADD_MONEY.toString())){
+                sum += tempmoneyLog.getMoney();
             }
         }
         return sum;
@@ -163,7 +163,7 @@ public class User extends DataSupport {
                 DataSupport.where("userid like ?", String.valueOf(this.id)).find(UserMorda.class);
 
         for (UserMorda item : mordas) {
-            item.userid = id;
+            item.setUserid(id);
             item.save();
         }
 
@@ -171,5 +171,73 @@ public class User extends DataSupport {
         save();
 
         return true;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getFirstname() {
+        return this.firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastname() {
+        return this.lastname;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getPatronymic() {
+        return this.patronymic;
+    }
+
+    public void setRfcid(String rfcid) {
+        this.rfcid = rfcid;
+    }
+
+    public String getRfcid() {
+        return rfcid;
+    }
+
+    public void setRouteid (Integer routeid) {
+        this.routeid = routeid;
+    }
+
+    public Integer getRouteid() {
+        return this.routeid;
+    }
+
+    public void setGroupid(Integer groupid) {
+        this.groupid = groupid;
+    }
+
+    public Integer getGroupid() {
+        return this.groupid;
+    }
+
+    public void setIscap(Integer iscap) {
+        this.iscap = iscap;
+    }
+
+    public Integer getIscap() {
+        return iscap;
+    }
+
+    public Integer getSyncFlag() {
+        return syncFlag;
+    }
+
+    public void setSyncFlag(Integer syncFlag) {
+        this.syncFlag = syncFlag;
     }
 }
