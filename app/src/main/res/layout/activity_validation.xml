@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tzadmin.nfc_reader_writer.ValidationActivity">
-    <!--android:background="@drawable/info_user_xxxhdpi"-->
+    tools:context="com.example.tzadmin.nfc_reader_writer.ValidationActivity"
+    android:background="@drawable/info_user_xxxhdpi">
 
     <TextView
         android:id="@+id/tv_valid_fio"
@@ -116,7 +116,7 @@
         android:textColor="@color/colorBlack"
         android:textAlignment="center"
         android:textSize="17dp"
-        android:text="v 1.224"
+        android:text="v 1.232"
         app:layout_constraintHorizontal_bias="0.959" />
 
 

@@ -28,14 +28,11 @@ public class HttpRequester extends AsyncTask<RequestNode, ResponceNode, Integer>
         this.stage = stage;
     }
 
-    @Override
-    protected void onProgressUpdate(ResponceNode... values) {
+    private void progressUpdate (ResponceNode... values) {
         if (delegate != null) {
             for (ResponceNode item : values)
                 delegate.RequestDone(item.url, item.responce, item.passData, stage);
         }
-
-        super.onProgressUpdate(values);
     }
 
     @Override
@@ -52,16 +49,15 @@ public class HttpRequester extends AsyncTask<RequestNode, ResponceNode, Integer>
             for (RequestNode item : urls) {
                 if (item.method == RequestMethod.GET) {
                     String body = HttpRequest.get(item.url, item.params, true).body();
-                    publishProgress( new ResponceNode(item.url, body, item.backParam) );
+                    progressUpdate( new ResponceNode(item.url, body, item.backParam) );
                 } else if (item.method == RequestMethod.POST) {
                     String body = HttpRequest.post(item.url).form(item.params).body();
-                    publishProgress( new ResponceNode(item.url, body, item.backParam) );
+                    progressUpdate( new ResponceNode(item.url, body, item.backParam) );
                 }
             }
         } catch (HttpRequest.HttpRequestException exception) {
             return stage;
         }
-
         return stage;
     }
 }

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.ThrowCubes"
-    android:id="@+id/team_constraint_layout">
-    <!-- android:background="@drawable/throw_cubes"-->
+    android:id="@+id/team_constraint_layout"
+    android:background="@drawable/throw_cubes">
 
     <ImageButton
         android:background="@drawable/bigimot_xxxhdpi"

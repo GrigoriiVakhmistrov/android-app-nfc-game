@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Timer timerFullSync;
     MyTimerTaskFullSync timerFullSyncTask;
 
-    Timer timerImplSync;
-    MyTimerTaskImplSync timerImplSyncTask;
-
     String[] values = {
             "",
             "",
@@ -60,11 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         timerFullSync = new Timer();
         timerFullSyncTask = new MyTimerTaskFullSync();
-        timerFullSync.schedule(timerFullSyncTask, 30000, 300000);
-
-        timerImplSync = new Timer();
-        timerImplSyncTask = new MyTimerTaskImplSync();
-        timerImplSync.schedule(timerImplSyncTask, 1000, 120000);
+        timerFullSync.schedule(timerFullSyncTask, 1000, 220000);
 
         gridView = (GridView) findViewById(R.id.gridView_main);
         MainGridViewAdapter adapter = new MainGridViewAdapter(MainActivity.this, values, imageId);
@@ -76,13 +69,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Full sync
                 if(Utilites.InetHasConnection(getBaseContext()))
                     new Sync();
             }
         });
 
-        //описание квестов
         if(itsOnlyValidationApp) {
             startActivityForResult(new Intent(this, MainValidationActivity.class), 200);
         }
@@ -92,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onDestroy() {
         super.onDestroy();
         timerFullSync.cancel();
-        timerImplSync.cancel();
     }
 
     @Override
@@ -137,19 +127,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         @Override
         public void run() {
-            //Full sync
             if(Utilites.InetHasConnection(getBaseContext()))
                 new Sync(true);
         }
     }
 
-    class MyTimerTaskImplSync extends TimerTask {
-
-        @Override
-        public void run() {
-            //impl sync
-            if(Utilites.InetHasConnection(getBaseContext()))
-                new Sync(true, false);
-        }
-    }
 }

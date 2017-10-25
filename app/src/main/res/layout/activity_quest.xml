@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.tzadmin.nfc_reader_writer.QuestActivity"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
-    <!--android:background="@drawable/quest"-->
+    android:focusableInTouchMode="true"
+    android:background="@drawable/quest">
 
     <TextView
         app:layout_constraintBottom_toBottomOf="parent"

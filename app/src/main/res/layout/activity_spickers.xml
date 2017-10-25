@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/spikers_layout"
-    tools:context="com.example.tzadmin.nfc_reader_writer.SpickersActivity">
-    <!--android:background="@drawable/spicker_reg_xxxhdpi"-->
+    tools:context="com.example.tzadmin.nfc_reader_writer.SpickersActivity"
+    android:background="@drawable/spicker_reg_xxxhdpi">
 
     <TextView
         app:layout_constraintBottom_toBottomOf="parent"
