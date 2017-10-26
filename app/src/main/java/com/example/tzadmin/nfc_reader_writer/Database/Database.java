@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import com.example.tzadmin.nfc_reader_writer.SharedApplication;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

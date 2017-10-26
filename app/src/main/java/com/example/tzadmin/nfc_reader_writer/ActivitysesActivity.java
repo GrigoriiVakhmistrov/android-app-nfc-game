@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 import com.example.tzadmin.nfc_reader_writer.Adapters.ActivitysAdapter;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;

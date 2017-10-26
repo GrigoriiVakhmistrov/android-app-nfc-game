@@ -1,18 +1,7 @@
 package com.example.tzadmin.nfc_reader_writer.NET;
 
 import android.os.AsyncTask;
-import android.speech.tts.Voice;
-import android.text.BoringLayout;
-import android.view.ViewDebug;
-
 import com.github.kevinsawicki.http.HttpRequest;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.security.PolicySpi;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by velor on 6/27/17.

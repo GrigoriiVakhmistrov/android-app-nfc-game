@@ -1,8 +1,5 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
-import android.support.annotation.IntegerRes;
-import android.support.annotation.StringDef;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;

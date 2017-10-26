@@ -9,11 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-
 import com.example.tzadmin.nfc_reader_writer.Fonts.SingletonFonts;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.R;
-
 import java.util.ArrayList;
 
 /**

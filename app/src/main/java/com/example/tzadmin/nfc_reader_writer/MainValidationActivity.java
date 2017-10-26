@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
 
 public class MainValidationActivity extends AppCompatActivity implements View.OnClickListener {

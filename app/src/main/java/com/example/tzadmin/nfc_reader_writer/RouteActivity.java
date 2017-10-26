@@ -11,9 +11,7 @@ import com.example.tzadmin.nfc_reader_writer.Adapters.RouteViewAdapter;
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Route;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class RouteActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 

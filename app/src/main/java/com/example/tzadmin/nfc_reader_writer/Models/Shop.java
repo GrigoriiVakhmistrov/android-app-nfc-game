@@ -1,6 +1,5 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
-import android.widget.Button;
 import java.util.Collection;
 
 /**

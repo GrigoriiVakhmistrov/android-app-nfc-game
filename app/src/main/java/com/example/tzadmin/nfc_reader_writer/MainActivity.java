@@ -12,7 +12,6 @@ import com.example.tzadmin.nfc_reader_writer.Database.DatabaseHelper;
 import com.example.tzadmin.nfc_reader_writer.Enums.MainMenu;
 import com.example.tzadmin.nfc_reader_writer.NET.Sync;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
-
 import java.util.Timer;
 import java.util.TimerTask;
 

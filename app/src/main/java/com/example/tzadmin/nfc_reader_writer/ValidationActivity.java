@@ -16,8 +16,6 @@ import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.Morda;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-import com.example.tzadmin.nfc_reader_writer.NET.Sync;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;

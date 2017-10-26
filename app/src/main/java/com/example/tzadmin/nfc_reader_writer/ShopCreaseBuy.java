@@ -20,7 +20,6 @@ import com.example.tzadmin.nfc_reader_writer.Models.Shop;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
 import com.example.tzadmin.nfc_reader_writer.Utilites.Utilites;
 import com.squareup.picasso.Picasso;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

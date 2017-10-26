@@ -1,24 +1,14 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
-import com.example.tzadmin.nfc_reader_writer.Models.User;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.StringTokenizer;
 
 public class ThrowCubes extends AppCompatActivity implements View.OnClickListener {
 

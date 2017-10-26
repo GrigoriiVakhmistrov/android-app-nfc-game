@@ -1,7 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer;
 
 import android.support.annotation.Nullable;
-
 import java.util.Collection;
 import java.util.Iterator;
 

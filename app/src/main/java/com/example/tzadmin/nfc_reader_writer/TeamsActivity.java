@@ -7,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.example.tzadmin.nfc_reader_writer.Messages.Message;
 import com.example.tzadmin.nfc_reader_writer.Models.Group;
 import com.example.tzadmin.nfc_reader_writer.Models.User;
-
 import java.util.ArrayList;
 import java.util.Collection;
 

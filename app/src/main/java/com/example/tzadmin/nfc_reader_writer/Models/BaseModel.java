@@ -1,11 +1,9 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
 import android.content.ContentValues;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import com.example.tzadmin.nfc_reader_writer.Database.Database;
 import com.example.tzadmin.nfc_reader_writer.Database.ModelInterface;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,11 +1,6 @@
 package com.example.tzadmin.nfc_reader_writer.Models;
 
 import android.support.annotation.Nullable;
-import com.example.tzadmin.nfc_reader_writer.Utils;
-
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created by velor on 6/23/17.
